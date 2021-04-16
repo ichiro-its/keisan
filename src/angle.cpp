@@ -18,12 +18,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__KEISAN_HPP_
-#define KEISAN__KEISAN_HPP_
+#include <keisan/angle.hpp>
+#include <keisan/number.hpp>
 
-#include "./angle.hpp"
-#include "./number.hpp"
-#include "./point_2.hpp"
-#include "./point_3.hpp"
+namespace keisan
+{
 
-#endif  // KEISAN__KEISAN_HPP_
+double wrap_rad(double value)
+{
+  return wrap_number(value, -pi, pi);
+}
+
+double wrap_deg(double value)
+{
+  return wrap_number(value, -180.0, 180.0);
+}
+
+double rad_to_deg(double value)
+{
+  auto result = map_number(value, -pi, pi, -180.0, 180.0);
+  return wrap_deg(result);
+}
+
+double deg_to_rad(double value)
+{
+  auto result = map_number(value, -180.0, 180.0, -pi, pi);
+  return wrap_rad(result);
+}
+
+}  // namespace keisan

@@ -18,12 +18,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__KEISAN_HPP_
-#define KEISAN__KEISAN_HPP_
+#ifndef KEISAN__NUMBER_HPP_
+#define KEISAN__NUMBER_HPP_
 
-#include "./angle.hpp"
-#include "./number.hpp"
-#include "./point_2.hpp"
-#include "./point_3.hpp"
+namespace keisan
+{
 
-#endif  // KEISAN__KEISAN_HPP_
+double wrap_number(double value, double min, double max);
+
+double map_number(
+  double value, double source_min, double source_max,
+  double target_min, double target_max);
+
+}  // namespace keisan
+
+#endif  // KEISAN__NUMBER_HPP_

@@ -18,12 +18,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__KEISAN_HPP_
-#define KEISAN__KEISAN_HPP_
+#include <keisan/number.hpp>
 
-#include "./angle.hpp"
-#include "./number.hpp"
-#include "./point_2.hpp"
-#include "./point_3.hpp"
+#include <cmath>
 
-#endif  // KEISAN__KEISAN_HPP_
+namespace keisan
+{
+
+double wrap_number(double value, double min, double max)
+{
+  double min_value = value - min;
+  double min_max = max - min;
+
+  return min + fmod(min_max + fmod(min_value, min_max), min_max);
+}
+
+double map_number(
+  double value, double source_min, double source_max,
+  double target_min, double target_max)
+{
+  double percentage = (value - source_min) / (source_max - source_min);
+  return target_min + percentage * (target_max - target_min);
+}
+
+}  // namespace keisan

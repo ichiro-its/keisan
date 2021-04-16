@@ -18,12 +18,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__KEISAN_HPP_
-#define KEISAN__KEISAN_HPP_
+#ifndef KEISAN__ANGLE_HPP_
+#define KEISAN__ANGLE_HPP_
 
-#include "./angle.hpp"
-#include "./number.hpp"
-#include "./point_2.hpp"
-#include "./point_3.hpp"
+#include <cmath>
 
-#endif  // KEISAN__KEISAN_HPP_
+namespace keisan
+{
+
+constexpr double pi = atan(1.0) * 4;
+
+double wrap_rad(double value);
+double wrap_deg(double value);
+
+double rad_to_deg(double value);
+double deg_to_rad(double value);
+
+}  // namespace keisan
+
+#endif  // KEISAN__ANGLE_HPP_

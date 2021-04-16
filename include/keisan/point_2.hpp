@@ -18,12 +18,39 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__KEISAN_HPP_
-#define KEISAN__KEISAN_HPP_
+#ifndef KEISAN__POINT_2_HPP_
+#define KEISAN__POINT_2_HPP_
 
-#include "./angle.hpp"
-#include "./number.hpp"
-#include "./point_2.hpp"
-#include "./point_3.hpp"
+namespace keisan
+{
 
-#endif  // KEISAN__KEISAN_HPP_
+struct Point2
+{
+  Point2();
+  Point2(double x, double y);
+  Point2(const Point2 & point);
+
+  Point2 & operator=(Point2 & point);
+  Point2 & operator+=(Point2 & point);
+  Point2 & operator-=(Point2 & point);
+
+  Point2 & operator+=(double value);
+  Point2 & operator-=(double value);
+  Point2 & operator*=(double value);
+  Point2 & operator/=(double value);
+
+  Point2 operator+(Point2 & point);
+  Point2 operator-(Point2 & point);
+
+  Point2 operator+(double value);
+  Point2 operator-(double value);
+  Point2 operator*(double value);
+  Point2 operator/(double value);
+
+  double x;
+  double y;
+};
+
+}  // namespace keisan
+
+#endif  // KEISAN__POINT_2_HPP_

@@ -18,22 +18,45 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__ANGLE_HPP_
-#define KEISAN__ANGLE_HPP_
+#include <gtest/gtest.h>
+#include <keisan/keisan.hpp>
 
-#include <cmath>
+TEST(WrapRadTest, OverflowTest) {
+  ASSERT_DOUBLE_EQ(
+    keisan::wrap_rad(keisan::pi * 6 + 1.5),
+    1.5);
 
-namespace keisan
-{
+  ASSERT_DOUBLE_EQ(
+    keisan::wrap_rad((-keisan::pi) * 6 - 1.5),
+    -1.5);
+}
 
-constexpr double pi = atan(1.0) * 4;
+TEST(WrapDegTest, OverflowTest) {
+  ASSERT_DOUBLE_EQ(
+    keisan::wrap_deg(180.0 * 6 + 100.0),
+    100.0);
 
-double wrap_rad(double value);
-double wrap_deg(double value);
+  ASSERT_DOUBLE_EQ(
+    keisan::wrap_deg((-180.0) * 6 - 100.0),
+    -100.0);
+}
 
-double rad_to_deg(double value);
-double deg_to_rad(double value);
+TEST(RadToDegTest, ConversionTest) {
+  ASSERT_DOUBLE_EQ(
+    keisan::rad_to_deg(keisan::pi * 0.2),
+    180.0 * 0.2);
 
-}  // namespace keisan
+  ASSERT_DOUBLE_EQ(
+    keisan::rad_to_deg(keisan::pi * 6.2),
+    180.0 * 0.2);
+}
 
-#endif  // KEISAN__ANGLE_HPP_
+TEST(DegToRadTest, ConversionTest) {
+  ASSERT_DOUBLE_EQ(
+    keisan::deg_to_rad(180.0 * 0.2),
+    keisan::pi * 0.2);
+
+  ASSERT_DOUBLE_EQ(
+    keisan::deg_to_rad(180.0 * 6.2),
+    keisan::pi * 0.2);
+}

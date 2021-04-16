@@ -30,7 +30,7 @@ double keisan::wrap_number(double value, double min, double max)
   return min + fmod(min_max + fmod(min_value, min_max), min_max);
 }
 
-double map_number(
+double keisan::map_number(
   double value, double source_min, double source_max,
   double target_min, double target_max)
 {

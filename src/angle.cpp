@@ -33,10 +33,12 @@ double keisan::wrap_deg(double value)
 
 double keisan::rad_to_deg(double value)
 {
-  return keisan::map_number(value, -keisan::pi, keisan::pi, -180.0, 180.0);
+  auto result = keisan::map_number(value, -keisan::pi, keisan::pi, -180.0, 180.0);
+  return keisan::wrap_deg(result);
 }
 
 double keisan::deg_to_rad(double value)
 {
-  return keisan::map_number(value, -180.0, 180.0, -keisan::pi, keisan::pi);
+  auto result = keisan::map_number(value, -180.0, 180.0, -keisan::pi, keisan::pi);
+  return keisan::wrap_rad(result);
 }

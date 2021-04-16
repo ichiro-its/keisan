@@ -25,99 +25,99 @@ namespace keisan
 
 Point2::Point2()
 {
-  X = 0;
-  Y = 0;
+  x = 0;
+  y = 0;
 }
 
 Point2::Point2(double x, double y)
 {
-  X = x;
-  Y = y;
+  x = x;
+  y = y;
 }
 
 Point2::Point2(const Point2 & point)
 {
-  X = point.X;
-  Y = point.Y;
+  x = point.x;
+  y = point.y;
 }
 
 Point2 & Point2::operator=(Point2 & point)
 {
-  X = point.X;
-  Y = point.Y;
+  x = point.x;
+  y = point.y;
   return *this;
 }
 
 Point2 & Point2::operator+=(Point2 & point)
 {
-  X += point.X;
-  Y += point.Y;
+  x += point.x;
+  y += point.y;
   return *this;
 }
 
 Point2 & Point2::operator-=(Point2 & point)
 {
-  X -= point.X;
-  Y -= point.Y;
+  x -= point.x;
+  y -= point.y;
   return *this;
 }
 
 Point2 & Point2::operator+=(double value)
 {
-  X += value;
-  Y += value;
+  x += value;
+  y += value;
   return *this;
 }
 
 Point2 & Point2::operator-=(double value)
 {
-  X -= value;
-  Y -= value;
+  x -= value;
+  y -= value;
   return *this;
 }
 
 Point2 & Point2::operator*=(double value)
 {
-  X *= value;
-  Y *= value;
+  x *= value;
+  y *= value;
   return *this;
 }
 
 Point2 & Point2::operator/=(double value)
 {
-  X /= value;
-  Y /= value;
+  x /= value;
+  y /= value;
   return *this;
 }
 
 Point2 Point2::operator+(Point2 & point)
 {
-  return Point2(X + point.X, Y + point.Y);
+  return Point2(x + point.x, y + point.y);
 }
 
 Point2 Point2::operator-(Point2 & point)
 {
-  return Point2(X - point.X, Y - point.Y);
+  return Point2(x - point.x, y - point.y);
 }
 
 Point2 Point2::operator+(double value)
 {
-  return Point2(X + value, Y + value);
+  return Point2(x + value, y + value);
 }
 
 Point2 Point2::operator-(double value)
 {
-  return Point2(X - value, Y - value);
+  return Point2(x - value, y - value);
 }
 
 Point2 Point2::operator*(double value)
 {
-  return Point2(X * value, Y * value);
+  return Point2(x * value, y * value);
 }
 
 Point2 Point2::operator/(double value)
 {
-  return Point2(X / value, Y / value);
+  return Point2(x / value, y / value);
 }
 
 }  // namespace keisan

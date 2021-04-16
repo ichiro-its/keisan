@@ -26,43 +26,30 @@ namespace keisan
 
 struct Point3
 {
-  double X;
-
-  double Y;
-
-  double Z;
-
   Point3();
-
   Point3(double x, double y, double z);
-
   Point3(const Point3 & point);
 
   Point3 & operator=(Point3 & point);
-
   Point3 & operator+=(Point3 & point);
-
   Point3 & operator-=(Point3 & point);
 
   Point3 & operator+=(double value);
-
   Point3 & operator-=(double value);
-
   Point3 & operator*=(double value);
-
   Point3 & operator/=(double value);
 
   Point3 operator+(Point3 & point);
-
   Point3 operator-(Point3 & point);
 
   Point3 operator+(double value);
-
   Point3 operator-(double value);
-
   Point3 operator*(double value);
-
   Point3 operator/(double value);
+
+  double x;
+  double y;
+  double z;
 };
 
 }  // namespace keisan

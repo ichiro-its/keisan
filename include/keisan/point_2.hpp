@@ -26,41 +26,29 @@ namespace keisan
 
 struct Point2
 {
-  double X;
-
-  double Y;
-
   Point2();
-
   Point2(double x, double y);
-
   Point2(const Point2 & point);
 
   Point2 & operator=(Point2 & point);
-
   Point2 & operator+=(Point2 & point);
-
   Point2 & operator-=(Point2 & point);
 
   Point2 & operator+=(double value);
-
   Point2 & operator-=(double value);
-
   Point2 & operator*=(double value);
-
   Point2 & operator/=(double value);
 
   Point2 operator+(Point2 & point);
-
   Point2 operator-(Point2 & point);
 
   Point2 operator+(double value);
-
   Point2 operator-(double value);
-
   Point2 operator*(double value);
-
   Point2 operator/(double value);
+
+  double x;
+  double y;
 };
 
 }  // namespace keisan

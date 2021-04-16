@@ -25,109 +25,109 @@ namespace keisan
 
 Point3::Point3()
 {
-  X = 0;
-  Y = 0;
-  Z = 0;
+  x = 0;
+  y = 0;
+  z = 0;
 }
 
 Point3::Point3(double x, double y, double z)
 {
-  X = x;
-  Y = y;
-  Z = z;
+  x = x;
+  y = y;
+  z = z;
 }
 
 Point3::Point3(const Point3 & point)
 {
-  X = point.X;
-  Y = point.Y;
-  Z = point.Z;
+  x = point.x;
+  y = point.y;
+  z = point.z;
 }
 
 Point3 & Point3::operator=(Point3 & point)
 {
-  X = point.X;
-  Y = point.Y;
-  Z = point.Z;
+  x = point.x;
+  y = point.y;
+  z = point.z;
   return *this;
 }
 
 Point3 & Point3::operator+=(Point3 & point)
 {
-  X += point.X;
-  Y += point.Y;
-  Z += point.Z;
+  x += point.x;
+  y += point.y;
+  z += point.z;
   return *this;
 }
 
 Point3 & Point3::operator-=(Point3 & point)
 {
-  X -= point.X;
-  Y -= point.Y;
-  Z -= point.Z;
+  x -= point.x;
+  y -= point.y;
+  z -= point.z;
   return *this;
 }
 
 Point3 & Point3::operator+=(double value)
 {
-  X += value;
-  Y += value;
-  Z += value;
+  x += value;
+  y += value;
+  z += value;
   return *this;
 }
 
 Point3 & Point3::operator-=(double value)
 {
-  X -= value;
-  Y -= value;
-  Z -= value;
+  x -= value;
+  y -= value;
+  z -= value;
   return *this;
 }
 
 Point3 & Point3::operator*=(double value)
 {
-  X *= value;
-  Y *= value;
-  Z *= value;
+  x *= value;
+  y *= value;
+  z *= value;
   return *this;
 }
 
 Point3 & Point3::operator/=(double value)
 {
-  X /= value;
-  Y /= value;
-  Z /= value;
+  x /= value;
+  y /= value;
+  z /= value;
   return *this;
 }
 
 Point3 Point3::operator+(Point3 & point)
 {
-  return Point3(X + point.X, Y + point.Y, Z + point.Z);
+  return Point3(x + point.x, y + point.y, z + point.z);
 }
 
 Point3 Point3::operator-(Point3 & point)
 {
-  return Point3(X - point.X, Y - point.Y, Z - point.Z);
+  return Point3(x - point.x, y - point.y, z - point.z);
 }
 
 Point3 Point3::operator+(double value)
 {
-  return Point3(X + value, Y + value, Z + value);
+  return Point3(x + value, y + value, z + value);
 }
 
 Point3 Point3::operator-(double value)
 {
-  return Point3(X - value, Y - value, Z - value);
+  return Point3(x - value, y - value, z - value);
 }
 
 Point3 Point3::operator*(double value)
 {
-  return Point3(X * value, Y * value, Z * value);
+  return Point3(x * value, y * value, z * value);
 }
 
 Point3 Point3::operator/(double value)
 {
-  return Point3(X / value, Y / value, Z / value);
+  return Point3(x / value, y / value, z / value);
 }
 
 }  // namespace keisan

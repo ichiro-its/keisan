@@ -22,7 +22,10 @@
 
 #include <cmath>
 
-double keisan::wrap_number(double value, double min, double max)
+namespace keisan
+{
+
+double wrap_number(double value, double min, double max)
 {
   double min_value = value - min;
   double min_max = max - min;
@@ -30,10 +33,12 @@ double keisan::wrap_number(double value, double min, double max)
   return min + fmod(min_max + fmod(min_value, min_max), min_max);
 }
 
-double keisan::map_number(
+double map_number(
   double value, double source_min, double source_max,
   double target_min, double target_max)
 {
   double percentage = (value - source_min) / (source_max - source_min);
   return target_min + percentage * (target_max - target_min);
 }
+
+}  // namespace keisan

@@ -21,24 +21,29 @@
 #include <keisan/angle.hpp>
 #include <keisan/number.hpp>
 
-double keisan::wrap_rad(double value)
+namespace keisan
 {
-  return keisan::wrap_number(value, -keisan::pi, keisan::pi);
+
+double wrap_rad(double value)
+{
+  return wrap_number(value, -pi, pi);
 }
 
-double keisan::wrap_deg(double value)
+double wrap_deg(double value)
 {
-  return keisan::wrap_number(value, -180.0, 180.0);
+  return wrap_number(value, -180.0, 180.0);
 }
 
-double keisan::rad_to_deg(double value)
+double rad_to_deg(double value)
 {
-  auto result = keisan::map_number(value, -keisan::pi, keisan::pi, -180.0, 180.0);
-  return keisan::wrap_deg(result);
+  auto result = map_number(value, -pi, pi, -180.0, 180.0);
+  return wrap_deg(result);
 }
 
-double keisan::deg_to_rad(double value)
+double deg_to_rad(double value)
 {
-  auto result = keisan::map_number(value, -180.0, 180.0, -keisan::pi, keisan::pi);
-  return keisan::wrap_rad(result);
+  auto result = map_number(value, -180.0, 180.0, -pi, pi);
+  return wrap_rad(result);
 }
+
+}  // namespace keisan

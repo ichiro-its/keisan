@@ -33,12 +33,16 @@ double wrap_number(double value, double min, double max)
   return min + fmod(min_max + fmod(min_value, min_max), min_max);
 }
 
-double map_number(
-  double value, double source_min, double source_max,
-  double target_min, double target_max)
+double scale_number(double value, double source, double target)
 {
-  double percentage = (value - source_min) / (source_max - source_min);
-  return target_min + percentage * (target_max - target_min);
+  return value * target / source;
+}
+
+double map_number(
+  double value, double source_min, double source_max, double target_min, double target_max)
+{
+  return target_min + scale_number(
+    value - source_min, source_max - source_min, target_max - target_min);
 }
 
 }  // namespace keisan

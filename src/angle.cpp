@@ -36,14 +36,12 @@ double wrap_deg(double value)
 
 double rad_to_deg(double value)
 {
-  auto result = map_number(value, -pi, pi, -180.0, 180.0);
-  return wrap_deg(result);
+  return wrap_deg(scale_number(value, pi, 180.0));
 }
 
 double deg_to_rad(double value)
 {
-  auto result = map_number(value, -180.0, 180.0, -pi, pi);
-  return wrap_rad(result);
+  return wrap_rad(scale_number(value, 180.0, pi));
 }
 
 }  // namespace keisan

@@ -25,10 +25,10 @@ namespace keisan
 {
 
 double wrap_number(double value, double min, double max);
+double scale_number(double value, double source, double target);
 
 double map_number(
-  double value, double source_min, double source_max,
-  double target_min, double target_max);
+  double value, double source_min, double source_max, double target_min, double target_max);
 
 }  // namespace keisan
 

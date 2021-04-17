@@ -63,6 +63,24 @@ TEST(WrapNumberTest, OutsideMinTest) {
     7.89 - (-3.7 + 6.5));
 }
 
+TEST(ScaleNumberTest, AllTest) {
+  ASSERT_DOUBLE_EQ(
+    keisan::scale_number(3.5, 6.5, 6.5 * 5.0),
+    3.5 * 5.0);
+
+  ASSERT_DOUBLE_EQ(
+    keisan::scale_number(-3.5, 6.5, 6.5 * 5.0),
+    -3.5 * 5.0);
+
+  ASSERT_DOUBLE_EQ(
+    keisan::scale_number(3.5, 6.5, -6.5 * 5.0),
+    -3.5 * 5.0);
+
+  ASSERT_DOUBLE_EQ(
+    keisan::scale_number(-3.5, 6.5, -6.5 * 5.0),
+    3.5 * 5.0);
+}
+
 TEST(MapNumberTest, InsideTest) {
   ASSERT_DOUBLE_EQ(
     keisan::map_number(3.5, -6.5, 4.75, -6.5 * 5.0, 4.75 * 5.0),

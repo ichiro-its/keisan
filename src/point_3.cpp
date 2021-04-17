@@ -32,9 +32,9 @@ Point3::Point3()
 
 Point3::Point3(double x, double y, double z)
 {
-  x = x;
-  y = y;
-  z = z;
+  this->x = x;
+  this->y = y;
+  this->z = z;
 }
 
 Point3::Point3(const Point3 & point)

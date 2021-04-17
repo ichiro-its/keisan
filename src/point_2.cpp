@@ -31,8 +31,8 @@ Point2::Point2()
 
 Point2::Point2(double x, double y)
 {
-  x = x;
-  y = y;
+  this->x = x;
+  this->y = y;
 }
 
 Point2::Point2(const Point2 & point)

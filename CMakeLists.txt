@@ -40,7 +40,9 @@ if(BUILD_TESTING)
 
   ament_add_gtest(${PROJECT_NAME}_tests
     "test/angle_test.cpp"
-    "test/number_test.cpp")
+    "test/number_test.cpp"
+    "test/point_2_test.cpp"
+    "test/point_3_test.cpp")
 
   target_include_directories(${PROJECT_NAME}_tests PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

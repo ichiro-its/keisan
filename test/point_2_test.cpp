@@ -20,6 +20,7 @@
 
 #include <gtest/gtest.h>
 #include <keisan/keisan.hpp>
+#include <iostream>
 
 keisan::Point2 point2;
 keisan::Point2 point2_with_value(1.0, 3.0);
@@ -105,4 +106,17 @@ TEST(Point2Test, ValueOperator)
   auto result4 = point2_assigned_value / -2.0;
   ASSERT_DOUBLE_EQ(result4.x, -2.5);
   ASSERT_DOUBLE_EQ(result4.y, -2.0);
+}
+
+TEST(Point2Test, DistanceEquation)
+{
+  auto result1 = keisan::Point2::distance_between(point2_with_value, point2_assigned_value);
+  ASSERT_DOUBLE_EQ(result1, 10.977249200050075);
+
+  auto result2 = point2_assigned_value.magnitude();
+  ASSERT_DOUBLE_EQ(result2, 6.4031242374328485);
+
+  auto result3 = point2_assigned_value.normalize();
+  ASSERT_DOUBLE_EQ(result3.x, 0.78086880944303039);
+  ASSERT_DOUBLE_EQ(result3.y, 0.62469504755442429);
 }

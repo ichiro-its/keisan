@@ -142,9 +142,9 @@ double Point3::distance_between(Point3 & pt1, Point3 & pt2)
 
 double Point3::magnitude()
 {
-  double x = this->x - 0;
-  double y = this->y - 0;
-  double z = this->z - 0;
+  double x = this->x;
+  double y = this->y;
+  double z = this->z;
   return sqrt(x * x + y * y + z * z);
 }
 

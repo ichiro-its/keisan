@@ -132,12 +132,12 @@ Point3 Point3::operator/(double value)
   return Point3(x / value, y / value, z / value);
 }
 
-double Point3::distance_between(Point3 &pt1, Point3 &pt2, Point3 &pt3)
+double Point3::distance_between(Point3 & pt1, Point3 & pt2)
 {
   double x = pt1.x - pt2.x;
-	double y = pt1.y - pt2.y;
+  double y = pt1.y - pt2.y;
   double z = pt1.z - pt2.z;
-	return sqrt(x * x + y * y + z * z);
+  return sqrt(x * x + y * y + z * z);
 }
 
 double Point3::magnitude()

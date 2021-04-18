@@ -122,11 +122,11 @@ Point2 Point2::operator/(double value)
   return Point2(x / value, y / value);
 }
 
-double Point2::distance_between(Point2 &pt1, Point2 &pt2)
+double Point2::distance_between(Point2 & pt1, Point2 & pt2)
 {
   double x = pt1.x - pt2.x;
-	double y = pt1.y - pt2.y;
-	return sqrt(x * x + y * y);
+  double y = pt1.y - pt2.y;
+  return sqrt(x * x + y * y);
 }
 
 double Point2::magnitude()

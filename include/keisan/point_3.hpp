@@ -47,7 +47,7 @@ struct Point3
   Point3 operator*(double value);
   Point3 operator/(double value);
 
-  static double distance_between(Point3 &pt1, Point3 &pt2, Point3 &pt3);
+  static double distance_between(Point3 & pt1, Point3 & pt2);
   double magnitude();
   Point3 normalize();
 

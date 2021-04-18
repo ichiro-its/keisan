@@ -18,6 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#include <math.h>
+
 #include <keisan/point_3.hpp>
 
 namespace keisan
@@ -128,6 +130,30 @@ Point3 Point3::operator*(double value)
 Point3 Point3::operator/(double value)
 {
   return Point3(x / value, y / value, z / value);
+}
+
+double Point3::distance_between(Point3 &pt1, Point3 &pt2, Point3 &pt3)
+{
+  double x = pt1.x - pt2.x;
+	double y = pt1.y - pt2.y;
+  double z = pt1.z - pt2.z;
+	return sqrt(x * x + y * y + z * z);
+}
+
+double Point3::magnitude()
+{
+  double x = this->x - 0;
+  double y = this->y - 0;
+  double z = this->z - 0;
+  return sqrt(x * x + y * y + z * z);
+}
+
+Point3 Point3::normalize()
+{
+  double x = this->x / Point3::magnitude();
+  double y = this->y / Point3::magnitude();
+  double z = this->z / Point3::magnitude();
+  return Point3(x, y, z);
 }
 
 }  // namespace keisan

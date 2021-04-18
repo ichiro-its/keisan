@@ -18,6 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#include <math.h>
+
 #include <keisan/point_2.hpp>
 
 namespace keisan
@@ -118,6 +120,27 @@ Point2 Point2::operator*(double value)
 Point2 Point2::operator/(double value)
 {
   return Point2(x / value, y / value);
+}
+
+double Point2::distance_between(Point2 &pt1, Point2 &pt2)
+{
+  double x = pt1.x - pt2.x;
+	double y = pt1.y - pt2.y;
+	return sqrt(x * x + y * y);
+}
+
+double Point2::magnitude()
+{
+  double x = this->x - 0;
+  double y = this->y - 0;
+  return sqrt(x * x + y * y);
+}
+
+Point2 Point2::normalize()
+{
+  double x = this->x / Point2::magnitude();
+  double y = this->y / Point2::magnitude();
+  return Point2(x, y);
 }
 
 }  // namespace keisan

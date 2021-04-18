@@ -47,6 +47,10 @@ struct Point2
   Point2 operator*(double value);
   Point2 operator/(double value);
 
+  static double distance_between(Point2 &pt1, Point2 &pt2);
+  double magnitude();
+  Point2 normalize();
+
   double x;
   double y;
 };

@@ -125,15 +125,21 @@ TEST(Point3Test, ValueOperator)
 
 TEST(Point3Test, DistanceEquation)
 {
-  auto result1 = keisan::Point3::distance_between(
-    point3_with_value, point3_assigned_value);
-  ASSERT_DOUBLE_EQ(result1, 9.9373034571758954);
+  {
+    keisan::Point3 a(1.0, 3.0, 5.0);
+    keisan::Point3 b(1.0 + 3.0, 3.0, 5.0 + 4.0);
+    ASSERT_DOUBLE_EQ(keisan::Point3::distance_between(a, b), 5.0);
+  }
 
-  auto result2 = point3_assigned_value.magnitude();
-  ASSERT_DOUBLE_EQ(result2, 7.0710678118654755);
+  {
+    keisan::Point3 point(3.0, 0.0, 4.0);
+    ASSERT_DOUBLE_EQ(point.magnitude(), 5.0);
+  }
 
-  auto result3 = point3_assigned_value.normalize();
-  ASSERT_DOUBLE_EQ(result3.x, 0.70710678118654746);
-  ASSERT_DOUBLE_EQ(result3.y, -0.56568542494923801);
-  ASSERT_DOUBLE_EQ(result3.z, 0.42426406871192851);
+  {
+    keisan::Point3 point(3.0, 0.0, 4.0);
+    ASSERT_DOUBLE_EQ(point.normalize().x, 0.6);
+    ASSERT_DOUBLE_EQ(point.normalize().y, 0.0);
+    ASSERT_DOUBLE_EQ(point.normalize().z, 0.8);
+  }
 }

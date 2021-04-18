@@ -131,16 +131,12 @@ double Point2::distance_between(Point2 & pt1, Point2 & pt2)
 
 double Point2::magnitude()
 {
-  double x = this->x;
-  double y = this->y;
   return sqrt(x * x + y * y);
 }
 
 Point2 Point2::normalize()
 {
-  double x = this->x / Point2::magnitude();
-  double y = this->y / Point2::magnitude();
-  return Point2(x, y);
+  return Point2(x / magnitude(), y / magnitude());
 }
 
 }  // namespace keisan

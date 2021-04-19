@@ -20,89 +20,102 @@
 
 #include <gtest/gtest.h>
 #include <keisan/keisan.hpp>
+#include <iostream>
 
-keisan::Point2 point2;
-keisan::Point2 point2_with_value(1.0, 3.0);
-keisan::Point2 point2_assigned_value(keisan::Point2(5.0, 4.0));
+#define ASSERT_POINT2_EQ(point, point_x, point_y) \
+  { \
+    auto temp_point = (point); \
+    ASSERT_DOUBLE_EQ(temp_point.x, (point_x)); \
+    ASSERT_DOUBLE_EQ(temp_point.y, (point_y)); \
+  }
 
 TEST(Point2Test, EmptyValue)
 {
-  ASSERT_DOUBLE_EQ(point2.x, 0);
-  ASSERT_DOUBLE_EQ(point2.y, 0);
+  auto point = keisan::Point2();
+  ASSERT_POINT2_EQ(point, 0.0, 0.0);
 }
 
 TEST(Point2Test, InitialValue)
 {
-  ASSERT_DOUBLE_EQ(point2_with_value.x, 1.0);
-  ASSERT_DOUBLE_EQ(point2_with_value.y, 3.0);
+  auto point = keisan::Point2(1.0, 3.0);
+  ASSERT_POINT2_EQ(point, 1.0, 3.0);
 }
 
 TEST(Point2Test, AssignedValue)
 {
-  ASSERT_DOUBLE_EQ(point2_assigned_value.x, 5.0);
-  ASSERT_DOUBLE_EQ(point2_assigned_value.y, 4.0);
+  auto point_a = keisan::Point2(5.0, 4.0);
+  auto point_b = keisan::Point2(point_a);
+
+  ASSERT_POINT2_EQ(point_b, point_a.x, point_a.y);
 }
 
 TEST(Point2Test, SelfPointOperator)
 {
-  point2 = point2_with_value;
-  ASSERT_DOUBLE_EQ(point2.x, 1.0);
-  ASSERT_DOUBLE_EQ(point2.y, 3.0);
+  auto point_a = keisan::Point2(5.0, 4.0);
+  auto point_b = keisan::Point2(1.0, 3.0);
 
-  point2 += point2_with_value;
-  ASSERT_DOUBLE_EQ(point2.x, 2.0);
-  ASSERT_DOUBLE_EQ(point2.y, 6.0);
+  point_a = point_b;
+  ASSERT_POINT2_EQ(point_a, 1.0, 3.0);
 
-  point2 -= point2_with_value;
-  ASSERT_DOUBLE_EQ(point2.x, 1.0);
-  ASSERT_DOUBLE_EQ(point2.y, 3.0);
+  point_a += point_b;
+  ASSERT_POINT2_EQ(point_a, 2.0, 6.0);
+
+  point_a -= point_b;
+  ASSERT_POINT2_EQ(point_a, 1.0, 3.0);
 }
 
 TEST(Point2Test, SelfValueOperator)
 {
-  point2_with_value += 2.0;
-  ASSERT_DOUBLE_EQ(point2_with_value.x, 3.0);
-  ASSERT_DOUBLE_EQ(point2_with_value.y, 5.0);
+  auto point = keisan::Point2(1.0, 3.0);
 
-  point2_with_value -= 6.0;
-  ASSERT_DOUBLE_EQ(point2_with_value.x, -3.0);
-  ASSERT_DOUBLE_EQ(point2_with_value.y, -1.0);
+  point += 2.0;
+  ASSERT_POINT2_EQ(point, 3.0, 5.0);
 
-  point2_with_value *= 3.0;
-  ASSERT_DOUBLE_EQ(point2_with_value.x, -9.0);
-  ASSERT_DOUBLE_EQ(point2_with_value.y, -3.0);
+  point -= 6.0;
+  ASSERT_POINT2_EQ(point, -3.0, -1.0);
 
-  point2_with_value /= 2.0;
-  ASSERT_DOUBLE_EQ(point2_with_value.x, -4.5);
-  ASSERT_DOUBLE_EQ(point2_with_value.y, -1.5);
+  point *= 3.0;
+  ASSERT_POINT2_EQ(point, -9.0, -3.0);
+
+  point /= 2.0;
+  ASSERT_POINT2_EQ(point, -4.5, -1.5);
 }
 
 TEST(Point2Test, PointOperator)
 {
-  auto result1 = point2_with_value + point2_assigned_value;
-  ASSERT_DOUBLE_EQ(result1.x, 0.5);
-  ASSERT_DOUBLE_EQ(result1.y, 2.5);
+  auto point_a = keisan::Point2(1.0, 3.0);
+  auto point_b = keisan::Point2(2.0, 5.0);
 
-  auto result2 = point2_with_value - point2_assigned_value;
-  ASSERT_DOUBLE_EQ(result2.x, -9.5);
-  ASSERT_DOUBLE_EQ(result2.y, -5.5);
+  ASSERT_POINT2_EQ(point_a + point_b, 3.0, 8.0);
+  ASSERT_POINT2_EQ(point_a - point_b, -1.0, -2.0);
 }
 
 TEST(Point2Test, ValueOperator)
 {
-  auto result1 = point2_assigned_value + 6.0;
-  ASSERT_DOUBLE_EQ(result1.x, 11.0);
-  ASSERT_DOUBLE_EQ(result1.y, 10.0);
+  auto point = keisan::Point2(1.0, 3.0);
 
-  auto result2 = point2_assigned_value - 4.5;
-  ASSERT_DOUBLE_EQ(result2.x, 0.5);
-  ASSERT_DOUBLE_EQ(result2.y, -0.5);
+  ASSERT_POINT2_EQ(point + 5.0, 6.0, 8.0);
+  ASSERT_POINT2_EQ(point - 4.0, -3.0, -1.0);
+  ASSERT_POINT2_EQ(point * 3.0, 3.0, 9.0);
+  ASSERT_POINT2_EQ(point / 2.0, 0.5, 1.5);
+}
 
-  auto result3 = point2_assigned_value * 2.0;
-  ASSERT_DOUBLE_EQ(result3.x, 10.0);
-  ASSERT_DOUBLE_EQ(result3.y, 8.0);
+TEST(Point2Test, DistanceBetween)
+{
+  auto point_a = keisan::Point2(5.0, 10.0);
+  auto point_b = keisan::Point2(5.0 + 3.0, 10.0 + 4.0);
 
-  auto result4 = point2_assigned_value / -2.0;
-  ASSERT_DOUBLE_EQ(result4.x, -2.5);
-  ASSERT_DOUBLE_EQ(result4.y, -2.0);
+  ASSERT_DOUBLE_EQ(keisan::Point2::distance_between(point_a, point_b), 5.0);
+}
+
+TEST(Point2Test, Magnitude)
+{
+  auto point = keisan::Point2(3.0, 4.0);
+  ASSERT_DOUBLE_EQ(point.magnitude(), 5.0);
+}
+
+TEST(Point2Test, Normalize)
+{
+  auto point = keisan::Point2(3.0, 4.0);
+  ASSERT_POINT2_EQ(point.normalize(), 0.6, 0.8);
 }

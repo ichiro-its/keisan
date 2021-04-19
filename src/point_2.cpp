@@ -18,6 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#include <math.h>
+
 #include <keisan/point_2.hpp>
 
 namespace keisan
@@ -45,6 +47,7 @@ Point2 & Point2::operator=(Point2 & point)
 {
   x = point.x;
   y = point.y;
+
   return *this;
 }
 
@@ -52,6 +55,7 @@ Point2 & Point2::operator+=(Point2 & point)
 {
   x += point.x;
   y += point.y;
+
   return *this;
 }
 
@@ -59,6 +63,7 @@ Point2 & Point2::operator-=(Point2 & point)
 {
   x -= point.x;
   y -= point.y;
+
   return *this;
 }
 
@@ -66,6 +71,7 @@ Point2 & Point2::operator+=(double value)
 {
   x += value;
   y += value;
+
   return *this;
 }
 
@@ -73,6 +79,7 @@ Point2 & Point2::operator-=(double value)
 {
   x -= value;
   y -= value;
+
   return *this;
 }
 
@@ -80,6 +87,7 @@ Point2 & Point2::operator*=(double value)
 {
   x *= value;
   y *= value;
+
   return *this;
 }
 
@@ -87,6 +95,7 @@ Point2 & Point2::operator/=(double value)
 {
   x /= value;
   y /= value;
+
   return *this;
 }
 
@@ -118,6 +127,26 @@ Point2 Point2::operator*(double value)
 Point2 Point2::operator/(double value)
 {
   return Point2(x / value, y / value);
+}
+
+double Point2::distance_between(Point2 & point_a, Point2 & point_b)
+{
+  double dx = point_a.x - point_b.x;
+  double dy = point_a.y - point_b.y;
+
+  return sqrt(dx * dx + dy * dy);
+}
+
+double Point2::magnitude()
+{
+  return sqrt(x * x + y * y);
+}
+
+Point2 Point2::normalize()
+{
+  double mag = magnitude();
+
+  return Point2(x / mag, y / mag);
 }
 
 }  // namespace keisan

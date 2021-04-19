@@ -18,6 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#include <math.h>
+
 #include <keisan/point_3.hpp>
 
 namespace keisan
@@ -49,6 +51,7 @@ Point3 & Point3::operator=(Point3 & point)
   x = point.x;
   y = point.y;
   z = point.z;
+
   return *this;
 }
 
@@ -57,6 +60,7 @@ Point3 & Point3::operator+=(Point3 & point)
   x += point.x;
   y += point.y;
   z += point.z;
+
   return *this;
 }
 
@@ -65,6 +69,7 @@ Point3 & Point3::operator-=(Point3 & point)
   x -= point.x;
   y -= point.y;
   z -= point.z;
+
   return *this;
 }
 
@@ -73,6 +78,7 @@ Point3 & Point3::operator+=(double value)
   x += value;
   y += value;
   z += value;
+
   return *this;
 }
 
@@ -81,6 +87,7 @@ Point3 & Point3::operator-=(double value)
   x -= value;
   y -= value;
   z -= value;
+
   return *this;
 }
 
@@ -89,6 +96,7 @@ Point3 & Point3::operator*=(double value)
   x *= value;
   y *= value;
   z *= value;
+
   return *this;
 }
 
@@ -97,6 +105,7 @@ Point3 & Point3::operator/=(double value)
   x /= value;
   y /= value;
   z /= value;
+
   return *this;
 }
 
@@ -128,6 +137,27 @@ Point3 Point3::operator*(double value)
 Point3 Point3::operator/(double value)
 {
   return Point3(x / value, y / value, z / value);
+}
+
+double Point3::distance_between(Point3 & point_a, Point3 & point_b)
+{
+  double dx = point_a.x - point_b.x;
+  double dy = point_a.y - point_b.y;
+  double dz = point_a.z - point_b.z;
+
+  return sqrt(dx * dx + dy * dy + dz * dz);
+}
+
+double Point3::magnitude()
+{
+  return sqrt(x * x + y * y + z * z);
+}
+
+Point3 Point3::normalize()
+{
+  double mag = magnitude();
+
+  return Point3(x / mag, y / mag, z / mag);
 }
 
 }  // namespace keisan

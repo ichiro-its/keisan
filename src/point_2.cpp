@@ -47,6 +47,7 @@ Point2 & Point2::operator=(Point2 & point)
 {
   x = point.x;
   y = point.y;
+
   return *this;
 }
 
@@ -54,6 +55,7 @@ Point2 & Point2::operator+=(Point2 & point)
 {
   x += point.x;
   y += point.y;
+
   return *this;
 }
 
@@ -61,6 +63,7 @@ Point2 & Point2::operator-=(Point2 & point)
 {
   x -= point.x;
   y -= point.y;
+
   return *this;
 }
 
@@ -68,6 +71,7 @@ Point2 & Point2::operator+=(double value)
 {
   x += value;
   y += value;
+
   return *this;
 }
 
@@ -75,6 +79,7 @@ Point2 & Point2::operator-=(double value)
 {
   x -= value;
   y -= value;
+
   return *this;
 }
 
@@ -82,6 +87,7 @@ Point2 & Point2::operator*=(double value)
 {
   x *= value;
   y *= value;
+
   return *this;
 }
 
@@ -89,6 +95,7 @@ Point2 & Point2::operator/=(double value)
 {
   x /= value;
   y /= value;
+
   return *this;
 }
 
@@ -122,11 +129,12 @@ Point2 Point2::operator/(double value)
   return Point2(x / value, y / value);
 }
 
-double Point2::distance_between(Point2 & pt1, Point2 & pt2)
+double Point2::distance_between(Point2 & point_a, Point2 & point_b)
 {
-  double x = pt1.x - pt2.x;
-  double y = pt1.y - pt2.y;
-  return sqrt(x * x + y * y);
+  double dx = point_a.x - point_b.x;
+  double dy = point_a.y - point_b.y;
+
+  return sqrt(dx * dx + dy * dy);
 }
 
 double Point2::magnitude()
@@ -136,7 +144,9 @@ double Point2::magnitude()
 
 Point2 Point2::normalize()
 {
-  return Point2(x / magnitude(), y / magnitude());
+  double mag = magnitude();
+
+  return Point2(x / mag, y / mag);
 }
 
 }  // namespace keisan

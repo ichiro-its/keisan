@@ -60,3 +60,24 @@ TEST(DegToRadTest, ConversionTest) {
     keisan::deg_to_rad(180.0 * 6.2),
     keisan::pi * 0.2);
 }
+
+TEST(DeltaDegTest, OverflowTest) {
+  ASSERT_DOUBLE_EQ(
+    keisan::delta_deg(100.0, -150.0),
+    110.0);
+
+  ASSERT_DOUBLE_EQ(
+    keisan::delta_deg(-100.0, 150.0),
+    110.0);
+}
+
+TEST(DeltaRadTest, OverflowTest)
+{
+  ASSERT_DOUBLE_EQ(
+    keisan::delta_rad(keisan::pi * 0.6, keisan::pi * -0.7),
+    keisan::pi * 0.7);
+
+  ASSERT_DOUBLE_EQ(
+    keisan::delta_rad(keisan::pi * -0.6, keisan::pi * 0.7),
+    keisan::pi * 0.7);
+}

@@ -20,7 +20,6 @@
 
 #include <keisan/angle.hpp>
 #include <keisan/number.hpp>
-#include <iostream>
 
 namespace keisan
 {
@@ -47,12 +46,30 @@ double deg_to_rad(double value)
 
 double delta_deg(double value1, double value2)
 {
-  return std::abs(wrap_deg(value1 - value2));
+  double result;
+  double temp = value1 - value2;
+
+  if (abs(temp) > 180) {
+    result = -1 * temp;
+  } else {
+    result = temp;
+  }
+
+  return wrap_deg(result);
 }
 
 double delta_rad(double value1, double value2)
 {
-  return std::abs(wrap_rad(value1 - value2));
+  double result;
+  double temp = value1 - value2;
+
+  if (abs(temp) > keisan::pi) {
+    result = -1 * temp;
+  } else {
+    result = temp;
+  }
+
+  return wrap_rad(result);
 }
 
 }  // namespace keisan

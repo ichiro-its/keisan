@@ -46,30 +46,12 @@ double deg_to_rad(double value)
 
 double delta_deg(double value1, double value2)
 {
-  double result;
-  double temp = value1 - value2;
-
-  if (abs(temp) > 180) {
-    result = -1 * temp;
-  } else {
-    result = temp;
-  }
-
-  return wrap_deg(result);
+  return wrap_deg(value2 - value1);
 }
 
 double delta_rad(double value1, double value2)
 {
-  double result;
-  double temp = value1 - value2;
-
-  if (abs(temp) > keisan::pi) {
-    result = -1 * temp;
-  } else {
-    result = temp;
-  }
-
-  return wrap_rad(result);
+  return wrap_rad(value2 - value1);
 }
 
 }  // namespace keisan

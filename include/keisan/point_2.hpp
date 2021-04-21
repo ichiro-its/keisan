@@ -52,6 +52,9 @@ struct Point2
   double magnitude();
   Point2 normalize();
 
+  double direction();
+  static double angle_between(Point2 point1, Point2 point2);
+
   double x;
   double y;
 };

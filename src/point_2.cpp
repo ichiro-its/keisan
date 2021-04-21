@@ -149,4 +149,17 @@ Point2 Point2::normalize()
   return Point2(x / mag, y / mag);
 }
 
+double Point2::direction()
+{
+  return atan(y / x);
+}
+
+double Point2::angle_between(Point2 point1, Point2 point2)
+{
+  return acos(
+    (point1.x * point2.x + point1.y * point2.y) /
+    (point1.magnitude() * point2.magnitude())
+  );
+}
+
 }  // namespace keisan

@@ -160,4 +160,18 @@ Point3 Point3::normalize()
   return Point3(x / mag, y / mag, z / mag);
 }
 
+double Point3::direction()
+{
+  double temp = sqrt(x * x + y * y);
+  return atan(z / temp);
+}
+
+double Point3::angle_between(Point3 point1, Point3 point2)
+{
+  return acos(
+    (point1.x * point2.x + point1.y * point2.y + point1.z * point2.z) /
+    (point1.magnitude() * point2.magnitude())
+  );
+}
+
 }  // namespace keisan

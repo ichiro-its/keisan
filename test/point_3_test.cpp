@@ -119,3 +119,17 @@ TEST(Point3Test, Normalize)
   auto point = keisan::Point3(3.0, 0.0, 4.0);
   ASSERT_POINT3_EQ(point.normalize(), 0.6, 0.0, 0.8);
 }
+
+TEST(Point3Test, Direction)
+{
+  auto point = keisan::Point3(3.0, 4.0, 5.0);
+  ASSERT_DOUBLE_EQ(point.direction(), 45.0 / 180.0 * keisan::pi);
+}
+
+TEST(Point3Test, AngleBetween)
+{
+  auto point_a = keisan::Point3(3.0, 4.0, 0.0);
+  auto point_b = keisan::Point3(4.0, 4.0, 2.0);
+
+  ASSERT_DOUBLE_EQ(keisan::Point3::angle_between(point_a, point_b), acos(14.0 / 15.0));
+}

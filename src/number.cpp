@@ -20,6 +20,7 @@
 
 #include <keisan/number.hpp>
 
+#include <algorithm>
 #include <cmath>
 
 namespace keisan
@@ -43,6 +44,11 @@ double map_number(
 {
   return target_min + scale_number(
     value - source_min, source_max - source_min, target_max - target_min);
+}
+
+double clamp_number(double value, double min_value, double max_value)
+{
+  return std::max(std::min(value, max_value), min_value);
 }
 
 }  // namespace keisan

@@ -157,6 +157,16 @@ double Point3::angle_between(Point3 & point_a, Point3 & point_b)
   return wrap_rad(acos(dot_product / mag));
 }
 
+double Point3::dot_product(Point3 & point_a, Point3 & point_b)
+{
+  return point_a.x * point_b.x + point_a.y * point_b.y + point_a.z * point_b.z;
+}
+
+double Point3::cross_product(Point3 & point_a, Point3 & point_b)
+{
+  return point_a.magnitude() * point_b.magnitude() * sin(angle_between(point_a, point_b));
+}
+
 double Point3::magnitude()
 {
   return sqrt(x * x + y * y + z * z);

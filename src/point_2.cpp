@@ -138,12 +138,12 @@ double Point2::distance_between(Point2 & point_a, Point2 & point_b)
   return sqrt(dx * dx + dy * dy);
 }
 
-double Point2::angle_between(Point2 point1, Point2 point2)
+double Point2::angle_between(Point2 & point_a, Point2 & point_b)
 {
-  return acos(
-    (point1.x * point2.x + point1.y * point2.y) /
-    (point1.magnitude() * point2.magnitude())
-  );
+  double dot_product = point_a.x * point_b.x + point_a.y * point_b.y;
+  double mag = point_a.magnitude() * point_b.magnitude();
+
+  return wrap_rad(acos(dot_product / mag));
 }
 
 double Point2::magnitude()
@@ -153,7 +153,7 @@ double Point2::magnitude()
 
 double Point2::direction()
 {
-  return atan(y / x);
+  return wrap_rad(atan(y / x));
 }
 
 Point2 Point2::normalize()

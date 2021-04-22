@@ -48,7 +48,7 @@ struct Point3
   Point3 operator/(double value);
 
   static double distance_between(Point3 & point_a, Point3 & point_b);
-  static double angle_between(Point3 point1, Point3 point2);
+  static double angle_between(Point3 & point_a, Point3 & point_b);
 
   double magnitude();
   double direction();

@@ -148,16 +148,17 @@ double Point3::distance_between(Point3 & point_a, Point3 & point_b)
   return sqrt(dx * dx + dy * dy + dz * dz);
 }
 
+double Point3::angle_between(Point3 point1, Point3 point2)
+{
+  return acos(
+    (point1.x * point2.x + point1.y * point2.y + point1.z * point2.z) /
+    (point1.magnitude() * point2.magnitude())
+  );
+}
+
 double Point3::magnitude()
 {
   return sqrt(x * x + y * y + z * z);
-}
-
-Point3 Point3::normalize()
-{
-  double mag = magnitude();
-
-  return Point3(x / mag, y / mag, z / mag);
 }
 
 double Point3::direction()
@@ -166,12 +167,11 @@ double Point3::direction()
   return atan(z / temp);
 }
 
-double Point3::angle_between(Point3 point1, Point3 point2)
+Point3 Point3::normalize()
 {
-  return acos(
-    (point1.x * point2.x + point1.y * point2.y + point1.z * point2.z) /
-    (point1.magnitude() * point2.magnitude())
-  );
+  double mag = magnitude();
+
+  return Point3(x / mag, y / mag, z / mag);
 }
 
 }  // namespace keisan

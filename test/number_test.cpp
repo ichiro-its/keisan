@@ -96,3 +96,19 @@ TEST(MapNumberTest, OutsideTest) {
     keisan::map_number(-9.3, -6.5, 4.75, -6.5 * 5.0, 4.75 * 5.0),
     -9.3 * 5.0);
 }
+
+TEST(ClampNumberTest, InsideTest) {
+  ASSERT_DOUBLE_EQ(
+    keisan::clamp_number(5.0, 1.0, 10.0),
+    5.0);
+}
+
+TEST(ClampNumberTest, OutsideTest) {
+  ASSERT_DOUBLE_EQ(
+    keisan::clamp_number(0.0, 1.0, 10.0),
+    1.0);
+
+  ASSERT_DOUBLE_EQ(
+    keisan::clamp_number(15.0, 1.0, 10.0),
+    10.0);
+}

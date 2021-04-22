@@ -20,6 +20,7 @@
 
 #include <math.h>
 
+#include <keisan/angle.hpp>
 #include <keisan/point_3.hpp>
 
 namespace keisan
@@ -148,9 +149,24 @@ double Point3::distance_between(Point3 & point_a, Point3 & point_b)
   return sqrt(dx * dx + dy * dy + dz * dz);
 }
 
+double Point3::angle_between(Point3 & point_a, Point3 & point_b)
+{
+  double dot_product = point_a.x * point_b.x + point_a.y * point_b.y + point_a.z * point_b.z;
+  double mag = point_a.magnitude() * point_b.magnitude();
+
+  return wrap_rad(acos(dot_product / mag));
+}
+
 double Point3::magnitude()
 {
   return sqrt(x * x + y * y + z * z);
+}
+
+double Point3::direction()
+{
+  double temp = sqrt(x * x + y * y);
+
+  return wrap_rad(atan(z / temp));
 }
 
 Point3 Point3::normalize()

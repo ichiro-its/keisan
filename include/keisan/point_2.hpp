@@ -48,8 +48,11 @@ struct Point2
   Point2 operator/(double value);
 
   static double distance_between(Point2 & point_a, Point2 & point_b);
+  static double angle_between(Point2 & point_a, Point2 & point_b);
 
   double magnitude();
+  double direction();
+
   Point2 normalize();
 
   double x;

@@ -133,3 +133,17 @@ TEST(Point3Test, AngleBetween)
 
   ASSERT_DOUBLE_EQ(keisan::Point3::angle_between(point_a, point_b), keisan::deg_to_rad(90.0));
 }
+
+TEST(Point3Test, DotProduct)
+{
+  auto point_a = keisan::Point3(4.0, 3.0, 2.0);
+  auto point_b = keisan::Point3(3.0, 4.0, 5.0);
+  ASSERT_DOUBLE_EQ(keisan::Point3::dot_product(point_a, point_b), 34.0);
+}
+
+TEST(Point3Test, CrossProduct)
+{
+  auto point_a = keisan::Point3(3.0, 6.0, -3.0);
+  auto point_b = keisan::Point3(0.0, 2.0, 4.0);
+  ASSERT_DOUBLE_EQ(keisan::Point3::cross_product(point_a, point_b), sqrt(54.0) * sqrt(20.0));
+}

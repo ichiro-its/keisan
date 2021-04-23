@@ -49,6 +49,8 @@ struct Point2
 
   static double distance_between(Point2 & point_a, Point2 & point_b);
   static double angle_between(Point2 & point_a, Point2 & point_b);
+  static double dot_product(Point2 & point_a, Point2 & point_b);
+  static double cross_product(Point2 & point_a, Point2 & point_b);
 
   double magnitude();
   double direction();

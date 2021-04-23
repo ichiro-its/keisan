@@ -151,10 +151,20 @@ double Point3::distance_between(Point3 & point_a, Point3 & point_b)
 
 double Point3::angle_between(Point3 & point_a, Point3 & point_b)
 {
-  double dot_product = point_a.x * point_b.x + point_a.y * point_b.y + point_a.z * point_b.z;
+  double dot = dot_product(point_a, point_b);
   double mag = point_a.magnitude() * point_b.magnitude();
 
-  return wrap_rad(acos(dot_product / mag));
+  return wrap_rad(acos(dot / mag));
+}
+
+double Point3::dot_product(Point3 & point_a, Point3 & point_b)
+{
+  return point_a.x * point_b.x + point_a.y * point_b.y + point_a.z * point_b.z;
+}
+
+double Point3::cross_product(Point3 & point_a, Point3 & point_b)
+{
+  return point_a.magnitude() * point_b.magnitude() * sin(angle_between(point_a, point_b));
 }
 
 double Point3::magnitude()

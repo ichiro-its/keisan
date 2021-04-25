@@ -10,4 +10,4 @@ Keisan is a [ROS 2](https://docs.ros.org/en/foxy/index.html) package that provid
 
 ## License
 
-This project is maintained by [ICHIRO ITS](https://github.com/ichiro-its) and licensed under [the MIT License](./LICENSE).
+This project is maintained by [ICHIRO ITS](https://github.com/ichiro-its) and licensed under the [MIT License](./LICENSE).

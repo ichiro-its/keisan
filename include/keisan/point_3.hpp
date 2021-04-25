@@ -30,32 +30,32 @@ struct Point3
   Point3(double x, double y, double z);
   Point3(const Point3 & point);
 
-  Point3 & operator=(Point3 & point);
-  Point3 & operator+=(Point3 & point);
-  Point3 & operator-=(Point3 & point);
+  Point3 & operator=(const Point3 & point);
+  Point3 & operator+=(const Point3 & point);
+  Point3 & operator-=(const Point3 & point);
 
   Point3 & operator+=(double value);
   Point3 & operator-=(double value);
   Point3 & operator*=(double value);
   Point3 & operator/=(double value);
 
-  Point3 operator+(Point3 & point);
-  Point3 operator-(Point3 & point);
+  Point3 operator+(const Point3 & point) const;
+  Point3 operator-(const Point3 & point) const;
 
-  Point3 operator+(double value);
-  Point3 operator-(double value);
-  Point3 operator*(double value);
-  Point3 operator/(double value);
+  Point3 operator+(double value) const;
+  Point3 operator-(double value) const;
+  Point3 operator*(double value) const;
+  Point3 operator/(double value) const;
 
-  static double distance_between(Point3 & point_a, Point3 & point_b);
-  static double angle_between(Point3 & point_a, Point3 & point_b);
-  static double dot_product(Point3 & point_a, Point3 & point_b);
-  static double cross_product(Point3 & point_a, Point3 & point_b);
+  static double distance_between(const Point3 & point_a, const Point3 & point_b);
+  static double angle_between(const Point3 & point_a, const Point3 & point_b);
+  static double dot_product(const Point3 & point_a, const Point3 & point_b);
+  static double cross_product(const Point3 & point_a, const Point3 & point_b);
 
-  double magnitude();
-  double direction();
+  double magnitude() const;
+  double direction() const;
 
-  Point3 normalize();
+  Point3 normalize() const;
 
   double x;
   double y;

@@ -47,7 +47,7 @@ Point3::Point3(const Point3 & point)
   z = point.z;
 }
 
-Point3 & Point3::operator=(Point3 & point)
+Point3 & Point3::operator=(const Point3 & point)
 {
   x = point.x;
   y = point.y;
@@ -56,7 +56,7 @@ Point3 & Point3::operator=(Point3 & point)
   return *this;
 }
 
-Point3 & Point3::operator+=(Point3 & point)
+Point3 & Point3::operator+=(const Point3 & point)
 {
   x += point.x;
   y += point.y;
@@ -65,7 +65,7 @@ Point3 & Point3::operator+=(Point3 & point)
   return *this;
 }
 
-Point3 & Point3::operator-=(Point3 & point)
+Point3 & Point3::operator-=(const Point3 & point)
 {
   x -= point.x;
   y -= point.y;
@@ -110,37 +110,37 @@ Point3 & Point3::operator/=(double value)
   return *this;
 }
 
-Point3 Point3::operator+(Point3 & point)
+Point3 Point3::operator+(const Point3 & point) const
 {
   return Point3(x + point.x, y + point.y, z + point.z);
 }
 
-Point3 Point3::operator-(Point3 & point)
+Point3 Point3::operator-(const Point3 & point) const
 {
   return Point3(x - point.x, y - point.y, z - point.z);
 }
 
-Point3 Point3::operator+(double value)
+Point3 Point3::operator+(double value) const
 {
   return Point3(x + value, y + value, z + value);
 }
 
-Point3 Point3::operator-(double value)
+Point3 Point3::operator-(double value) const
 {
   return Point3(x - value, y - value, z - value);
 }
 
-Point3 Point3::operator*(double value)
+Point3 Point3::operator*(double value) const
 {
   return Point3(x * value, y * value, z * value);
 }
 
-Point3 Point3::operator/(double value)
+Point3 Point3::operator/(double value) const
 {
   return Point3(x / value, y / value, z / value);
 }
 
-double Point3::distance_between(Point3 & point_a, Point3 & point_b)
+double Point3::distance_between(const Point3 & point_a, const Point3 & point_b)
 {
   double dx = point_a.x - point_b.x;
   double dy = point_a.y - point_b.y;
@@ -149,7 +149,7 @@ double Point3::distance_between(Point3 & point_a, Point3 & point_b)
   return sqrt(dx * dx + dy * dy + dz * dz);
 }
 
-double Point3::angle_between(Point3 & point_a, Point3 & point_b)
+double Point3::angle_between(const Point3 & point_a, const Point3 & point_b)
 {
   double dot = dot_product(point_a, point_b);
   double mag = point_a.magnitude() * point_b.magnitude();
@@ -157,29 +157,29 @@ double Point3::angle_between(Point3 & point_a, Point3 & point_b)
   return wrap_rad(acos(dot / mag));
 }
 
-double Point3::dot_product(Point3 & point_a, Point3 & point_b)
+double Point3::dot_product(const Point3 & point_a, const Point3 & point_b)
 {
   return point_a.x * point_b.x + point_a.y * point_b.y + point_a.z * point_b.z;
 }
 
-double Point3::cross_product(Point3 & point_a, Point3 & point_b)
+double Point3::cross_product(const Point3 & point_a, const Point3 & point_b)
 {
   return point_a.magnitude() * point_b.magnitude() * sin(angle_between(point_a, point_b));
 }
 
-double Point3::magnitude()
+double Point3::magnitude() const
 {
   return sqrt(x * x + y * y + z * z);
 }
 
-double Point3::direction()
+double Point3::direction() const
 {
   double temp = sqrt(x * x + y * y);
 
   return wrap_rad(atan(z / temp));
 }
 
-Point3 Point3::normalize()
+Point3 Point3::normalize() const
 {
   double mag = magnitude();
 

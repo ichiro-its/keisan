@@ -163,7 +163,7 @@ double Point2::magnitude() const
 
 double Point2::direction() const
 {
-  return wrap_rad(atan(y / x));
+  return wrap_rad(atan2(y, x));
 }
 
 Point2 Point2::normalize() const

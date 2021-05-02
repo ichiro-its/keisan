@@ -18,13 +18,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__KEISAN_HPP_
-#define KEISAN__KEISAN_HPP_
+#ifndef KEISAN__TRANSFORM2_HPP_
+#define KEISAN__TRANSFORM2_HPP_
 
-#include "./angle.hpp"
-#include "./number.hpp"
-#include "./point_2.hpp"
-#include "./point_3.hpp"
-#include "./transform2.hpp"
+#include <keisan/point_2.hpp>
 
-#endif  // KEISAN__KEISAN_HPP_
+namespace keisan
+{
+
+struct Transform2
+{
+  Transform2();
+  Transform2(const keisan::Point2 & translate, double rot, const keisan::Point2 & scale);
+
+  void set_translation(Point2 & point);
+  void set_rotation(double value);
+  void set_scale(Point2 & point);
+
+  Point2 operator*(Point2 & point);
+
+  Point2 translation;
+  Point2 scale;
+  double rotation;
+};
+
+}  // namespace keisan
+
+#endif   // KEISAN__TRANSFORM2_HPP_

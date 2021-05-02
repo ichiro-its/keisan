@@ -18,13 +18,50 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__KEISAN_HPP_
-#define KEISAN__KEISAN_HPP_
+#include <math.h>
 
-#include "./angle.hpp"
-#include "./number.hpp"
-#include "./point_2.hpp"
-#include "./point_3.hpp"
-#include "./transform2.hpp"
+#include <keisan/angle.hpp>
+#include <keisan/transform2.hpp>
 
-#endif  // KEISAN__KEISAN_HPP_
+namespace keisan
+{
+
+Transform2::Transform2()
+{
+  translation = Point2(0, 0);
+  rotation = 0;
+  scale = Point2(0, 0);
+}
+
+void Transform2::set_translation(Point2 & point)
+{
+  translation.x = point.x;
+  translation.y = point.y;
+}
+
+void Transform2::set_rotation(double value)
+{
+  rotation = value;
+}
+
+void Transform2::set_scale(Point2 & point)
+{
+  scale.x = point.x;
+  scale.y = point.y;
+}
+
+Point2 Transform2::operator*(Point2 & point)
+{
+  point.x *= scale.x;
+  point.y *= scale.y;
+  point.x = point.x * cos(keisan::deg_to_rad(rotation)) -
+    point.y * sin(keisan::deg_to_rad(rotation));
+  point.y = point.y * cos(keisan::deg_to_rad(rotation)) -
+    point.x * sin(keisan::deg_to_rad(rotation));
+  point.x += translation.x;
+  point.y += translation.y;
+
+  return point;
+}
+
+}  // namespace keisan

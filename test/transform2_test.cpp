@@ -18,13 +18,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__KEISAN_HPP_
-#define KEISAN__KEISAN_HPP_
+#include <gtest/gtest.h>
+#include <keisan/keisan.hpp>
+#include <iostream>
 
-#include "./angle.hpp"
-#include "./number.hpp"
-#include "./point_2.hpp"
-#include "./point_3.hpp"
-#include "./transform2.hpp"
+#define ASSERT_POINT2_EQ(point, point_x, point_y) \
+  { \
+    auto temp_point = (point); \
+    ASSERT_DOUBLE_EQ(temp_point.x, (point_x)); \
+    ASSERT_DOUBLE_EQ(temp_point.y, (point_y)); \
+  }
 
-#endif  // KEISAN__KEISAN_HPP_
+TEST(Trasform2Test, GeometryTransformation)
+{
+  auto point = keisan::Point2(3.0, 5.0);
+  auto point_a = keisan::Point2(2.0, 3.0);
+  auto point_b = keisan::Point2(2.0, 2.0);
+  keisan::Transform2 transform = keisan::Transform2();
+
+  transform.set_translation(point_a);
+  transform.set_rotation(180.0);
+  transform.set_scale(point_b);
+
+  auto result = transform * point;
+  ASSERT_POINT2_EQ(result, -4.0, -7.0);
+}

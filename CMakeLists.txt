@@ -20,7 +20,8 @@ add_library(${PROJECT_NAME}
   "src/angle.cpp"
   "src/number.cpp"
   "src/point_2.cpp"
-  "src/point_3.cpp")
+  "src/point_3.cpp"
+  "src/transform2.cpp")
 
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -42,7 +43,8 @@ if(BUILD_TESTING)
     "test/angle_test.cpp"
     "test/number_test.cpp"
     "test/point_2_test.cpp"
-    "test/point_3_test.cpp")
+    "test/point_3_test.cpp"
+    "test/transform2_test.cpp")
 
   target_include_directories(${PROJECT_NAME}_tests PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

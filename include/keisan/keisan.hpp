@@ -25,5 +25,6 @@
 #include "./number.hpp"
 #include "./point_2.hpp"
 #include "./point_3.hpp"
+#include "./transform2.hpp"
 
 #endif  // KEISAN__KEISAN_HPP_

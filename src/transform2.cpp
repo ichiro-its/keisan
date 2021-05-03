@@ -18,40 +18,71 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#include <math.h>
+
 #include <keisan/angle.hpp>
-#include <keisan/number.hpp>
+#include <keisan/transform2.hpp>
 
 namespace keisan
 {
 
-double wrap_rad(double value)
+Transform2::Transform2()
+: translation(0.0, 0.0),
+  rotation(0.0),
+  scale(1.0, 1.0)
 {
-  return wrap_number(value, -pi, pi);
 }
 
-double wrap_deg(double value)
+void Transform2::set_translation(const Point2 & translation)
 {
-  return wrap_number(value, -180.0, 180.0);
+  this->translation = translation;
 }
 
-double rad_to_deg(double value)
+void Transform2::set_rotation(const double & rotation)
 {
-  return wrap_deg(scale_number(value, pi, 180.0));
+  this->rotation = rotation;
 }
 
-double deg_to_rad(double value)
+void Transform2::set_scale(const Point2 & scale)
 {
-  return wrap_rad(scale_number(value, 180.0, pi));
+  this->scale = scale;
 }
 
-double delta_rad(double value1, double value2)
+void Transform2::set_scale(const double & scale)
 {
-  return wrap_rad(wrap_rad(value2) - wrap_rad(value1));
+  set_scale({scale, scale});
 }
 
-double delta_deg(double value1, double value2)
+const Point2 & Transform2::get_translation() const
 {
-  return wrap_deg(wrap_deg(value2) - wrap_deg(value1));
+  return translation;
+}
+
+const double & Transform2::get_rotation() const
+{
+  return rotation;
+}
+
+const Point2 & Transform2::get_scale() const
+{
+  return scale;
+}
+
+Point2 Transform2::operator*(const Point2 & point) const
+{
+  // Scale transform
+  auto scaled_point = Point2(point.x * scale.x, point.y * scale.y);
+
+  // Rotation transform
+  auto angle = deg_to_rad(rotation);
+  auto rotated_point = Point2(
+    scaled_point.x * cos(angle) - scaled_point.y * sin(angle),
+    scaled_point.x * sin(angle) + scaled_point.y * cos(angle));
+
+  // Translation transform
+  auto translated_point = rotated_point + translation;
+
+  return translated_point;
 }
 
 }  // namespace keisan

@@ -34,8 +34,8 @@ double wrap_deg(double value);
 double rad_to_deg(double value);
 double deg_to_rad(double value);
 
-double delta_deg(double value1, double value2);
 double delta_rad(double value1, double value2);
+double delta_deg(double value1, double value2);
 
 }  // namespace keisan
 

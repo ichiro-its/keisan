@@ -27,41 +27,62 @@ namespace keisan
 {
 
 Transform2::Transform2()
+: translation(0.0, 0.0),
+  rotation(0.0),
+  scale(1.0, 1.0)
 {
-  translation = Point2(0, 0);
-  rotation = 0;
-  scale = Point2(0, 0);
 }
 
-void Transform2::set_translation(Point2 & point)
+void Transform2::set_translation(const Point2 & translation)
 {
-  translation.x = point.x;
-  translation.y = point.y;
+  this->translation = translation;
 }
 
-void Transform2::set_rotation(double value)
+void Transform2::set_rotation(const double & rotation)
 {
-  rotation = value;
+  this->rotation = rotation;
 }
 
-void Transform2::set_scale(Point2 & point)
+void Transform2::set_scale(const Point2 & scale)
 {
-  scale.x = point.x;
-  scale.y = point.y;
+  this->scale = scale;
 }
 
-Point2 Transform2::operator*(Point2 & point)
+void Transform2::set_scale(const double & scale)
 {
-  point.x *= scale.x;
-  point.y *= scale.y;
-  point.x = point.x * cos(keisan::deg_to_rad(rotation)) -
-    point.y * sin(keisan::deg_to_rad(rotation));
-  point.y = point.y * cos(keisan::deg_to_rad(rotation)) -
-    point.x * sin(keisan::deg_to_rad(rotation));
-  point.x += translation.x;
-  point.y += translation.y;
+  set_scale({scale, scale});
+}
 
-  return point;
+const Point2 & Transform2::get_translation() const
+{
+  return translation;
+}
+
+const double & Transform2::get_rotation() const
+{
+  return rotation;
+}
+
+const Point2 & Transform2::get_scale() const
+{
+  return scale;
+}
+
+Point2 Transform2::operator*(const Point2 & point) const
+{
+  // Scale transform
+  auto scaled_point = Point2(point.x * scale.x, point.y * scale.y);
+
+  // Rotation transform
+  auto angle = deg_to_rad(rotation);
+  auto rotated_point = Point2(
+    scaled_point.x * cos(angle) - scaled_point.y * sin(angle),
+    scaled_point.x * sin(angle) + scaled_point.y * cos(angle));
+
+  // Translation transform
+  auto translated_point = rotated_point + translation;
+
+  return translated_point;
 }
 
 }  // namespace keisan

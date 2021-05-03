@@ -32,14 +32,15 @@
 TEST(Trasform2Test, GeometryTransformation)
 {
   auto point = keisan::Point2(3.0, 5.0);
-  auto point_a = keisan::Point2(2.0, 3.0);
-  auto point_b = keisan::Point2(2.0, 2.0);
-  keisan::Transform2 transform = keisan::Transform2();
 
-  transform.set_translation(point_a);
-  transform.set_rotation(180.0);
-  transform.set_scale(point_b);
+  auto transform = keisan::Transform2();
 
-  auto result = transform * point;
-  ASSERT_POINT2_EQ(result, -4.0, -7.0);
+  transform.set_scale({2.0, 3.0});
+  ASSERT_POINT2_EQ(transform * point, 6.0, 15.0);
+
+  transform.set_rotation(90.0);
+  ASSERT_POINT2_EQ(transform * point, -15.0, 6.0);
+
+  transform.set_translation({2.0, 3.0});
+  ASSERT_POINT2_EQ(transform * point, -13.0, 9.0);
 }

@@ -26,20 +26,27 @@
 namespace keisan
 {
 
-struct Transform2
+class Transform2
 {
+public:
   Transform2();
-  Transform2(const keisan::Point2 & translate, double rot, const keisan::Point2 & scale);
 
-  void set_translation(Point2 & point);
-  void set_rotation(double value);
-  void set_scale(Point2 & point);
+  Point2 operator*(const Point2 & point) const;
 
-  Point2 operator*(Point2 & point);
+  void set_translation(const Point2 & translation);
+  void set_rotation(const double & rotation);
 
+  void set_scale(const Point2 & scale);
+  void set_scale(const double & scale);
+
+  const Point2 & get_translation() const;
+  const double & get_rotation() const;
+  const Point2 & get_scale() const;
+
+private:
   Point2 translation;
-  Point2 scale;
   double rotation;
+  Point2 scale;
 };
 
 }  // namespace keisan

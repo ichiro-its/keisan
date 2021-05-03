@@ -44,14 +44,14 @@ double deg_to_rad(double value)
   return wrap_rad(scale_number(value, 180.0, pi));
 }
 
-double delta_deg(double value1, double value2)
-{
-  return wrap_deg(wrap_deg(value2) - wrap_deg(value1));
-}
-
 double delta_rad(double value1, double value2)
 {
   return wrap_rad(wrap_rad(value2) - wrap_rad(value1));
+}
+
+double delta_deg(double value1, double value2)
+{
+  return wrap_deg(wrap_deg(value2) - wrap_deg(value1));
 }
 
 }  // namespace keisan

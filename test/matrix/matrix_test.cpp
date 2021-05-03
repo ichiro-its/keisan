@@ -58,6 +58,24 @@ TEST(MatrixTest, ZeroValue)
     0.0, 0.0, 0.0, 0.0);
 }
 
+TEST(MatrixTest, MatrixMultiplication)
+{
+  auto a = keisan::Matrix<3, 2>(
+    1.0, 1.0,
+    2.0, 2.0,
+    3.0, 3.0);
+
+  auto b = keisan::Matrix<2, 2>(
+    1.0, 1.0,
+    2.0, 2.0);
+
+  ASSERT_MATRIX_M_N_EQ(
+    3, 2, a * b,
+    3.0, 3.0,
+    6.0, 6.0,
+    9.0, 9.0);
+}
+
 TEST(MatrixTest, MatrixOperation)
 {
   auto a = keisan::Matrix<3, 4>(

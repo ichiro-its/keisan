@@ -26,6 +26,9 @@
 namespace keisan
 {
 
+template<size_t N>
+class Vector;
+
 template<size_t M, size_t N>
 class Matrix
 {
@@ -47,6 +50,11 @@ public:
   inline Matrix<M, N> & operator-=(const double & value);
   inline Matrix<M, N> & operator*=(const double & value);
   inline Matrix<M, N> & operator/=(const double & value);
+
+  template<size_t O>
+  inline Matrix<M, O> operator*(const Matrix<N, O> & matrix);
+
+  inline Vector<M> operator*(const Vector<N> & vector);
 
   inline Matrix<M, N> operator+(const Matrix<M, N> & matrix) const;
   inline Matrix<M, N> operator-(const Matrix<M, N> & matrix) const;
@@ -160,6 +168,30 @@ Matrix<M, N> & Matrix<M, N>::operator/=(const double & value)
   }
 
   return *this;
+}
+
+
+template<size_t M, size_t N>
+template<size_t O>
+inline Matrix<M, O> Matrix<M, N>::operator*(const Matrix<N, O> & matrix)
+{
+  Matrix<M, O> new_matrix;
+  for (size_t i = 0; i < M; ++i) {
+    for (size_t j = 0; j < O; ++j) {
+      new_matrix[i][j] = 0.0;
+      for (size_t k = 0; k < N; ++k) {
+        new_matrix[i][j] += (*this)[i][k] * matrix[k][j];
+      }
+    }
+  }
+
+  return new_matrix;
+}
+
+template<size_t M, size_t N>
+inline Vector<M> Matrix<M, N>::operator*(const Vector<N> & vector)
+{
+  return (Vector<M>) operator*((Matrix<N, 1>& )vector);
 }
 
 template<size_t M, size_t N>

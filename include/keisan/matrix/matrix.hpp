@@ -23,8 +23,6 @@
 
 #include <algorithm>
 
-#include "./vector.hpp"
-
 namespace keisan
 {
 

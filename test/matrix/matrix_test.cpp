@@ -18,16 +18,42 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__KEISAN_HPP_
-#define KEISAN__KEISAN_HPP_
+#include <gtest/gtest.h>
+#include <keisan/keisan.hpp>
 
-#include "./matrix/matrix.hpp"
-#include "./matrix/vector.hpp"
+#define ASSERT_MATRIX_M_N_EQ(M, N, MATRIX, ...) \
+  { \
+    keisan::Matrix<M, N> _matrix = MATRIX; \
+    double _values[] = {__VA_ARGS__}; \
+    for (size_t i = 0; i < M; ++i) { \
+      for (size_t j = 0; j < N; ++j) { \
+        ASSERT_DOUBLE_EQ(_values[i * N + j], _matrix[i][j]); \
+      } \
+    } \
+  }
 
-#include "./angle.hpp"
-#include "./number.hpp"
-#include "./point_2.hpp"
-#include "./point_3.hpp"
-#include "./transform2.hpp"
+TEST(MatrixTest, InitialValue)
+{
+  ASSERT_MATRIX_M_N_EQ(2, 1, (keisan::Matrix<2, 1>(1.0, 2.0)), 1.0, 2.0);
 
-#endif  // KEISAN__KEISAN_HPP_
+  ASSERT_MATRIX_M_N_EQ(
+    3, 4,
+    (keisan::Matrix<3, 4>(
+      1.0, 1.0, 1.0, 1.0,
+      2.0, 2.0, 2.0, 2.0,
+      3.0, 3.0, 3.0, 3.0)),
+    1.0, 1.0, 1.0, 1.0,
+    2.0, 2.0, 2.0, 2.0,
+    3.0, 3.0, 3.0, 3.0);
+}
+
+TEST(MatrixTest, ZeroValue)
+{
+  ASSERT_MATRIX_M_N_EQ(2, 1, (keisan::Matrix<2, 1>::zero()), 0.0, 0.0);
+
+  ASSERT_MATRIX_M_N_EQ(
+    3, 4, (keisan::Matrix<3, 4>::zero()),
+    0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0);
+}

@@ -42,6 +42,22 @@ public:
 
   Matrix<M, N> & operator=(const Matrix<M, N> & matrix);
 
+  Matrix<M, N> & operator+=(const Matrix<M, N> & matrix);
+  Matrix<M, N> & operator-=(const Matrix<M, N> & matrix);
+
+  Matrix<M, N> & operator+=(const double & value);
+  Matrix<M, N> & operator-=(const double & value);
+  Matrix<M, N> & operator*=(const double & value);
+  Matrix<M, N> & operator/=(const double & value);
+
+  Matrix<M, N> operator+(const Matrix<M, N> & matrix) const;
+  Matrix<M, N> operator-(const Matrix<M, N> & matrix) const;
+
+  Matrix<M, N> operator+(const double & value) const;
+  Matrix<M, N> operator-(const double & value) const;
+  Matrix<M, N> operator*(const double & value) const;
+  Matrix<M, N> operator/(const double & value) const;
+
   double * operator[](size_t pos);
   const double * operator[](size_t pos) const;
 
@@ -86,6 +102,120 @@ Matrix<M, N> & Matrix<M, N>::operator=(const Matrix<M, N> & matrix)
   std::copy(matrix.data, matrix.data + M * N, data);
 
   return *this;
+}
+
+template<size_t M, size_t N>
+Matrix<M, N> & Matrix<M, N>::operator+=(const Matrix<M, N> & matrix)
+{
+  for (size_t i = 0; i < M * N; ++i) {
+    data[i] += matrix.data[i];
+  }
+
+  return *this;
+}
+
+template<size_t M, size_t N>
+Matrix<M, N> & Matrix<M, N>::operator-=(const Matrix<M, N> & matrix)
+{
+  for (size_t i = 0; i < M * N; ++i) {
+    data[i] -= matrix.data[i];
+  }
+
+  return *this;
+}
+
+template<size_t M, size_t N>
+Matrix<M, N> & Matrix<M, N>::operator+=(const double & value)
+{
+  for (size_t i = 0; i < M * N; ++i) {
+    data[i] += value;
+  }
+
+  return *this;
+}
+
+template<size_t M, size_t N>
+Matrix<M, N> & Matrix<M, N>::operator-=(const double & value)
+{
+  for (size_t i = 0; i < M * N; ++i) {
+    data[i] -= value;
+  }
+
+  return *this;
+}
+
+template<size_t M, size_t N>
+Matrix<M, N> & Matrix<M, N>::operator*=(const double & value)
+{
+  for (size_t i = 0; i < M * N; ++i) {
+    data[i] *= value;
+  }
+
+  return *this;
+}
+
+template<size_t M, size_t N>
+Matrix<M, N> & Matrix<M, N>::operator/=(const double & value)
+{
+  for (size_t i = 0; i < M * N; ++i) {
+    data[i] /= value;
+  }
+
+  return *this;
+}
+
+template<size_t M, size_t N>
+Matrix<M, N> Matrix<M, N>::operator+(const Matrix<M, N> & matrix) const
+{
+  auto new_matrix = *this;
+  new_matrix += matrix;
+
+  return new_matrix;
+}
+
+template<size_t M, size_t N>
+Matrix<M, N> Matrix<M, N>::operator-(const Matrix<M, N> & matrix) const
+{
+  auto new_matrix = *this;
+  new_matrix -= matrix;
+
+  return new_matrix;
+}
+
+template<size_t M, size_t N>
+Matrix<M, N> Matrix<M, N>::operator+(const double & value) const
+{
+  auto new_matrix = *this;
+  new_matrix += value;
+
+  return new_matrix;
+}
+
+template<size_t M, size_t N>
+Matrix<M, N> Matrix<M, N>::operator-(const double & value) const
+{
+  auto new_matrix = *this;
+  new_matrix -= value;
+
+  return new_matrix;
+}
+
+template<size_t M, size_t N>
+Matrix<M, N> Matrix<M, N>::operator*(const double & value) const
+{
+  auto new_matrix = *this;
+  new_matrix *= value;
+
+  return new_matrix;
+}
+
+template<size_t M, size_t N>
+Matrix<M, N> Matrix<M, N>::operator/(const double & value) const
+{
+  auto new_matrix = *this;
+  new_matrix /= value;
+
+  return new_matrix;
 }
 
 template<size_t M, size_t N>

@@ -22,6 +22,7 @@
 #define KEISAN__KEISAN_HPP_
 
 #include "./matrix/matrix.hpp"
+#include "./matrix/square_matrix.hpp"
 #include "./matrix/vector.hpp"
 
 #include "./angle.hpp"

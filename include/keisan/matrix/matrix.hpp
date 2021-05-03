@@ -27,6 +27,9 @@ namespace keisan
 {
 
 template<size_t N>
+class SquareMatrix;
+
+template<size_t N>
 class Vector;
 
 template<size_t M, size_t N>
@@ -55,6 +58,7 @@ public:
   template<size_t O>
   inline Matrix<M, O> operator*(const Matrix<N, O> & matrix);
 
+  inline Matrix<M, N> operator*(const SquareMatrix<N> & square_matrix);
   inline Vector<M> operator*(const Vector<N> & vector);
 
   inline Matrix<M, N> operator+(const Matrix<M, N> & matrix) const;
@@ -174,7 +178,7 @@ Matrix<M, N> & Matrix<M, N>::operator/=(const double & value)
 
 template<size_t M, size_t N>
 template<size_t O>
-inline Matrix<M, O> Matrix<M, N>::operator*(const Matrix<N, O> & matrix)
+Matrix<M, O> Matrix<M, N>::operator*(const Matrix<N, O> & matrix)
 {
   Matrix<M, O> new_matrix;
   for (size_t i = 0; i < M; ++i) {
@@ -190,7 +194,13 @@ inline Matrix<M, O> Matrix<M, N>::operator*(const Matrix<N, O> & matrix)
 }
 
 template<size_t M, size_t N>
-inline Vector<M> Matrix<M, N>::operator*(const Vector<N> & vector)
+Matrix<M, N> Matrix<M, N>::operator*(const SquareMatrix<N> & square_matrix)
+{
+  return operator*((Matrix<N, N>& )square_matrix);
+}
+
+template<size_t M, size_t N>
+Vector<M> Matrix<M, N>::operator*(const Vector<N> & vector)
 {
   return (Vector<M>) operator*((Matrix<N, 1>& )vector);
 }

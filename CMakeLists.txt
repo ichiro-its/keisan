@@ -41,6 +41,7 @@ if(BUILD_TESTING)
 
   ament_add_gtest(${PROJECT_NAME}_tests
     "test/matrix/matrix_test.cpp"
+    "test/matrix/square_matrix_test.cpp"
     "test/matrix/vector_test.cpp"
     "test/angle_test.cpp"
     "test/number_test.cpp"

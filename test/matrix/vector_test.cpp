@@ -48,7 +48,7 @@ TEST(VectorTest, ZeroValue)
   ASSERT_VECTOR_N_EQ(5, b, 0.0, 0.0, 0.0, 0.0, 0.0);
 }
 
-TEST(VectorTest, MatrixVectorMultiplication)
+TEST(VectorTest, MatrixMultiplication)
 {
   auto a = keisan::Matrix<3, 2>(
     1.0, 1.0,
@@ -58,6 +58,17 @@ TEST(VectorTest, MatrixVectorMultiplication)
   auto b = keisan::Vector<2>(1.0, 2.0);
 
   ASSERT_VECTOR_N_EQ(3, a * b, 3.0, 6.0, 9.0);
+}
+
+TEST(VectorTest, SquareMatrixMultiplication)
+{
+  auto a = keisan::SquareMatrix<2>(
+    1.0, 1.0,
+    2.0, 2.0);
+
+  auto b = keisan::Vector<2>(1.0, 2.0);
+
+  ASSERT_VECTOR_N_EQ(2, a * b, 3.0, 6.0);
 }
 
 TEST(VectorTest, VectorOperation)

@@ -30,34 +30,34 @@ template<size_t M, size_t N>
 class Matrix
 {
 public:
-  Matrix();
-  Matrix(const Matrix<M, N> & matrix);
+  inline Matrix();
+  inline Matrix(const Matrix<M, N> & matrix);
 
   template<typename ... Types>
-  explicit Matrix(Types ... values);
+  inline explicit Matrix(Types ... values);
 
-  static Matrix<M, N> zero();
+  inline static Matrix<M, N> zero();
 
-  Matrix<M, N> & operator=(const Matrix<M, N> & matrix);
+  inline Matrix<M, N> & operator=(const Matrix<M, N> & matrix);
 
-  Matrix<M, N> & operator+=(const Matrix<M, N> & matrix);
-  Matrix<M, N> & operator-=(const Matrix<M, N> & matrix);
+  inline Matrix<M, N> & operator+=(const Matrix<M, N> & matrix);
+  inline Matrix<M, N> & operator-=(const Matrix<M, N> & matrix);
 
-  Matrix<M, N> & operator+=(const double & value);
-  Matrix<M, N> & operator-=(const double & value);
-  Matrix<M, N> & operator*=(const double & value);
-  Matrix<M, N> & operator/=(const double & value);
+  inline Matrix<M, N> & operator+=(const double & value);
+  inline Matrix<M, N> & operator-=(const double & value);
+  inline Matrix<M, N> & operator*=(const double & value);
+  inline Matrix<M, N> & operator/=(const double & value);
 
-  Matrix<M, N> operator+(const Matrix<M, N> & matrix) const;
-  Matrix<M, N> operator-(const Matrix<M, N> & matrix) const;
+  inline Matrix<M, N> operator+(const Matrix<M, N> & matrix) const;
+  inline Matrix<M, N> operator-(const Matrix<M, N> & matrix) const;
 
-  Matrix<M, N> operator+(const double & value) const;
-  Matrix<M, N> operator-(const double & value) const;
-  Matrix<M, N> operator*(const double & value) const;
-  Matrix<M, N> operator/(const double & value) const;
+  inline Matrix<M, N> operator+(const double & value) const;
+  inline Matrix<M, N> operator-(const double & value) const;
+  inline Matrix<M, N> operator*(const double & value) const;
+  inline Matrix<M, N> operator/(const double & value) const;
 
-  double * operator[](size_t pos);
-  const double * operator[](size_t pos) const;
+  inline double * operator[](size_t pos);
+  inline const double * operator[](size_t pos) const;
 
 private:
   double data[M * N];

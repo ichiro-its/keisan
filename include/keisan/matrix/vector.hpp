@@ -30,34 +30,34 @@ template<size_t N>
 class Vector : public Matrix<N, 1>
 {
 public:
-  Vector();
-  explicit Vector(const Matrix<N, 1> & matrix);
+  inline Vector();
+  inline explicit Vector(const Matrix<N, 1> & matrix);
 
   template<typename ... Types>
-  explicit Vector(Types ... values);
+  inline explicit Vector(Types ... values);
 
-  static Vector<N> zero();
+  inline static Vector<N> zero();
 
-  Vector<N> & operator=(const Matrix<N, 1> & matrix);
+  inline Vector<N> & operator=(const Matrix<N, 1> & matrix);
 
-  Vector<N> & operator+=(const Matrix<N, 1> & matrix);
-  Vector<N> & operator-=(const Matrix<N, 1> & matrix);
+  inline Vector<N> & operator+=(const Matrix<N, 1> & matrix);
+  inline Vector<N> & operator-=(const Matrix<N, 1> & matrix);
 
-  Vector<N> & operator+=(const double & value);
-  Vector<N> & operator-=(const double & value);
-  Vector<N> & operator*=(const double & value);
-  Vector<N> & operator/=(const double & value);
+  inline Vector<N> & operator+=(const double & value);
+  inline Vector<N> & operator-=(const double & value);
+  inline Vector<N> & operator*=(const double & value);
+  inline Vector<N> & operator/=(const double & value);
 
-  Vector<N> operator+(const Matrix<N, 1> & matrix) const;
-  Vector<N> operator-(const Matrix<N, 1> & matrix) const;
+  inline Vector<N> operator+(const Matrix<N, 1> & matrix) const;
+  inline Vector<N> operator-(const Matrix<N, 1> & matrix) const;
 
-  Vector<N> operator+(const double & value) const;
-  Vector<N> operator-(const double & value) const;
-  Vector<N> operator*(const double & value) const;
-  Vector<N> operator/(const double & value) const;
+  inline Vector<N> operator+(const double & value) const;
+  inline Vector<N> operator-(const double & value) const;
+  inline Vector<N> operator*(const double & value) const;
+  inline Vector<N> operator/(const double & value) const;
 
-  double & operator[](size_t pos);
-  const double & operator[](size_t pos) const;
+  inline double & operator[](size_t pos);
+  inline const double & operator[](size_t pos) const;
 };
 
 template<size_t N>

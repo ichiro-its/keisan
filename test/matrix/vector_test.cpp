@@ -32,14 +32,20 @@
 
 TEST(VectorTest, InitialValue)
 {
-  ASSERT_VECTOR_N_EQ(2, keisan::Vector<2>(1.0, 2.0), 1.0, 2.0);
-  ASSERT_VECTOR_N_EQ(5, keisan::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0), 1.0, 2.0, 3.0, 4.0, 5.0);
+  auto a = keisan::Vector<2>(1.0, 2.0);
+  ASSERT_VECTOR_N_EQ(2, a, 1.0, 2.0);
+
+  auto b = keisan::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0);
+  ASSERT_VECTOR_N_EQ(5, b, 1.0, 2.0, 3.0, 4.0, 5.0);
 }
 
 TEST(VectorTest, ZeroValue)
 {
-  ASSERT_VECTOR_N_EQ(2, keisan::Vector<2>::zero(), 0.0, 0.0);
-  ASSERT_VECTOR_N_EQ(5, keisan::Vector<5>::zero(), 0.0, 0.0, 0.0, 0.0, 0.0);
+  auto a = keisan::Vector<2>::zero();
+  ASSERT_VECTOR_N_EQ(2, a, 0.0, 0.0);
+
+  auto b = keisan::Vector<5>::zero();
+  ASSERT_VECTOR_N_EQ(5, b, 0.0, 0.0, 0.0, 0.0, 0.0);
 }
 
 TEST(VectorTest, MatrixVectorMultiplication)
@@ -71,22 +77,22 @@ TEST(VectorTest, VectorOperation)
 
 TEST(VectorTest, ScalarOperation)
 {
-  auto vector = keisan::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0);
+  auto a = keisan::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0);
 
-  ASSERT_VECTOR_N_EQ(5, vector + 2.0, 3.0, 4.0, 5.0, 6.0, 7.0);
-  ASSERT_VECTOR_N_EQ(5, vector - 2.0, -1.0, 0.0, 1.0, 2.0, 3.0);
-  ASSERT_VECTOR_N_EQ(5, vector * 2.0, 2.0, 4.0, 6.0, 8.0, 10.0);
-  ASSERT_VECTOR_N_EQ(5, vector / 2.0, 0.5, 1.0, 1.5, 2.0, 2.5);
+  ASSERT_VECTOR_N_EQ(5, a + 2.0, 3.0, 4.0, 5.0, 6.0, 7.0);
+  ASSERT_VECTOR_N_EQ(5, a - 2.0, -1.0, 0.0, 1.0, 2.0, 3.0);
+  ASSERT_VECTOR_N_EQ(5, a * 2.0, 2.0, 4.0, 6.0, 8.0, 10.0);
+  ASSERT_VECTOR_N_EQ(5, a / 2.0, 0.5, 1.0, 1.5, 2.0, 2.5);
 
-  vector += 2.0;
-  ASSERT_VECTOR_N_EQ(5, vector, 3.0, 4.0, 5.0, 6.0, 7.0);
+  a += 2.0;
+  ASSERT_VECTOR_N_EQ(5, a, 3.0, 4.0, 5.0, 6.0, 7.0);
 
-  vector -= 2.0;
-  ASSERT_VECTOR_N_EQ(5, vector, 1.0, 2.0, 3.0, 4.0, 5.0);
+  a -= 2.0;
+  ASSERT_VECTOR_N_EQ(5, a, 1.0, 2.0, 3.0, 4.0, 5.0);
 
-  vector *= 2.0;
-  ASSERT_VECTOR_N_EQ(5, vector, 2.0, 4.0, 6.0, 8.0, 10.0);
+  a *= 2.0;
+  ASSERT_VECTOR_N_EQ(5, a, 2.0, 4.0, 6.0, 8.0, 10.0);
 
-  vector /= 2.0;
-  ASSERT_VECTOR_N_EQ(5, vector, 1.0, 2.0, 3.0, 4.0, 5.0);
+  a /= 2.0;
+  ASSERT_VECTOR_N_EQ(5, a, 1.0, 2.0, 3.0, 4.0, 5.0);
 }

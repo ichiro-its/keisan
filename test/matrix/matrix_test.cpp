@@ -34,14 +34,16 @@
 
 TEST(MatrixTest, InitialValue)
 {
-  ASSERT_MATRIX_M_N_EQ(2, 1, (keisan::Matrix<2, 1>(1.0, 2.0)), 1.0, 2.0);
+  auto a = keisan::Matrix<2, 1>(1.0, 2.0);
+  ASSERT_MATRIX_M_N_EQ(2, 1, a, 1.0, 2.0);
+
+  auto b = keisan::Matrix<3, 4>(
+    1.0, 1.0, 1.0, 1.0,
+    2.0, 2.0, 2.0, 2.0,
+    3.0, 3.0, 3.0, 3.0);
 
   ASSERT_MATRIX_M_N_EQ(
-    3, 4,
-    (keisan::Matrix<3, 4>(
-      1.0, 1.0, 1.0, 1.0,
-      2.0, 2.0, 2.0, 2.0,
-      3.0, 3.0, 3.0, 3.0)),
+    3, 4, b,
     1.0, 1.0, 1.0, 1.0,
     2.0, 2.0, 2.0, 2.0,
     3.0, 3.0, 3.0, 3.0);
@@ -49,10 +51,12 @@ TEST(MatrixTest, InitialValue)
 
 TEST(MatrixTest, ZeroValue)
 {
-  ASSERT_MATRIX_M_N_EQ(2, 1, (keisan::Matrix<2, 1>::zero()), 0.0, 0.0);
+  auto a = keisan::Matrix<2, 1>::zero();
+  ASSERT_MATRIX_M_N_EQ(2, 1, a, 0.0, 0.0);
 
+  auto b = keisan::Matrix<3, 4>::zero();
   ASSERT_MATRIX_M_N_EQ(
-    3, 4, (keisan::Matrix<3, 4>::zero()),
+    3, 4, b,
     0.0, 0.0, 0.0, 0.0,
     0.0, 0.0, 0.0, 0.0,
     0.0, 0.0, 0.0, 0.0);
@@ -117,59 +121,59 @@ TEST(MatrixTest, MatrixOperation)
 
 TEST(MatrixTest, ScalarOperation)
 {
-  auto matrix = keisan::Matrix<3, 4>(
+  auto a = keisan::Matrix<3, 4>(
     1.0, 1.0, 1.0, 1.0,
     2.0, 2.0, 2.0, 2.0,
     3.0, 3.0, 3.0, 3.0);
 
   ASSERT_MATRIX_M_N_EQ(
-    3, 4, matrix + 2.0,
+    3, 4, a + 2.0,
     3.0, 3.0, 3.0, 3.0,
     4.0, 4.0, 4.0, 4.0,
     5.0, 5.0, 5.0, 5.0);
 
   ASSERT_MATRIX_M_N_EQ(
-    3, 4, matrix - 2.0,
+    3, 4, a - 2.0,
     -1.0, -1.0, -1.0, -1.0,
     0.0, 0.0, 0.0, 0.0,
     1.0, 1.0, 1.0, 1.0);
 
   ASSERT_MATRIX_M_N_EQ(
-    3, 4, matrix * 2.0,
+    3, 4, a * 2.0,
     2.0, 2.0, 2.0, 2.0,
     4.0, 4.0, 4.0, 4.0,
     6.0, 6.0, 6.0, 6.0);
 
   ASSERT_MATRIX_M_N_EQ(
-    3, 4, matrix / 2.0,
+    3, 4, a / 2.0,
     0.5, 0.5, 0.5, 0.5,
     1.0, 1.0, 1.0, 1.0,
     1.5, 1.5, 1.5, 1.5);
 
-  matrix += 2.0;
+  a += 2.0;
   ASSERT_MATRIX_M_N_EQ(
-    3, 4, matrix,
+    3, 4, a,
     3.0, 3.0, 3.0, 3.0,
     4.0, 4.0, 4.0, 4.0,
     5.0, 5.0, 5.0, 5.0);
 
-  matrix -= 2.0;
+  a -= 2.0;
   ASSERT_MATRIX_M_N_EQ(
-    3, 4, matrix,
+    3, 4, a,
     1.0, 1.0, 1.0, 1.0,
     2.0, 2.0, 2.0, 2.0,
     3.0, 3.0, 3.0, 3.0);
 
-  matrix *= 2.0;
+  a *= 2.0;
   ASSERT_MATRIX_M_N_EQ(
-    3, 4, matrix,
+    3, 4, a,
     2.0, 2.0, 2.0, 2.0,
     4.0, 4.0, 4.0, 4.0,
     6.0, 6.0, 6.0, 6.0);
 
-  matrix /= 2.0;
+  a /= 2.0;
   ASSERT_MATRIX_M_N_EQ(
-    3, 4, matrix,
+    3, 4, a,
     1.0, 1.0, 1.0, 1.0,
     2.0, 2.0, 2.0, 2.0,
     3.0, 3.0, 3.0, 3.0);

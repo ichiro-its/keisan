@@ -34,10 +34,11 @@ class Matrix
 {
 public:
   inline Matrix();
-  inline Matrix(const Matrix<M, N> & matrix);
 
   template<typename ... Types>
-  inline explicit Matrix(Types ... values);
+  inline explicit Matrix(const double & value, Types ... the_rest);
+
+  inline Matrix(const Matrix<M, N> & matrix);
 
   inline static Matrix<M, N> zero();
 
@@ -77,16 +78,16 @@ Matrix<M, N>::Matrix()
 }
 
 template<size_t M, size_t N>
-Matrix<M, N>::Matrix(const Matrix<M, N> & matrix)
+template<typename ... Types>
+Matrix<M, N>::Matrix(const double & value, Types ... the_rest)
+: data{value, the_rest ...}
 {
-  *this = matrix;
 }
 
 template<size_t M, size_t N>
-template<typename ... Types>
-Matrix<M, N>::Matrix(Types ... values)
-: data{values ...}
+Matrix<M, N>::Matrix(const Matrix<M, N> & matrix)
 {
+  *this = matrix;
 }
 
 template<size_t M, size_t N>

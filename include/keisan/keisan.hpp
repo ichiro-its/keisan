@@ -21,6 +21,10 @@
 #ifndef KEISAN__KEISAN_HPP_
 #define KEISAN__KEISAN_HPP_
 
+#include "./matrix/matrix.hpp"
+#include "./matrix/square_matrix.hpp"
+#include "./matrix/vector.hpp"
+
 #include "./angle.hpp"
 #include "./number.hpp"
 #include "./point_2.hpp"

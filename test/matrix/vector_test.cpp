@@ -30,16 +30,16 @@
     } \
   }
 
-TEST(VectorTest, EmptyValue)
-{
-  ASSERT_VECTOR_N_EQ(keisan::Vector<2>(), 0.0, 0.0);
-  ASSERT_VECTOR_N_EQ(keisan::Vector<5>(), 0.0, 0.0, 0.0, 0.0, 0.0);
-}
-
 TEST(VectorTest, InitialValue)
 {
   ASSERT_VECTOR_N_EQ(keisan::Vector<2>(1.0, 2.0), 1.0, 2.0);
   ASSERT_VECTOR_N_EQ(keisan::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0), 1.0, 2.0, 3.0, 4.0, 5.0);
+}
+
+TEST(VectorTest, ZeroValue)
+{
+  ASSERT_VECTOR_N_EQ(keisan::Vector<2>::zero(), 0.0, 0.0);
+  ASSERT_VECTOR_N_EQ(keisan::Vector<5>::zero(), 0.0, 0.0, 0.0, 0.0, 0.0);
 }
 
 TEST(VectorTest, Vector2Operation)

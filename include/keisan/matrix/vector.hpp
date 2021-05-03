@@ -36,6 +36,8 @@ public:
   template<typename ... Types>
   explicit Vector(Types ... values);
 
+  static Vector<N> zero();
+
   Vector<N> & operator=(const Vector<N> & vector);
 
   Vector<N> & operator+=(const Vector<N> & vector);
@@ -64,7 +66,6 @@ private:
 template<size_t N>
 Vector<N>::Vector()
 {
-  data.fill(0.0);
 }
 
 template<size_t N>
@@ -78,6 +79,15 @@ template<typename ... Types>
 Vector<N>::Vector(Types ... values)
 : data({values ...})
 {
+}
+
+template<size_t N>
+Vector<N> Vector<N>::zero()
+{
+  Vector<N> vector;
+  vector.data.fill(0.0);
+
+  return vector;
 }
 
 template<size_t N>

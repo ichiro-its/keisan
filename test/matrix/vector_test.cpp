@@ -23,10 +23,10 @@
 
 #define ASSERT_VECTOR_N_EQ(VECTOR, ...) \
   { \
-    auto vector = (VECTOR); \
-    double values[] = {__VA_ARGS__}; \
-    for (size_t i = 0; i < sizeof(values) / sizeof(double); ++i) { \
-      ASSERT_DOUBLE_EQ(values[i], vector[i]); \
+    auto _vector = VECTOR; \
+    double _values[] = {__VA_ARGS__}; \
+    for (size_t i = 0; i < sizeof(_values) / sizeof(double); ++i) { \
+      ASSERT_DOUBLE_EQ(_values[i], _vector[i]); \
     } \
   }
 
@@ -40,4 +40,42 @@ TEST(VectorTest, InitialValue)
 {
   ASSERT_VECTOR_N_EQ(keisan::Vector<2>(1.0, 2.0), 1.0, 2.0);
   ASSERT_VECTOR_N_EQ(keisan::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0), 1.0, 2.0, 3.0, 4.0, 5.0);
+}
+
+TEST(VectorTest, Vector2Operation)
+{
+  auto a = keisan::Vector<2>(1.0, 2.0);
+  auto b = keisan::Vector<2>(3.0, 4.0);
+
+  ASSERT_VECTOR_N_EQ(a + b, 4.0, 6.0);
+  ASSERT_VECTOR_N_EQ(a - b, -2.0, -2.0);
+}
+
+TEST(VectorTest, Vector5Operation)
+{
+  auto a = keisan::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0);
+  auto b = keisan::Vector<5>(6.0, 7.0, 8.0, 9.0, 10.0);
+
+  ASSERT_VECTOR_N_EQ(a + b, 7.0, 9.0, 11.0, 13.0, 15.0);
+  ASSERT_VECTOR_N_EQ(a - b, -5.0, -5.0, -5.0, -5.0, -5.0);
+}
+
+TEST(VectorTest, Vector2ScalarOperation)
+{
+  auto vector = keisan::Vector<2>(1.0, 2.0);
+
+  ASSERT_VECTOR_N_EQ(vector + 2.0, 3.0, 4.0);
+  ASSERT_VECTOR_N_EQ(vector - 2.0, -1.0, 0.0);
+  ASSERT_VECTOR_N_EQ(vector * 2.0, 2.0, 4.0);
+  ASSERT_VECTOR_N_EQ(vector / 2.0, 0.5, 1.0);
+}
+
+TEST(VectorTest, Vector5ScalarOperation)
+{
+  auto vector = keisan::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0);
+
+  ASSERT_VECTOR_N_EQ(vector + 2.0, 3.0, 4.0, 5.0, 6.0, 7.0);
+  ASSERT_VECTOR_N_EQ(vector - 2.0, -1.0, 0.0, 1.0, 2.0, 3.0);
+  ASSERT_VECTOR_N_EQ(vector * 2.0, 2.0, 4.0, 6.0, 8.0, 10.0);
+  ASSERT_VECTOR_N_EQ(vector / 2.0, 0.5, 1.0, 1.5, 2.0, 2.5);
 }

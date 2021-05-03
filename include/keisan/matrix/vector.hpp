@@ -31,9 +31,28 @@ class Vector
 {
 public:
   Vector();
+  Vector(const Vector<N> & vector);
 
   template<typename ... Types>
   explicit Vector(Types ... values);
+
+  Vector<N> & operator=(const Vector<N> & vector);
+
+  Vector<N> & operator+=(const Vector<N> & vector);
+  Vector<N> & operator-=(const Vector<N> & vector);
+
+  Vector<N> & operator+=(const double & value);
+  Vector<N> & operator-=(const double & value);
+  Vector<N> & operator*=(const double & value);
+  Vector<N> & operator/=(const double & value);
+
+  Vector<N> operator+(const Vector<N> & vector) const;
+  Vector<N> operator-(const Vector<N> & vector) const;
+
+  Vector<N> operator+(const double & value) const;
+  Vector<N> operator-(const double & value) const;
+  Vector<N> operator*(const double & value) const;
+  Vector<N> operator/(const double & value) const;
 
   double & operator[](size_t pos);
   const double & operator[](size_t pos) const;
@@ -49,10 +68,140 @@ Vector<N>::Vector()
 }
 
 template<size_t N>
+Vector<N>::Vector(const Vector<N> & vector)
+: data(vector.data)
+{
+}
+
+template<size_t N>
 template<typename ... Types>
 Vector<N>::Vector(Types ... values)
 : data({values ...})
 {
+}
+
+template<size_t N>
+Vector<N> & Vector<N>::operator=(const Vector<N> & vector)
+{
+  for (size_t i = 0; i < N; ++i) {
+    data[i] = vector[i];
+  }
+
+  return *this;
+}
+
+template<size_t N>
+Vector<N> & Vector<N>::operator+=(const Vector<N> & vector)
+{
+  for (size_t i = 0; i < N; ++i) {
+    data[i] += vector[i];
+  }
+
+  return *this;
+}
+
+template<size_t N>
+Vector<N> & Vector<N>::operator-=(const Vector<N> & vector)
+{
+  for (size_t i = 0; i < N; ++i) {
+    data[i] -= vector[i];
+  }
+
+  return *this;
+}
+
+template<size_t N>
+Vector<N> & Vector<N>::operator+=(const double & value)
+{
+  for (auto & datum : data) {
+    datum += value;
+  }
+
+  return *this;
+}
+
+template<size_t N>
+Vector<N> & Vector<N>::operator-=(const double & value)
+{
+  for (auto & datum : data) {
+    datum -= value;
+  }
+
+  return *this;
+}
+
+template<size_t N>
+Vector<N> & Vector<N>::operator*=(const double & value)
+{
+  for (auto & datum : data) {
+    datum *= value;
+  }
+
+  return *this;
+}
+
+template<size_t N>
+Vector<N> & Vector<N>::operator/=(const double & value)
+{
+  for (auto & datum : data) {
+    datum /= value;
+  }
+
+  return *this;
+}
+
+template<size_t N>
+Vector<N> Vector<N>::operator+(const Vector<N> & vector) const
+{
+  auto new_vector = *this;
+  new_vector += vector;
+
+  return new_vector;
+}
+
+template<size_t N>
+Vector<N> Vector<N>::operator-(const Vector<N> & vector) const
+{
+  auto new_vector = *this;
+  new_vector -= vector;
+
+  return new_vector;
+}
+
+template<size_t N>
+Vector<N> Vector<N>::operator+(const double & value) const
+{
+  auto new_vector = *this;
+  new_vector += value;
+
+  return new_vector;
+}
+
+template<size_t N>
+Vector<N> Vector<N>::operator-(const double & value) const
+{
+  auto new_vector = *this;
+  new_vector -= value;
+
+  return new_vector;
+}
+
+template<size_t N>
+Vector<N> Vector<N>::operator*(const double & value) const
+{
+  auto new_vector = *this;
+  new_vector *= value;
+
+  return new_vector;
+}
+
+template<size_t N>
+Vector<N> Vector<N>::operator/(const double & value) const
+{
+  auto new_vector = *this;
+  new_vector /= value;
+
+  return new_vector;
 }
 
 template<size_t N>

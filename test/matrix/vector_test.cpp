@@ -18,15 +18,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__KEISAN_HPP_
-#define KEISAN__KEISAN_HPP_
+#include <gtest/gtest.h>
+#include <keisan/keisan.hpp>
 
-#include "./matrix/vector.hpp"
+#define ASSERT_VECTOR_N_EQ(VECTOR, ...) \
+  { \
+    auto vector = (VECTOR); \
+    double values[] = {__VA_ARGS__}; \
+    for (size_t i = 0; i < sizeof(values) / sizeof(double); ++i) { \
+      ASSERT_DOUBLE_EQ(values[i], vector[i]); \
+    } \
+  }
 
-#include "./angle.hpp"
-#include "./number.hpp"
-#include "./point_2.hpp"
-#include "./point_3.hpp"
-#include "./transform2.hpp"
+TEST(VectorTest, EmptyValue)
+{
+  ASSERT_VECTOR_N_EQ(keisan::Vector<2>(), 0.0, 0.0);
+  ASSERT_VECTOR_N_EQ(keisan::Vector<5>(), 0.0, 0.0, 0.0, 0.0, 0.0);
+}
 
-#endif  // KEISAN__KEISAN_HPP_
+TEST(VectorTest, InitialValue)
+{
+  ASSERT_VECTOR_N_EQ(keisan::Vector<2>(1.0, 2.0), 1.0, 2.0);
+  ASSERT_VECTOR_N_EQ(keisan::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0), 1.0, 2.0, 3.0, 4.0, 5.0);
+}

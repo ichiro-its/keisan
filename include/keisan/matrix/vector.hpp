@@ -18,15 +18,55 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__KEISAN_HPP_
-#define KEISAN__KEISAN_HPP_
+#ifndef KEISAN__MATRIX__VECTOR_HPP_
+#define KEISAN__MATRIX__VECTOR_HPP_
 
-#include "./matrix/vector.hpp"
+#include <array>
 
-#include "./angle.hpp"
-#include "./number.hpp"
-#include "./point_2.hpp"
-#include "./point_3.hpp"
-#include "./transform2.hpp"
+namespace keisan
+{
 
-#endif  // KEISAN__KEISAN_HPP_
+template<size_t N>
+class Vector
+{
+public:
+  Vector();
+
+  template<typename ... Types>
+  explicit Vector(Types ... values);
+
+  double & operator[](size_t pos);
+  const double & operator[](size_t pos) const;
+
+private:
+  std::array<double, N> data;
+};
+
+template<size_t N>
+Vector<N>::Vector()
+{
+  data.fill(0.0);
+}
+
+template<size_t N>
+template<typename ... Types>
+Vector<N>::Vector(Types ... values)
+: data({values ...})
+{
+}
+
+template<size_t N>
+double & Vector<N>::operator[](size_t pos)
+{
+  return data[pos];
+}
+
+template<size_t N>
+const double & Vector<N>::operator[](size_t pos) const
+{
+  return data[pos];
+}
+
+}  // namespace keisan
+
+#endif  // KEISAN__MATRIX__VECTOR_HPP_

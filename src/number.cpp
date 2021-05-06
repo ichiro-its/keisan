@@ -51,4 +51,9 @@ double clamp_number(double value, double min_value, double max_value)
   return std::max(std::min(value, max_value), min_value);
 }
 
+double sign_number(double value)
+{
+  return (value >= 0) ? 1.0 : -1.0;
+}
+
 }  // namespace keisan

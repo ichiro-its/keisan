@@ -32,6 +32,8 @@ double map_number(
 
 double clamp_number(double value, double min, double max);
 
+double sign_number(double value);
+
 }  // namespace keisan
 
 #endif  // KEISAN__NUMBER_HPP_

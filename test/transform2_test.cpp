@@ -44,3 +44,42 @@ TEST(Trasform2Test, GeometryTransformation)
   transform.set_translation({2.0, 3.0});
   ASSERT_POINT2_EQ(transform * point, -13.0, 9.0);
 }
+
+TEST(Trasform2Test, Translation)
+{
+  auto point = keisan::Point2(3.0, 5.0);
+
+  auto transform = keisan::Transform2();
+
+  transform.set_translation({0.0, 0.0});
+  ASSERT_POINT2_EQ(transform * point, 3.0, 5.0);
+
+  transform.set_translation({2.0, 3.0});
+  ASSERT_POINT2_EQ(transform * point, 5.0, 8.0);
+}
+
+TEST(Trasform2Test, Rotation)
+{
+  auto point = keisan::Point2(3.0, 5.0);
+
+  auto transform = keisan::Transform2();
+
+  transform.set_rotation(0.0);
+  ASSERT_POINT2_EQ(transform * point, 3.0, 5.0);
+
+  transform.set_rotation(180.0);
+  ASSERT_POINT2_EQ(transform * point, -3.0, -5.0);
+}
+
+TEST(Trasform2Test, Scaling)
+{
+  auto point = keisan::Point2(3.0, 5.0);
+
+  auto transform = keisan::Transform2();
+
+  transform.set_scale({1.0, 1.0});
+  ASSERT_POINT2_EQ(transform * point, 3.0, 5.0);
+
+  transform.set_scale({2.0, 3.0});
+  ASSERT_POINT2_EQ(transform * point, 6.0, 15.0);
+}

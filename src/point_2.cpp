@@ -44,6 +44,12 @@ Point2::Point2(const Point2 & point)
   y = point.y;
 }
 
+Point2::Point2(const Vector<3> & vector)
+{
+  x = vector[0] / vector[2];
+  y = vector[1] / vector[2];
+}
+
 Point2 & Point2::operator=(const Point2 & point)
 {
   x = point.x;

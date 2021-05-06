@@ -21,6 +21,8 @@
 #ifndef KEISAN__POINT_2_HPP_
 #define KEISAN__POINT_2_HPP_
 
+#include <keisan/matrix/vector.hpp>
+
 namespace keisan
 {
 
@@ -29,6 +31,7 @@ struct Point2
   Point2();
   Point2(double x, double y);
   Point2(const Point2 & point);
+  explicit Point2(const Vector<3> & vector);
 
   Point2 & operator=(const Point2 & point);
   Point2 & operator+=(const Point2 & point);

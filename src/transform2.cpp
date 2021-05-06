@@ -21,6 +21,8 @@
 #include <math.h>
 
 #include <keisan/angle.hpp>
+#include <keisan/matrix/square_matrix.hpp>
+#include <keisan/matrix/vector.hpp>
 #include <keisan/transform2.hpp>
 
 namespace keisan
@@ -70,19 +72,32 @@ const Point2 & Transform2::get_scale() const
 
 Point2 Transform2::operator*(const Point2 & point) const
 {
-  // Scale transform
-  auto scaled_point = Point2(point.x * scale.x, point.y * scale.y);
+  // Set matrix
+  auto mat_point = Vector<3>(point.x, point.y, 1.0);
 
-  // Rotation transform
+  auto mat_scale = SquareMatrix<3>::identity();
+  mat_scale[0][0] = scale.x;
+  mat_scale[1][1] = scale.y;
+
+  auto mat_rotation = SquareMatrix<3>::identity();
   auto angle = deg_to_rad(rotation);
-  auto rotated_point = Point2(
-    scaled_point.x * cos(angle) - scaled_point.y * sin(angle),
-    scaled_point.x * sin(angle) + scaled_point.y * cos(angle));
+  mat_rotation[0][0] = cos(angle);
+  mat_rotation[0][1] = -1 * sin(angle);
+  mat_rotation[1][0] = sin(angle);
+  mat_rotation[1][1] = cos(angle);
 
-  // Translation transform
-  auto translated_point = rotated_point + translation;
+  auto mat_translation = SquareMatrix<3>::identity();
+  mat_translation[0][2] = translation.x;
+  mat_translation[1][2] = translation.y;
 
-  return translated_point;
+  // Multiplication Matrix
+  // The order is scale, rotation, translation
+  auto mat_temp = mat_translation * mat_rotation * mat_scale;
+  auto mat_result = mat_temp * mat_point;
+
+  auto result_point = Point2(mat_result);
+
+  return result_point;
 }
 
 }  // namespace keisan

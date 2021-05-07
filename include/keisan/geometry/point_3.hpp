@@ -18,8 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__POINT_3_HPP_
-#define KEISAN__POINT_3_HPP_
+#ifndef KEISAN__GEOMETRY__POINT_3_HPP_
+#define KEISAN__GEOMETRY__POINT_3_HPP_
 
 namespace keisan
 {
@@ -64,4 +64,4 @@ struct Point3
 
 }  // namespace keisan
 
-#endif  // KEISAN__POINT_3_HPP_
+#endif  // KEISAN__GEOMETRY__POINT_3_HPP_

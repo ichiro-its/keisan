@@ -21,7 +21,7 @@
 #include <math.h>
 
 #include <keisan/angle.hpp>
-#include <keisan/point_3.hpp>
+#include <keisan/geometry/point_3.hpp>
 
 namespace keisan
 {

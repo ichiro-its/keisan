@@ -23,7 +23,7 @@
 #include <keisan/angle.hpp>
 #include <keisan/matrix/square_matrix.hpp>
 #include <keisan/matrix/vector.hpp>
-#include <keisan/transform2.hpp>
+#include <keisan/geometry/transform2.hpp>
 
 namespace keisan
 {

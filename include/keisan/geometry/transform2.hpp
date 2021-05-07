@@ -21,6 +21,7 @@
 #ifndef KEISAN__GEOMETRY__TRANSFORM2_HPP_
 #define KEISAN__GEOMETRY__TRANSFORM2_HPP_
 
+#include "../matrix.hpp"
 #include "./point_2.hpp"
 
 namespace keisan
@@ -30,6 +31,8 @@ class Transform2
 {
 public:
   Transform2();
+
+  operator SquareMatrix<3>() const;
 
   Point2 operator*(const Point2 & point) const;
 

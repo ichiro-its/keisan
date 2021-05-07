@@ -18,36 +18,54 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <math.h>
-
 #include <keisan/angle.hpp>
 #include <keisan/geometry/point_2.hpp>
+
+#include <math.h>
 
 namespace keisan
 {
 
 Point2::Point2()
 {
-  x = 0;
-  y = 0;
 }
 
 Point2::Point2(double x, double y)
+: x(x),
+  y(y)
 {
-  this->x = x;
-  this->y = y;
+}
+
+Point2::Point2(const Vector<2> & vector)
+: x(vector[0]),
+  y(vector[1])
+{
+}
+
+Point2::Point2(const Vector<3> & vector)
+: x(vector[0] / vector[2]),
+  y(vector[1] / vector[2])
+{
 }
 
 Point2::Point2(const Point2 & point)
 {
-  x = point.x;
-  y = point.y;
+  *this = point;
 }
 
-Point2::Point2(const Vector<3> & vector)
+Point2::operator Vector<2>() const
 {
-  x = vector[0] / vector[2];
-  y = vector[1] / vector[2];
+  return Vector<2>(x, y);
+}
+
+Point2::operator Vector<3>() const
+{
+  return Vector<3>(x, y, 1.0);
+}
+
+Point2 Point2::zero()
+{
+  return Point2(Vector<2>::zero());
 }
 
 Point2 & Point2::operator=(const Point2 & point)
@@ -60,88 +78,68 @@ Point2 & Point2::operator=(const Point2 & point)
 
 Point2 & Point2::operator+=(const Point2 & point)
 {
-  x += point.x;
-  y += point.y;
-
-  return *this;
+  return *this = *this + point;
 }
 
 Point2 & Point2::operator-=(const Point2 & point)
 {
-  x -= point.x;
-  y -= point.y;
-
-  return *this;
+  return *this = *this - point;
 }
 
-Point2 & Point2::operator+=(double value)
+Point2 & Point2::operator+=(const double & value)
 {
-  x += value;
-  y += value;
-
-  return *this;
+  return *this = *this + value;
 }
 
-Point2 & Point2::operator-=(double value)
+Point2 & Point2::operator-=(const double & value)
 {
-  x -= value;
-  y -= value;
-
-  return *this;
+  return *this = *this - value;
 }
 
-Point2 & Point2::operator*=(double value)
+Point2 & Point2::operator*=(const double & value)
 {
-  x *= value;
-  y *= value;
-
-  return *this;
+  return *this = *this * value;
 }
 
-Point2 & Point2::operator/=(double value)
+Point2 & Point2::operator/=(const double & value)
 {
-  x /= value;
-  y /= value;
-
-  return *this;
+  return *this = *this / value;
 }
 
 Point2 Point2::operator+(const Point2 & point) const
 {
-  return Point2(x + point.x, y + point.y);
+  return Point2((Vector<2>)(*this) + (Vector<2>)point);
 }
 
 Point2 Point2::operator-(const Point2 & point) const
 {
-  return Point2(x - point.x, y - point.y);
+  return Point2((Vector<2>)(*this) - (Vector<2>)point);
 }
 
-Point2 Point2::operator+(double value) const
+Point2 Point2::operator+(const double & value) const
 {
-  return Point2(x + value, y + value);
+  return Point2((Vector<2>)(*this) + value);
 }
 
-Point2 Point2::operator-(double value) const
+Point2 Point2::operator-(const double & value) const
 {
-  return Point2(x - value, y - value);
+  return Point2((Vector<2>)(*this) - value);
 }
 
-Point2 Point2::operator*(double value) const
+Point2 Point2::operator*(const double & value) const
 {
-  return Point2(x * value, y * value);
+  return Point2((Vector<2>)(*this) * value);
 }
 
-Point2 Point2::operator/(double value) const
+Point2 Point2::operator/(const double & value) const
 {
-  return Point2(x / value, y / value);
+  return Point2((Vector<2>)(*this) / value);
 }
 
 double Point2::distance_between(const Point2 & point_a, const Point2 & point_b)
 {
-  double dx = point_a.x - point_b.x;
-  double dy = point_a.y - point_b.y;
-
-  return sqrt(dx * dx + dy * dy);
+  auto delta = point_a - point_b;
+  return sqrt(delta.x * delta.x + delta.y * delta.y);
 }
 
 double Point2::angle_between(const Point2 & point_a, const Point2 & point_b)

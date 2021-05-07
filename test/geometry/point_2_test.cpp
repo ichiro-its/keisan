@@ -29,16 +29,16 @@
     ASSERT_DOUBLE_EQ(temp_point.y, (point_y)); \
   }
 
-TEST(Point2Test, EmptyValue)
-{
-  auto point = keisan::Point2();
-  ASSERT_POINT2_EQ(point, 0.0, 0.0);
-}
-
 TEST(Point2Test, InitialValue)
 {
   auto point = keisan::Point2(1.0, 3.0);
   ASSERT_POINT2_EQ(point, 1.0, 3.0);
+}
+
+TEST(Point2Test, ZeroValue)
+{
+  auto point = keisan::Point2::zero();
+  ASSERT_POINT2_EQ(point, 0.0, 0.0);
 }
 
 TEST(Point2Test, AssignedValue)

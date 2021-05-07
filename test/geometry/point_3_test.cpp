@@ -29,16 +29,16 @@
     ASSERT_DOUBLE_EQ(temp_point.z, (point_z)); \
   }
 
-TEST(Point3Test, EmptyValue)
-{
-  auto point = keisan::Point3();
-  ASSERT_POINT3_EQ(point, 0.0, 0.0, 0.0);
-}
-
 TEST(Point3Test, InitialValue)
 {
   auto point = keisan::Point3(1.0, 3.0, 5.0);
   ASSERT_POINT3_EQ(point, 1.0, 3.0, 5.0);
+}
+
+TEST(Point3Test, EmptyValue)
+{
+  auto point = keisan::Point3::zero();
+  ASSERT_POINT3_EQ(point, 0.0, 0.0, 0.0);
 }
 
 TEST(Point3Test, AssignedValue)

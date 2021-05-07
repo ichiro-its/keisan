@@ -138,7 +138,7 @@ Point2 Point2::operator/(const double & value) const
 
 double Point2::distance_between(const Point2 & point_a, const Point2 & point_b)
 {
-  auto delta = point_a - point_b;
+  auto delta = point_b - point_a;
   return sqrt(delta.x * delta.x + delta.y * delta.y);
 }
 

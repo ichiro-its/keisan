@@ -17,8 +17,6 @@ endif()
 find_package(ament_cmake REQUIRED)
 
 add_library(${PROJECT_NAME}
-  "src/angle.cpp"
-  "src/number.cpp"
   "src/point_2.cpp"
   "src/point_3.cpp"
   "src/transform2.cpp")

@@ -21,21 +21,49 @@
 #ifndef KEISAN__ANGLE_HPP_
 #define KEISAN__ANGLE_HPP_
 
+#include <keisan/number.hpp>
 #include <cmath>
 
 namespace keisan
 {
+template<typename T>
+constexpr T pi = atan(1.0) * 4;
 
-constexpr double pi = atan(1.0) * 4;
+template<typename T>
+T wrap_rad(T value)
+{
+  return wrap_number<T>(value, -pi<T>, pi<T>);
+}
 
-double wrap_rad(double value);
-double wrap_deg(double value);
+template<typename T>
+T wrap_deg(T value)
+{
+  return wrap_number(value, (T)-180.0, (T)180.0);
+}
 
-double rad_to_deg(double value);
-double deg_to_rad(double value);
+template<typename T>
+T rad_to_deg(T value)
+{
+  return wrap_deg(scale_number(value, pi<T>, (T)180.0));
+}
 
-double delta_rad(double value1, double value2);
-double delta_deg(double value1, double value2);
+template<typename T>
+T deg_to_rad(T value)
+{
+  return wrap_rad(scale_number(value, (T)180.0, pi<T>));
+}
+
+template<typename T>
+T delta_rad(T value1, T value2)
+{
+  return wrap_rad(wrap_rad(value2) - wrap_rad(value1));
+}
+
+template<typename T>
+T delta_deg(T value1, T value2)
+{
+  return wrap_deg(wrap_deg(value2) - wrap_deg(value1));
+}
 
 }  // namespace keisan
 

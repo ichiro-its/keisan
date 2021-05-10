@@ -21,18 +21,45 @@
 #ifndef KEISAN__NUMBER_HPP_
 #define KEISAN__NUMBER_HPP_
 
+#include <algorithm>
+#include <cmath>
+
 namespace keisan
 {
+template<typename T>
+T wrap_number(T value, T min, T max)
+{
+  T min_value = value - min;
+  T min_max = max - min;
 
-double wrap_number(double value, double min, double max);
-double scale_number(double value, double source, double target);
+  return min + fmod(min_max + fmod(min_value, min_max), min_max);
+}
 
-double map_number(
-  double value, double source_min, double source_max, double target_min, double target_max);
+template<typename T>
+T scale_number(T value, T source, T target)
+{
+  return value * target / source;
+}
 
-double clamp_number(double value, double min, double max);
+template<typename T>
+T map_number(
+  T value, T source_min, T source_max, T target_min, T target_max)
+{
+  return target_min + scale_number(
+    value - source_min, source_max - source_min, target_max - target_min);
+}
 
-double sign_number(double value);
+template<typename T>
+T clamp_number(T value, T min_value, T max_value)
+{
+  return std::max(std::min(value, max_value), min_value);
+}
+
+template<typename T>
+T sign_number(T value)
+{
+  return (value >= 0) ? 1.0 : -1.0;
+}
 
 }  // namespace keisan
 

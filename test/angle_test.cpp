@@ -23,117 +23,117 @@
 
 TEST(WrapRadTest, OverflowTest) {
   ASSERT_DOUBLE_EQ(
-    keisan::wrap_rad<double>(keisan::pi<double> * 6 + 1.5),
+    keisan::wrap_rad(keisan::pi * 6 + 1.5),
     1.5);
 
   ASSERT_DOUBLE_EQ(
-    keisan::wrap_rad<double>((-keisan::pi<double>) * 6 - 1.5),
+    keisan::wrap_rad((-keisan::pi) * 6 - 1.5),
     -1.5);
 
   ASSERT_DOUBLE_EQ(
-    keisan::wrap_rad<int>(keisan::pi<int> * 6 + 1),
+    keisan::wrap_rad(keisan::pi * 6 + 1),
     1);
 
   ASSERT_DOUBLE_EQ(
-    keisan::wrap_rad<int>(keisan::pi<int> * 6 + -1),
+    keisan::wrap_rad(keisan::pi * 6 + -1),
     -1);
 }
 
 TEST(WrapDegTest, OverflowTest) {
   ASSERT_DOUBLE_EQ(
-    keisan::wrap_deg<double>(180.0 * 6 + 100.0),
+    keisan::wrap_deg(180.0 * 6 + 100.0),
     100.0);
 
   ASSERT_DOUBLE_EQ(
-    keisan::wrap_deg<double>((-180.0) * 6 - 100.0),
+    keisan::wrap_deg((-180.0) * 6 - 100.0),
     -100.0);
 
   ASSERT_DOUBLE_EQ(
-    keisan::wrap_deg<int>(180 * 6 + 50),
+    keisan::wrap_deg(180 * 6 + 50),
     50);
 
   ASSERT_DOUBLE_EQ(
-    keisan::wrap_deg<int>(180 * 6 - 50),
+    keisan::wrap_deg(180 * 6 - 50),
     -50);
 }
 
 TEST(RadToDegTest, ConversionTest) {
   ASSERT_DOUBLE_EQ(
-    keisan::rad_to_deg<double>(keisan::pi<double> * 0.2),
+    keisan::rad_to_deg(keisan::pi * 0.2),
     180.0 * 0.2);
 
   ASSERT_DOUBLE_EQ(
-    keisan::rad_to_deg<double>(keisan::pi<double> * 6.2),
+    keisan::rad_to_deg(keisan::pi * 6.2),
     180.0 * 0.2);
 
   ASSERT_DOUBLE_EQ(
-    keisan::rad_to_deg<int>(keisan::pi<int> * 2),
+    keisan::rad_to_deg(keisan::pi * 2),
     180 * 0);
 
   ASSERT_DOUBLE_EQ(
-    keisan::rad_to_deg<int>(keisan::pi<int> * -1),
+    keisan::rad_to_deg(keisan::pi * -1),
     180 * -1);
 }
 
 TEST(DegToRadTest, ConversionTest) {
   ASSERT_DOUBLE_EQ(
-    keisan::deg_to_rad<double>(180.0 * 0.2),
-    keisan::pi<double> * 0.2);
+    keisan::deg_to_rad(180.0 * 0.2),
+    keisan::pi * 0.2);
 
   ASSERT_DOUBLE_EQ(
-    keisan::deg_to_rad<double>(180.0 * 6.2),
-    keisan::pi<double> * 0.2);
+    keisan::deg_to_rad(180.0 * 6.2),
+    keisan::pi * 0.2);
 
   ASSERT_DOUBLE_EQ(
-    keisan::deg_to_rad<int>(180.0 * 2),
-    keisan::pi<int> * 0);
+    keisan::deg_to_rad(180.0 * 2),
+    keisan::pi * 0);
 }
 
 TEST(DeltaDegTest, OverflowTest) {
   ASSERT_DOUBLE_EQ(
-    keisan::delta_deg<double>(-30.0, 40.0),
+    keisan::delta_deg(-30.0, 40.0),
     70.0);
 
   ASSERT_DOUBLE_EQ(
-    keisan::delta_deg<double>(30.0, -40.0),
+    keisan::delta_deg(30.0, -40.0),
     -70.0);
 
   ASSERT_DOUBLE_EQ(
-    keisan::delta_deg<double>(100.0, -150.0),
+    keisan::delta_deg(100.0, -150.0),
     110.0);
 
   ASSERT_DOUBLE_EQ(
-    keisan::delta_deg<double>(-100.0, 150.0),
+    keisan::delta_deg(-100.0, 150.0),
     -110.0);
 
   ASSERT_DOUBLE_EQ(
-    keisan::delta_deg<int>(30, -40),
+    keisan::delta_deg(30, -40),
     -70);
 
   ASSERT_DOUBLE_EQ(
-    keisan::delta_deg<int>(-30, 40),
+    keisan::delta_deg(-30, 40),
     70);
 }
 
 TEST(DeltaRadTest, OverflowTest)
 {
   ASSERT_DOUBLE_EQ(
-    keisan::delta_rad<double>(keisan::pi<double> * -0.1, keisan::pi<double> * 0.3),
-    keisan::pi<double> * 0.4);
+    keisan::delta_rad(keisan::pi * -0.1, keisan::pi * 0.3),
+    keisan::pi * 0.4);
 
   ASSERT_DOUBLE_EQ(
-    keisan::delta_rad<double>(keisan::pi<double> * 0.1, keisan::pi<double> * -0.3),
-    keisan::pi<double> * -0.4);
+    keisan::delta_rad(keisan::pi * 0.1, keisan::pi * -0.3),
+    keisan::pi * -0.4);
 
   ASSERT_DOUBLE_EQ(
-    keisan::delta_rad<double>(keisan::pi<double> * 0.6, keisan::pi<double> * -0.7),
-    keisan::pi<double> * 0.7);
+    keisan::delta_rad(keisan::pi * 0.6, keisan::pi * -0.7),
+    keisan::pi * 0.7);
 
   ASSERT_DOUBLE_EQ(
-    keisan::delta_rad<double>(keisan::pi<double> * -0.6, keisan::pi<double> * 0.7),
-    keisan::pi<double> * -0.7);
+    keisan::delta_rad(keisan::pi * -0.6, keisan::pi * 0.7),
+    keisan::pi * -0.7);
 
   ASSERT_DOUBLE_EQ(
-    keisan::delta_rad<int>(keisan::pi<int> * 1, keisan::pi<int> * -2),
-    -3);
+    keisan::delta_rad(keisan::pi * -1, keisan::pi * 2),
+    keisan::pi * -1);
 }

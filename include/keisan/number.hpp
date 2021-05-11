@@ -26,37 +26,37 @@
 
 namespace keisan
 {
-template<typename T>
-T wrap_number(T value, T min, T max)
+template<typename M, typename N, typename O>
+M wrap_number(M value, N min, O max)
 {
-  T min_value = value - min;
-  T min_max = max - min;
+  M min_value = value - min;
+  M min_max = max - min;
 
   return min + fmod(min_max + fmod(min_value, min_max), min_max);
 }
 
-template<typename T>
-T scale_number(T value, T source, T target)
+template<typename M, typename N, typename O>
+M scale_number(M value, N source, O target)
 {
   return value * target / source;
 }
 
-template<typename T>
-T map_number(
-  T value, T source_min, T source_max, T target_min, T target_max)
+template<typename M, typename N, typename O, typename P, typename Q>
+M map_number(
+  M value, N source_min, O source_max, P target_min, Q target_max)
 {
   return target_min + scale_number(
     value - source_min, source_max - source_min, target_max - target_min);
 }
 
-template<typename T>
-T clamp_number(T value, T min_value, T max_value)
+template<typename M, typename N, typename O>
+M clamp_number(M value, N min_value, O max_value)
 {
   return std::max(std::min(value, max_value), min_value);
 }
 
-template<typename T>
-T sign_number(T value)
+template<typename M>
+M sign_number(M value)
 {
   return (value >= 0) ? 1.0 : -1.0;
 }

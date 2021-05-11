@@ -26,41 +26,40 @@
 
 namespace keisan
 {
-template<typename T>
-constexpr T pi = atan(1.0) * 4;
+constexpr double pi = atan(1.0) * 4;
 
 template<typename T>
 T wrap_rad(T value)
 {
-  return wrap_number<T>(value, -pi<T>, pi<T>);
+  return wrap_number<T>(value, -pi, pi);
 }
 
 template<typename T>
 T wrap_deg(T value)
 {
-  return wrap_number(value, (T)-180.0, (T)180.0);
+  return wrap_number(value, -180.0, 180.0);
 }
 
 template<typename T>
 T rad_to_deg(T value)
 {
-  return wrap_deg(scale_number(value, pi<T>, (T)180.0));
+  return wrap_deg(scale_number(value, pi, 180.0));
 }
 
 template<typename T>
 T deg_to_rad(T value)
 {
-  return wrap_rad(scale_number(value, (T)180.0, pi<T>));
+  return wrap_rad(scale_number(value, 180.0, pi));
 }
 
-template<typename T>
-T delta_rad(T value1, T value2)
+template<typename M, typename N>
+M delta_rad(M value1, N value2)
 {
   return wrap_rad(wrap_rad(value2) - wrap_rad(value1));
 }
 
-template<typename T>
-T delta_deg(T value1, T value2)
+template<typename M, typename N>
+M delta_deg(M value1, N value2)
 {
   return wrap_deg(wrap_deg(value2) - wrap_deg(value1));
 }

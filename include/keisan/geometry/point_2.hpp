@@ -18,10 +18,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__POINT_2_HPP_
-#define KEISAN__POINT_2_HPP_
+#ifndef KEISAN__GEOMETRY__POINT_2_HPP_
+#define KEISAN__GEOMETRY__POINT_2_HPP_
 
-#include <keisan/matrix/vector.hpp>
+#include "../matrix.hpp"
 
 namespace keisan
 {
@@ -30,25 +30,32 @@ struct Point2
 {
   Point2();
   Point2(double x, double y);
-  Point2(const Point2 & point);
+  explicit Point2(const Vector<2> & vector);
   explicit Point2(const Vector<3> & vector);
+  Point2(const Point2 & point);
+
+  operator Vector<2>() const;
+  operator Vector<3>() const;
+
+  static Point2 zero();
 
   Point2 & operator=(const Point2 & point);
+
   Point2 & operator+=(const Point2 & point);
   Point2 & operator-=(const Point2 & point);
 
-  Point2 & operator+=(double value);
-  Point2 & operator-=(double value);
-  Point2 & operator*=(double value);
-  Point2 & operator/=(double value);
+  Point2 & operator+=(const double & value);
+  Point2 & operator-=(const double & value);
+  Point2 & operator*=(const double & value);
+  Point2 & operator/=(const double & value);
 
   Point2 operator+(const Point2 & point) const;
   Point2 operator-(const Point2 & point) const;
 
-  Point2 operator+(double value) const;
-  Point2 operator-(double value) const;
-  Point2 operator*(double value) const;
-  Point2 operator/(double value) const;
+  Point2 operator+(const double & value) const;
+  Point2 operator-(const double & value) const;
+  Point2 operator*(const double & value) const;
+  Point2 operator/(const double & value) const;
 
   static double distance_between(const Point2 & point_a, const Point2 & point_b);
   static double angle_between(const Point2 & point_a, const Point2 & point_b);
@@ -66,4 +73,4 @@ struct Point2
 
 }  // namespace keisan
 
-#endif  // KEISAN__POINT_2_HPP_
+#endif  // KEISAN__GEOMETRY__POINT_2_HPP_

@@ -18,15 +18,40 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__KEISAN_HPP_
-#define KEISAN__KEISAN_HPP_
+#ifndef KEISAN__GEOMETRY__TRANSFORM2_HPP_
+#define KEISAN__GEOMETRY__TRANSFORM2_HPP_
 
-#include "./geometry/point_2.hpp"
-#include "./geometry/point_3.hpp"
-#include "./geometry/transform2.hpp"
+#include "../matrix.hpp"
+#include "./point_2.hpp"
 
-#include "./angle.hpp"
-#include "./number.hpp"
-#include "./matrix.hpp"
+namespace keisan
+{
 
-#endif  // KEISAN__KEISAN_HPP_
+class Transform2
+{
+public:
+  Transform2();
+
+  operator SquareMatrix<3>() const;
+
+  Point2 operator*(const Point2 & point) const;
+
+  void set_translation(const Point2 & translation);
+  void set_rotation(const double & rotation);
+
+  void set_scale(const Point2 & scale);
+  void set_scale(const double & scale);
+
+  const Point2 & get_translation() const;
+  const double & get_rotation() const;
+  const Point2 & get_scale() const;
+
+private:
+  Point2 translation;
+  double rotation;
+  Point2 scale;
+};
+
+}  // namespace keisan
+
+#endif   // KEISAN__GEOMETRY__TRANSFORM2_HPP_

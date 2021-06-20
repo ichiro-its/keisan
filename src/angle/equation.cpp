@@ -18,8 +18,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <keisan/angle.hpp>
+#include <keisan/angle/equation.hpp>
 #include <keisan/number.hpp>
+
+#include <cmath>
 
 namespace keisan
 {

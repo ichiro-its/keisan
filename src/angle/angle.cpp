@@ -23,7 +23,6 @@
 
 namespace keisan
 {
-constexpr double pi = 3.14159265359;
 
 Angle make_degree(const double & value)
 {

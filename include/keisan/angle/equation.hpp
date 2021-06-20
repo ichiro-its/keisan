@@ -18,10 +18,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__ANGLE_HPP_
-#define KEISAN__ANGLE_HPP_
+#ifndef KEISAN__ANGLE__EQUATION_HPP_
+#define KEISAN__ANGLE__EQUATION_HPP_
 
-#include "./angle/angle.hpp"
-#include "./angle/equation.hpp"
+#include "./angle.hpp"
 
-#endif  // KEISAN__ANGLE_HPP_
+namespace keisan
+{
+
+double wrap_rad(double value);
+double wrap_deg(double value);
+
+double rad_to_deg(double value);
+double deg_to_rad(double value);
+
+double delta_rad(double value1, double value2);
+double delta_deg(double value1, double value2);
+
+}  // namespace keisan
+
+#endif  // KEISAN__ANGLE__EQUATION_HPP_

@@ -21,6 +21,8 @@
 #include <gtest/gtest.h>
 #include <keisan/keisan.hpp>
 
+#include <cmath>
+
 #define ASSERT_POINT3_EQ(point, point_x, point_y, point_z) \
   { \
     auto temp_point = (point); \

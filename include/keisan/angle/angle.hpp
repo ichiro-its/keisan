@@ -21,8 +21,12 @@
 #ifndef KEISAN__ANGLE__ANGLE_HPP_
 #define KEISAN__ANGLE__ANGLE_HPP_
 
+#include <cmath>
+
 namespace keisan
 {
+
+constexpr double pi = atan(1.0) * 4;
 
 class Angle;
 

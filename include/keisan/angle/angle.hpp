@@ -18,27 +18,52 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__ANGLE_HPP_
-#define KEISAN__ANGLE_HPP_
-
-#include <cmath>
-
-#include "./angle/angle.hpp"
+#ifndef KEISAN__ANGLE__ANGLE_HPP_
+#define KEISAN__ANGLE__ANGLE_HPP_
 
 namespace keisan
 {
 
-constexpr double pi = atan(1.0) * 4;
+class Angle;
 
-double wrap_rad(double value);
-double wrap_deg(double value);
+Angle make_degree(const double & value);
+Angle make_radian(const double & value);
 
-double rad_to_deg(double value);
-double deg_to_rad(double value);
+class Angle
+{
+public:
+  explicit Angle(const double & data, const bool & is_degree = false);
+  Angle(const Angle & angle);
 
-double delta_rad(double value1, double value2);
-double delta_deg(double value1, double value2);
+  Angle & operator=(const Angle & angle);
+
+  Angle & operator+=(const Angle & angle);
+  Angle & operator-=(const Angle & angle);
+
+  Angle & operator+=(const double & value);
+  Angle & operator-=(const double & value);
+  Angle & operator*=(const double & value);
+  Angle & operator/=(const double & value);
+
+  Angle operator+(const Angle & angle);
+  Angle operator-(const Angle & angle);
+
+  Angle operator+(const double & value);
+  Angle operator-(const double & value);
+  Angle operator*(const double & value);
+  Angle operator/(const double & value);
+
+  double degree() const;
+  double radian() const;
+
+  double normalized_degree() const;
+  double normalized_radian() const;
+
+private:
+  double data;
+  bool is_degree;
+};
 
 }  // namespace keisan
 
-#endif  // KEISAN__ANGLE_HPP_
+#endif  // KEISAN__ANGLE__ANGLE_HPP_

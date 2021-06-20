@@ -65,18 +65,6 @@ Angle & Angle::operator-=(const Angle & angle)
   return *this;
 }
 
-Angle & Angle::operator+=(const double & value)
-{
-  data += value;
-  return *this;
-}
-
-Angle & Angle::operator-=(const double & value)
-{
-  data -= value;
-  return *this;
-}
-
 Angle & Angle::operator*=(const double & value)
 {
   data *= value;
@@ -91,22 +79,12 @@ Angle & Angle::operator/=(const double & value)
 
 Angle Angle::operator+(const Angle & angle)
 {
-  return Angle(data + is_degree ? angle.degree() : angle.radian(), is_degree);
+  return Angle(data + (is_degree ? angle.degree() : angle.radian()), is_degree);
 }
 
 Angle Angle::operator-(const Angle & angle)
 {
-  return Angle(data - is_degree ? angle.degree() : angle.radian(), is_degree);
-}
-
-Angle Angle::operator+(const double & value)
-{
-  return Angle(data + value, is_degree);
-}
-
-Angle Angle::operator-(const double & value)
-{
-  return Angle(data - value, is_degree);
+  return Angle(data - (is_degree ? angle.degree() : angle.radian()), is_degree);
 }
 
 Angle Angle::operator*(const double & value)

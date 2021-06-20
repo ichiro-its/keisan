@@ -44,16 +44,12 @@ public:
   Angle & operator+=(const Angle & angle);
   Angle & operator-=(const Angle & angle);
 
-  Angle & operator+=(const double & value);
-  Angle & operator-=(const double & value);
   Angle & operator*=(const double & value);
   Angle & operator/=(const double & value);
 
   Angle operator+(const Angle & angle);
   Angle operator-(const Angle & angle);
 
-  Angle operator+(const double & value);
-  Angle operator-(const double & value);
   Angle operator*(const double & value);
   Angle operator/(const double & value);
 

@@ -41,6 +41,7 @@ if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
 
   ament_add_gtest(${PROJECT_NAME}_tests
+    "test/angle/angle_test.cpp"
     "test/angle/equation_test.cpp"
     "test/geometry/point_2_test.cpp"
     "test/geometry/point_3_test.cpp"

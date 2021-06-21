@@ -18,42 +18,40 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#include <keisan/angle/angle.hpp>
 #include <keisan/angle/equation.hpp>
-#include <keisan/number.hpp>
-
-#include <cmath>
 
 namespace keisan
 {
 
 double wrap_rad(double value)
 {
-  return wrap_number(value, -pi, pi);
+  return make_radian(value).normalized_radian();
 }
 
 double wrap_deg(double value)
 {
-  return wrap_number(value, -180.0, 180.0);
+  return make_degree(value).normalized_degree();
 }
 
 double rad_to_deg(double value)
 {
-  return wrap_deg(scale_number(value, pi, 180.0));
+  return make_radian(value).normalized_degree();
 }
 
 double deg_to_rad(double value)
 {
-  return wrap_rad(scale_number(value, 180.0, pi));
+  return make_degree(value).normalized_radian();
 }
 
 double delta_rad(double value1, double value2)
 {
-  return wrap_rad(wrap_rad(value2) - wrap_rad(value1));
+  return difference_between(make_radian(value1), make_radian(value2)).radian();
 }
 
 double delta_deg(double value1, double value2)
 {
-  return wrap_deg(wrap_deg(value2) - wrap_deg(value1));
+  return difference_between(make_degree(value1), make_degree(value2)).degree();
 }
 
 }  // namespace keisan

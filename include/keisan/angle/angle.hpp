@@ -30,6 +30,9 @@ constexpr double pi = atan(1.0) * 4;
 
 class Angle;
 
+double degree(const double & value);
+double radian(const double & value);
+
 Angle make_degree(const double & value);
 Angle make_radian(const double & value);
 

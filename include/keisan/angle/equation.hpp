@@ -26,13 +26,22 @@
 namespace keisan
 {
 
+[[deprecated("Use Angle::normalized_radian() instead.")]]
 double wrap_rad(double value);
+
+[[deprecated("Use Angle::normalized_degree() instead.")]]
 double wrap_deg(double value);
 
+[[deprecated("Use Angle::degree() instead.")]]
 double rad_to_deg(double value);
+
+[[deprecated("Use Angle::radian() instead.")]]
 double deg_to_rad(double value);
 
+[[deprecated("Use difference_between() instead.")]]
 double delta_rad(double value1, double value2);
+
+[[deprecated("Use difference_between() instead.")]]
 double delta_deg(double value1, double value2);
 
 }  // namespace keisan

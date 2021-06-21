@@ -40,11 +40,10 @@ Transform2::operator SquareMatrix<3>() const
   scale_matrix[1][1] = scale.y;
 
   auto rotation_matrix = SquareMatrix<3>::identity();
-  auto angle = deg_to_rad(rotation);
-  rotation_matrix[0][0] = std::cos(angle);
-  rotation_matrix[0][1] = -1 * std::sin(angle);
-  rotation_matrix[1][0] = std::sin(angle);
-  rotation_matrix[1][1] = std::cos(angle);
+  rotation_matrix[0][0] = cos(rotation);
+  rotation_matrix[0][1] = -sin(rotation);
+  rotation_matrix[1][0] = sin(rotation);
+  rotation_matrix[1][1] = cos(rotation);
 
   auto translation_matrix = SquareMatrix<3>::identity();
   translation_matrix[0][2] = translation.x;
@@ -64,7 +63,7 @@ void Transform2::set_translation(const Point2 & translation)
   this->translation = translation;
 }
 
-void Transform2::set_rotation(const double & rotation)
+void Transform2::set_rotation(const Angle & rotation)
 {
   this->rotation = rotation;
 }
@@ -84,7 +83,7 @@ const Point2 & Transform2::get_translation() const
   return translation;
 }
 
-const double & Transform2::get_rotation() const
+const Angle & Transform2::get_rotation() const
 {
   return rotation;
 }

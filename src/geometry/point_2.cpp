@@ -139,15 +139,15 @@ Point2 Point2::operator/(const double & value) const
 double Point2::distance_between(const Point2 & point_a, const Point2 & point_b)
 {
   auto delta = point_b - point_a;
-  return sqrt(delta.x * delta.x + delta.y * delta.y);
+  return std::sqrt(delta.x * delta.x + delta.y * delta.y);
 }
 
-double Point2::angle_between(const Point2 & point_a, const Point2 & point_b)
+Angle Point2::angle_between(const Point2 & point_a, const Point2 & point_b)
 {
   double dot = dot_product(point_a, point_b);
   double mag = point_a.magnitude() * point_b.magnitude();
 
-  return wrap_rad(acos(dot / mag));
+  return arccos(dot / mag);
 }
 
 double Point2::dot_product(const Point2 & point_a, const Point2 & point_b)
@@ -157,17 +157,17 @@ double Point2::dot_product(const Point2 & point_a, const Point2 & point_b)
 
 double Point2::cross_product(const Point2 & point_a, const Point2 & point_b)
 {
-  return point_a.magnitude() * point_b.magnitude() * std::sin(angle_between(point_a, point_b));
+  return point_a.magnitude() * point_b.magnitude() * sin(angle_between(point_a, point_b));
 }
 
 double Point2::magnitude() const
 {
-  return sqrt(x * x + y * y);
+  return std::sqrt(x * x + y * y);
 }
 
-double Point2::direction() const
+Angle Point2::direction() const
 {
-  return wrap_rad(atan2(y, x));
+  return signed_arctan(y, x);
 }
 
 Point2 Point2::normalize() const

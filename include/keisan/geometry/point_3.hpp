@@ -21,6 +21,7 @@
 #ifndef KEISAN__GEOMETRY__POINT_3_HPP_
 #define KEISAN__GEOMETRY__POINT_3_HPP_
 
+#include "../angle.hpp"
 #include "../matrix.hpp"
 
 namespace keisan
@@ -58,12 +59,13 @@ struct Point3
   Point3 operator/(const double & value) const;
 
   static double distance_between(const Point3 & point_a, const Point3 & point_b);
-  static double angle_between(const Point3 & point_a, const Point3 & point_b);
+  static Angle angle_between(const Point3 & point_a, const Point3 & point_b);
+
   static double dot_product(const Point3 & point_a, const Point3 & point_b);
   static double cross_product(const Point3 & point_a, const Point3 & point_b);
 
   double magnitude() const;
-  double direction() const;
+  Angle direction() const;
 
   Point3 normalize() const;
 

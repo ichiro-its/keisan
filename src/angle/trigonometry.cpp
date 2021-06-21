@@ -18,56 +18,45 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__ANGLE__ANGLE_HPP_
-#define KEISAN__ANGLE__ANGLE_HPP_
-
-#include <cmath>
+#include <keisan/angle/angle.hpp>
+#include <keisan/angle/trigonometry.hpp>
 
 namespace keisan
 {
 
-constexpr double pi = std::atan(1.0) * 4;
-
-class Angle;
-
-Angle make_degree(const double & value);
-Angle make_radian(const double & value);
-
-Angle difference_between(const Angle & a, const Angle & b);
-
-class Angle
+double sin(const Angle & angle)
 {
-public:
-  explicit Angle(const double & data, const bool & is_degree = false);
-  Angle(const Angle & angle);
+  return std::sin(angle.radian());
+}
 
-  Angle & operator=(const Angle & angle);
+double cos(const Angle & angle)
+{
+  return std::cos(angle.radian());
+}
 
-  Angle & operator+=(const Angle & angle);
-  Angle & operator-=(const Angle & angle);
+double tan(const Angle & angle)
+{
+  return std::tan(angle.radian());
+}
 
-  Angle & operator*=(const double & value);
-  Angle & operator/=(const double & value);
+Angle arcsin(const double & value)
+{
+  return make_radian(std::asin(value));
+}
 
-  Angle operator+(const Angle & angle) const;
-  Angle operator-(const Angle & angle) const;
+Angle arccos(const double & value)
+{
+  return make_radian(std::acos(value));
+}
 
-  Angle operator*(const double & value) const;
-  Angle operator/(const double & value) const;
+Angle arctan(const double & value)
+{
+  return make_radian(std::atan(value));
+}
 
-  double degree() const;
-  double radian() const;
-
-  double normalized_degree() const;
-  double normalized_radian() const;
-
-  Angle difference_to(const Angle & angle) const;
-
-private:
-  double data;
-  bool is_degree;
-};
+Angle signed_arctan(const double & y, const double & x)
+{
+  return make_radian(std::atan2(y, x));
+}
 
 }  // namespace keisan
-
-#endif  // KEISAN__ANGLE__ANGLE_HPP_

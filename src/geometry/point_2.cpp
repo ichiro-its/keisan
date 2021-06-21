@@ -157,7 +157,7 @@ double Point2::dot_product(const Point2 & point_a, const Point2 & point_b)
 
 double Point2::cross_product(const Point2 & point_a, const Point2 & point_b)
 {
-  return point_a.magnitude() * point_b.magnitude() * sin(angle_between(point_a, point_b));
+  return point_a.magnitude() * point_b.magnitude() * std::sin(angle_between(point_a, point_b));
 }
 
 double Point2::magnitude() const

@@ -41,10 +41,10 @@ Transform2::operator SquareMatrix<3>() const
 
   auto rotation_matrix = SquareMatrix<3>::identity();
   auto angle = deg_to_rad(rotation);
-  rotation_matrix[0][0] = cos(angle);
-  rotation_matrix[0][1] = -1 * sin(angle);
-  rotation_matrix[1][0] = sin(angle);
-  rotation_matrix[1][1] = cos(angle);
+  rotation_matrix[0][0] = std::cos(angle);
+  rotation_matrix[0][1] = -1 * std::sin(angle);
+  rotation_matrix[1][0] = std::sin(angle);
+  rotation_matrix[1][1] = std::cos(angle);
 
   auto translation_matrix = SquareMatrix<3>::identity();
   translation_matrix[0][2] = translation.x;

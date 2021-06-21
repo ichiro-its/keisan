@@ -74,3 +74,11 @@ TEST(AngleTest, ValueOperator) {
   ASSERT_DOUBLE_EQ((angle * 2.0).degree(), 540.0);
   ASSERT_DOUBLE_EQ((angle / 3.0).degree(), 90.0);
 }
+
+TEST(AngleTest, Difference) {
+  auto a = keisan::make_radian(-keisan::pi);
+  auto b = keisan::make_degree(270.0);
+
+  ASSERT_DOUBLE_EQ(a.difference_to(b).degree(), 90.0);
+  ASSERT_DOUBLE_EQ(keisan::difference_between(b, a).radian(), -keisan::pi * 0.5);
+}

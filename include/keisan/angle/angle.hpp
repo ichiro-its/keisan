@@ -33,6 +33,8 @@ class Angle;
 Angle make_degree(const double & value);
 Angle make_radian(const double & value);
 
+Angle difference_between(const Angle & a, const Angle & b);
+
 class Angle
 {
 public:
@@ -47,17 +49,19 @@ public:
   Angle & operator*=(const double & value);
   Angle & operator/=(const double & value);
 
-  Angle operator+(const Angle & angle);
-  Angle operator-(const Angle & angle);
+  Angle operator+(const Angle & angle) const;
+  Angle operator-(const Angle & angle) const;
 
-  Angle operator*(const double & value);
-  Angle operator/(const double & value);
+  Angle operator*(const double & value) const;
+  Angle operator/(const double & value) const;
 
   double degree() const;
   double radian() const;
 
   double normalized_degree() const;
   double normalized_radian() const;
+
+  Angle difference_to(const Angle & angle) const;
 
 private:
   double data;

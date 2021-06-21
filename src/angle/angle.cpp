@@ -34,6 +34,11 @@ Angle make_radian(const double & value)
   return Angle(value, false);
 }
 
+Angle difference_between(const Angle & a, const Angle & b)
+{
+  return a.difference_to(b);
+}
+
 Angle::Angle(const double & data, const bool & is_degree)
 : data(data),
   is_degree(is_degree)
@@ -77,22 +82,22 @@ Angle & Angle::operator/=(const double & value)
   return *this;
 }
 
-Angle Angle::operator+(const Angle & angle)
+Angle Angle::operator+(const Angle & angle) const
 {
   return Angle(data + (is_degree ? angle.degree() : angle.radian()), is_degree);
 }
 
-Angle Angle::operator-(const Angle & angle)
+Angle Angle::operator-(const Angle & angle) const
 {
   return Angle(data - (is_degree ? angle.degree() : angle.radian()), is_degree);
 }
 
-Angle Angle::operator*(const double & value)
+Angle Angle::operator*(const double & value) const
 {
   return Angle(data * value, is_degree);
 }
 
-Angle Angle::operator/(const double & value)
+Angle Angle::operator/(const double & value) const
 {
   return Angle(data / value, is_degree);
 }
@@ -115,6 +120,15 @@ double Angle::normalized_degree() const
 double Angle::normalized_radian() const
 {
   return wrap_number(radian(), -pi, pi);
+}
+
+Angle Angle::difference_to(const Angle & angle) const
+{
+  if (is_degree) {
+    return make_degree((angle - *this).normalized_degree());
+  } else {
+    return make_radian((angle - *this).normalized_radian());
+  }
 }
 
 }  // namespace keisan

@@ -45,6 +45,11 @@ Angle::Angle(const double & data, const bool & is_degree)
 {
 }
 
+Angle::Angle()
+: Angle(0.0)
+{
+}
+
 Angle::Angle(const Angle & angle)
 {
   *this = angle;

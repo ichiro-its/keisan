@@ -23,6 +23,10 @@
 
 #include <vector>
 
+TEST(AngleTest, Empty) {
+  Angle angle;
+}
+
 TEST(AngleTest, Conversion) {
   std::vector<keisan::Angle> angles = {
     keisan::make_degree(270.0), keisan::make_radian(keisan::pi * 1.5)

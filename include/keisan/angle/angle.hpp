@@ -39,6 +39,8 @@ class Angle
 {
 public:
   explicit Angle(const double & data, const bool & is_degree = false);
+  Angle();
+
   Angle(const Angle & angle);
 
   Angle & operator=(const Angle & angle);

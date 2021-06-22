@@ -24,7 +24,7 @@
 #include <vector>
 
 TEST(AngleTest, Empty) {
-  Angle angle;
+  keisan::Angle angle;
 }
 
 TEST(AngleTest, Conversion) {
@@ -77,6 +77,12 @@ TEST(AngleTest, ValueOperator) {
 
   ASSERT_DOUBLE_EQ((angle * 2.0).degree(), 540.0);
   ASSERT_DOUBLE_EQ((angle / 3.0).degree(), 90.0);
+}
+
+TEST(AngleTest, NegationOperator) {
+  auto angle = -keisan::make_degree(90.0);
+
+  ASSERT_DOUBLE_EQ(angle.degree(), -90.0);
 }
 
 TEST(AngleTest, Difference) {

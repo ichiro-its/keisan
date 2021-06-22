@@ -107,6 +107,11 @@ Angle Angle::operator/(const double & value) const
   return Angle(data / value, is_degree);
 }
 
+Angle Angle::operator-() const
+{
+  return Angle(-data, is_degree);
+}
+
 double Angle::degree() const
 {
   return is_degree ? data : scale_number(data, pi, 180.0);

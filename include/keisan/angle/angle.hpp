@@ -57,6 +57,8 @@ public:
   Angle operator*(const double & value) const;
   Angle operator/(const double & value) const;
 
+  Angle operator-() const;
+
   double degree() const;
   double radian() const;
 

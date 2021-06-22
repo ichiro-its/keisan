@@ -147,22 +147,21 @@ double Angle::radian() const
   return is_degree ? scale_number(data, 180.0, pi) : data;
 }
 
-double Angle::normalized_degree() const
+Angle Angle::normalize() const
 {
-  return wrap_number(degree(), -180.0, 180.0);
-}
-
-double Angle::normalized_radian() const
-{
-  return wrap_number(radian(), -pi, pi);
+  if (is_degree) {
+    return make_degree(wrap_number(data, -180.0, 180.0));
+  } else {
+    return make_radian(wrap_number(data, -pi, pi));
+  }
 }
 
 Angle Angle::difference_to(const Angle & angle) const
 {
   if (is_degree) {
-    return make_degree((angle - *this).normalized_degree());
+    return make_degree((angle - *this).normalize().degree());
   } else {
-    return make_radian((angle - *this).normalized_radian());
+    return make_radian((angle - *this).normalize().radian());
   }
 }
 

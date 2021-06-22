@@ -68,8 +68,7 @@ public:
   double degree() const;
   double radian() const;
 
-  double normalized_degree() const;
-  double normalized_radian() const;
+  Angle normalize() const;
 
   Angle difference_to(const Angle & angle) const;
 

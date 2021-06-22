@@ -26,22 +26,22 @@ namespace keisan
 
 double wrap_rad(double value)
 {
-  return make_radian(value).normalized_radian();
+  return make_radian(value).normalize().radian();
 }
 
 double wrap_deg(double value)
 {
-  return make_degree(value).normalized_degree();
+  return make_degree(value).normalize().degree();
 }
 
 double rad_to_deg(double value)
 {
-  return make_radian(value).normalized_degree();
+  return make_radian(value).normalize().degree();
 }
 
 double deg_to_rad(double value)
 {
-  return make_degree(value).normalized_radian();
+  return make_degree(value).normalize().radian();
 }
 
 double delta_rad(double value1, double value2)

@@ -21,23 +21,18 @@
 #include <gtest/gtest.h>
 #include <keisan/keisan.hpp>
 
-#include <vector>
-
 TEST(AngleTest, Empty) {
   keisan::Angle angle;
 }
 
 TEST(AngleTest, Conversion) {
-  std::vector<keisan::Angle> angles = {
-    keisan::make_degree(270.0), keisan::make_radian(keisan::pi * 1.5)
-  };
+  auto a = keisan::make_degree(270.0);
+  auto b = keisan::make_radian(-keisan::pi * 0.5);
 
-  for (const auto & angle : angles) {
-    ASSERT_DOUBLE_EQ(angle.degree(), 270.0);
-    ASSERT_DOUBLE_EQ(angle.radian(), keisan::pi * 1.5);
-    ASSERT_DOUBLE_EQ(angle.normalized_degree(), -90.0);
-    ASSERT_DOUBLE_EQ(angle.normalized_radian(), -keisan::pi * 0.5);
-  }
+  ASSERT_DOUBLE_EQ(a.degree(), 270.0);
+  ASSERT_DOUBLE_EQ(a.radian(), keisan::pi * 1.5);
+  ASSERT_DOUBLE_EQ(b.degree(), -90.0);
+  ASSERT_DOUBLE_EQ(b.radian(), -keisan::pi * 0.5);
 }
 
 TEST(AngleTest, ComparisonOperator) {
@@ -93,6 +88,14 @@ TEST(AngleTest, NegationOperator) {
   auto angle = -keisan::make_degree(90.0);
 
   ASSERT_DOUBLE_EQ(angle.degree(), -90.0);
+}
+
+TEST(AngleTest, NormalizeTest) {
+  auto a = keisan::make_degree(270.0);
+  auto b = keisan::make_radian(keisan::pi * -4.5);
+
+  ASSERT_DOUBLE_EQ(a.normalize().degree(), -90.0);
+  ASSERT_DOUBLE_EQ(b.normalize().degree(), -90.0);
 }
 
 TEST(AngleTest, Difference) {

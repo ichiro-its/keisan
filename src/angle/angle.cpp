@@ -63,6 +63,31 @@ Angle & Angle::operator=(const Angle & angle)
   return *this;
 }
 
+bool Angle::operator==(const Angle & angle) const
+{
+  return data == (is_degree ? angle.degree() : angle.radian());
+}
+
+bool Angle::operator>(const Angle & angle) const
+{
+  return data > (is_degree ? angle.degree() : angle.radian());
+}
+
+bool Angle::operator>=(const Angle & angle) const
+{
+  return data >= (is_degree ? angle.degree() : angle.radian());
+}
+
+bool Angle::operator<(const Angle & angle) const
+{
+  return data < (is_degree ? angle.degree() : angle.radian());
+}
+
+bool Angle::operator<=(const Angle & angle) const
+{
+  return data <= (is_degree ? angle.degree() : angle.radian());
+}
+
 Angle & Angle::operator+=(const Angle & angle)
 {
   data += is_degree ? angle.degree() : angle.radian();

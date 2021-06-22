@@ -40,6 +40,16 @@ TEST(AngleTest, Conversion) {
   }
 }
 
+TEST(AngleTest, ComparisonOperator) {
+  auto a = keisan::make_degree(90.0);
+  auto b = keisan::make_degree(-180.0);
+  auto c = keisan::make_radian(-keisan::pi);
+
+  ASSERT_TRUE(b == c);
+  ASSERT_TRUE(a > b && a >= b && a >= a);
+  ASSERT_TRUE(b < a && b <= a && b <= b);
+}
+
 TEST(AngleTest, SelfAngleOperator) {
   auto a = keisan::make_radian(keisan::pi);
   auto b = keisan::make_degree(270.0);

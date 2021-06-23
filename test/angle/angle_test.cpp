@@ -81,6 +81,7 @@ TEST(AngleTest, ValueOperator) {
   auto angle = keisan::make_degree(270.0);
 
   ASSERT_DOUBLE_EQ((angle * 2.0).degree(), 540.0);
+  ASSERT_DOUBLE_EQ((2.0 * angle).degree(), 540.0);
   ASSERT_DOUBLE_EQ((angle / 3.0).degree(), 90.0);
 }
 

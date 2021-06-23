@@ -34,6 +34,16 @@ Angle make_radian(const double & value)
   return Angle(value, false);
 }
 
+std::ostream & operator<<(std::ostream & out, const Angle & angle)
+{
+  return out << angle.degree();
+}
+
+Angle operator*(const double & value, const Angle & angle)
+{
+  return angle * value;
+}
+
 Angle difference_between(const Angle & a, const Angle & b)
 {
   return a.difference_to(b);

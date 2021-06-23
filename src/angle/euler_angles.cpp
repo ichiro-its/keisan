@@ -19,9 +19,16 @@
 // THE SOFTWARE.
 
 #include <keisan/angle/euler_angles.hpp>
+#include <keisan/angle/quaternion.hpp>
+#include <keisan/angle/trigonometry.hpp>
 
 namespace keisan
 {
+
+std::ostream & operator<<(std::ostream & out, const EulerAngles & euler)
+{
+  return out << euler.roll << " " << euler.pitch << " " << euler.yaw;
+}
 
 EulerAngles::EulerAngles()
 {
@@ -54,6 +61,25 @@ bool EulerAngles::operator==(const EulerAngles & other) const
 bool EulerAngles::operator!=(const EulerAngles & other) const
 {
   return roll != other.roll || yaw != other.yaw || pitch != other.pitch;
+}
+
+Quaternion EulerAngles::quaternion() const
+{
+  Quaternion quaternion;
+
+  double sr = sin(0.5 * roll);
+  double cr = cos(0.5 * roll);
+  double sp = sin(0.5 * pitch);
+  double cp = cos(0.5 * pitch);
+  double sy = sin(0.5 * yaw);
+  double cy = cos(0.5 * yaw);
+
+  quaternion.x = sr * cp * cy - cr * sp * sy;
+  quaternion.y = cr * sp * cy + sr * cp * sy;
+  quaternion.z = cr * cp * sy - sr * sp * cy;
+  quaternion.w = cr * cp * cy + sr * sp * sy;
+
+  return quaternion;
 }
 
 }  // namespace keisan

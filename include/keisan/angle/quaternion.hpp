@@ -21,8 +21,15 @@
 #ifndef KEISAN__ANGLE__QUATERNION_HPP_
 #define KEISAN__ANGLE__QUATERNION_HPP_
 
+#include <iostream>
+
 namespace keisan
 {
+
+struct EulerAngles;
+struct Quaternion;
+
+std::ostream & operator<<(std::ostream & out, const Quaternion & quaternion);
 
 struct Quaternion
 {
@@ -35,6 +42,8 @@ struct Quaternion
 
   bool operator==(const Quaternion & other) const;
   bool operator!=(const Quaternion & other) const;
+
+  EulerAngles euler() const;
 
   double x;
   double y;

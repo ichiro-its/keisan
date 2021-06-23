@@ -22,7 +22,7 @@
 #include <keisan/keisan.hpp>
 
 TEST(EulerAnglesTest, Empty) {
-  keisan::EulerAngles euler_angles;
+  keisan::EulerAngles euler;
 }
 
 TEST(EulerAnglesTest, AssignValue) {
@@ -54,4 +54,13 @@ TEST(EulerAnglesTest, ComparisonOperator) {
 
   ASSERT_FALSE(a == b);
   ASSERT_TRUE(a != b);
+}
+
+TEST(EulerAnglesTest, QuaternionConversion) {
+  keisan::EulerAngles euler(
+    keisan::make_degree(0.0), keisan::make_degree(0.0), keisan::make_degree(90.0));
+
+  auto quaternion = euler.quaternion();
+
+  ASSERT_EQ(quaternion.euler(), euler);
 }

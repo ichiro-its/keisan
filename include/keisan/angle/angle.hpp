@@ -22,6 +22,7 @@
 #define KEISAN__ANGLE__ANGLE_HPP_
 
 #include <cmath>
+#include <iostream>
 
 namespace keisan
 {
@@ -32,6 +33,10 @@ class Angle;
 
 Angle make_degree(const double & value);
 Angle make_radian(const double & value);
+
+std::ostream & operator<<(std::ostream & out, const Angle & angle);
+
+Angle operator*(const double & value, const Angle & angle);
 
 Angle difference_between(const Angle & a, const Angle & b);
 

@@ -21,10 +21,17 @@
 #ifndef KEISAN__ANGLE__EULER_ANGLES_HPP_
 #define KEISAN__ANGLE__EULER_ANGLES_HPP_
 
+#include <iostream>
+
 #include "./angle.hpp"
 
 namespace keisan
 {
+
+struct EulerAngles;
+struct Quaternion;
+
+std::ostream & operator<<(std::ostream & out, const EulerAngles & euler);
 
 struct EulerAngles
 {
@@ -37,6 +44,8 @@ struct EulerAngles
 
   bool operator==(const EulerAngles & other) const;
   bool operator!=(const EulerAngles & other) const;
+
+  Quaternion quaternion() const;
 
   Angle roll;
   Angle pitch;

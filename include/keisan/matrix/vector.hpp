@@ -21,10 +21,18 @@
 #ifndef KEISAN__MATRIX__VECTOR_HPP_
 #define KEISAN__MATRIX__VECTOR_HPP_
 
+#include <ostream>
+
 #include "./matrix.hpp"
 
 namespace keisan
 {
+
+template<size_t N>
+class Vector;
+
+template<size_t N>
+inline std::ostream & operator<<(std::ostream & out, const Vector<N> & vector);
 
 template<size_t N>
 class Vector
@@ -68,6 +76,23 @@ public:
 private:
   Matrix<N, 1> matrix;
 };
+
+template<size_t N>
+std::ostream & operator<<(std::ostream & out, const Vector<N> & vector)
+{
+  out << "[";
+  for (size_t i = 0; i < N; ++i) {
+    if (i > 0) {
+      out << ",";
+    }
+
+    out << vector[i];
+  }
+
+  out << "]";
+
+  return out;
+}
 
 template<size_t N>
 Vector<N>::Vector()

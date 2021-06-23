@@ -21,6 +21,8 @@
 #include <gtest/gtest.h>
 #include <keisan/keisan.hpp>
 
+#include <sstream>
+
 #define ASSERT_VECTOR_N_EQ(N, VECTOR, ...) \
   { \
     keisan::Vector<N> _vector = VECTOR; \
@@ -29,6 +31,16 @@
       ASSERT_DOUBLE_EQ(_values[i], _vector[i]); \
     } \
   }
+
+TEST(VectorTest, OutStream)
+{
+  auto a = keisan::Vector<2>(1.0, 2.0);
+
+  std::stringstream ss;
+  ss << a;
+
+  ASSERT_STREQ(ss.str().c_str(), "[1,2]");
+}
 
 TEST(VectorTest, InitialValue)
 {

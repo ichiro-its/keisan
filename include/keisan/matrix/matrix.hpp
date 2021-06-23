@@ -22,15 +22,22 @@
 #define KEISAN__MATRIX__MATRIX_HPP_
 
 #include <algorithm>
+#include <ostream>
 
 namespace keisan
 {
+
+template<size_t M, size_t N>
+class Matrix;
 
 template<size_t N>
 class SquareMatrix;
 
 template<size_t N>
 class Vector;
+
+template<size_t M, size_t N>
+inline std::ostream & operator<<(std::ostream & out, const Matrix<M, N> & matrix);
 
 template<size_t M, size_t N>
 class Matrix
@@ -77,6 +84,32 @@ public:
 private:
   double data[M * N];
 };
+
+template<size_t M, size_t N>
+std::ostream & operator<<(std::ostream & out, const Matrix<M, N> & matrix)
+{
+  out << "[";
+  for (size_t i = 0; i < M; ++i) {
+    if (i > 0) {
+      out << ",";
+    }
+
+    out << "[";
+    for (size_t j = 0; j < N; ++j) {
+      if (j > 0) {
+        out << ",";
+      }
+
+      out << matrix[i][j];
+    }
+
+    out << "]";
+  }
+
+  out << "]";
+
+  return out;
+}
 
 template<size_t M, size_t N>
 Matrix<M, N>::Matrix()

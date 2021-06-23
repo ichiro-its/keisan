@@ -21,6 +21,8 @@
 #include <gtest/gtest.h>
 #include <keisan/keisan.hpp>
 
+#include <sstream>
+
 #define ASSERT_MATRIX_M_N_EQ(M, N, MATRIX, ...) \
   { \
     keisan::Matrix<M, N> _matrix = MATRIX; \
@@ -31,6 +33,19 @@
       } \
     } \
   }
+
+TEST(MatrixTest, OutStream)
+{
+  auto a = keisan::Matrix<3, 4>(
+    1.0, 1.0, 1.0, 1.0,
+    2.0, 2.0, 2.0, 2.0,
+    3.0, 3.0, 3.0, 3.0);
+
+  std::stringstream ss;
+  ss << a;
+
+  ASSERT_STREQ(ss.str().c_str(), "[[1,1,1,1],[2,2,2,2],[3,3,3,3]]");
+}
 
 TEST(MatrixTest, InitialValue)
 {

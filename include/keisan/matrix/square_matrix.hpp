@@ -21,11 +21,19 @@
 #ifndef KEISAN__MATRIX__SQUARE_MATRIX_HPP_
 #define KEISAN__MATRIX__SQUARE_MATRIX_HPP_
 
+#include <ostream>
+
 #include "./matrix.hpp"
 #include "./vector.hpp"
 
 namespace keisan
 {
+
+template<size_t N>
+class SquareMatrix;
+
+template<size_t N>
+inline std::ostream & operator<<(std::ostream & out, const SquareMatrix<N> square_matrix);
 
 template<size_t N>
 class SquareMatrix
@@ -76,6 +84,12 @@ public:
 private:
   Matrix<N, N> matrix;
 };
+
+template<size_t N>
+std::ostream & operator<<(std::ostream & out, const SquareMatrix<N> square_matrix)
+{
+  return out << (Matrix<N, N>)square_matrix;
+}
 
 template<size_t N>
 SquareMatrix<N>::SquareMatrix()

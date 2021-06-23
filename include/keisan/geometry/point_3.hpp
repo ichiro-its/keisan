@@ -33,6 +33,12 @@ struct Point3;
 
 std::ostream & operator<<(std::ostream & out, const Point3 point);
 
+double distance_between(const Point3 & a, const Point3 & b);
+Angle angle_between(const Point3 & a, const Point3 & b);
+
+double dot_product(const Point3 & a, const Point3 & b);
+double cross_product(const Point3 & a, const Point3 & b);
+
 struct Point3
 {
   Point3();
@@ -69,16 +75,11 @@ struct Point3
 
   Point3 operator-() const;
 
-  static double distance_between(const Point3 & point_a, const Point3 & point_b);
-  static Angle angle_between(const Point3 & point_a, const Point3 & point_b);
-
-  static double dot_product(const Point3 & point_a, const Point3 & point_b);
-  static double cross_product(const Point3 & point_a, const Point3 & point_b);
-
   double magnitude() const;
-  Angle direction() const;
 
   Point3 normalize() const;
+
+  double distance_to(const Point3 & other) const;
 
   double x;
   double y;

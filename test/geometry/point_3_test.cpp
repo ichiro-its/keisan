@@ -123,14 +123,6 @@ TEST(Point3Test, NegationOperator)
   ASSERT_EQ(-point, keisan::Point3(-1.0, -3.0, -5.0));
 }
 
-TEST(Point3Test, DistanceBetween)
-{
-  auto a = keisan::Point3(1.0, 3.0, 5.0);
-  auto b = keisan::Point3(1.0 + 3.0, 3.0, 5.0 + 4.0);
-
-  ASSERT_DOUBLE_EQ(keisan::Point3::distance_between(a, b), 5.0);
-}
-
 TEST(Point3Test, Magnitude)
 {
   auto point = keisan::Point3(3.0, 0.0, 4.0);
@@ -143,10 +135,13 @@ TEST(Point3Test, Normalize)
   ASSERT_EQ(point.normalize(), keisan::Point3(0.6, 0.0, 0.8));
 }
 
-TEST(Point3Test, Direction)
+TEST(Point3Test, DistanceBetween)
 {
-  auto point = keisan::Point3(3.0, 4.0, 0.0);
-  ASSERT_DOUBLE_EQ(point.direction().degree(), 0.0);
+  auto a = keisan::Point3(1.0, 3.0, 5.0);
+  auto b = keisan::Point3(1.0 + 3.0, 3.0, 5.0 + 4.0);
+
+  ASSERT_DOUBLE_EQ(a.distance_to(b), 5.0);
+  ASSERT_DOUBLE_EQ(keisan::distance_between(a, b), 5.0);
 }
 
 TEST(Point3Test, AngleBetween)
@@ -154,7 +149,7 @@ TEST(Point3Test, AngleBetween)
   auto a = keisan::Point3(2.0, -1.0, 7.0);
   auto b = keisan::Point3(1.0, 2.0, 0.0);
 
-  ASSERT_DOUBLE_EQ(keisan::Point3::angle_between(a, b).degree(), 90.0);
+  ASSERT_DOUBLE_EQ(keisan::angle_between(a, b).degree(), 90.0);
 }
 
 TEST(Point3Test, DotProduct)
@@ -162,7 +157,7 @@ TEST(Point3Test, DotProduct)
   auto a = keisan::Point3(4.0, 3.0, 2.0);
   auto b = keisan::Point3(3.0, 4.0, 5.0);
 
-  ASSERT_DOUBLE_EQ(keisan::Point3::dot_product(a, b), 34.0);
+  ASSERT_DOUBLE_EQ(keisan::dot_product(a, b), 34.0);
 }
 
 TEST(Point3Test, CrossProduct)
@@ -170,5 +165,5 @@ TEST(Point3Test, CrossProduct)
   auto a = keisan::Point3(3.0, 6.0, -3.0);
   auto b = keisan::Point3(0.0, 2.0, 4.0);
 
-  ASSERT_DOUBLE_EQ(keisan::Point3::cross_product(a, b), sqrt(54.0) * sqrt(20.0));
+  ASSERT_DOUBLE_EQ(keisan::cross_product(a, b), sqrt(54.0) * sqrt(20.0));
 }

@@ -31,6 +31,29 @@ std::ostream & operator<<(std::ostream & out, const Point3 point)
   return out << "{" << point.x << "," << point.y << "," << point.z << "}";
 }
 
+double distance_between(const Point3 & a, const Point3 & b)
+{
+  return a.distance_to(b);
+}
+
+Angle angle_between(const Point3 & a, const Point3 & b)
+{
+  double dot = dot_product(a, b);
+  double mag = a.magnitude() * b.magnitude();
+
+  return arccos(dot / mag);
+}
+
+double dot_product(const Point3 & a, const Point3 & b)
+{
+  return a.x * b.x + a.y * b.y + a.z * b.z;
+}
+
+double cross_product(const Point3 & a, const Point3 & b)
+{
+  return a.magnitude() * b.magnitude() * sin(angle_between(a, b));
+}
+
 Point3::Point3()
 {
 }
@@ -160,41 +183,9 @@ Point3 Point3::operator-() const
   return Point3(-(Vector<3>)(*this));
 }
 
-double Point3::distance_between(const Point3 & point_a, const Point3 & point_b)
-{
-  auto delta = point_b - point_a;
-
-  return sqrt(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
-}
-
-Angle Point3::angle_between(const Point3 & point_a, const Point3 & point_b)
-{
-  double dot = dot_product(point_a, point_b);
-  double mag = point_a.magnitude() * point_b.magnitude();
-
-  return arccos(dot / mag);
-}
-
-double Point3::dot_product(const Point3 & point_a, const Point3 & point_b)
-{
-  return point_a.x * point_b.x + point_a.y * point_b.y + point_a.z * point_b.z;
-}
-
-double Point3::cross_product(const Point3 & point_a, const Point3 & point_b)
-{
-  return point_a.magnitude() * point_b.magnitude() * sin(angle_between(point_a, point_b));
-}
-
 double Point3::magnitude() const
 {
-  return sqrt(x * x + y * y + z * z);
-}
-
-Angle Point3::direction() const
-{
-  double temp = sqrt(x * x + y * y);
-
-  return arctan(z / temp);
+  return std::hypot(std::hypot(x, y), z);
 }
 
 Point3 Point3::normalize() const
@@ -202,6 +193,11 @@ Point3 Point3::normalize() const
   double mag = magnitude();
 
   return Point3(x / mag, y / mag, z / mag);
+}
+
+double Point3::distance_to(const Point3 & other) const
+{
+  return (other - *this).magnitude();
 }
 
 }  // namespace keisan

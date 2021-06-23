@@ -60,6 +60,8 @@ public:
   inline Vector<N> operator*(const double & value) const;
   inline Vector<N> operator/(const double & value) const;
 
+  inline Vector<N> operator-() const;
+
   inline double & operator[](size_t pos);
   inline const double & operator[](size_t pos) const;
 
@@ -186,6 +188,12 @@ template<size_t N>
 Vector<N> Vector<N>::operator/(const double & value) const
 {
   return Vector<N>(matrix / value);
+}
+
+template<size_t N>
+Vector<N> Vector<N>::operator-() const
+{
+  return Vector<N>(-matrix);
 }
 
 template<size_t N>

@@ -69,6 +69,8 @@ public:
   inline Matrix<M, N> operator*(const double & value) const;
   inline Matrix<M, N> operator/(const double & value) const;
 
+  inline Matrix<M, N> operator-() const;
+
   inline double * operator[](size_t pos);
   inline const double * operator[](size_t pos) const;
 
@@ -257,6 +259,17 @@ Matrix<M, N> Matrix<M, N>::operator/(const double & value) const
   new_matrix /= value;
 
   return new_matrix;
+}
+
+template<size_t M, size_t N>
+Matrix<M, N> Matrix<M, N>::operator-() const
+{
+  Matrix<M, N> matrix;
+  for (size_t i = 0; i < M * N; ++i) {
+    matrix.data[i] = -data[i];
+  }
+
+  return matrix;
 }
 
 template<size_t M, size_t N>

@@ -205,3 +205,17 @@ TEST(MatrixTest, ScalarOperation)
     2.0, 2.0, 2.0, 2.0,
     3.0, 3.0, 3.0, 3.0);
 }
+
+TEST(MatrixTest, NegationOperation)
+{
+  auto a = keisan::Matrix<3, 4>(
+    1.0, 1.0, 1.0, 1.0,
+    2.0, 2.0, 2.0, 2.0,
+    3.0, 3.0, 3.0, 3.0);
+
+  ASSERT_MATRIX_M_N_EQ(
+    3, 4, -a,
+    -1.0, -1.0, -1.0, -1.0,
+    -2.0, -2.0, -2.0, -2.0,
+    -3.0, -3.0, -3.0, -3.0);
+}

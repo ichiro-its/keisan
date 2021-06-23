@@ -205,3 +205,17 @@ TEST(SquareMatrixTest, ScalarOperation)
     2.0, 2.0, 2.0,
     3.0, 3.0, 3.0);
 }
+
+TEST(SquareMatrixTest, NegationOperation)
+{
+  auto a = keisan::SquareMatrix<3>(
+    1.0, 1.0, 1.0,
+    2.0, 2.0, 2.0,
+    3.0, 3.0, 3.0);
+
+  ASSERT_SQUARE_MATRIX_N_EQ(
+    3, -a,
+    -1.0, -1.0, -1.0,
+    -2.0, -2.0, -2.0,
+    -3.0, -3.0, -3.0);
+}

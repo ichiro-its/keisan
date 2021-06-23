@@ -140,6 +140,11 @@ Point3 Point3::operator/(const double & value) const
   return Point3((Vector<3>)(*this) / value);
 }
 
+Point3 Point3::operator-() const
+{
+  return Point3(-(Vector<3>)(*this));
+}
+
 double Point3::distance_between(const Point3 & point_a, const Point3 & point_b)
 {
   auto delta = point_b - point_a;

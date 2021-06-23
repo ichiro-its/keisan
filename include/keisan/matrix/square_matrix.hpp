@@ -68,6 +68,8 @@ public:
   inline SquareMatrix<N> operator*(const double & value) const;
   inline SquareMatrix<N> operator/(const double & value) const;
 
+  inline SquareMatrix<N> operator-() const;
+
   inline double * operator[](size_t pos);
   inline const double * operator[](size_t pos) const;
 
@@ -224,6 +226,12 @@ template<size_t N>
 SquareMatrix<N> SquareMatrix<N>::operator/(const double & value) const
 {
   return SquareMatrix<N>(matrix / value);
+}
+
+template<size_t N>
+SquareMatrix<N> SquareMatrix<N>::operator-() const
+{
+  return SquareMatrix<N>(-matrix);
 }
 
 template<size_t N>

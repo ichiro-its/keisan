@@ -58,6 +58,8 @@ struct Point3
   Point3 operator*(const double & value) const;
   Point3 operator/(const double & value) const;
 
+  Point3 operator-() const;
+
   static double distance_between(const Point3 & point_a, const Point3 & point_b);
   static Angle angle_between(const Point3 & point_a, const Point3 & point_b);
 

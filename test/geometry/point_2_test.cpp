@@ -100,6 +100,12 @@ TEST(Point2Test, ValueOperator)
   ASSERT_POINT2_EQ(point / 2.0, 0.5, 1.5);
 }
 
+TEST(Point2Test, NegationOperator)
+{
+  auto point = keisan::Point2(1.0, 3.0);
+  ASSERT_POINT2_EQ(-point, -1.0, -3.0);
+}
+
 TEST(Point2Test, DistanceBetween)
 {
   auto point_a = keisan::Point2(5.0, 10.0);

@@ -107,3 +107,9 @@ TEST(VectorTest, ScalarOperation)
   a /= 2.0;
   ASSERT_VECTOR_N_EQ(5, a, 1.0, 2.0, 3.0, 4.0, 5.0);
 }
+
+TEST(VectorTest, NegationOperation)
+{
+  auto a = keisan::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0);
+  ASSERT_VECTOR_N_EQ(5, -a, -1.0, -2.0, -3.0, -4.0, -5.0);
+}

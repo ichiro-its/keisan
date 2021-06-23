@@ -40,7 +40,7 @@ TEST(AngleTest, ComparisonOperator) {
   auto b = keisan::make_degree(-180.0);
   auto c = keisan::make_radian(-keisan::pi);
 
-  ASSERT_TRUE(b == c);
+  ASSERT_TRUE(b == c && a != c);
   ASSERT_TRUE(a > b && a >= b && a >= a);
   ASSERT_TRUE(b < a && b <= a && b <= b);
 }

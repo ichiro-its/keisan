@@ -46,6 +46,7 @@ public:
   Angle & operator=(const Angle & angle);
 
   bool operator==(const Angle & angle) const;
+  bool operator!=(const Angle & angle) const;
   bool operator>(const Angle & angle) const;
   bool operator>=(const Angle & angle) const;
   bool operator<(const Angle & angle) const;

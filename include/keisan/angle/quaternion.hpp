@@ -21,8 +21,6 @@
 #ifndef KEISAN__ANGLE__QUATERNION_HPP_
 #define KEISAN__ANGLE__QUATERNION_HPP_
 
-#include "./angle.hpp"
-
 namespace keisan
 {
 
@@ -31,12 +29,12 @@ struct Quaternion
   Quaternion();
   Quaternion(const double & x, const double & y, const double & z, const double & w);
 
-  Quaternion(const Quaternion & quaternion);
+  Quaternion(const Quaternion & other);
 
-  Quaternion & operator=(const Quaternion & quaternion);
+  Quaternion & operator=(const Quaternion & other);
 
-  bool operator==(const Quaternion & quaternion) const;
-  bool operator!=(const Quaternion & quaternion) const;
+  bool operator==(const Quaternion & other) const;
+  bool operator!=(const Quaternion & other) const;
 
   double x;
   double y;

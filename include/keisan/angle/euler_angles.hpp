@@ -18,39 +18,31 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <gtest/gtest.h>
-#include <keisan/keisan.hpp>
+#ifndef KEISAN__ANGLE__EULER_ANGLES_HPP_
+#define KEISAN__ANGLE__EULER_ANGLES_HPP_
 
-TEST(QuaternionTest, Empty) {
-  keisan::Quaternion quaternion;
-}
+#include "./angle.hpp"
 
-TEST(QuaternionTest, AssignValue) {
-  keisan::Quaternion a(1.0, 0.5, 0.0, -0.5);
-  keisan::Quaternion b;
+namespace keisan
+{
 
-  ASSERT_DOUBLE_EQ(a.x, 1.0);
-  ASSERT_DOUBLE_EQ(a.y, 0.5);
-  ASSERT_DOUBLE_EQ(a.z, 0.0);
-  ASSERT_DOUBLE_EQ(a.w, -0.5);
+struct EulerAngles
+{
+  EulerAngles();
+  EulerAngles(const Angle & roll, const Angle & pitch, const Angle & yaw);
 
-  b = a;
+  EulerAngles(const EulerAngles & other);
 
-  ASSERT_DOUBLE_EQ(a.x, b.x);
-  ASSERT_DOUBLE_EQ(a.y, b.y);
-  ASSERT_DOUBLE_EQ(a.z, b.z);
-  ASSERT_DOUBLE_EQ(a.w, b.w);
-}
+  EulerAngles & operator=(const EulerAngles & other);
 
-TEST(QuaternionTest, ComparisonOperator) {
-  keisan::Quaternion a(1.0, 0.5, 0.0, -0.5);
-  keisan::Quaternion b = a;
+  bool operator==(const EulerAngles & other) const;
+  bool operator!=(const EulerAngles & other) const;
 
-  ASSERT_TRUE(a == b);
-  ASSERT_FALSE(a != b);
+  Angle roll;
+  Angle pitch;
+  Angle yaw;
+};
 
-  a.x = 0.0;
+}  // namespace keisan
 
-  ASSERT_FALSE(a == b);
-  ASSERT_TRUE(a != b);
-}
+#endif  // KEISAN__ANGLE__EULER_ANGLES_HPP_

@@ -19,6 +19,7 @@ find_package(ament_cmake REQUIRED)
 add_library(${PROJECT_NAME}
   "src/angle/angle.cpp"
   "src/angle/equation.cpp"
+  "src/angle/euler_angles.cpp"
   "src/angle/quaternion.cpp"
   "src/angle/trigonometry.cpp"
   "src/geometry/point_2.cpp"

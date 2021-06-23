@@ -32,29 +32,29 @@ Quaternion::Quaternion(const double & x, const double & y, const double & z, con
 {
 }
 
-Quaternion::Quaternion(const Quaternion & quaternion)
+Quaternion::Quaternion(const Quaternion & other)
+: x(other.x), y(other.y), z(other.z), w(other.w)
 {
-  *this = quaternion;
 }
 
-Quaternion & Quaternion::operator=(const Quaternion & quaternion)
+Quaternion & Quaternion::operator=(const Quaternion & other)
 {
-  x = quaternion.x;
-  y = quaternion.y;
-  z = quaternion.z;
-  w = quaternion.w;
+  x = other.x;
+  y = other.y;
+  z = other.z;
+  w = other.w;
 
   return *this;
 }
 
-bool Quaternion::operator==(const Quaternion & quaternion) const
+bool Quaternion::operator==(const Quaternion & other) const
 {
-  return x == quaternion.x && y == quaternion.y && z == quaternion.z && w == quaternion.w;
+  return x == other.x && y == other.y && z == other.z && w == other.w;
 }
 
-bool Quaternion::operator!=(const Quaternion & quaternion) const
+bool Quaternion::operator!=(const Quaternion & other) const
 {
-  return !(*this == quaternion);
+  return x != other.x || y != other.y || z != other.z || w != other.w;
 }
 
 }  // namespace keisan

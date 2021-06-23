@@ -18,39 +18,42 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <gtest/gtest.h>
-#include <keisan/keisan.hpp>
+#include <keisan/angle/euler_angles.hpp>
 
-TEST(QuaternionTest, Empty) {
-  keisan::Quaternion quaternion;
+namespace keisan
+{
+
+EulerAngles::EulerAngles()
+{
 }
 
-TEST(QuaternionTest, AssignValue) {
-  keisan::Quaternion a(1.0, 0.5, 0.0, -0.5);
-  keisan::Quaternion b;
-
-  ASSERT_DOUBLE_EQ(a.x, 1.0);
-  ASSERT_DOUBLE_EQ(a.y, 0.5);
-  ASSERT_DOUBLE_EQ(a.z, 0.0);
-  ASSERT_DOUBLE_EQ(a.w, -0.5);
-
-  b = a;
-
-  ASSERT_DOUBLE_EQ(a.x, b.x);
-  ASSERT_DOUBLE_EQ(a.y, b.y);
-  ASSERT_DOUBLE_EQ(a.z, b.z);
-  ASSERT_DOUBLE_EQ(a.w, b.w);
+EulerAngles::EulerAngles(const Angle & roll, const Angle & pitch, const Angle & yaw)
+: roll(roll), pitch(pitch), yaw(yaw)
+{
 }
 
-TEST(QuaternionTest, ComparisonOperator) {
-  keisan::Quaternion a(1.0, 0.5, 0.0, -0.5);
-  keisan::Quaternion b = a;
-
-  ASSERT_TRUE(a == b);
-  ASSERT_FALSE(a != b);
-
-  a.x = 0.0;
-
-  ASSERT_FALSE(a == b);
-  ASSERT_TRUE(a != b);
+EulerAngles::EulerAngles(const EulerAngles & other)
+: roll(other.roll), pitch(other.pitch), yaw(other.yaw)
+{
 }
+
+EulerAngles & EulerAngles::operator=(const EulerAngles & other)
+{
+  roll = other.roll;
+  pitch = other.pitch;
+  yaw = other.yaw;
+
+  return *this;
+}
+
+bool EulerAngles::operator==(const EulerAngles & other) const
+{
+  return roll == other.roll && yaw == other.yaw && pitch == other.pitch;
+}
+
+bool EulerAngles::operator!=(const EulerAngles & other) const
+{
+  return roll != other.roll || yaw != other.yaw || pitch != other.pitch;
+}
+
+}  // namespace keisan

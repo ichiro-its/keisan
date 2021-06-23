@@ -39,14 +39,13 @@ Angle difference_between(const Angle & a, const Angle & b)
   return a.difference_to(b);
 }
 
-Angle::Angle(const double & data, const bool & is_degree)
-: data(data),
-  is_degree(is_degree)
+Angle::Angle()
 {
 }
 
-Angle::Angle()
-: Angle(0.0)
+Angle::Angle(const double & data, const bool & is_degree)
+: data(data),
+  is_degree(is_degree)
 {
 }
 

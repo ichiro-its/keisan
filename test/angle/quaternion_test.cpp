@@ -18,12 +18,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__ANGLE_HPP_
-#define KEISAN__ANGLE_HPP_
+#include <gtest/gtest.h>
+#include <keisan/keisan.hpp>
 
-#include "./angle/angle.hpp"
-#include "./angle/equation.hpp"
-#include "./angle/quaternion.hpp"
-#include "./angle/trigonometry.hpp"
+TEST(QuaternionTest, Empty) {
+  keisan::Quaternion quaternion;
+}
 
-#endif  // KEISAN__ANGLE_HPP_
+TEST(QuaternionTest, AssignValue) {
+  auto a = keisan::Quaternion(1.0, 0.5, 0.0, -0.5);
+
+  ASSERT_DOUBLE_EQ(a.x, 1.0);
+  ASSERT_DOUBLE_EQ(a.y, 0.5);
+  ASSERT_DOUBLE_EQ(a.z, 0.0);
+  ASSERT_DOUBLE_EQ(a.w, -0.5);
+}
+
+TEST(QuaternionTest, ComparisonOperator) {
+  auto a = keisan::Quaternion(1.0, 0.5, 0.0, -0.5);
+  auto b = a;
+
+  ASSERT_TRUE(a == b);
+
+  a.x = 0.0;
+  ASSERT_TRUE(a != b);
+}

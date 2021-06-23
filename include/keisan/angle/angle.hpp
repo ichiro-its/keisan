@@ -38,8 +38,8 @@ Angle difference_between(const Angle & a, const Angle & b);
 class Angle
 {
 public:
-  explicit Angle(const double & data, const bool & is_degree = false);
   Angle();
+  explicit Angle(const double & data, const bool & is_degree = false);
 
   Angle(const Angle & angle);
 

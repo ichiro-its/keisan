@@ -18,12 +18,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__ANGLE_HPP_
-#define KEISAN__ANGLE_HPP_
+#ifndef KEISAN__ANGLE__QUATERNION_HPP_
+#define KEISAN__ANGLE__QUATERNION_HPP_
 
-#include "./angle/angle.hpp"
-#include "./angle/equation.hpp"
-#include "./angle/quaternion.hpp"
-#include "./angle/trigonometry.hpp"
+#include "./angle.hpp"
 
-#endif  // KEISAN__ANGLE_HPP_
+namespace keisan
+{
+
+struct Quaternion
+{
+  Quaternion();
+  Quaternion(const double & x, const double & y, const double & z, const double & w);
+
+  Quaternion(const Quaternion & quaternion);
+
+  Quaternion & operator=(const Quaternion & quaternion);
+
+  bool operator==(const Quaternion & quaternion) const;
+  bool operator!=(const Quaternion & quaternion) const;
+
+  double x;
+  double y;
+  double z;
+  double w;
+};
+
+}  // namespace keisan
+
+#endif  // KEISAN__ANGLE__QUATERNION_HPP_

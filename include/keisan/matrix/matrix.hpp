@@ -54,8 +54,8 @@ public:
 
   inline Matrix<M, N> & operator=(const Matrix<M, N> & matrix);
 
-  inline bool operator==(const Matrix<M, N> & matrix);
-  inline bool operator!=(const Matrix<M, N> & matrix);
+  inline bool operator==(const Matrix<M, N> & matrix) const;
+  inline bool operator!=(const Matrix<M, N> & matrix) const;
 
   inline Matrix<M, N> & operator+=(const Matrix<M, N> & matrix);
   inline Matrix<M, N> & operator-=(const Matrix<M, N> & matrix);
@@ -154,7 +154,7 @@ Matrix<M, N> & Matrix<M, N>::operator=(const Matrix<M, N> & matrix)
 }
 
 template<size_t M, size_t N>
-bool Matrix<M, N>::operator==(const Matrix<M, N> & matrix)
+bool Matrix<M, N>::operator==(const Matrix<M, N> & matrix) const
 {
   for (size_t i = 0; i < M * N; ++i) {
     if (data[i] != matrix.data[i]) {
@@ -166,7 +166,7 @@ bool Matrix<M, N>::operator==(const Matrix<M, N> & matrix)
 }
 
 template<size_t M, size_t N>
-bool Matrix<M, N>::operator!=(const Matrix<M, N> & matrix)
+bool Matrix<M, N>::operator!=(const Matrix<M, N> & matrix) const
 {
   return !(*this == matrix);
 }

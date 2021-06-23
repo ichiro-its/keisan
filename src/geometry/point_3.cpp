@@ -85,6 +85,16 @@ Point3 & Point3::operator=(const Point3 & point)
   return *this;
 }
 
+bool Point3::operator==(const Point3 & point) const
+{
+  return (Vector<3>)(*this) == (Vector<3>)point;
+}
+
+bool Point3::operator!=(const Point3 & point) const
+{
+  return (Vector<3>)(*this) != (Vector<3>)point;
+}
+
 Point3 & Point3::operator+=(const Point3 & point)
 {
   return *this = *this + point;

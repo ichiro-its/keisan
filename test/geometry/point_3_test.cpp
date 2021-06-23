@@ -62,6 +62,20 @@ TEST(Point3Test, AssignedValue)
   ASSERT_POINT3_EQ(point_b, point_a.x, point_a.y, point_a.z);
 }
 
+TEST(Point3Test, ComparisonOperation)
+{
+  auto a = keisan::Point3(5.0, 4.0, 3.0);
+  auto b = a;
+
+  ASSERT_TRUE(a == b);
+  ASSERT_FALSE(a != b);
+
+  a.x = 10.0;
+
+  ASSERT_FALSE(a == b);
+  ASSERT_TRUE(a != b);
+}
+
 TEST(Point3Test, SelfPointOperator)
 {
   auto point_a = keisan::Point3(5.0, 4.0, 3.0);

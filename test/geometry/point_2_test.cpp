@@ -60,6 +60,20 @@ TEST(Point2Test, AssignedValue)
   ASSERT_POINT2_EQ(point_b, point_a.x, point_a.y);
 }
 
+TEST(Point2Test, ComparisonOperation)
+{
+  auto a = keisan::Point2(1.0, 3.0);
+  auto b = a;
+
+  ASSERT_TRUE(a == b);
+  ASSERT_FALSE(a != b);
+
+  a.x = 5.0;
+
+  ASSERT_FALSE(a == b);
+  ASSERT_TRUE(a != b);
+}
+
 TEST(Point2Test, SelfPointOperator)
 {
   auto point_a = keisan::Point2(5.0, 4.0);

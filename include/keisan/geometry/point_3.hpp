@@ -48,6 +48,9 @@ struct Point3
 
   Point3 & operator=(const Point3 & point);
 
+  bool operator==(const Point3 & point) const;
+  bool operator!=(const Point3 & point) const;
+
   Point3 & operator+=(const Point3 & point);
   Point3 & operator-=(const Point3 & point);
 

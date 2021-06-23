@@ -26,34 +26,60 @@
 namespace keisan
 {
 
-double wrap_number(double value, double min, double max)
+double sign(const double & value)
+{
+  return (value >= 0) ? 1.0 : -1.0;
+}
+
+double scale(const double & value, const double & source, const double & target)
+{
+  return value * target / source;
+}
+
+double map(
+  const double & value, const double & source_min, const double & source_max,
+  const double & target_min, const double & target_max)
+{
+  return target_min + scale(value - source_min, source_max - source_min, target_max - target_min);
+}
+
+double clamp(const double & value, const double & min, const double & max)
+{
+  return std::min(std::max(value, min), max);
+}
+
+double wrap(const double & value, const double & min, const double & max)
 {
   double min_value = value - min;
   double min_max = max - min;
 
-  return min + fmod(min_max + fmod(min_value, min_max), min_max);
+  return min + std::fmod(min_max + std::fmod(min_value, min_max), min_max);
+}
+
+double sign_number(double value)
+{
+  return sign(value);
 }
 
 double scale_number(double value, double source, double target)
 {
-  return value * target / source;
+  return scale(value, source, target);
 }
 
 double map_number(
   double value, double source_min, double source_max, double target_min, double target_max)
 {
-  return target_min + scale_number(
-    value - source_min, source_max - source_min, target_max - target_min);
+  return map(value, source_min, source_max, target_min, target_max);
 }
 
-double clamp_number(double value, double min_value, double max_value)
+double clamp_number(double value, double min, double max)
 {
-  return std::max(std::min(value, max_value), min_value);
+  return clamp(value, min, max);
 }
 
-double sign_number(double value)
+double wrap_number(double value, double min, double max)
 {
-  return (value >= 0) ? 1.0 : -1.0;
+  return wrap(value, min, max);
 }
 
 }  // namespace keisan

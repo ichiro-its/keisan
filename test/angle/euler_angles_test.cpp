@@ -21,35 +21,36 @@
 #include <gtest/gtest.h>
 #include <keisan/keisan.hpp>
 
-TEST(QuaternionTest, Empty) {
-  keisan::Quaternion quaternion;
+TEST(EulerAnglesTest, Empty) {
+  keisan::EulerAngles euler_angles;
 }
 
-TEST(QuaternionTest, AssignValue) {
-  keisan::Quaternion a(1.0, 0.5, 0.0, -0.5);
+TEST(EulerAnglesTest, AssignValue) {
+  keisan::EulerAngles a(
+    keisan::make_degree(0.0), keisan::make_degree(90.0), keisan::make_degree(180.0));
 
-  ASSERT_DOUBLE_EQ(a.x, 1.0);
-  ASSERT_DOUBLE_EQ(a.y, 0.5);
-  ASSERT_DOUBLE_EQ(a.z, 0.0);
-  ASSERT_DOUBLE_EQ(a.w, -0.5);
+  ASSERT_DOUBLE_EQ(a.roll.degree(), 0.0);
+  ASSERT_DOUBLE_EQ(a.pitch.degree(), 90.0);
+  ASSERT_DOUBLE_EQ(a.yaw.degree(), 180.0);
 
-  keisan::Quaternion b;
+  keisan::EulerAngles b;
   b = a;
 
-  ASSERT_DOUBLE_EQ(a.x, b.x);
-  ASSERT_DOUBLE_EQ(a.y, b.y);
-  ASSERT_DOUBLE_EQ(a.z, b.z);
-  ASSERT_DOUBLE_EQ(a.w, b.w);
+  ASSERT_EQ(a.roll, b.roll);
+  ASSERT_EQ(a.pitch, b.pitch);
+  ASSERT_EQ(a.yaw, b.yaw);
 }
 
-TEST(QuaternionTest, ComparisonOperator) {
-  keisan::Quaternion a(1.0, 0.5, 0.0, -0.5);
-  keisan::Quaternion b = a;
+TEST(EulerAnglesTest, ComparisonOperator) {
+  keisan::EulerAngles a(
+    keisan::make_degree(0.0), keisan::make_degree(90.0), keisan::make_degree(180.0));
+
+  keisan::EulerAngles b = a;
 
   ASSERT_TRUE(a == b);
   ASSERT_FALSE(a != b);
 
-  a.x = 0.0;
+  a.roll = keisan::make_radian(keisan::pi);
 
   ASSERT_FALSE(a == b);
   ASSERT_TRUE(a != b);

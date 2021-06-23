@@ -21,11 +21,17 @@
 #ifndef KEISAN__GEOMETRY__POINT_2_HPP_
 #define KEISAN__GEOMETRY__POINT_2_HPP_
 
+#include <ostream>
+
 #include "../angle.hpp"
 #include "../matrix.hpp"
 
 namespace keisan
 {
+
+struct Point2;
+
+std::ostream & operator<<(std::ostream & out, const Point2 & point);
 
 struct Point2
 {

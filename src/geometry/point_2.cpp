@@ -26,6 +26,11 @@
 namespace keisan
 {
 
+std::ostream & operator<<(std::ostream & out, const Point2 & point)
+{
+  return out << "{" << point.x << "," << point.y << "}";
+}
+
 Point2::Point2()
 {
 }

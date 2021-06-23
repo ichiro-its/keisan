@@ -21,6 +21,7 @@
 #include <gtest/gtest.h>
 #include <keisan/keisan.hpp>
 
+#include <sstream>
 #include <cmath>
 
 #define ASSERT_POINT3_EQ(point, point_x, point_y, point_z) \
@@ -30,6 +31,16 @@
     ASSERT_DOUBLE_EQ(temp_point.y, (point_y)); \
     ASSERT_DOUBLE_EQ(temp_point.z, (point_z)); \
   }
+
+TEST(Point3Test, OutStream)
+{
+  auto point = keisan::Point3(1.0, 3.0, 5.0);
+
+  std::stringstream ss;
+  ss << point;
+
+  ASSERT_STREQ(ss.str().c_str(), "{1,3,5}");
+}
 
 TEST(Point3Test, InitialValue)
 {

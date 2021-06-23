@@ -204,4 +204,44 @@ Angle Point2::direction_to(const Point2 & other) const
   return delta.direction();
 }
 
+Point2 Point2::translate(const Point2 & translation) const
+{
+  return *this + translation;
+}
+
+Point2 Point2::scale(const Point2 & scaling) const
+{
+  return Point2(x * scaling.x, y * scaling.y);
+}
+
+Point2 Point2::scale(const double & scaling) const
+{
+  return scale({scaling, scaling});
+}
+
+Point2 Point2::rotate(const Angle & rotation) const
+{
+  Point2 point;
+
+  point.x = x * cos(rotation) - y * sin(rotation);
+  point.y = x * sin(rotation) + y * cos(rotation);
+
+  return point;
+}
+
+Point2 Point2::scale_from(const Point2 & scaling, const Point2 & anchor)
+{
+  return translate(-anchor).scale(scaling).translate(anchor);
+}
+
+Point2 Point2::scale_from(const double & scaling, const Point2 & anchor)
+{
+  return translate(-anchor).scale(scaling).translate(anchor);
+}
+
+Point2 Point2::rotate_from(const Angle & rotation, const Point2 & anchor)
+{
+  return translate(-anchor).rotate(rotation).translate(anchor);
+}
+
 }  // namespace keisan

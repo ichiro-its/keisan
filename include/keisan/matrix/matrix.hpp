@@ -21,6 +21,8 @@
 #ifndef KEISAN__MATRIX__MATRIX_HPP_
 #define KEISAN__MATRIX__MATRIX_HPP_
 
+#include <gtest/gtest.h>
+
 #include <algorithm>
 #include <ostream>
 
@@ -156,8 +158,9 @@ Matrix<M, N> & Matrix<M, N>::operator=(const Matrix<M, N> & matrix)
 template<size_t M, size_t N>
 bool Matrix<M, N>::operator==(const Matrix<M, N> & matrix) const
 {
+  using testing::internal::FloatingPoint;
   for (size_t i = 0; i < M * N; ++i) {
-    if (data[i] != matrix.data[i]) {
+    if (!FloatingPoint<double>(data[i]).AlmostEquals(FloatingPoint<double>(matrix.data[i]))) {
       return false;
     }
   }

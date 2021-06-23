@@ -15,6 +15,9 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 find_package(ament_cmake REQUIRED)
+find_package(gtest_vendor REQUIRED)
+
+install(DIRECTORY "include" DESTINATION ".")
 
 add_library(${PROJECT_NAME}
   "src/angle/angle.cpp"
@@ -25,11 +28,11 @@ add_library(${PROJECT_NAME}
   "src/geometry/transform2.cpp"
   "src/number.cpp")
 
+ament_target_dependencies(${PROJECT_NAME} gtest_vendor)
+
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
-
-install(DIRECTORY "include" DESTINATION ".")
 
 install(TARGETS ${PROJECT_NAME}
   EXPORT export_${PROJECT_NAME}
@@ -61,6 +64,7 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
+ament_export_dependencies(gtest_vendor)
 ament_export_include_directories("include")
 ament_export_libraries(${PROJECT_NAME})
 

@@ -181,3 +181,28 @@ TEST(Point2Test, CrossProduct)
 
   ASSERT_DOUBLE_EQ(keisan::cross_product(a, b), 25.0);
 }
+
+TEST(Point2Test, Translation)
+{
+  auto point = keisan::Point2(4.0, 3.0);
+  ASSERT_EQ(point.translate({5.0, 10.0}), keisan::Point2(9.0, 13.0));
+}
+
+TEST(Point2Test, Scaling)
+{
+  auto point = keisan::Point2(4.0, 3.0);
+
+  ASSERT_EQ(point.scale({2.0, 3.0}), keisan::Point2(8.0, 9.0));
+  ASSERT_EQ(point.scale(2.0), keisan::Point2(8.0, 6.0));
+  ASSERT_EQ(point.scale_from({2.0, 3.0}, {1.0, -1.0}), keisan::Point2(7.0, 11.0));
+  ASSERT_EQ(point.scale_from(2.0, {1.0, -1.0}), keisan::Point2(7.0, 7.0));
+}
+
+TEST(Point2Test, Rotation)
+{
+  auto point = keisan::Point2(4.0, 3.0);
+
+  ASSERT_EQ(point.rotate(keisan::make_degree(90.0)), keisan::Point2(-3.0, 4.0));
+  ASSERT_EQ(
+    point.rotate_from(keisan::make_degree(90.0), {1.0, -1.0}), keisan::Point2(-3.0, 2.0));
+}

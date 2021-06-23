@@ -60,6 +60,20 @@ TEST(VectorTest, ZeroValue)
   ASSERT_VECTOR_N_EQ(5, b, 0.0, 0.0, 0.0, 0.0, 0.0);
 }
 
+TEST(VectorTest, ComparisonOperation)
+{
+  auto a = keisan::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0);
+  auto b = a;
+
+  ASSERT_TRUE(a == b);
+  ASSERT_FALSE(a != b);
+
+  b[1] = 5.0;
+
+  ASSERT_FALSE(a == b);
+  ASSERT_TRUE(a != b);
+}
+
 TEST(VectorTest, MatrixMultiplication)
 {
   auto a = keisan::Matrix<3, 2>(

@@ -52,6 +52,9 @@ public:
 
   inline Vector<N> & operator=(const Vector<N> & vector);
 
+  inline bool operator==(const Vector<N> & vector) const;
+  inline bool operator!=(const Vector<N> & vector) const;
+
   inline Vector<N> & operator+=(const Vector<N> & vector);
   inline Vector<N> & operator-=(const Vector<N> & vector);
 
@@ -135,6 +138,18 @@ Vector<N> & Vector<N>::operator=(const Vector<N> & vector)
 {
   matrix = vector.matrix;
   return *this;
+}
+
+template<size_t N>
+bool Vector<N>::operator==(const Vector<N> & vector) const
+{
+  return (Matrix<N, 1>)(*this) == (Matrix<N, 1>)vector;
+}
+
+template<size_t N>
+bool Vector<N>::operator!=(const Vector<N> & vector) const
+{
+  return (Matrix<N, 1>)(*this) != (Matrix<N, 1>)vector;
 }
 
 template<size_t N>

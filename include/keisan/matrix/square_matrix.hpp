@@ -54,6 +54,9 @@ public:
 
   inline SquareMatrix<N> & operator=(const SquareMatrix<N> & square_matrix);
 
+  inline bool operator==(const SquareMatrix<N> & square_matrix);
+  inline bool operator!=(const SquareMatrix<N> & square_matrix);
+
   inline SquareMatrix<N> & operator+=(const SquareMatrix<N> & square_matrix);
   inline SquareMatrix<N> & operator-=(const SquareMatrix<N> & square_matrix);
 
@@ -144,6 +147,19 @@ SquareMatrix<N> & SquareMatrix<N>::operator=(const SquareMatrix<N> & square_matr
   matrix = square_matrix.matrix;
   return *this;
 }
+
+template<size_t N>
+bool SquareMatrix<N>::operator==(const SquareMatrix<N> & square_matrix)
+{
+  return (Matrix<N, N>)(*this) == (Matrix<N, N>)square_matrix;
+}
+
+template<size_t N>
+bool SquareMatrix<N>::operator!=(const SquareMatrix<N> & square_matrix)
+{
+  return (Matrix<N, N>)(*this) != (Matrix<N, N>)square_matrix;
+}
+
 
 template<size_t N>
 SquareMatrix<N> & SquareMatrix<N>::operator+=(const SquareMatrix<N> & square_matrix)

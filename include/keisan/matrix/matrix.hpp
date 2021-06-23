@@ -54,6 +54,9 @@ public:
 
   inline Matrix<M, N> & operator=(const Matrix<M, N> & matrix);
 
+  inline bool operator==(const Matrix<M, N> & matrix);
+  inline bool operator!=(const Matrix<M, N> & matrix);
+
   inline Matrix<M, N> & operator+=(const Matrix<M, N> & matrix);
   inline Matrix<M, N> & operator-=(const Matrix<M, N> & matrix);
 
@@ -148,6 +151,24 @@ Matrix<M, N> & Matrix<M, N>::operator=(const Matrix<M, N> & matrix)
   std::copy(matrix.data, matrix.data + M * N, data);
 
   return *this;
+}
+
+template<size_t M, size_t N>
+bool Matrix<M, N>::operator==(const Matrix<M, N> & matrix)
+{
+  for (size_t i = 0; i < M * N; ++i) {
+    if (data[i] != matrix.data[i]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+template<size_t M, size_t N>
+bool Matrix<M, N>::operator!=(const Matrix<M, N> & matrix)
+{
+  return !(*this == matrix);
 }
 
 template<size_t M, size_t N>

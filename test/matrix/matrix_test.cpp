@@ -77,6 +77,24 @@ TEST(MatrixTest, ZeroValue)
     0.0, 0.0, 0.0, 0.0);
 }
 
+TEST(MatrixTest, ComparisonOperation)
+{
+  auto a = keisan::Matrix<3, 4>(
+    1.0, 1.0, 1.0, 1.0,
+    2.0, 2.0, 2.0, 2.0,
+    3.0, 3.0, 3.0, 3.0);
+
+  auto b = a;
+
+  ASSERT_TRUE(a == b);
+  ASSERT_FALSE(a != b);
+
+  b[1][1] = 5.0;
+
+  ASSERT_FALSE(a == b);
+  ASSERT_TRUE(a != b);
+}
+
 TEST(MatrixTest, MatrixMultiplication)
 {
   auto a = keisan::Matrix<3, 2>(

@@ -105,6 +105,23 @@ TEST(SquareMatrixTest, IdentityValue)
     0.0, 0.0, 0.0, 1.0);
 }
 
+TEST(SquareMatrixTest, ComparisonOperation)
+{
+  auto a = keisan::SquareMatrix<2>(
+    1.0, 1.0,
+    2.0, 2.0);
+
+  auto b = a;
+
+  ASSERT_TRUE(a == b);
+  ASSERT_FALSE(a != b);
+
+  b[1][1] = 5.0;
+
+  ASSERT_FALSE(a == b);
+  ASSERT_TRUE(a != b);
+}
+
 TEST(SquareMatrixTest, SquareMatrixMultiplication)
 {
   auto a = keisan::SquareMatrix<2>(

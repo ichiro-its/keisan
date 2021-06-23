@@ -120,24 +120,10 @@ TEST(Point2Test, NegationOperator)
   ASSERT_EQ(-point, keisan::Point2(-1.0, -3.0));
 }
 
-TEST(Point2Test, DistanceBetween)
-{
-  auto a = keisan::Point2(5.0, 10.0);
-  auto b = keisan::Point2(5.0 + 3.0, 10.0 + 4.0);
-
-  ASSERT_DOUBLE_EQ(keisan::Point2::distance_between(a, b), 5.0);
-}
-
 TEST(Point2Test, Magnitude)
 {
   auto point = keisan::Point2(3.0, 4.0);
   ASSERT_DOUBLE_EQ(point.magnitude(), 5.0);
-}
-
-TEST(Point2Test, Normalize)
-{
-  auto point = keisan::Point2(3.0, 4.0);
-  ASSERT_EQ(point.normalize(), keisan::Point2(0.6, 0.8));
 }
 
 TEST(Point2Test, Direction)
@@ -149,12 +135,35 @@ TEST(Point2Test, Direction)
   ASSERT_EQ(point.direction().degree(), 180.0);
 }
 
+TEST(Point2Test, Normalize)
+{
+  auto point = keisan::Point2(3.0, 4.0);
+  ASSERT_EQ(point.normalize(), keisan::Point2(0.6, 0.8));
+}
+
+TEST(Point2Test, DirectionTo)
+{
+  auto a = keisan::Point2(5.0, 10.0);
+  auto b = keisan::Point2(5.0, 10.0 + 5.0);
+
+  ASSERT_DOUBLE_EQ(a.direction_to(b).degree(), 90.0);
+}
+
+TEST(Point2Test, DistanceBetween)
+{
+  auto a = keisan::Point2(5.0, 10.0);
+  auto b = keisan::Point2(5.0 + 3.0, 10.0 + 4.0);
+
+  ASSERT_DOUBLE_EQ(a.distance_to(b), 5.0);
+  ASSERT_DOUBLE_EQ(keisan::distance_between(a, b), 5.0);
+}
+
 TEST(Point2Test, AngleBetween)
 {
   auto a = keisan::Point2(4.0, 3.0);
   auto b = keisan::Point2(-3.0, 4.0);
 
-  ASSERT_DOUBLE_EQ(keisan::Point2::angle_between(a, b).degree(), 90.0);
+  ASSERT_DOUBLE_EQ(keisan::angle_between(a, b).degree(), 90.0);
 }
 
 TEST(Point2Test, DotProduct)
@@ -162,7 +171,7 @@ TEST(Point2Test, DotProduct)
   auto a = keisan::Point2(4.0, 3.0);
   auto b = keisan::Point2(3.0, 4.0);
 
-  ASSERT_DOUBLE_EQ(keisan::Point2::dot_product(a, b), 24.0);
+  ASSERT_DOUBLE_EQ(keisan::dot_product(a, b), 24.0);
 }
 
 TEST(Point2Test, CrossProduct)
@@ -170,5 +179,5 @@ TEST(Point2Test, CrossProduct)
   auto a = keisan::Point2(4.0, 3.0);
   auto b = keisan::Point2(-3.0, 4.0);
 
-  ASSERT_DOUBLE_EQ(keisan::Point2::cross_product(a, b), 25.0);
+  ASSERT_DOUBLE_EQ(keisan::cross_product(a, b), 25.0);
 }

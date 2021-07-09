@@ -21,6 +21,8 @@
 #include <gtest/gtest.h>
 #include <keisan/keisan.hpp>
 
+#include <cmath>
+
 #define ASSERT_POINT3_EQ(point, point_x, point_y, point_z) \
   { \
     auto temp_point = (point); \
@@ -123,7 +125,7 @@ TEST(Point3Test, Normalize)
 TEST(Point3Test, Direction)
 {
   auto point = keisan::Point3(3.0, 4.0, 0.0);
-  ASSERT_DOUBLE_EQ(point.direction(), keisan::deg_to_rad(0.0));
+  ASSERT_DOUBLE_EQ(point.direction().degree(), 0.0);
 }
 
 TEST(Point3Test, AngleBetween)
@@ -131,7 +133,7 @@ TEST(Point3Test, AngleBetween)
   auto point_a = keisan::Point3(2.0, -1.0, 7.0);
   auto point_b = keisan::Point3(1.0, 2.0, 0.0);
 
-  ASSERT_DOUBLE_EQ(keisan::Point3::angle_between(point_a, point_b), keisan::deg_to_rad(90.0));
+  ASSERT_DOUBLE_EQ(keisan::Point3::angle_between(point_a, point_b).degree(), 90.0);
 }
 
 TEST(Point3Test, DotProduct)

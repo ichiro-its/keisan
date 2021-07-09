@@ -18,11 +18,45 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__ANGLE_HPP_
-#define KEISAN__ANGLE_HPP_
+#include <keisan/angle/angle.hpp>
+#include <keisan/angle/trigonometry.hpp>
 
-#include "./angle/angle.hpp"
-#include "./angle/equation.hpp"
-#include "./angle/trigonometry.hpp"
+namespace keisan
+{
 
-#endif  // KEISAN__ANGLE_HPP_
+double sin(const Angle & angle)
+{
+  return std::sin(angle.radian());
+}
+
+double cos(const Angle & angle)
+{
+  return std::cos(angle.radian());
+}
+
+double tan(const Angle & angle)
+{
+  return std::tan(angle.radian());
+}
+
+Angle arcsin(const double & value)
+{
+  return make_radian(std::asin(value));
+}
+
+Angle arccos(const double & value)
+{
+  return make_radian(std::acos(value));
+}
+
+Angle arctan(const double & value)
+{
+  return make_radian(std::atan(value));
+}
+
+Angle signed_arctan(const double & y, const double & x)
+{
+  return make_radian(std::atan2(y, x));
+}
+
+}  // namespace keisan

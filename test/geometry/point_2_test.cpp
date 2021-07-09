@@ -122,8 +122,8 @@ TEST(Point2Test, Normalize)
 
 TEST(Point2Test, Direction)
 {
-  ASSERT_DOUBLE_EQ(keisan::Point2(0.0, 4.0).direction(), keisan::deg_to_rad(90.0));
-  ASSERT_DOUBLE_EQ(keisan::Point2(-4.0, 0.0).direction(), keisan::deg_to_rad(180.0));
+  ASSERT_DOUBLE_EQ(keisan::Point2(0.0, 4.0).direction().degree(), 90.0);
+  ASSERT_DOUBLE_EQ(keisan::Point2(-4.0, 0.0).direction().degree(), 180.0);
 }
 
 TEST(Point2Test, AngleBetween)
@@ -131,7 +131,7 @@ TEST(Point2Test, AngleBetween)
   auto point_a = keisan::Point2(4.0, 3.0);
   auto point_b = keisan::Point2(-3.0, 4.0);
 
-  ASSERT_DOUBLE_EQ(keisan::Point2::angle_between(point_a, point_b), keisan::deg_to_rad(90.0));
+  ASSERT_DOUBLE_EQ(keisan::Point2::angle_between(point_a, point_b).degree(), 90.0);
 }
 
 TEST(Point2Test, DotProduct)

@@ -38,7 +38,7 @@ TEST(Trasform2Test, GeometryTransformation)
   transform.set_scale({2.0, 3.0});
   ASSERT_POINT2_EQ(transform * point, 6.0, 15.0);
 
-  transform.set_rotation(90.0);
+  transform.set_rotation(keisan::make_degree(90.0));
   ASSERT_POINT2_EQ(transform * point, -15.0, 6.0);
 
   transform.set_translation({2.0, 3.0});
@@ -64,10 +64,10 @@ TEST(Trasform2Test, Rotation)
 
   auto transform = keisan::Transform2();
 
-  transform.set_rotation(0.0);
+  transform.set_rotation(keisan::make_degree(0.0));
   ASSERT_POINT2_EQ(transform * point, 3.0, 5.0);
 
-  transform.set_rotation(180.0);
+  transform.set_rotation(keisan::make_degree(180.0));
   ASSERT_POINT2_EQ(transform * point, -3.0, -5.0);
 }
 

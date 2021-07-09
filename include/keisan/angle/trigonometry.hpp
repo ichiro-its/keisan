@@ -18,11 +18,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__ANGLE_HPP_
-#define KEISAN__ANGLE_HPP_
+#ifndef KEISAN__ANGLE__TRIGONOMETRY_HPP_
+#define KEISAN__ANGLE__TRIGONOMETRY_HPP_
 
-#include "./angle/angle.hpp"
-#include "./angle/equation.hpp"
-#include "./angle/trigonometry.hpp"
+#include "./angle.hpp"
 
-#endif  // KEISAN__ANGLE_HPP_
+namespace keisan
+{
+
+double sin(const Angle & angle);
+double cos(const Angle & angle);
+double tan(const Angle & angle);
+
+Angle arcsin(const double & value);
+Angle arccos(const double & value);
+Angle arctan(const double & value);
+Angle signed_arctan(const double & y, const double & x);
+
+}  // namespace keisan
+
+#endif  // KEISAN__ANGLE__TRIGONOMETRY_HPP_

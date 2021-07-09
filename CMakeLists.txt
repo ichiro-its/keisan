@@ -17,10 +17,12 @@ endif()
 find_package(ament_cmake REQUIRED)
 
 add_library(${PROJECT_NAME}
+  "src/angle/angle.cpp"
+  "src/angle/equation.cpp"
+  "src/angle/trigonometry.cpp"
   "src/geometry/point_2.cpp"
   "src/geometry/point_3.cpp"
   "src/geometry/transform2.cpp"
-  "src/angle.cpp"
   "src/number.cpp")
 
 target_include_directories(${PROJECT_NAME} PUBLIC
@@ -40,13 +42,14 @@ if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
 
   ament_add_gtest(${PROJECT_NAME}_tests
+    "test/angle/angle_test.cpp"
+    "test/angle/trigonometry_test.cpp"
     "test/geometry/point_2_test.cpp"
     "test/geometry/point_3_test.cpp"
     "test/geometry/transform2_test.cpp"
     "test/matrix/matrix_test.cpp"
     "test/matrix/square_matrix_test.cpp"
     "test/matrix/vector_test.cpp"
-    "test/angle_test.cpp"
     "test/number_test.cpp")
 
   target_include_directories(${PROJECT_NAME}_tests PUBLIC

@@ -31,7 +31,7 @@ double wrap_number(double value, double min, double max)
   double min_value = value - min;
   double min_max = max - min;
 
-  return min + fmod(min_max + fmod(min_value, min_max), min_max);
+  return min + std::fmod(min_max + std::fmod(min_value, min_max), min_max);
 }
 
 double scale_number(double value, double source, double target)

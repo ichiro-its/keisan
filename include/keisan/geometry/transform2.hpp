@@ -21,6 +21,7 @@
 #ifndef KEISAN__GEOMETRY__TRANSFORM2_HPP_
 #define KEISAN__GEOMETRY__TRANSFORM2_HPP_
 
+#include "../angle.hpp"
 #include "../matrix.hpp"
 #include "./point_2.hpp"
 
@@ -37,18 +38,18 @@ public:
   Point2 operator*(const Point2 & point) const;
 
   void set_translation(const Point2 & translation);
-  void set_rotation(const double & rotation);
+  void set_rotation(const Angle & rotation);
 
   void set_scale(const Point2 & scale);
   void set_scale(const double & scale);
 
   const Point2 & get_translation() const;
-  const double & get_rotation() const;
+  const Angle & get_rotation() const;
   const Point2 & get_scale() const;
 
 private:
   Point2 translation;
-  double rotation;
+  Angle rotation;
   Point2 scale;
 };
 

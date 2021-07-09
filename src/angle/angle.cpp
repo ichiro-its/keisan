@@ -144,20 +144,20 @@ Angle Angle::operator-() const
 
 double Angle::degree() const
 {
-  return is_degree ? data : scale_number(data, pi, 180.0);
+  return is_degree ? data : scale(data, pi, 180.0);
 }
 
 double Angle::radian() const
 {
-  return is_degree ? scale_number(data, 180.0, pi) : data;
+  return is_degree ? scale(data, 180.0, pi) : data;
 }
 
 Angle Angle::normalize() const
 {
   if (is_degree) {
-    return make_degree(wrap_number(data, -180.0, 180.0));
+    return make_degree(wrap(data, -180.0, 180.0));
   } else {
-    return make_radian(wrap_number(data, -pi, pi));
+    return make_radian(wrap(data, -pi, pi));
   }
 }
 

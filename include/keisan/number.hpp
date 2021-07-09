@@ -24,15 +24,32 @@
 namespace keisan
 {
 
-double wrap_number(double value, double min, double max);
+double sign(const double & value);
+
+double scale(const double & value, const double & source, const double & target);
+
+double map(
+  const double & value, const double & source_min, const double & source_max,
+  const double & target_min, const double & target_max);
+
+double clamp(const double & value, const double & min, const double & max);
+double wrap(const double & value, const double & min, const double & max);
+
+[[deprecated("Use sign() instead.")]]
+double sign_number(double value);
+
+[[deprecated("Use scale() instead.")]]
 double scale_number(double value, double source, double target);
 
+[[deprecated("Use map() instead.")]]
 double map_number(
   double value, double source_min, double source_max, double target_min, double target_max);
 
+[[deprecated("Use clamp() instead.")]]
 double clamp_number(double value, double min, double max);
 
-double sign_number(double value);
+[[deprecated("Use wrap() instead.")]]
+double wrap_number(double value, double min, double max);
 
 }  // namespace keisan
 

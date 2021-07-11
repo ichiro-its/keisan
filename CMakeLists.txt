@@ -16,7 +16,7 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 
-add_library(${PROJECT_NAME}
+add_library(${PROJECT_NAME} SHARED
   "src/angle/angle.cpp"
   "src/angle/equation.cpp"
   "src/angle/euler_angles.cpp"

@@ -34,6 +34,10 @@ Keisan (計算, calculation) is a [ROS 2](https://docs.ros.org/en/foxy/index.htm
   ```
   > See [this guide](https://docs.ros.org/en/foxy/Tutorials/Workspace/Creating-A-Workspace.html) for more information on how to setup a workspace in ROS 2.
 
+## Documentation
+
+You can read the full API documentation in the generated `doc` directory or in [here](https://ichiro-its.github.io/keisan).
+
 ## License
 
 This project is maintained by [ICHIRO ITS](https://ichiro-its.org/) and licensed under the [MIT License](./LICENSE).

@@ -19,7 +19,7 @@ find_package(gtest_vendor REQUIRED)
 
 install(DIRECTORY "include" DESTINATION ".")
 
-add_library(${PROJECT_NAME}
+add_library(${PROJECT_NAME} SHARED
   "src/angle/angle.cpp"
   "src/angle/equation.cpp"
   "src/angle/trigonometry.cpp"

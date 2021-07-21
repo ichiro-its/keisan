@@ -6,7 +6,9 @@ var searchData=
   ['delta_5frad_13',['delta_rad',['../namespacekeisan.html#ae5836dfa15d59182ae6763824c17b251',1,'keisan']]],
   ['difference_5fbetween_14',['difference_between',['../namespacekeisan.html#aba8904c689187125f3c1bafc6cb720b4',1,'keisan']]],
   ['difference_5fto_15',['difference_to',['../classkeisan_1_1Angle.html#a8da43b9d4ceb7d4975e6a75fd60ca4d6',1,'keisan::Angle']]],
-  ['direction_16',['direction',['../structkeisan_1_1Point2.html#a84ab9ebb5b061b5e5b7a13bef7c3a52a',1,'keisan::Point2::direction()'],['../structkeisan_1_1Point3.html#a2249ce1b117e0f4dd14c416201e61505',1,'keisan::Point3::direction()']]],
-  ['distance_5fbetween_17',['distance_between',['../structkeisan_1_1Point2.html#a68e5052f6c927f5919da7d6ff8bb2c47',1,'keisan::Point2::distance_between()'],['../structkeisan_1_1Point3.html#af79e71e70290f31b5db1eda2d55565e8',1,'keisan::Point3::distance_between()']]],
-  ['dot_5fproduct_18',['dot_product',['../structkeisan_1_1Point2.html#a4ab218ca835fdd5e2a3dd2b1b954cedb',1,'keisan::Point2::dot_product()'],['../structkeisan_1_1Point3.html#a876e248b19742b3645ab8e155b7ff8c0',1,'keisan::Point3::dot_product()']]]
+  ['direction_16',['direction',['../structkeisan_1_1Point2.html#a84ab9ebb5b061b5e5b7a13bef7c3a52a',1,'keisan::Point2']]],
+  ['direction_5fto_17',['direction_to',['../structkeisan_1_1Point2.html#a56ca970dd9f690230d39fc5791097bd1',1,'keisan::Point2']]],
+  ['distance_5fbetween_18',['distance_between',['../namespacekeisan.html#a0af8593fca6670ba6a07199c13d010e9',1,'keisan::distance_between(const Point2 &amp;a, const Point2 &amp;b)'],['../namespacekeisan.html#ae70bd94eddf75c116fa6c008cd8056ef',1,'keisan::distance_between(const Point3 &amp;a, const Point3 &amp;b)']]],
+  ['distance_5fto_19',['distance_to',['../structkeisan_1_1Point2.html#a399977bb2a9cef9d9ab78dae3f2ae8b1',1,'keisan::Point2::distance_to()'],['../structkeisan_1_1Point3.html#af750dcab9347e39c7aeca3b57fea0c8a',1,'keisan::Point3::distance_to()']]],
+  ['dot_5fproduct_20',['dot_product',['../namespacekeisan.html#a8b7e082145121a52dd51ffd648584be8',1,'keisan::dot_product(const Point2 &amp;a, const Point2 &amp;b)'],['../namespacekeisan.html#ae2424979fd36d975475a87618efa7a8c',1,'keisan::dot_product(const Point3 &amp;a, const Point3 &amp;b)']]]
 ];

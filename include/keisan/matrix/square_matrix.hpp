@@ -21,11 +21,19 @@
 #ifndef KEISAN__MATRIX__SQUARE_MATRIX_HPP_
 #define KEISAN__MATRIX__SQUARE_MATRIX_HPP_
 
+#include <ostream>
+
 #include "./matrix.hpp"
 #include "./vector.hpp"
 
 namespace keisan
 {
+
+template<size_t N>
+class SquareMatrix;
+
+template<size_t N>
+inline std::ostream & operator<<(std::ostream & out, const SquareMatrix<N> square_matrix);
 
 template<size_t N>
 class SquareMatrix
@@ -45,6 +53,9 @@ public:
   inline static SquareMatrix<N> identity();
 
   inline SquareMatrix<N> & operator=(const SquareMatrix<N> & square_matrix);
+
+  inline bool operator==(const SquareMatrix<N> & square_matrix) const;
+  inline bool operator!=(const SquareMatrix<N> & square_matrix) const;
 
   inline SquareMatrix<N> & operator+=(const SquareMatrix<N> & square_matrix);
   inline SquareMatrix<N> & operator-=(const SquareMatrix<N> & square_matrix);
@@ -68,12 +79,20 @@ public:
   inline SquareMatrix<N> operator*(const double & value) const;
   inline SquareMatrix<N> operator/(const double & value) const;
 
+  inline SquareMatrix<N> operator-() const;
+
   inline double * operator[](size_t pos);
   inline const double * operator[](size_t pos) const;
 
 private:
   Matrix<N, N> matrix;
 };
+
+template<size_t N>
+std::ostream & operator<<(std::ostream & out, const SquareMatrix<N> square_matrix)
+{
+  return out << (Matrix<N, N>)square_matrix;
+}
 
 template<size_t N>
 SquareMatrix<N>::SquareMatrix()
@@ -128,6 +147,19 @@ SquareMatrix<N> & SquareMatrix<N>::operator=(const SquareMatrix<N> & square_matr
   matrix = square_matrix.matrix;
   return *this;
 }
+
+template<size_t N>
+bool SquareMatrix<N>::operator==(const SquareMatrix<N> & square_matrix) const
+{
+  return (Matrix<N, N>)(*this) == (Matrix<N, N>)square_matrix;
+}
+
+template<size_t N>
+bool SquareMatrix<N>::operator!=(const SquareMatrix<N> & square_matrix) const
+{
+  return (Matrix<N, N>)(*this) != (Matrix<N, N>)square_matrix;
+}
+
 
 template<size_t N>
 SquareMatrix<N> & SquareMatrix<N>::operator+=(const SquareMatrix<N> & square_matrix)
@@ -224,6 +256,12 @@ template<size_t N>
 SquareMatrix<N> SquareMatrix<N>::operator/(const double & value) const
 {
   return SquareMatrix<N>(matrix / value);
+}
+
+template<size_t N>
+SquareMatrix<N> SquareMatrix<N>::operator-() const
+{
+  return SquareMatrix<N>(-matrix);
 }
 
 template<size_t N>

@@ -172,11 +172,7 @@ Angle Angle::normalize() const
 
 Angle Angle::difference_to(const Angle & angle) const
 {
-  if (is_degree) {
-    return make_degree((angle - *this).normalize().degree());
-  } else {
-    return make_radian((angle - *this).normalize().radian());
-  }
+  return (angle - *this).normalize();
 }
 
 }  // namespace keisan

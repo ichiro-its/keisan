@@ -34,19 +34,28 @@ Angle make_radian(const double & value)
   return Angle(value, false);
 }
 
+std::ostream & operator<<(std::ostream & out, const Angle & angle)
+{
+  return out << angle.degree();
+}
+
+Angle operator*(const double & value, const Angle & angle)
+{
+  return angle * value;
+}
+
 Angle difference_between(const Angle & a, const Angle & b)
 {
   return a.difference_to(b);
 }
 
-Angle::Angle(const double & data, const bool & is_degree)
-: data(data),
-  is_degree(is_degree)
+Angle::Angle()
 {
 }
 
-Angle::Angle()
-: Angle(0.0)
+Angle::Angle(const double & data, const bool & is_degree)
+: data(data),
+  is_degree(is_degree)
 {
 }
 

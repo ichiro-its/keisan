@@ -18,13 +18,39 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__ANGLE_HPP_
-#define KEISAN__ANGLE_HPP_
+#include <gtest/gtest.h>
+#include <keisan/keisan.hpp>
 
-#include "./angle/angle.hpp"
-#include "./angle/equation.hpp"
-#include "./angle/euler_angles.hpp"
-#include "./angle/quaternion.hpp"
-#include "./angle/trigonometry.hpp"
+TEST(QuaternionTest, Empty) {
+  keisan::Quaternion quaternion;
+}
 
-#endif  // KEISAN__ANGLE_HPP_
+TEST(QuaternionTest, AssignValue) {
+  keisan::Quaternion a(1.0, 0.5, 0.0, -0.5);
+
+  ASSERT_DOUBLE_EQ(a.x, 1.0);
+  ASSERT_DOUBLE_EQ(a.y, 0.5);
+  ASSERT_DOUBLE_EQ(a.z, 0.0);
+  ASSERT_DOUBLE_EQ(a.w, -0.5);
+
+  keisan::Quaternion b;
+  b = a;
+
+  ASSERT_DOUBLE_EQ(a.x, b.x);
+  ASSERT_DOUBLE_EQ(a.y, b.y);
+  ASSERT_DOUBLE_EQ(a.z, b.z);
+  ASSERT_DOUBLE_EQ(a.w, b.w);
+}
+
+TEST(QuaternionTest, ComparisonOperator) {
+  keisan::Quaternion a(1.0, 0.5, 0.0, -0.5);
+  keisan::Quaternion b = a;
+
+  ASSERT_TRUE(a == b);
+  ASSERT_FALSE(a != b);
+
+  a.x = 0.0;
+
+  ASSERT_FALSE(a == b);
+  ASSERT_TRUE(a != b);
+}

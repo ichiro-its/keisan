@@ -21,16 +21,25 @@
 #ifndef KEISAN__MATRIX__MATRIX_HPP_
 #define KEISAN__MATRIX__MATRIX_HPP_
 
+#include <gtest/gtest.h>
+
 #include <algorithm>
+#include <ostream>
 
 namespace keisan
 {
+
+template<size_t M, size_t N>
+class Matrix;
 
 template<size_t N>
 class SquareMatrix;
 
 template<size_t N>
 class Vector;
+
+template<size_t M, size_t N>
+inline std::ostream & operator<<(std::ostream & out, const Matrix<M, N> & matrix);
 
 template<size_t M, size_t N>
 class Matrix
@@ -46,6 +55,9 @@ public:
   inline static Matrix<M, N> zero();
 
   inline Matrix<M, N> & operator=(const Matrix<M, N> & matrix);
+
+  inline bool operator==(const Matrix<M, N> & matrix) const;
+  inline bool operator!=(const Matrix<M, N> & matrix) const;
 
   inline Matrix<M, N> & operator+=(const Matrix<M, N> & matrix);
   inline Matrix<M, N> & operator-=(const Matrix<M, N> & matrix);
@@ -69,12 +81,40 @@ public:
   inline Matrix<M, N> operator*(const double & value) const;
   inline Matrix<M, N> operator/(const double & value) const;
 
+  inline Matrix<M, N> operator-() const;
+
   inline double * operator[](size_t pos);
   inline const double * operator[](size_t pos) const;
 
 private:
   double data[M * N];
 };
+
+template<size_t M, size_t N>
+std::ostream & operator<<(std::ostream & out, const Matrix<M, N> & matrix)
+{
+  out << "[";
+  for (size_t i = 0; i < M; ++i) {
+    if (i > 0) {
+      out << ",";
+    }
+
+    out << "[";
+    for (size_t j = 0; j < N; ++j) {
+      if (j > 0) {
+        out << ",";
+      }
+
+      out << matrix[i][j];
+    }
+
+    out << "]";
+  }
+
+  out << "]";
+
+  return out;
+}
 
 template<size_t M, size_t N>
 Matrix<M, N>::Matrix()
@@ -113,6 +153,25 @@ Matrix<M, N> & Matrix<M, N>::operator=(const Matrix<M, N> & matrix)
   std::copy(matrix.data, matrix.data + M * N, data);
 
   return *this;
+}
+
+template<size_t M, size_t N>
+bool Matrix<M, N>::operator==(const Matrix<M, N> & matrix) const
+{
+  using testing::internal::FloatingPoint;
+  for (size_t i = 0; i < M * N; ++i) {
+    if (!FloatingPoint<double>(data[i]).AlmostEquals(FloatingPoint<double>(matrix.data[i]))) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+template<size_t M, size_t N>
+bool Matrix<M, N>::operator!=(const Matrix<M, N> & matrix) const
+{
+  return !(*this == matrix);
 }
 
 template<size_t M, size_t N>
@@ -257,6 +316,17 @@ Matrix<M, N> Matrix<M, N>::operator/(const double & value) const
   new_matrix /= value;
 
   return new_matrix;
+}
+
+template<size_t M, size_t N>
+Matrix<M, N> Matrix<M, N>::operator-() const
+{
+  Matrix<M, N> matrix;
+  for (size_t i = 0; i < M * N; ++i) {
+    matrix.data[i] = -data[i];
+  }
+
+  return matrix;
 }
 
 template<size_t M, size_t N>

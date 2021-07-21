@@ -21,49 +21,64 @@
 #include <gtest/gtest.h>
 #include <keisan/keisan.hpp>
 
+#include <sstream>
 #include <cmath>
 
-#define ASSERT_POINT3_EQ(point, point_x, point_y, point_z) \
-  { \
-    auto temp_point = (point); \
-    ASSERT_DOUBLE_EQ(temp_point.x, (point_x)); \
-    ASSERT_DOUBLE_EQ(temp_point.y, (point_y)); \
-    ASSERT_DOUBLE_EQ(temp_point.z, (point_z)); \
-  }
+TEST(Point3Test, OutStream)
+{
+  auto point = keisan::Point3(1.0, 3.0, 5.0);
+
+  std::stringstream ss;
+  ss << point;
+
+  ASSERT_STREQ(ss.str().c_str(), "{1,3,5}");
+}
 
 TEST(Point3Test, InitialValue)
 {
   auto point = keisan::Point3(1.0, 3.0, 5.0);
-  ASSERT_POINT3_EQ(point, 1.0, 3.0, 5.0);
+
+  ASSERT_DOUBLE_EQ(point.x, 1.0);
+  ASSERT_DOUBLE_EQ(point.y, 3.0);
+  ASSERT_DOUBLE_EQ(point.z, 5.0);
 }
 
 TEST(Point3Test, EmptyValue)
 {
   auto point = keisan::Point3::zero();
-  ASSERT_POINT3_EQ(point, 0.0, 0.0, 0.0);
+
+  ASSERT_DOUBLE_EQ(point.x, 0.0);
+  ASSERT_DOUBLE_EQ(point.y, 0.0);
+  ASSERT_DOUBLE_EQ(point.z, 0.0);
 }
 
-TEST(Point3Test, AssignedValue)
+TEST(Point3Test, ComparisonOperation)
 {
-  auto point_a = keisan::Point3(5.0, 4.0, 3.0);
-  auto point_b = keisan::Point3(point_a);
+  auto a = keisan::Point3(5.0, 4.0, 3.0);
+  auto b = a;
 
-  ASSERT_POINT3_EQ(point_b, point_a.x, point_a.y, point_a.z);
+  ASSERT_TRUE(a == b);
+  ASSERT_FALSE(a != b);
+
+  a.x = 10.0;
+
+  ASSERT_FALSE(a == b);
+  ASSERT_TRUE(a != b);
 }
 
 TEST(Point3Test, SelfPointOperator)
 {
-  auto point_a = keisan::Point3(5.0, 4.0, 3.0);
-  auto point_b = keisan::Point3(1.0, 3.0, 5.0);
+  auto a = keisan::Point3(5.0, 4.0, 3.0);
+  auto b = keisan::Point3(1.0, 3.0, 5.0);
 
-  point_a = point_b;
-  ASSERT_POINT3_EQ(point_a, 1.0, 3.0, 5.0);
+  a = b;
+  ASSERT_EQ(a, keisan::Point3(1.0, 3.0, 5.0));
 
-  point_a += point_b;
-  ASSERT_POINT3_EQ(point_a, 2.0, 6.0, 10.0);
+  a += b;
+  ASSERT_EQ(a, keisan::Point3(2.0, 6.0, 10.0));
 
-  point_a -= point_b;
-  ASSERT_POINT3_EQ(point_a, 1.0, 3.0, 5.0);
+  a -= b;
+  ASSERT_EQ(a, keisan::Point3(1.0, 3.0, 5.0));
 }
 
 TEST(Point3Test, SelfValueOperator)
@@ -71,43 +86,41 @@ TEST(Point3Test, SelfValueOperator)
   auto point = keisan::Point3(1.0, 3.0, 5.0);
 
   point += 2.0;
-  ASSERT_POINT3_EQ(point, 3.0, 5.0, 7.0);
+  ASSERT_EQ(point, keisan::Point3(3.0, 5.0, 7.0));
 
   point -= 6.0;
-  ASSERT_POINT3_EQ(point, -3.0, -1.0, 1.0);
+  ASSERT_EQ(point, keisan::Point3(-3.0, -1.0, 1.0));
 
   point *= 3.0;
-  ASSERT_POINT3_EQ(point, -9.0, -3.0, 3.0);
+  ASSERT_EQ(point, keisan::Point3(-9.0, -3.0, 3.0));
 
   point /= 2.0;
-  ASSERT_POINT3_EQ(point, -4.5, -1.5, 1.5);
+  ASSERT_EQ(point, keisan::Point3(-4.5, -1.5, 1.5));
 }
 
 TEST(Point3Test, PointOperator)
 {
-  auto point_a = keisan::Point3(1.0, 3.0, 5.0);
-  auto point_b = keisan::Point3(2.0, 5.0, 10.0);
+  auto a = keisan::Point3(1.0, 3.0, 5.0);
+  auto b = keisan::Point3(2.0, 5.0, 10.0);
 
-  ASSERT_POINT3_EQ(point_a + point_b, 3.0, 8.0, 15.0);
-  ASSERT_POINT3_EQ(point_a - point_b, -1.0, -2.0, -5.0);
+  ASSERT_EQ(a + b, keisan::Point3(3.0, 8.0, 15.0));
+  ASSERT_EQ(a - b, keisan::Point3(-1.0, -2.0, -5.0));
 }
 
 TEST(Point3Test, ValueOperator)
 {
   auto point = keisan::Point3(1.0, 3.0, 5.0);
 
-  ASSERT_POINT3_EQ(point + 5.0, 6.0, 8.0, 10.0);
-  ASSERT_POINT3_EQ(point - 4.0, -3.0, -1.0, 1.0);
-  ASSERT_POINT3_EQ(point * 3.0, 3.0, 9.0, 15.0);
-  ASSERT_POINT3_EQ(point / 2.0, 0.5, 1.5, 2.5);
+  ASSERT_EQ(point + 5.0, keisan::Point3(6.0, 8.0, 10.0));
+  ASSERT_EQ(point - 4.0, keisan::Point3(-3.0, -1.0, 1.0));
+  ASSERT_EQ(point * 3.0, keisan::Point3(3.0, 9.0, 15.0));
+  ASSERT_EQ(point / 2.0, keisan::Point3(0.5, 1.5, 2.5));
 }
 
-TEST(Point3Test, DistanceBetween)
+TEST(Point3Test, NegationOperator)
 {
-  auto point_a = keisan::Point3(1.0, 3.0, 5.0);
-  auto point_b = keisan::Point3(1.0 + 3.0, 3.0, 5.0 + 4.0);
-
-  ASSERT_DOUBLE_EQ(keisan::Point3::distance_between(point_a, point_b), 5.0);
+  auto point = keisan::Point3(1.0, 3.0, 5.0);
+  ASSERT_EQ(-point, keisan::Point3(-1.0, -3.0, -5.0));
 }
 
 TEST(Point3Test, Magnitude)
@@ -119,33 +132,38 @@ TEST(Point3Test, Magnitude)
 TEST(Point3Test, Normalize)
 {
   auto point = keisan::Point3(3.0, 0.0, 4.0);
-  ASSERT_POINT3_EQ(point.normalize(), 0.6, 0.0, 0.8);
+  ASSERT_EQ(point.normalize(), keisan::Point3(0.6, 0.0, 0.8));
 }
 
-TEST(Point3Test, Direction)
+TEST(Point3Test, DistanceBetween)
 {
-  auto point = keisan::Point3(3.0, 4.0, 0.0);
-  ASSERT_DOUBLE_EQ(point.direction().degree(), 0.0);
+  auto a = keisan::Point3(1.0, 3.0, 5.0);
+  auto b = keisan::Point3(1.0 + 3.0, 3.0, 5.0 + 4.0);
+
+  ASSERT_DOUBLE_EQ(a.distance_to(b), 5.0);
+  ASSERT_DOUBLE_EQ(keisan::distance_between(a, b), 5.0);
 }
 
 TEST(Point3Test, AngleBetween)
 {
-  auto point_a = keisan::Point3(2.0, -1.0, 7.0);
-  auto point_b = keisan::Point3(1.0, 2.0, 0.0);
+  auto a = keisan::Point3(2.0, -1.0, 7.0);
+  auto b = keisan::Point3(1.0, 2.0, 0.0);
 
-  ASSERT_DOUBLE_EQ(keisan::Point3::angle_between(point_a, point_b).degree(), 90.0);
+  ASSERT_DOUBLE_EQ(keisan::angle_between(a, b).degree(), 90.0);
 }
 
 TEST(Point3Test, DotProduct)
 {
-  auto point_a = keisan::Point3(4.0, 3.0, 2.0);
-  auto point_b = keisan::Point3(3.0, 4.0, 5.0);
-  ASSERT_DOUBLE_EQ(keisan::Point3::dot_product(point_a, point_b), 34.0);
+  auto a = keisan::Point3(4.0, 3.0, 2.0);
+  auto b = keisan::Point3(3.0, 4.0, 5.0);
+
+  ASSERT_DOUBLE_EQ(keisan::dot_product(a, b), 34.0);
 }
 
 TEST(Point3Test, CrossProduct)
 {
-  auto point_a = keisan::Point3(3.0, 6.0, -3.0);
-  auto point_b = keisan::Point3(0.0, 2.0, 4.0);
-  ASSERT_DOUBLE_EQ(keisan::Point3::cross_product(point_a, point_b), sqrt(54.0) * sqrt(20.0));
+  auto a = keisan::Point3(3.0, 6.0, -3.0);
+  auto b = keisan::Point3(0.0, 2.0, 4.0);
+
+  ASSERT_DOUBLE_EQ(keisan::cross_product(a, b), sqrt(54.0) * sqrt(20.0));
 }

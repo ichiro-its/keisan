@@ -8,6 +8,7 @@
   <license>MIT License</license>
   <url>https://github.com/ichiro-its/keisan</url>
   <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>gtest_vendor</depend>
   <test_depend>ament_cmake_gtest</test_depend>
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

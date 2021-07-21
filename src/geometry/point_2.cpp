@@ -26,6 +26,31 @@
 namespace keisan
 {
 
+std::ostream & operator<<(std::ostream & out, const Point2 & point)
+{
+  return out << "{" << point.x << "," << point.y << "}";
+}
+
+double distance_between(const Point2 & a, const Point2 & b)
+{
+  return a.distance_to(b);
+}
+
+Angle angle_between(const Point2 & a, const Point2 & b)
+{
+  return difference_between(a.direction(), b.direction());
+}
+
+double dot_product(const Point2 & a, const Point2 & b)
+{
+  return a.x * b.x + a.y * b.y;
+}
+
+double cross_product(const Point2 & a, const Point2 & b)
+{
+  return a.magnitude() * b.magnitude() * sin(angle_between(a, b));
+}
+
 Point2::Point2()
 {
 }
@@ -74,6 +99,16 @@ Point2 & Point2::operator=(const Point2 & point)
   y = point.y;
 
   return *this;
+}
+
+bool Point2::operator==(const Point2 & point) const
+{
+  return (Vector<2>)(*this) == (Vector<2>)point;
+}
+
+bool Point2::operator!=(const Point2 & point) const
+{
+  return (Vector<2>)(*this) != (Vector<2>)point;
 }
 
 Point2 & Point2::operator+=(const Point2 & point)
@@ -136,33 +171,14 @@ Point2 Point2::operator/(const double & value) const
   return Point2((Vector<2>)(*this) / value);
 }
 
-double Point2::distance_between(const Point2 & point_a, const Point2 & point_b)
+Point2 Point2::operator-() const
 {
-  auto delta = point_b - point_a;
-  return std::sqrt(delta.x * delta.x + delta.y * delta.y);
-}
-
-Angle Point2::angle_between(const Point2 & point_a, const Point2 & point_b)
-{
-  double dot = dot_product(point_a, point_b);
-  double mag = point_a.magnitude() * point_b.magnitude();
-
-  return arccos(dot / mag);
-}
-
-double Point2::dot_product(const Point2 & point_a, const Point2 & point_b)
-{
-  return point_a.x * point_b.x + point_a.y * point_b.y;
-}
-
-double Point2::cross_product(const Point2 & point_a, const Point2 & point_b)
-{
-  return point_a.magnitude() * point_b.magnitude() * sin(angle_between(point_a, point_b));
+  return Point2(-(Vector<2>)(*this));
 }
 
 double Point2::magnitude() const
 {
-  return std::sqrt(x * x + y * y);
+  return std::hypot(x, y);
 }
 
 Angle Point2::direction() const
@@ -173,8 +189,59 @@ Angle Point2::direction() const
 Point2 Point2::normalize() const
 {
   double mag = magnitude();
-
   return Point2(x / mag, y / mag);
+}
+
+double Point2::distance_to(const Point2 & other) const
+{
+  auto delta = other - *this;
+  return delta.magnitude();
+}
+
+Angle Point2::direction_to(const Point2 & other) const
+{
+  auto delta = other - *this;
+  return delta.direction();
+}
+
+Point2 Point2::translate(const Point2 & translation) const
+{
+  return *this + translation;
+}
+
+Point2 Point2::scale(const Point2 & scaling) const
+{
+  return Point2(x * scaling.x, y * scaling.y);
+}
+
+Point2 Point2::scale(const double & scaling) const
+{
+  return scale({scaling, scaling});
+}
+
+Point2 Point2::rotate(const Angle & rotation) const
+{
+  Point2 point;
+
+  point.x = x * cos(rotation) - y * sin(rotation);
+  point.y = x * sin(rotation) + y * cos(rotation);
+
+  return point;
+}
+
+Point2 Point2::scale_from(const Point2 & scaling, const Point2 & anchor)
+{
+  return translate(-anchor).scale(scaling).translate(anchor);
+}
+
+Point2 Point2::scale_from(const double & scaling, const Point2 & anchor)
+{
+  return translate(-anchor).scale(scaling).translate(anchor);
+}
+
+Point2 Point2::rotate_from(const Angle & rotation, const Point2 & anchor)
+{
+  return translate(-anchor).rotate(rotation).translate(anchor);
 }
 
 }  // namespace keisan

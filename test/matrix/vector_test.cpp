@@ -21,6 +21,8 @@
 #include <gtest/gtest.h>
 #include <keisan/keisan.hpp>
 
+#include <sstream>
+
 #define ASSERT_VECTOR_N_EQ(N, VECTOR, ...) \
   { \
     keisan::Vector<N> _vector = VECTOR; \
@@ -29,6 +31,16 @@
       ASSERT_DOUBLE_EQ(_values[i], _vector[i]); \
     } \
   }
+
+TEST(VectorTest, OutStream)
+{
+  auto a = keisan::Vector<2>(1.0, 2.0);
+
+  std::stringstream ss;
+  ss << a;
+
+  ASSERT_STREQ(ss.str().c_str(), "[1,2]");
+}
 
 TEST(VectorTest, InitialValue)
 {
@@ -46,6 +58,20 @@ TEST(VectorTest, ZeroValue)
 
   auto b = keisan::Vector<5>::zero();
   ASSERT_VECTOR_N_EQ(5, b, 0.0, 0.0, 0.0, 0.0, 0.0);
+}
+
+TEST(VectorTest, ComparisonOperation)
+{
+  auto a = keisan::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0);
+  auto b = a;
+
+  ASSERT_TRUE(a == b);
+  ASSERT_FALSE(a != b);
+
+  b[1] = 5.0;
+
+  ASSERT_FALSE(a == b);
+  ASSERT_TRUE(a != b);
 }
 
 TEST(VectorTest, MatrixMultiplication)
@@ -106,4 +132,10 @@ TEST(VectorTest, ScalarOperation)
 
   a /= 2.0;
   ASSERT_VECTOR_N_EQ(5, a, 1.0, 2.0, 3.0, 4.0, 5.0);
+}
+
+TEST(VectorTest, NegationOperation)
+{
+  auto a = keisan::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0);
+  ASSERT_VECTOR_N_EQ(5, -a, -1.0, -2.0, -3.0, -4.0, -5.0);
 }

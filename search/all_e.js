@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['vector_90',['Vector',['../classkeisan_1_1Vector.html',1,'keisan::Vector&lt; N &gt;'],['../classkeisan_1_1Vector.html#a56bb112a9c9f30e54290798f28555905',1,'keisan::Vector::Vector()'],['../classkeisan_1_1Vector.html#a9ef51d50d5e350178c24a2c0f0c7391e',1,'keisan::Vector::Vector(const Matrix&lt; N, 1 &gt; &amp;matrix)'],['../classkeisan_1_1Vector.html#a2cc6371bb5802f36a74b26267f295393',1,'keisan::Vector::Vector(const double &amp;value, Types ... the_rest)'],['../classkeisan_1_1Vector.html#a3cff4b1c3fb7a2210b425be92f1288c2',1,'keisan::Vector::Vector(const Vector&lt; N &gt; &amp;vector)']]],
-  ['vector_2ehpp_91',['vector.hpp',['../vector_8hpp.html',1,'']]]
+  ['tan_94',['tan',['../namespacekeisan.html#a2662ab3159c181653993256fe123a963',1,'keisan']]],
+  ['transform2_95',['Transform2',['../classkeisan_1_1Transform2.html',1,'keisan::Transform2'],['../classkeisan_1_1Transform2.html#ac0d128199ac05acd5d441372bf87dcdc',1,'keisan::Transform2::Transform2()']]],
+  ['transform2_2ehpp_96',['transform2.hpp',['../transform2_8hpp.html',1,'']]],
+  ['translate_97',['translate',['../structkeisan_1_1Point2.html#a9ba5f949a5030fb3ccffc0f8567a34b2',1,'keisan::Point2']]],
+  ['trigonometry_2ehpp_98',['trigonometry.hpp',['../trigonometry_8hpp.html',1,'']]]
 ];

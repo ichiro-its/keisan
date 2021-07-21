@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['point2_104',['Point2',['../structkeisan_1_1Point2.html',1,'keisan']]],
-  ['point3_105',['Point3',['../structkeisan_1_1Point3.html',1,'keisan']]]
+  ['matrix_113',['Matrix',['../classkeisan_1_1Matrix.html',1,'keisan']]],
+  ['matrix_3c_20n_2c_201_20_3e_114',['Matrix&lt; N, 1 &gt;',['../classkeisan_1_1Matrix.html',1,'keisan']]],
+  ['matrix_3c_20n_2c_20n_20_3e_115',['Matrix&lt; N, N &gt;',['../classkeisan_1_1Matrix.html',1,'keisan']]]
 ];

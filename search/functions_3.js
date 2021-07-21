@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['get_5frotation_142',['get_rotation',['../classkeisan_1_1Transform2.html#a69e97f83d05b2359887be85dba195b32',1,'keisan::Transform2']]],
-  ['get_5fscale_143',['get_scale',['../classkeisan_1_1Transform2.html#a5f6c092c652689cfdf96209c01730773',1,'keisan::Transform2']]],
-  ['get_5ftranslation_144',['get_translation',['../classkeisan_1_1Transform2.html#a16a0e63e89c99f1f19272033846b2558',1,'keisan::Transform2']]]
+  ['euler_157',['euler',['../structkeisan_1_1Quaternion.html#a7e9c5698500b88e357514d3e6362765b',1,'keisan::Quaternion']]],
+  ['eulerangles_158',['EulerAngles',['../structkeisan_1_1EulerAngles.html#aadbc4b3cafed42fa64b3bcdb0507aa44',1,'keisan::EulerAngles::EulerAngles()'],['../structkeisan_1_1EulerAngles.html#a91855f99b65ba2fbc5606b6b724883f7',1,'keisan::EulerAngles::EulerAngles(const Angle &amp;roll, const Angle &amp;pitch, const Angle &amp;yaw)'],['../structkeisan_1_1EulerAngles.html#a05a18f32355763650aa4da24d75fc473',1,'keisan::EulerAngles::EulerAngles(const EulerAngles &amp;other)']]]
 ];

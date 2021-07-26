@@ -21,10 +21,18 @@
 #ifndef KEISAN__MATRIX__VECTOR_HPP_
 #define KEISAN__MATRIX__VECTOR_HPP_
 
+#include <ostream>
+
 #include "./matrix.hpp"
 
 namespace keisan
 {
+
+template<size_t N>
+class Vector;
+
+template<size_t N>
+inline std::ostream & operator<<(std::ostream & out, const Vector<N> & vector);
 
 template<size_t N>
 class Vector
@@ -44,6 +52,9 @@ public:
 
   inline Vector<N> & operator=(const Vector<N> & vector);
 
+  inline bool operator==(const Vector<N> & vector) const;
+  inline bool operator!=(const Vector<N> & vector) const;
+
   inline Vector<N> & operator+=(const Vector<N> & vector);
   inline Vector<N> & operator-=(const Vector<N> & vector);
 
@@ -60,12 +71,31 @@ public:
   inline Vector<N> operator*(const double & value) const;
   inline Vector<N> operator/(const double & value) const;
 
+  inline Vector<N> operator-() const;
+
   inline double & operator[](size_t pos);
   inline const double & operator[](size_t pos) const;
 
 private:
   Matrix<N, 1> matrix;
 };
+
+template<size_t N>
+std::ostream & operator<<(std::ostream & out, const Vector<N> & vector)
+{
+  out << "[";
+  for (size_t i = 0; i < N; ++i) {
+    if (i > 0) {
+      out << ",";
+    }
+
+    out << vector[i];
+  }
+
+  out << "]";
+
+  return out;
+}
 
 template<size_t N>
 Vector<N>::Vector()
@@ -108,6 +138,18 @@ Vector<N> & Vector<N>::operator=(const Vector<N> & vector)
 {
   matrix = vector.matrix;
   return *this;
+}
+
+template<size_t N>
+bool Vector<N>::operator==(const Vector<N> & vector) const
+{
+  return (Matrix<N, 1>)(*this) == (Matrix<N, 1>)vector;
+}
+
+template<size_t N>
+bool Vector<N>::operator!=(const Vector<N> & vector) const
+{
+  return (Matrix<N, 1>)(*this) != (Matrix<N, 1>)vector;
 }
 
 template<size_t N>
@@ -186,6 +228,12 @@ template<size_t N>
 Vector<N> Vector<N>::operator/(const double & value) const
 {
   return Vector<N>(matrix / value);
+}
+
+template<size_t N>
+Vector<N> Vector<N>::operator-() const
+{
+  return Vector<N>(-matrix);
 }
 
 template<size_t N>

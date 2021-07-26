@@ -21,14 +21,12 @@
 #ifndef KEISAN__KEISAN_HPP_
 #define KEISAN__KEISAN_HPP_
 
-#include "./matrix/matrix.hpp"
-#include "./matrix/square_matrix.hpp"
-#include "./matrix/vector.hpp"
+#include "./geometry/point_2.hpp"
+#include "./geometry/point_3.hpp"
+#include "./geometry/transform2.hpp"
 
 #include "./angle.hpp"
 #include "./number.hpp"
-#include "./point_2.hpp"
-#include "./point_3.hpp"
-#include "./transform2.hpp"
+#include "./matrix.hpp"
 
 #endif  // KEISAN__KEISAN_HPP_

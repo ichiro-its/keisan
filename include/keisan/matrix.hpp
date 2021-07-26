@@ -18,13 +18,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__ANGLE_HPP_
-#define KEISAN__ANGLE_HPP_
+#ifndef KEISAN__MATRIX_HPP_
+#define KEISAN__MATRIX_HPP_
 
-#include "./angle/angle.hpp"
-#include "./angle/equation.hpp"
-#include "./angle/euler_angles.hpp"
-#include "./angle/quaternion.hpp"
-#include "./angle/trigonometry.hpp"
+#include "./matrix/matrix.hpp"
+#include "./matrix/square_matrix.hpp"
+#include "./matrix/vector.hpp"
 
-#endif  // KEISAN__ANGLE_HPP_
+#endif  // KEISAN__MATRIX_HPP_

@@ -21,6 +21,8 @@
 #include <gtest/gtest.h>
 #include <keisan/keisan.hpp>
 
+#include <sstream>
+
 #define ASSERT_SQUARE_MATRIX_N_EQ(N, SQUARE_MATRIX, ...) \
   { \
     keisan::SquareMatrix<N> _square_matrix = SQUARE_MATRIX; \
@@ -31,6 +33,18 @@
       } \
     } \
   }
+
+TEST(SquareMatrixTest, OutStream)
+{
+  auto a = keisan::SquareMatrix<2>(
+    1.0, 1.0,
+    2.0, 2.0);
+
+  std::stringstream ss;
+  ss << a;
+
+  ASSERT_STREQ(ss.str().c_str(), "[[1,1],[2,2]]");
+}
 
 TEST(SquareMatrixTest, InitialValue)
 {
@@ -89,6 +103,23 @@ TEST(SquareMatrixTest, IdentityValue)
     0.0, 1.0, 0.0, 0.0,
     0.0, 0.0, 1.0, 0.0,
     0.0, 0.0, 0.0, 1.0);
+}
+
+TEST(SquareMatrixTest, ComparisonOperation)
+{
+  auto a = keisan::SquareMatrix<2>(
+    1.0, 1.0,
+    2.0, 2.0);
+
+  auto b = a;
+
+  ASSERT_TRUE(a == b);
+  ASSERT_FALSE(a != b);
+
+  b[1][1] = 5.0;
+
+  ASSERT_FALSE(a == b);
+  ASSERT_TRUE(a != b);
 }
 
 TEST(SquareMatrixTest, SquareMatrixMultiplication)
@@ -204,4 +235,18 @@ TEST(SquareMatrixTest, ScalarOperation)
     1.0, 1.0, 1.0,
     2.0, 2.0, 2.0,
     3.0, 3.0, 3.0);
+}
+
+TEST(SquareMatrixTest, NegationOperation)
+{
+  auto a = keisan::SquareMatrix<3>(
+    1.0, 1.0, 1.0,
+    2.0, 2.0, 2.0,
+    3.0, 3.0, 3.0);
+
+  ASSERT_SQUARE_MATRIX_N_EQ(
+    3, -a,
+    -1.0, -1.0, -1.0,
+    -2.0, -2.0, -2.0,
+    -3.0, -3.0, -3.0);
 }

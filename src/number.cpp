@@ -18,13 +18,38 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__ANGLE_HPP_
-#define KEISAN__ANGLE_HPP_
+#include <keisan/number.hpp>
 
-#include "./angle/angle.hpp"
-#include "./angle/equation.hpp"
-#include "./angle/euler_angles.hpp"
-#include "./angle/quaternion.hpp"
-#include "./angle/trigonometry.hpp"
+#include <algorithm>
+#include <cmath>
 
-#endif  // KEISAN__ANGLE_HPP_
+namespace keisan
+{
+
+double sign_number(double value)
+{
+  return sign(value);
+}
+
+double scale_number(double value, double source, double target)
+{
+  return scale(value, source, target);
+}
+
+double map_number(
+  double value, double source_min, double source_max, double target_min, double target_max)
+{
+  return map(value, source_min, source_max, target_min, target_max);
+}
+
+double clamp_number(double value, double min, double max)
+{
+  return clamp(value, min, max);
+}
+
+double wrap_number(double value, double min, double max)
+{
+  return wrap(value, min, max);
+}
+
+}  // namespace keisan

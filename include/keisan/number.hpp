@@ -26,40 +26,57 @@
 
 namespace keisan
 {
-template<typename M, typename N, typename O>
-M wrap_number(M value, N min, O max)
-{
-  M min_value = value - min;
-  M min_max = max - min;
 
-  return min + fmod(min_max + fmod(min_value, min_max), min_max);
+template<typename T>
+T sign(const T & value)
+{
+  return (value >= 0) ? 1 : -1;
 }
 
-template<typename M, typename N, typename O>
-M scale_number(M value, N source, O target)
+template<typename T, typename U>
+U scale(const T & value, const T & source, const U & target)
 {
-  return value * target / source;
+  return (value * target) / source;
 }
 
-template<typename M, typename N, typename O, typename P, typename Q>
-M map_number(
-  M value, N source_min, O source_max, P target_min, Q target_max)
+template<typename T, typename U>
+U map(
+  const T & value, const T & source_min, const T & source_max,
+  const U & target_min, const U & target_max)
 {
-  return target_min + scale_number(
-    value - source_min, source_max - source_min, target_max - target_min);
+  return target_min + scale(value - source_min, source_max - source_min, target_max - target_min);
 }
 
-template<typename M, typename N, typename O>
-M clamp_number(M value, N min_value, O max_value)
+template<typename T, typename U>
+U clamp(const T & value, const U & min, const U & max)
 {
-  return std::max(std::min(value, max_value), min_value);
+  return std::min(std::max(value, min), max);
 }
 
-template<typename M>
-M sign_number(M value)
+template<typename T, typename U>
+U wrap(const T & value, const U & min, const U & max)
 {
-  return (value >= 0) ? 1.0 : -1.0;
+  auto min_value = value - min;
+  auto min_max = max - min;
+
+  return min + std::fmod(min_max + std::fmod(min_value, min_max), min_max);
 }
+
+[[deprecated("Use sign() instead.")]]
+double sign_number(double value);
+
+[[deprecated("Use scale() instead.")]]
+double scale_number(double value, double source, double target);
+
+[[deprecated("Use map() instead.")]]
+double map_number(
+  double value, double source_min, double source_max, double target_min, double target_max);
+
+[[deprecated("Use clamp() instead.")]]
+double clamp_number(double value, double min, double max);
+
+[[deprecated("Use wrap() instead.")]]
+double wrap_number(double value, double min, double max);
 
 }  // namespace keisan
 

@@ -21,94 +21,49 @@
 #include <gtest/gtest.h>
 #include <keisan/keisan.hpp>
 
-TEST(WrapNumberTest, InsideTest) {
-  ASSERT_DOUBLE_EQ(
-    keisan::wrap_number<double>(3.5, 1.2, 4.75),
-    3.5);
-
-  ASSERT_DOUBLE_EQ(
-    keisan::wrap_number<double>(-2.3, -5.6, -0.9),
-    -2.3);
-
-  ASSERT_DOUBLE_EQ(
-    keisan::wrap_number<double>(0.56, -3.7, 7.89),
-    0.56);
+TEST(NumberTest, Sign)
+{
+  ASSERT_DOUBLE_EQ(keisan::sign(5.0), 1.0);
+  ASSERT_DOUBLE_EQ(keisan::sign(-5.0), -1.0);
 }
 
-TEST(WrapNumberTest, OutsideMaxTest) {
-  ASSERT_DOUBLE_EQ(
-    keisan::wrap_number<double>(5.5, 1.2, 4.75),
-    1.2 + (5.5 - 4.75));
-
-  ASSERT_DOUBLE_EQ(
-    keisan::wrap_number<double>(-0.1, -5.6, -0.9),
-    -5.6 + (-0.1 + 0.9));
-
-  ASSERT_DOUBLE_EQ(
-    keisan::wrap_number<double>(9.34, -3.7, 7.89),
-    -3.7 + (9.34 - 7.89));
+TEST(NumberTest, Scale)
+{
+  ASSERT_DOUBLE_EQ(keisan::scale(3.5, 6.5, 6.5 * 5.0), 3.5 * 5.0);
+  ASSERT_DOUBLE_EQ(keisan::scale(-3.5, 6.5, 6.5 * 5.0), -3.5 * 5.0);
+  ASSERT_DOUBLE_EQ(keisan::scale(3.5, 6.5, -6.5 * 5.0), -3.5 * 5.0);
+  ASSERT_DOUBLE_EQ(keisan::scale(-3.5, 6.5, -6.5 * 5.0), 3.5 * 5.0);
 }
 
-TEST(WrapNumberTest, OutsideMinTest) {
-  ASSERT_DOUBLE_EQ(
-    keisan::wrap_number<double>(0.43, 1.2, 4.75),
-    4.75 - (1.2 - 0.43));
-
-  ASSERT_DOUBLE_EQ(
-    keisan::wrap_number<double>(-8.9, -5.6, -0.9),
-    -0.9 - (-5.6 + 8.9));
-
-  ASSERT_DOUBLE_EQ(
-    keisan::wrap_number<double>(-6.5, -3.7, 7.89),
-    7.89 - (-3.7 + 6.5));
+TEST(NumberTest, Map) {
+  ASSERT_DOUBLE_EQ(keisan::map(3.5, -6.5, 4.75, -6.5 * 5.0, 4.75 * 5.0), 3.5 * 5.0);
+  ASSERT_DOUBLE_EQ(keisan::map(8.75, -6.5, 4.75, -6.5 * 5.0, 4.75 * 5.0), 8.75 * 5.0);
+  ASSERT_DOUBLE_EQ(keisan::map(-9.3, -6.5, 4.75, -6.5 * 5.0, 4.75 * 5.0), -9.3 * 5.0);
 }
 
-TEST(ScaleNumberTest, AllTest) {
-  ASSERT_DOUBLE_EQ(
-    keisan::scale_number<double>(3.5, 6.5, 6.5 * 5.0),
-    3.5 * 5.0);
-
-  ASSERT_DOUBLE_EQ(
-    keisan::scale_number<double>(-3.5, 6.5, 6.5 * 5.0),
-    -3.5 * 5.0);
-
-  ASSERT_DOUBLE_EQ(
-    keisan::scale_number<double>(3.5, 6.5, -6.5 * 5.0),
-    -3.5 * 5.0);
-
-  ASSERT_DOUBLE_EQ(
-    keisan::scale_number<double>(-3.5, 6.5, -6.5 * 5.0),
-    3.5 * 5.0);
+TEST(NumberTest, Clamp)
+{
+  ASSERT_DOUBLE_EQ(keisan::clamp(5.0, 1.0, 10.0), 5.0);
+  ASSERT_DOUBLE_EQ(keisan::clamp(0.0, 1.0, 10.0), 1.0);
+  ASSERT_DOUBLE_EQ(keisan::clamp(15.0, 1.0, 10.0), 10.0);
 }
 
-TEST(MapNumberTest, InsideTest) {
-  ASSERT_DOUBLE_EQ(
-    keisan::map_number<double>(3.5, -6.5, 4.75, -6.5 * 5.0, 4.75 * 5.0),
-    3.5 * 5.0);
+TEST(NumberTest, WrapInside)
+{
+  ASSERT_DOUBLE_EQ(keisan::wrap(3.5, 1.2, 4.75), 3.5);
+  ASSERT_DOUBLE_EQ(keisan::wrap(-2.3, -5.6, -0.9), -2.3);
+  ASSERT_DOUBLE_EQ(keisan::wrap(0.56, -3.7, 7.89), 0.56);
 }
 
-TEST(MapNumberTest, OutsideTest) {
-  ASSERT_DOUBLE_EQ(
-    keisan::map_number<double>(8.75, -6.5, 4.75, -6.5 * 5.0, 4.75 * 5.0),
-    8.75 * 5.0);
-
-  ASSERT_DOUBLE_EQ(
-    keisan::map_number<double>(-9.3, -6.5, 4.75, -6.5 * 5.0, 4.75 * 5.0),
-    -9.3 * 5.0);
+TEST(NumberTest, WrapOutsideMax)
+{
+  ASSERT_DOUBLE_EQ(keisan::wrap(5.5, 1.2, 4.75), 1.2 + (5.5 - 4.75));
+  ASSERT_DOUBLE_EQ(keisan::wrap(-0.1, -5.6, -0.9), -5.6 + (-0.1 + 0.9));
+  ASSERT_DOUBLE_EQ(keisan::wrap(9.34, -3.7, 7.89), -3.7 + (9.34 - 7.89));
 }
 
-TEST(ClampNumberTest, InsideTest) {
-  ASSERT_DOUBLE_EQ(
-    keisan::clamp_number<double>(5.0, 1.0, 10.0),
-    5.0);
-}
-
-TEST(ClampNumberTest, OutsideTest) {
-  ASSERT_DOUBLE_EQ(
-    keisan::clamp_number<double>(0.0, 1.0, 10.0),
-    1.0);
-
-  ASSERT_DOUBLE_EQ(
-    keisan::clamp_number<double>(15.0, 1.0, 10.0),
-    10.0);
+TEST(NumberTest, WrapOutsideMin) {
+  ASSERT_DOUBLE_EQ(keisan::wrap(0.43, 1.2, 4.75), 4.75 - (1.2 - 0.43));
+  ASSERT_DOUBLE_EQ(keisan::wrap(-8.9, -5.6, -0.9), -0.9 - (-5.6 + 8.9));
+  ASSERT_DOUBLE_EQ(keisan::wrap(-6.5, -3.7, 7.89), 7.89 - (-3.7 + 6.5));
 }

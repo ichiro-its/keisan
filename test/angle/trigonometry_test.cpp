@@ -18,13 +18,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__ANGLE_HPP_
-#define KEISAN__ANGLE_HPP_
+#include <gtest/gtest.h>
+#include <keisan/keisan.hpp>
 
-#include "./angle/angle.hpp"
-#include "./angle/equation.hpp"
-#include "./angle/euler_angles.hpp"
-#include "./angle/quaternion.hpp"
-#include "./angle/trigonometry.hpp"
+TEST(TrigonometryTest, SinCosTan) {
+  ASSERT_DOUBLE_EQ(keisan::sin(keisan::make_degree(30.0)), 0.5);
+  ASSERT_DOUBLE_EQ(keisan::cos(keisan::make_degree(60.0)), 0.5);
+  ASSERT_DOUBLE_EQ(keisan::tan(keisan::make_degree(45.0)), 1.0);
+}
 
-#endif  // KEISAN__ANGLE_HPP_
+TEST(TrigonometryTest, ArcSinCosTan) {
+  ASSERT_DOUBLE_EQ(keisan::arcsin(0.5).degree(), 30.0);
+  ASSERT_DOUBLE_EQ(keisan::arccos(0.5).degree(), 60.0);
+  ASSERT_DOUBLE_EQ(keisan::arctan(1.0).degree(), 45.0);
+  ASSERT_DOUBLE_EQ(keisan::signed_arctan(-1.0, 1.0).degree(), -45.0);
+}

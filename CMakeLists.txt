@@ -15,17 +15,26 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 find_package(ament_cmake REQUIRED)
+find_package(gtest_vendor REQUIRED)
 
-add_library(${PROJECT_NAME}
-  "src/point_2.cpp"
-  "src/point_3.cpp"
-  "src/transform2.cpp")
+install(DIRECTORY "include" DESTINATION ".")
+
+add_library(${PROJECT_NAME} SHARED
+  "src/angle/angle.cpp"
+  "src/angle/equation.cpp"
+  "src/angle/euler_angles.cpp"
+  "src/angle/quaternion.cpp"
+  "src/angle/trigonometry.cpp"
+  "src/geometry/point_2.cpp"
+  "src/geometry/point_3.cpp"
+  "src/geometry/transform2.cpp"
+  "src/number.cpp")
+
+ament_target_dependencies(${PROJECT_NAME} gtest_vendor)
 
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
-
-install(DIRECTORY "include" DESTINATION ".")
 
 install(TARGETS ${PROJECT_NAME}
   EXPORT export_${PROJECT_NAME}
@@ -38,14 +47,17 @@ if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
 
   ament_add_gtest(${PROJECT_NAME}_tests
+    "test/angle/angle_test.cpp"
+    "test/angle/euler_angles_test.cpp"
+    "test/angle/quaternion_test.cpp"
+    "test/angle/trigonometry_test.cpp"
+    "test/geometry/point_2_test.cpp"
+    "test/geometry/point_3_test.cpp"
+    "test/geometry/transform2_test.cpp"
     "test/matrix/matrix_test.cpp"
     "test/matrix/square_matrix_test.cpp"
     "test/matrix/vector_test.cpp"
-    "test/angle_test.cpp"
-    "test/number_test.cpp"
-    "test/point_2_test.cpp"
-    "test/point_3_test.cpp"
-    "test/transform2_test.cpp")
+    "test/number_test.cpp")
 
   target_include_directories(${PROJECT_NAME}_tests PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -56,6 +68,7 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
+ament_export_dependencies(gtest_vendor)
 ament_export_include_directories("include")
 ament_export_libraries(${PROJECT_NAME})
 

@@ -18,37 +18,40 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__TRANSFORM2_HPP_
-#define KEISAN__TRANSFORM2_HPP_
-
-#include <keisan/point_2.hpp>
+#include <keisan/angle/angle.hpp>
+#include <keisan/angle/equation.hpp>
 
 namespace keisan
 {
 
-class Transform2
+double wrap_rad(double value)
 {
-public:
-  Transform2();
+  return make_radian(value).normalize().radian();
+}
 
-  Point2 operator*(const Point2 & point) const;
+double wrap_deg(double value)
+{
+  return make_degree(value).normalize().degree();
+}
 
-  void set_translation(const Point2 & translation);
-  void set_rotation(const double & rotation);
+double rad_to_deg(double value)
+{
+  return make_radian(value).normalize().degree();
+}
 
-  void set_scale(const Point2 & scale);
-  void set_scale(const double & scale);
+double deg_to_rad(double value)
+{
+  return make_degree(value).normalize().radian();
+}
 
-  const Point2 & get_translation() const;
-  const double & get_rotation() const;
-  const Point2 & get_scale() const;
+double delta_rad(double value1, double value2)
+{
+  return difference_between(make_radian(value1), make_radian(value2)).radian();
+}
 
-private:
-  Point2 translation;
-  double rotation;
-  Point2 scale;
-};
+double delta_deg(double value1, double value2)
+{
+  return difference_between(make_degree(value1), make_degree(value2)).degree();
+}
 
 }  // namespace keisan
-
-#endif   // KEISAN__TRANSFORM2_HPP_

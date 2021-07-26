@@ -18,13 +18,49 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__ANGLE_HPP_
-#define KEISAN__ANGLE_HPP_
+#include <gtest/gtest.h>
+#include <keisan/keisan.hpp>
 
-#include "./angle/angle.hpp"
-#include "./angle/equation.hpp"
-#include "./angle/euler_angles.hpp"
-#include "./angle/quaternion.hpp"
-#include "./angle/trigonometry.hpp"
+TEST(EulerAnglesTest, Empty) {
+  keisan::EulerAngles euler;
+}
 
-#endif  // KEISAN__ANGLE_HPP_
+TEST(EulerAnglesTest, AssignValue) {
+  keisan::EulerAngles a(
+    keisan::make_degree(0.0), keisan::make_degree(90.0), keisan::make_degree(180.0));
+
+  ASSERT_DOUBLE_EQ(a.roll.degree(), 0.0);
+  ASSERT_DOUBLE_EQ(a.pitch.degree(), 90.0);
+  ASSERT_DOUBLE_EQ(a.yaw.degree(), 180.0);
+
+  keisan::EulerAngles b;
+  b = a;
+
+  ASSERT_EQ(a.roll, b.roll);
+  ASSERT_EQ(a.pitch, b.pitch);
+  ASSERT_EQ(a.yaw, b.yaw);
+}
+
+TEST(EulerAnglesTest, ComparisonOperator) {
+  keisan::EulerAngles a(
+    keisan::make_degree(0.0), keisan::make_degree(90.0), keisan::make_degree(180.0));
+
+  keisan::EulerAngles b = a;
+
+  ASSERT_TRUE(a == b);
+  ASSERT_FALSE(a != b);
+
+  a.roll = keisan::make_radian(keisan::pi);
+
+  ASSERT_FALSE(a == b);
+  ASSERT_TRUE(a != b);
+}
+
+TEST(EulerAnglesTest, QuaternionConversion) {
+  keisan::EulerAngles euler(
+    keisan::make_degree(0.0), keisan::make_degree(0.0), keisan::make_degree(90.0));
+
+  auto quaternion = euler.quaternion();
+
+  ASSERT_EQ(quaternion.euler(), euler);
+}

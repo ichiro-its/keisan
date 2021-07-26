@@ -18,13 +18,40 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__ANGLE_HPP_
-#define KEISAN__ANGLE_HPP_
+#ifndef KEISAN__ANGLE__EULER_ANGLES_HPP_
+#define KEISAN__ANGLE__EULER_ANGLES_HPP_
 
-#include "./angle/angle.hpp"
-#include "./angle/equation.hpp"
-#include "./angle/euler_angles.hpp"
-#include "./angle/quaternion.hpp"
-#include "./angle/trigonometry.hpp"
+#include <iostream>
 
-#endif  // KEISAN__ANGLE_HPP_
+#include "./angle.hpp"
+
+namespace keisan
+{
+
+struct EulerAngles;
+struct Quaternion;
+
+std::ostream & operator<<(std::ostream & out, const EulerAngles & euler);
+
+struct EulerAngles
+{
+  EulerAngles();
+  EulerAngles(const Angle & roll, const Angle & pitch, const Angle & yaw);
+
+  EulerAngles(const EulerAngles & other);
+
+  EulerAngles & operator=(const EulerAngles & other);
+
+  bool operator==(const EulerAngles & other) const;
+  bool operator!=(const EulerAngles & other) const;
+
+  Quaternion quaternion() const;
+
+  Angle roll;
+  Angle pitch;
+  Angle yaw;
+};
+
+}  // namespace keisan
+
+#endif  // KEISAN__ANGLE__EULER_ANGLES_HPP_

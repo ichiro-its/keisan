@@ -26,36 +26,6 @@
 namespace keisan
 {
 
-double sign(const double & value)
-{
-  return (value >= 0) ? 1.0 : -1.0;
-}
-
-double scale(const double & value, const double & source, const double & target)
-{
-  return value * target / source;
-}
-
-double map(
-  const double & value, const double & source_min, const double & source_max,
-  const double & target_min, const double & target_max)
-{
-  return target_min + scale(value - source_min, source_max - source_min, target_max - target_min);
-}
-
-double clamp(const double & value, const double & min, const double & max)
-{
-  return std::min(std::max(value, min), max);
-}
-
-double wrap(const double & value, const double & min, const double & max)
-{
-  double min_value = value - min;
-  double min_max = max - min;
-
-  return min + std::fmod(min_max + std::fmod(min_value, min_max), min_max);
-}
-
 double sign_number(double value)
 {
   return sign(value);

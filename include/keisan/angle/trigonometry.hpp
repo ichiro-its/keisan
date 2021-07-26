@@ -26,14 +26,14 @@
 namespace keisan
 {
 
-double sin(const Angle & angle);
-double cos(const Angle & angle);
-double tan(const Angle & angle);
+double sin(const Angle<double> & angle);
+double cos(const Angle<double> & angle);
+double tan(const Angle<double> & angle);
 
-Angle arcsin(const double & value);
-Angle arccos(const double & value);
-Angle arctan(const double & value);
-Angle signed_arctan(const double & y, const double & x);
+Angle<double> arcsin(const double & value);
+Angle<double> arccos(const double & value);
+Angle<double> arctan(const double & value);
+Angle<double> signed_arctan(const double & y, const double & x);
 
 }  // namespace keisan
 

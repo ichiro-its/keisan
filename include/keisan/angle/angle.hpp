@@ -24,64 +24,248 @@
 #include <cmath>
 #include <iostream>
 
+#include "../number.hpp"
+
 namespace keisan
 {
 
 constexpr double pi = std::atan(1.0) * 4;
 
+template<typename T>
 class Angle;
 
-Angle make_degree(const double & value);
-Angle make_radian(const double & value);
+template<typename T>
+Angle<T> make_degree(const T & value)
+{
+  return Angle<T>(value, true);
+}
 
-std::ostream & operator<<(std::ostream & out, const Angle & angle);
+template<typename T>
+Angle<T> make_radian(const T & value)
+{
+  return Angle<T>(value, false);
+}
 
-Angle operator*(const double & value, const Angle & angle);
+template<typename T>
+std::ostream & operator<<(std::ostream & out, const Angle<T> & angle)
+{
+  return out << angle.degree();
+}
 
-Angle difference_between(const Angle & a, const Angle & b);
+template<typename T>
+Angle<T> operator*(const T & value, const Angle<T> & angle)
+{
+  return angle * value;
+}
 
+template<typename T>
+Angle<T> difference_between(const Angle<T> & a, const Angle<T> & b)
+{
+  return a.difference_to(b);
+}
+
+template<typename T>
 class Angle
 {
 public:
-  Angle();
-  explicit Angle(const double & data, const bool & is_degree = false);
+  inline Angle();
+  inline explicit Angle(const T & data, const bool & is_degree = false);
 
-  Angle(const Angle & angle);
+  inline Angle(const Angle<T> & angle);
 
-  Angle & operator=(const Angle & angle);
+  template<typename U>
+  inline operator Angle<U>() const;
 
-  bool operator==(const Angle & angle) const;
-  bool operator!=(const Angle & angle) const;
-  bool operator>(const Angle & angle) const;
-  bool operator>=(const Angle & angle) const;
-  bool operator<(const Angle & angle) const;
-  bool operator<=(const Angle & angle) const;
+  inline Angle<T> & operator=(const Angle<T> & angle);
 
-  Angle & operator+=(const Angle & angle);
-  Angle & operator-=(const Angle & angle);
+  inline bool operator==(const Angle<T> & angle) const;
+  inline bool operator!=(const Angle<T> & angle) const;
+  inline bool operator>(const Angle<T> & angle) const;
+  inline bool operator>=(const Angle<T> & angle) const;
+  inline bool operator<(const Angle<T> & angle) const;
+  inline bool operator<=(const Angle<T> & angle) const;
 
-  Angle & operator*=(const double & value);
-  Angle & operator/=(const double & value);
+  inline Angle<T> & operator+=(const Angle<T> & angle);
+  inline Angle<T> & operator-=(const Angle<T> & angle);
 
-  Angle operator+(const Angle & angle) const;
-  Angle operator-(const Angle & angle) const;
+  inline Angle<T> & operator*=(const T & value);
+  inline Angle<T> & operator/=(const T & value);
 
-  Angle operator*(const double & value) const;
-  Angle operator/(const double & value) const;
+  inline Angle<T> operator+(const Angle<T> & angle) const;
+  inline Angle<T> operator-(const Angle<T> & angle) const;
 
-  Angle operator-() const;
+  inline Angle<T> operator*(const T & value) const;
+  inline Angle<T> operator/(const T & value) const;
 
-  double degree() const;
-  double radian() const;
+  inline Angle<T> operator-() const;
 
-  Angle normalize() const;
+  inline T degree() const;
+  inline T radian() const;
 
-  Angle difference_to(const Angle & angle) const;
+  inline Angle<T> normalize() const;
+
+  inline Angle<T> difference_to(const Angle<T> & angle) const;
 
 private:
-  double data;
+  T data;
   bool is_degree;
 };
+
+template<typename T>
+Angle<T>::Angle()
+{
+}
+
+template<typename T>
+Angle<T>::Angle(const T & data, const bool & is_degree)
+: data(data),
+  is_degree(is_degree)
+{
+}
+
+template<typename T>
+Angle<T>::Angle(const Angle<T> & angle)
+{
+  *this = angle;
+}
+
+template<typename T>
+template<typename U>
+Angle<T>::operator Angle<U>() const
+{
+  return Angle<U>(data, is_degree);
+}
+
+template<typename T>
+Angle<T> & Angle<T>::operator=(const Angle<T> & angle)
+{
+  data = angle.data;
+  is_degree = angle.is_degree;
+
+  return *this;
+}
+
+template<typename T>
+bool Angle<T>::operator==(const Angle<T> & angle) const
+{
+  return data == (is_degree ? angle.degree() : angle.radian());
+}
+
+template<typename T>
+bool Angle<T>::operator!=(const Angle<T> & angle) const
+{
+  return data != (is_degree ? angle.degree() : angle.radian());
+}
+
+template<typename T>
+bool Angle<T>::operator>(const Angle<T> & angle) const
+{
+  return data > (is_degree ? angle.degree() : angle.radian());
+}
+
+template<typename T>
+bool Angle<T>::operator>=(const Angle<T> & angle) const
+{
+  return data >= (is_degree ? angle.degree() : angle.radian());
+}
+
+template<typename T>
+bool Angle<T>::operator<(const Angle<T> & angle) const
+{
+  return data < (is_degree ? angle.degree() : angle.radian());
+}
+
+template<typename T>
+bool Angle<T>::operator<=(const Angle<T> & angle) const
+{
+  return data <= (is_degree ? angle.degree() : angle.radian());
+}
+
+template<typename T>
+Angle<T> & Angle<T>::operator+=(const Angle<T> & angle)
+{
+  data += is_degree ? angle.degree() : angle.radian();
+  return *this;
+}
+
+template<typename T>
+Angle<T> & Angle<T>::operator-=(const Angle<T> & angle)
+{
+  data -= is_degree ? angle.degree() : angle.radian();
+  return *this;
+}
+
+template<typename T>
+Angle<T> & Angle<T>::operator*=(const T & value)
+{
+  data *= value;
+  return *this;
+}
+
+template<typename T>
+Angle<T> & Angle<T>::operator/=(const T & value)
+{
+  data /= value;
+  return *this;
+}
+
+template<typename T>
+Angle<T> Angle<T>::operator+(const Angle<T> & angle) const
+{
+  return Angle(data + (is_degree ? angle.degree() : angle.radian()), is_degree);
+}
+
+template<typename T>
+Angle<T> Angle<T>::operator-(const Angle<T> & angle) const
+{
+  return Angle(data - (is_degree ? angle.degree() : angle.radian()), is_degree);
+}
+
+template<typename T>
+Angle<T> Angle<T>::operator*(const T & value) const
+{
+  return Angle(data * value, is_degree);
+}
+
+template<typename T>
+Angle<T> Angle<T>::operator/(const T & value) const
+{
+  return Angle(data / value, is_degree);
+}
+
+template<typename T>
+Angle<T> Angle<T>::operator-() const
+{
+  return Angle(-data, is_degree);
+}
+
+template<typename T>
+T Angle<T>::degree() const
+{
+  return is_degree ? data : scale<T>(data, pi, 180.0);
+}
+
+template<typename T>
+T Angle<T>::radian() const
+{
+  return is_degree ? scale<T>(data, 180.0, pi) : data;
+}
+
+template<typename T>
+Angle<T> Angle<T>::normalize() const
+{
+  if (is_degree) {
+    return make_degree(wrap<T>(data, -180.0, 180.0));
+  } else {
+    return make_radian(wrap<T>(data, -pi, pi));
+  }
+}
+
+template<typename T>
+Angle<T> Angle<T>::difference_to(const Angle<T> & angle) const
+{
+  return (angle - *this).normalize();
+}
 
 }  // namespace keisan
 

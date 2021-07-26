@@ -22,7 +22,7 @@
 #include <keisan/keisan.hpp>
 
 TEST(AngleTest, Empty) {
-  keisan::Angle angle;
+  keisan::Angle<float> angle;
 }
 
 TEST(AngleTest, Conversion) {

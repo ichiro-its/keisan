@@ -24,37 +24,37 @@
 namespace keisan
 {
 
-double sin(const Angle & angle)
+double sin(const Angle<double> & angle)
 {
   return std::sin(angle.radian());
 }
 
-double cos(const Angle & angle)
+double cos(const Angle<double> & angle)
 {
   return std::cos(angle.radian());
 }
 
-double tan(const Angle & angle)
+double tan(const Angle<double> & angle)
 {
   return std::tan(angle.radian());
 }
 
-Angle arcsin(const double & value)
+Angle<double> arcsin(const double & value)
 {
   return make_radian(std::asin(value));
 }
 
-Angle arccos(const double & value)
+Angle<double> arccos(const double & value)
 {
   return make_radian(std::acos(value));
 }
 
-Angle arctan(const double & value)
+Angle<double> arctan(const double & value)
 {
   return make_radian(std::atan(value));
 }
 
-Angle signed_arctan(const double & y, const double & x)
+Angle<double> signed_arctan(const double & y, const double & x)
 {
   return make_radian(std::atan2(y, x));
 }

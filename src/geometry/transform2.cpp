@@ -63,7 +63,7 @@ void Transform2::set_translation(const Point2 & translation)
   this->translation = translation;
 }
 
-void Transform2::set_rotation(const Angle & rotation)
+void Transform2::set_rotation(const Angle<double> & rotation)
 {
   this->rotation = rotation;
 }
@@ -83,7 +83,7 @@ const Point2 & Transform2::get_translation() const
   return translation;
 }
 
-const Angle & Transform2::get_rotation() const
+const Angle<double> & Transform2::get_rotation() const
 {
   return rotation;
 }

@@ -36,7 +36,7 @@ std::ostream & operator<<(std::ostream & out, const EulerAngles & euler);
 struct EulerAngles
 {
   EulerAngles();
-  EulerAngles(const Angle & roll, const Angle & pitch, const Angle & yaw);
+  EulerAngles(const Angle<double> & roll, const Angle<double> & pitch, const Angle<double> & yaw);
 
   EulerAngles(const EulerAngles & other);
 
@@ -47,9 +47,9 @@ struct EulerAngles
 
   Quaternion quaternion() const;
 
-  Angle roll;
-  Angle pitch;
-  Angle yaw;
+  Angle<double> roll;
+  Angle<double> pitch;
+  Angle<double> yaw;
 };
 
 }  // namespace keisan

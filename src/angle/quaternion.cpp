@@ -22,6 +22,8 @@
 #include <keisan/angle/quaternion.hpp>
 #include <keisan/angle/trigonometry.hpp>
 
+using keisan::literals::operator""_pi;
+
 namespace keisan
 {
 
@@ -76,11 +78,11 @@ EulerAngles Quaternion::euler() const
   double sarg = -2 * (x * z - w * y) / (sqx + sqy + sqz + sqw);
   if (sarg <= -0.99999) {
     euler.roll = make_radian(0.0);
-    euler.pitch = make_radian(-0.5 * pi);
+    euler.pitch = make_radian(-0.5_pi);
     euler.yaw = -2.0 * signed_arctan(y, x);
   } else if (sarg >= 0.99999) {
     euler.roll = make_radian(0.0);
-    euler.pitch = make_radian(0.5 * pi);
+    euler.pitch = make_radian(0.5_pi);
     euler.yaw = 2.0 * signed_arctan(y, x);
   } else {
     euler.roll = signed_arctan(2 * (y * z + w * x), sqw - sqx - sqy + sqz);

@@ -29,7 +29,23 @@
 namespace keisan
 {
 
-constexpr double pi = std::atan(1.0) * 4;
+template<typename T, enable_if_is_floating_point<T> = true>
+T pi = std::atan((T)1) * 4;
+
+namespace literals
+{
+
+inline double operator""_pi(long double value)
+{
+  return value * keisan::pi<double>;
+}
+
+inline double operator""_pi(unsigned long long int value)  // NOLINT
+{
+  return value * keisan::pi<double>;
+}
+
+}  // namespace literals
 
 template<typename T>
 class Angle;
@@ -296,24 +312,30 @@ template<typename T>
 template<enable_if_is_floating_point<T>>
 T Angle<T>::degree() const
 {
-  return is_degree ? data : scale<T>(data, pi, 180.0);
+  using keisan::literals::operator""_pi;
+
+  return is_degree ? data : scale<T>(data, 1_pi, 180.0);
 }
 
 template<typename T>
 template<enable_if_is_floating_point<T>>
 T Angle<T>::radian() const
 {
-  return is_degree ? scale<T>(data, 180.0, pi) : data;
+  using keisan::literals::operator""_pi;
+
+  return is_degree ? scale<T>(data, 180.0, 1_pi) : data;
 }
 
 template<typename T>
 template<enable_if_is_floating_point<T>>
 Angle<T> Angle<T>::normalize() const
 {
+  using keisan::literals::operator""_pi;
+
   if (is_degree) {
     return make_degree(wrap<T>(data, -180.0, 180.0));
   } else {
-    return make_radian(wrap<T>(data, -pi, pi));
+    return make_radian(wrap<T>(data, -1_pi, 1_pi));
   }
 }
 

@@ -21,6 +21,8 @@
 #include <gtest/gtest.h>
 #include <keisan/keisan.hpp>
 
+using keisan::literals::operator""_pi;
+
 TEST(EulerAnglesTest, Empty) {
   keisan::EulerAngles euler;
 }
@@ -50,7 +52,7 @@ TEST(EulerAnglesTest, ComparisonOperator) {
   ASSERT_TRUE(a == b);
   ASSERT_FALSE(a != b);
 
-  a.roll = keisan::make_radian(keisan::pi);
+  a.roll = keisan::make_radian(1_pi);
 
   ASSERT_FALSE(a == b);
   ASSERT_TRUE(a != b);

@@ -34,31 +34,31 @@ constexpr double pi = std::atan(1.0) * 4;
 template<typename T>
 class Angle;
 
-template<typename T>
+template<typename T, enable_if_is_floating_point<T> = true>
 Angle<T> make_degree(const T & value)
 {
   return Angle<T>(value, true);
 }
 
-template<typename T>
+template<typename T, enable_if_is_floating_point<T> = true>
 Angle<T> make_radian(const T & value)
 {
   return Angle<T>(value, false);
 }
 
-template<typename T>
+template<typename T, enable_if_is_floating_point<T> = true>
 std::ostream & operator<<(std::ostream & out, const Angle<T> & angle)
 {
   return out << angle.degree();
 }
 
-template<typename T>
+template<typename T, enable_if_is_floating_point<T> = true>
 Angle<T> operator*(const T & value, const Angle<T> & angle)
 {
   return angle * value;
 }
 
-template<typename T>
+template<typename T, enable_if_is_floating_point<T> = true>
 Angle<T> difference_between(const Angle<T> & a, const Angle<T> & b)
 {
   return a.difference_to(b);
@@ -68,42 +68,76 @@ template<typename T>
 class Angle
 {
 public:
+  template<enable_if_is_floating_point<T> = true>
   inline Angle();
+
+  template<enable_if_is_floating_point<T> = true>
   inline explicit Angle(const T & data, const bool & is_degree = false);
 
+  template<enable_if_is_floating_point<T> = true>
   inline Angle(const Angle<T> & angle);
 
-  template<typename U>
+  template<typename U, enable_if_is_floating_point<T> = true, enable_if_is_floating_point<U> = true>
   inline operator Angle<U>() const;
 
+  template<enable_if_is_floating_point<T> = true>
   inline Angle<T> & operator=(const Angle<T> & angle);
 
+  template<enable_if_is_floating_point<T> = true>
   inline bool operator==(const Angle<T> & angle) const;
+
+  template<enable_if_is_floating_point<T> = true>
   inline bool operator!=(const Angle<T> & angle) const;
+
+  template<enable_if_is_floating_point<T> = true>
   inline bool operator>(const Angle<T> & angle) const;
+
+  template<enable_if_is_floating_point<T> = true>
   inline bool operator>=(const Angle<T> & angle) const;
+
+  template<enable_if_is_floating_point<T> = true>
   inline bool operator<(const Angle<T> & angle) const;
+
+  template<enable_if_is_floating_point<T> = true>
   inline bool operator<=(const Angle<T> & angle) const;
 
+  template<enable_if_is_floating_point<T> = true>
   inline Angle<T> & operator+=(const Angle<T> & angle);
+
+  template<enable_if_is_floating_point<T> = true>
   inline Angle<T> & operator-=(const Angle<T> & angle);
 
+  template<enable_if_is_floating_point<T> = true>
   inline Angle<T> & operator*=(const T & value);
+
+  template<enable_if_is_floating_point<T> = true>
   inline Angle<T> & operator/=(const T & value);
 
+  template<enable_if_is_floating_point<T> = true>
   inline Angle<T> operator+(const Angle<T> & angle) const;
+
+  template<enable_if_is_floating_point<T> = true>
   inline Angle<T> operator-(const Angle<T> & angle) const;
 
+  template<enable_if_is_floating_point<T> = true>
   inline Angle<T> operator*(const T & value) const;
+
+  template<enable_if_is_floating_point<T> = true>
   inline Angle<T> operator/(const T & value) const;
 
+  template<enable_if_is_floating_point<T> = true>
   inline Angle<T> operator-() const;
 
+  template<enable_if_is_floating_point<T> = true>
   inline T degree() const;
+
+  template<enable_if_is_floating_point<T> = true>
   inline T radian() const;
 
+  template<enable_if_is_floating_point<T> = true>
   inline Angle<T> normalize() const;
 
+  template<enable_if_is_floating_point<T> = true>
   inline Angle<T> difference_to(const Angle<T> & angle) const;
 
 private:
@@ -112,11 +146,13 @@ private:
 };
 
 template<typename T>
+template<enable_if_is_floating_point<T>>
 Angle<T>::Angle()
 {
 }
 
 template<typename T>
+template<enable_if_is_floating_point<T>>
 Angle<T>::Angle(const T & data, const bool & is_degree)
 : data(data),
   is_degree(is_degree)
@@ -124,19 +160,21 @@ Angle<T>::Angle(const T & data, const bool & is_degree)
 }
 
 template<typename T>
+template<enable_if_is_floating_point<T>>
 Angle<T>::Angle(const Angle<T> & angle)
 {
   *this = angle;
 }
 
 template<typename T>
-template<typename U>
+template<typename U, enable_if_is_floating_point<T>, enable_if_is_floating_point<U>>
 Angle<T>::operator Angle<U>() const
 {
   return Angle<U>(data, is_degree);
 }
 
 template<typename T>
+template<enable_if_is_floating_point<T>>
 Angle<T> & Angle<T>::operator=(const Angle<T> & angle)
 {
   data = angle.data;
@@ -146,42 +184,49 @@ Angle<T> & Angle<T>::operator=(const Angle<T> & angle)
 }
 
 template<typename T>
+template<enable_if_is_floating_point<T>>
 bool Angle<T>::operator==(const Angle<T> & angle) const
 {
   return data == (is_degree ? angle.degree() : angle.radian());
 }
 
 template<typename T>
+template<enable_if_is_floating_point<T>>
 bool Angle<T>::operator!=(const Angle<T> & angle) const
 {
   return data != (is_degree ? angle.degree() : angle.radian());
 }
 
 template<typename T>
+template<enable_if_is_floating_point<T>>
 bool Angle<T>::operator>(const Angle<T> & angle) const
 {
   return data > (is_degree ? angle.degree() : angle.radian());
 }
 
 template<typename T>
+template<enable_if_is_floating_point<T>>
 bool Angle<T>::operator>=(const Angle<T> & angle) const
 {
   return data >= (is_degree ? angle.degree() : angle.radian());
 }
 
 template<typename T>
+template<enable_if_is_floating_point<T>>
 bool Angle<T>::operator<(const Angle<T> & angle) const
 {
   return data < (is_degree ? angle.degree() : angle.radian());
 }
 
 template<typename T>
+template<enable_if_is_floating_point<T>>
 bool Angle<T>::operator<=(const Angle<T> & angle) const
 {
   return data <= (is_degree ? angle.degree() : angle.radian());
 }
 
 template<typename T>
+template<enable_if_is_floating_point<T>>
 Angle<T> & Angle<T>::operator+=(const Angle<T> & angle)
 {
   data += is_degree ? angle.degree() : angle.radian();
@@ -189,6 +234,7 @@ Angle<T> & Angle<T>::operator+=(const Angle<T> & angle)
 }
 
 template<typename T>
+template<enable_if_is_floating_point<T>>
 Angle<T> & Angle<T>::operator-=(const Angle<T> & angle)
 {
   data -= is_degree ? angle.degree() : angle.radian();
@@ -196,6 +242,7 @@ Angle<T> & Angle<T>::operator-=(const Angle<T> & angle)
 }
 
 template<typename T>
+template<enable_if_is_floating_point<T>>
 Angle<T> & Angle<T>::operator*=(const T & value)
 {
   data *= value;
@@ -203,6 +250,7 @@ Angle<T> & Angle<T>::operator*=(const T & value)
 }
 
 template<typename T>
+template<enable_if_is_floating_point<T>>
 Angle<T> & Angle<T>::operator/=(const T & value)
 {
   data /= value;
@@ -210,48 +258,56 @@ Angle<T> & Angle<T>::operator/=(const T & value)
 }
 
 template<typename T>
+template<enable_if_is_floating_point<T>>
 Angle<T> Angle<T>::operator+(const Angle<T> & angle) const
 {
   return Angle(data + (is_degree ? angle.degree() : angle.radian()), is_degree);
 }
 
 template<typename T>
+template<enable_if_is_floating_point<T>>
 Angle<T> Angle<T>::operator-(const Angle<T> & angle) const
 {
   return Angle(data - (is_degree ? angle.degree() : angle.radian()), is_degree);
 }
 
 template<typename T>
+template<enable_if_is_floating_point<T>>
 Angle<T> Angle<T>::operator*(const T & value) const
 {
   return Angle(data * value, is_degree);
 }
 
 template<typename T>
+template<enable_if_is_floating_point<T>>
 Angle<T> Angle<T>::operator/(const T & value) const
 {
   return Angle(data / value, is_degree);
 }
 
 template<typename T>
+template<enable_if_is_floating_point<T>>
 Angle<T> Angle<T>::operator-() const
 {
   return Angle(-data, is_degree);
 }
 
 template<typename T>
+template<enable_if_is_floating_point<T>>
 T Angle<T>::degree() const
 {
   return is_degree ? data : scale<T>(data, pi, 180.0);
 }
 
 template<typename T>
+template<enable_if_is_floating_point<T>>
 T Angle<T>::radian() const
 {
   return is_degree ? scale<T>(data, 180.0, pi) : data;
 }
 
 template<typename T>
+template<enable_if_is_floating_point<T>>
 Angle<T> Angle<T>::normalize() const
 {
   if (is_degree) {
@@ -262,6 +318,7 @@ Angle<T> Angle<T>::normalize() const
 }
 
 template<typename T>
+template<enable_if_is_floating_point<T>>
 Angle<T> Angle<T>::difference_to(const Angle<T> & angle) const
 {
   return (angle - *this).normalize();

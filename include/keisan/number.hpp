@@ -23,24 +23,28 @@
 
 #include <algorithm>
 #include <cmath>
+#include <type_traits>
 
 namespace keisan
 {
 
 template<typename T>
-T sign(const T & value)
+typename std::enable_if<std::is_arithmetic<T>::value, T>::type
+sign(const T & value)
 {
   return (value >= 0) ? 1 : -1;
 }
 
 template<typename T>
-T scale(const T & value, const T & source, const T & target)
+typename std::enable_if<std::is_arithmetic<T>::value, T>::type
+scale(const T & value, const T & source, const T & target)
 {
   return value / source * target;
 }
 
 template<typename T>
-T map(
+typename std::enable_if<std::is_arithmetic<T>::value, T>::type
+map(
   const T & value, const T & source_min, const T & source_max,
   const T & target_min, const T & target_max)
 {
@@ -48,18 +52,30 @@ T map(
 }
 
 template<typename T>
-T clamp(const T & value, const T & min, const T & max)
+typename std::enable_if<std::is_arithmetic<T>::value, T>::type
+clamp(const T & value, const T & min, const T & max)
 {
   return std::min(std::max(value, min), max);
 }
 
 template<typename T>
-T wrap(const T & value, const T & min, const T & max)
+typename std::enable_if<std::is_floating_point<T>::value, T>::type
+wrap(const T & value, const T & min, const T & max)
 {
   auto min_value = value - min;
   auto min_max = max - min;
 
   return min + std::fmod(min_max + std::fmod(min_value, min_max), min_max);
+}
+
+template<typename T>
+typename std::enable_if<std::is_integral<T>::value, T>::type
+wrap(const T & value, const T & min, const T & max)
+{
+  auto min_value = value - min;
+  auto min_max = max - min;
+
+  return min + (min_max + min_value % min_max) % min_max;
 }
 
 [[deprecated("Use sign() instead.")]]

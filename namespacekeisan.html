@@ -164,16 +164,24 @@ Functions</h2></td></tr>
 <tr class="memitem:ad0c6a65299d21cbec0902e71eeab497c"><td class="memTemplParams" colspan="2">template&lt;size_t N&gt; </td></tr>
 <tr class="memitem:ad0c6a65299d21cbec0902e71eeab497c"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#ad0c6a65299d21cbec0902e71eeab497c">operator&lt;&lt;</a> (std::ostream &amp;out, const <a class="el" href="classkeisan_1_1Vector.html">Vector</a>&lt; N &gt; &amp;vector)</td></tr>
 <tr class="separator:ad0c6a65299d21cbec0902e71eeab497c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5cf1b3573511a36cb69678b056bfca3f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a5cf1b3573511a36cb69678b056bfca3f">sign</a> (const double &amp;value)</td></tr>
-<tr class="separator:a5cf1b3573511a36cb69678b056bfca3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87c45429a3475d8765b67e008be8b15e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a87c45429a3475d8765b67e008be8b15e">scale</a> (const double &amp;value, const double &amp;source, const double &amp;target)</td></tr>
-<tr class="separator:a87c45429a3475d8765b67e008be8b15e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a738c5b24e10e47f46489325858ed958e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a738c5b24e10e47f46489325858ed958e">map</a> (const double &amp;value, const double &amp;source_min, const double &amp;source_max, const double &amp;target_min, const double &amp;target_max)</td></tr>
-<tr class="separator:a738c5b24e10e47f46489325858ed958e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22bbadee975f63efe26f4f0398f923a8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a22bbadee975f63efe26f4f0398f923a8">clamp</a> (const double &amp;value, const double &amp;min, const double &amp;max)</td></tr>
-<tr class="separator:a22bbadee975f63efe26f4f0398f923a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8e4acb5d6b55db451ae8c20db62661b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#ae8e4acb5d6b55db451ae8c20db62661b">wrap</a> (const double &amp;value, const double &amp;min, const double &amp;max)</td></tr>
-<tr class="separator:ae8e4acb5d6b55db451ae8c20db62661b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0e763b09c2e4b663b87b401e51165fc"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ab0e763b09c2e4b663b87b401e51165fc"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; std::is_arithmetic&lt; T &gt;::value, T &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#ab0e763b09c2e4b663b87b401e51165fc">sign</a> (const T &amp;value)</td></tr>
+<tr class="separator:ab0e763b09c2e4b663b87b401e51165fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4ff75f05af2ee11edbb436ff8b06171"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ad4ff75f05af2ee11edbb436ff8b06171"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; std::is_arithmetic&lt; T &gt;::value, T &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#ad4ff75f05af2ee11edbb436ff8b06171">scale</a> (const T &amp;value, const T &amp;source, const T &amp;target)</td></tr>
+<tr class="separator:ad4ff75f05af2ee11edbb436ff8b06171"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7637a4bb354bcbde32bc27def690cb3e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a7637a4bb354bcbde32bc27def690cb3e"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; std::is_arithmetic&lt; T &gt;::value, T &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a7637a4bb354bcbde32bc27def690cb3e">map</a> (const T &amp;value, const T &amp;source_min, const T &amp;source_max, const T &amp;target_min, const T &amp;target_max)</td></tr>
+<tr class="separator:a7637a4bb354bcbde32bc27def690cb3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fb8c7b22016276ba9e2f658876ba908"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a5fb8c7b22016276ba9e2f658876ba908"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; std::is_arithmetic&lt; T &gt;::value, T &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a5fb8c7b22016276ba9e2f658876ba908">clamp</a> (const T &amp;value, const T &amp;min, const T &amp;max)</td></tr>
+<tr class="separator:a5fb8c7b22016276ba9e2f658876ba908"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafc9cb86e317189a19e54df0bab754c4"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aafc9cb86e317189a19e54df0bab754c4"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; std::is_floating_point&lt; T &gt;::value, T &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#aafc9cb86e317189a19e54df0bab754c4">wrap</a> (const T &amp;value, const T &amp;min, const T &amp;max)</td></tr>
+<tr class="separator:aafc9cb86e317189a19e54df0bab754c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91cb02b35388f6b59e2468b761f0fb63"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a91cb02b35388f6b59e2468b761f0fb63"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; std::is_integral&lt; T &gt;::value, T &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a91cb02b35388f6b59e2468b761f0fb63">wrap</a> (const T &amp;value, const T &amp;min, const T &amp;max)</td></tr>
+<tr class="separator:a91cb02b35388f6b59e2468b761f0fb63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acca34695effd6e2ebe4408fb1c0f3da2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#acca34695effd6e2ebe4408fb1c0f3da2">sign_number</a> (double value)</td></tr>
 <tr class="separator:acca34695effd6e2ebe4408fb1c0f3da2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ea5bf910fa081e4a02fec51b5d8c1a8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a0ea5bf910fa081e4a02fec51b5d8c1a8">scale_number</a> (double value, double source, double target)</td></tr>
@@ -1025,16 +1033,18 @@ template&lt;size_t N&gt; </div>
 
 </div>
 </div>
-<a id="a5cf1b3573511a36cb69678b056bfca3f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5cf1b3573511a36cb69678b056bfca3f">&#9670;&nbsp;</a></span>sign()</h2>
+<a id="ab0e763b09c2e4b663b87b401e51165fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0e763b09c2e4b663b87b401e51165fc">&#9670;&nbsp;</a></span>sign()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">double keisan::sign </td>
+          <td class="memname">std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value, T&gt;::type keisan::sign </td>
           <td>(</td>
-          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1043,28 +1053,30 @@ template&lt;size_t N&gt; </div>
 
 </div>
 </div>
-<a id="a87c45429a3475d8765b67e008be8b15e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87c45429a3475d8765b67e008be8b15e">&#9670;&nbsp;</a></span>scale()</h2>
+<a id="ad4ff75f05af2ee11edbb436ff8b06171"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4ff75f05af2ee11edbb436ff8b06171">&#9670;&nbsp;</a></span>scale()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">double keisan::scale </td>
+          <td class="memname">std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value, T&gt;::type keisan::scale </td>
           <td>(</td>
-          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>value</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>source</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>target</em>&#160;</td>
         </tr>
         <tr>
@@ -1077,40 +1089,42 @@ template&lt;size_t N&gt; </div>
 
 </div>
 </div>
-<a id="a738c5b24e10e47f46489325858ed958e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a738c5b24e10e47f46489325858ed958e">&#9670;&nbsp;</a></span>map()</h2>
+<a id="a7637a4bb354bcbde32bc27def690cb3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7637a4bb354bcbde32bc27def690cb3e">&#9670;&nbsp;</a></span>map()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">double keisan::map </td>
+          <td class="memname">std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value, T&gt;::type keisan::map </td>
           <td>(</td>
-          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>value</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>source_min</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>source_max</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>target_min</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>target_max</em>&#160;</td>
         </tr>
         <tr>
@@ -1123,28 +1137,30 @@ template&lt;size_t N&gt; </div>
 
 </div>
 </div>
-<a id="a22bbadee975f63efe26f4f0398f923a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a22bbadee975f63efe26f4f0398f923a8">&#9670;&nbsp;</a></span>clamp()</h2>
+<a id="a5fb8c7b22016276ba9e2f658876ba908"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fb8c7b22016276ba9e2f658876ba908">&#9670;&nbsp;</a></span>clamp()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">double keisan::clamp </td>
+          <td class="memname">std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value, T&gt;::type keisan::clamp </td>
           <td>(</td>
-          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>value</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>min</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>max</em>&#160;</td>
         </tr>
         <tr>
@@ -1157,28 +1173,66 @@ template&lt;size_t N&gt; </div>
 
 </div>
 </div>
-<a id="ae8e4acb5d6b55db451ae8c20db62661b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae8e4acb5d6b55db451ae8c20db62661b">&#9670;&nbsp;</a></span>wrap()</h2>
+<a id="aafc9cb86e317189a19e54df0bab754c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafc9cb86e317189a19e54df0bab754c4">&#9670;&nbsp;</a></span>wrap() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">double keisan::wrap </td>
+          <td class="memname">std::enable_if&lt;std::is_floating_point&lt;T&gt;::value, T&gt;::type keisan::wrap </td>
           <td>(</td>
-          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>value</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>min</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>max</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a91cb02b35388f6b59e2468b761f0fb63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91cb02b35388f6b59e2468b761f0fb63">&#9670;&nbsp;</a></span>wrap() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::enable_if&lt;std::is_integral&lt;T&gt;::value, T&gt;::type keisan::wrap </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>max</em>&#160;</td>
         </tr>
         <tr>

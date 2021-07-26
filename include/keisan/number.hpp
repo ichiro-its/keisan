@@ -33,28 +33,28 @@ T sign(const T & value)
   return (value >= 0) ? 1 : -1;
 }
 
-template<typename T, typename U>
-U scale(const T & value, const T & source, const U & target)
+template<typename T>
+T scale(const T & value, const T & source, const T & target)
 {
-  return (value * target) / source;
+  return value / source * target;
 }
 
-template<typename T, typename U>
-U map(
+template<typename T>
+T map(
   const T & value, const T & source_min, const T & source_max,
-  const U & target_min, const U & target_max)
+  const T & target_min, const T & target_max)
 {
   return target_min + scale(value - source_min, source_max - source_min, target_max - target_min);
 }
 
-template<typename T, typename U>
-U clamp(const T & value, const U & min, const U & max)
+template<typename T>
+T clamp(const T & value, const T & min, const T & max)
 {
   return std::min(std::max(value, min), max);
 }
 
-template<typename T, typename U>
-U wrap(const T & value, const U & min, const U & max)
+template<typename T>
+T wrap(const T & value, const T & min, const T & max)
 {
   auto min_value = value - min;
   auto min_max = max - min;

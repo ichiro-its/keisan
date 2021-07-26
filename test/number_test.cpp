@@ -21,49 +21,120 @@
 #include <gtest/gtest.h>
 #include <keisan/keisan.hpp>
 
-TEST(NumberTest, Sign)
+TEST(NumberTest, SignIntegral)
 {
-  ASSERT_DOUBLE_EQ(keisan::sign(5.0), 1.0);
-  ASSERT_DOUBLE_EQ(keisan::sign(-5.0), -1.0);
+  EXPECT_EQ(keisan::sign(0), 1) << "Sign result must be positive for zero";
+  EXPECT_EQ(keisan::sign(5), 1) << "Sign result must be positive";
+  EXPECT_EQ(keisan::sign(-5), -1) << "Sign result must be negative";
 }
 
-TEST(NumberTest, Scale)
+TEST(NumberTest, SignFloatingPoint)
 {
-  ASSERT_DOUBLE_EQ(keisan::scale(3.5, 6.5, 6.5 * 5.0), 3.5 * 5.0);
-  ASSERT_DOUBLE_EQ(keisan::scale(-3.5, 6.5, 6.5 * 5.0), -3.5 * 5.0);
-  ASSERT_DOUBLE_EQ(keisan::scale(3.5, 6.5, -6.5 * 5.0), -3.5 * 5.0);
-  ASSERT_DOUBLE_EQ(keisan::scale(-3.5, 6.5, -6.5 * 5.0), 3.5 * 5.0);
+  EXPECT_DOUBLE_EQ(keisan::sign(0.0), 1.0) << "Sign result must be positive for zero";
+  EXPECT_DOUBLE_EQ(keisan::sign(5.0), 1.0) << "Sign result must be positive";
+  EXPECT_DOUBLE_EQ(keisan::sign(-5.0), -1.0) << "Sign result must be negative";
 }
 
-TEST(NumberTest, Map) {
-  ASSERT_DOUBLE_EQ(keisan::map(3.5, -6.5, 4.75, -6.5 * 5.0, 4.75 * 5.0), 3.5 * 5.0);
-  ASSERT_DOUBLE_EQ(keisan::map(8.75, -6.5, 4.75, -6.5 * 5.0, 4.75 * 5.0), 8.75 * 5.0);
-  ASSERT_DOUBLE_EQ(keisan::map(-9.3, -6.5, 4.75, -6.5 * 5.0, 4.75 * 5.0), -9.3 * 5.0);
-}
-
-TEST(NumberTest, Clamp)
+TEST(NumberTest, ScaleIntegral)
 {
-  ASSERT_DOUBLE_EQ(keisan::clamp(5.0, 1.0, 10.0), 5.0);
-  ASSERT_DOUBLE_EQ(keisan::clamp(0.0, 1.0, 10.0), 1.0);
-  ASSERT_DOUBLE_EQ(keisan::clamp(15.0, 1.0, 10.0), 10.0);
+  EXPECT_EQ(keisan::scale(5, 2, 3), 6) <<
+    "5 / 2 = 2\n"
+    "2 * 3 = 6";
 }
 
-TEST(NumberTest, WrapInside)
+TEST(NumberTest, ScaleFloatingPoint)
 {
-  ASSERT_DOUBLE_EQ(keisan::wrap(3.5, 1.2, 4.75), 3.5);
-  ASSERT_DOUBLE_EQ(keisan::wrap(-2.3, -5.6, -0.9), -2.3);
-  ASSERT_DOUBLE_EQ(keisan::wrap(0.56, -3.7, 7.89), 0.56);
+  EXPECT_DOUBLE_EQ(keisan::scale(3.3, 0.5, 1.5), 9.9) <<
+    "3.3 / 0.5 = 6.6\n"
+    "6.6 * 1.5 = 9.9";
 }
 
-TEST(NumberTest, WrapOutsideMax)
+TEST(NumberTest, MapIntegral)
 {
-  ASSERT_DOUBLE_EQ(keisan::wrap(5.5, 1.2, 4.75), 1.2 + (5.5 - 4.75));
-  ASSERT_DOUBLE_EQ(keisan::wrap(-0.1, -5.6, -0.9), -5.6 + (-0.1 + 0.9));
-  ASSERT_DOUBLE_EQ(keisan::wrap(9.34, -3.7, 7.89), -3.7 + (9.34 - 7.89));
+  EXPECT_EQ(keisan::map(5, 2, 4, 0, 1), 1) <<
+    "5 - 2 = 3\n"
+    "4 - 2 = 2\n"
+    "1 - 0 = 1\n"
+    "scale(3, 2, 1) = 1\n"
+    "1 + 0 = 1";
+
+  EXPECT_EQ(keisan::map(0, -2, -4, 0, 1), -1) <<
+    "0 - (-2) = 2\n"
+    "-4 - (-2) = -2\n"
+    "1 - 0 = 1\n"
+    "scale(2, -2, 1) = -1\n"
+    "-1 + 0 = -1";
 }
 
-TEST(NumberTest, WrapOutsideMin) {
-  ASSERT_DOUBLE_EQ(keisan::wrap(0.43, 1.2, 4.75), 4.75 - (1.2 - 0.43));
-  ASSERT_DOUBLE_EQ(keisan::wrap(-8.9, -5.6, -0.9), -0.9 - (-5.6 + 8.9));
-  ASSERT_DOUBLE_EQ(keisan::wrap(-6.5, -3.7, 7.89), 7.89 - (-3.7 + 6.5));
+TEST(NumberTest, MapFloatingPoint)
+{
+  EXPECT_DOUBLE_EQ(keisan::map(0.5, 0.2, 0.8, 1.0, 3.2), 2.1) <<
+    "0.5 - 0.2 = 0.3\n"
+    "0.8 - 0.2 = 0.6\n"
+    "3.2 - 1.0 = 2.2\n"
+    "scale(0.3, 0.6, 2.2) = 1.1\n"
+    "1.1 + 1.0 = 2.1";
+
+  EXPECT_DOUBLE_EQ(keisan::map(-0.1, 0.2, 0.8, -3.2, -1.0), -4.3) <<
+    "-0.1 - 0.2 = -0.3\n"
+    "0.8 - 0.2 = 0.6\n"
+    "-1.0 - (-3.2) = 2.2\n"
+    "scale(-0.3, 0.6, 2.2) = -1.1\n"
+    "-1.1 + (-3.2) = -4.3";
+}
+
+TEST(NumberTest, ClampIntegral)
+{
+  EXPECT_EQ(keisan::clamp(5, 0, 10), 5) << "0 <= 5 <= 10";
+  EXPECT_EQ(keisan::clamp(-5, 0, 10), 0) << "-5 < 0";
+  EXPECT_EQ(keisan::clamp(15, 0, 10), 10) << "15 > 10";
+}
+
+TEST(NumberTest, ClampFloatingPoint)
+{
+  EXPECT_DOUBLE_EQ(keisan::clamp(0.5, -3.3, 2.2), 0.5) << "-3.3 <= 0.5 <= 2.2";
+  EXPECT_DOUBLE_EQ(keisan::clamp(-5.5, -3.3, 2.2), -3.3) << "-5.5 < -3.3";
+  EXPECT_DOUBLE_EQ(keisan::clamp(5.5, -3.3, 2.2), 2.2) << "5.5 > 2.2";
+}
+
+TEST(NumberTest, WrapIntegral)
+{
+  EXPECT_EQ(keisan::wrap(13, 10, 15), 13) <<
+    "13 - 10 = 3\n"
+    "15 - 10 = 5\n"
+    "3 = 5 * 0 + 3\n"
+    "3 + 10 = 13";
+
+  EXPECT_EQ(keisan::wrap(31, 10, 15), 11) <<
+    "31 - 10 = 21\n"
+    "15 - 10 = 5\n"
+    "21 = 5 * 4 + 1\n"
+    "1 + 10 = 11";
+
+  EXPECT_EQ(keisan::wrap(4, 10, 15), 14) <<
+    "4 - 10 = -6\n"
+    "15 - 10 = 5\n"
+    "-6 = 5 * (-2) + 4\n"
+    "4 + 10 = 14";
+}
+
+TEST(NumberTest, WrapFloatingPoint)
+{
+  EXPECT_DOUBLE_EQ(keisan::wrap(0.1, -0.1, 0.3), 0.1) <<
+    "0.1 - (-0.1) = 0.2\n"
+    "0.3 - (-0.1) = 0.4\n"
+    "0.2 = 0.4 * 0 + 0.2\n"
+    "0.2 + (-0.1) = 0.1";
+
+  EXPECT_DOUBLE_EQ(keisan::wrap(1.8, -0.1, 0.3), 0.2) <<
+    "1.8 - (-0.1) = 1.9\n"
+    "0.3 - (-0.1) = 0.4\n"
+    "1.9 = 0.4 * 4 + 0.3\n"
+    "0.3 + (-0.1) = 0.2";
+
+  EXPECT_DOUBLE_EQ(keisan::wrap(0.1, 1.1, 1.5), 1.3) <<
+    "0.1 - (1.1) = -1.0\n"
+    "1.5 - (1.1) = 0.4\n"
+    "-1.0 = 0.4 * (-3) + 0.2\n"
+    "0.2 + (1.1) = 1.3";
 }

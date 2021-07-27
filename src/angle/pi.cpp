@@ -26,12 +26,12 @@ namespace keisan
 namespace literals
 {
 
-double operator""_pi(long double value)
+double operator""_pi(unsigned long long int value)  // NOLINT
 {
   return value * keisan::pi<double>;
 }
 
-double operator""_pi(unsigned long long int value)  // NOLINT
+double operator""_pi(long double value)
 {
   return value * keisan::pi<double>;
 }

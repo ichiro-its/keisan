@@ -21,15 +21,15 @@
 #include <gtest/gtest.h>
 #include <keisan/keisan.hpp>
 
-using keisan::literals::operator""_pi;
+using namespace keisan::literals;  // NOLINT
 
 TEST(AngleTest, Empty) {
   keisan::Angle<float> angle;
 }
 
 TEST(AngleTest, Conversion) {
-  auto a = keisan::make_degree(270.0);
-  auto b = keisan::make_radian(-0.5_pi);
+  auto a = 270.0_deg;
+  auto b = -0.5_pi_rad;
 
   ASSERT_DOUBLE_EQ(a.degree(), 270.0);
   ASSERT_DOUBLE_EQ(a.radian(), 1.5_pi);
@@ -38,9 +38,9 @@ TEST(AngleTest, Conversion) {
 }
 
 TEST(AngleTest, ComparisonOperator) {
-  auto a = keisan::make_degree(90.0);
-  auto b = keisan::make_degree(-180.0);
-  auto c = keisan::make_radian(-1_pi);
+  auto a = 90.0_deg;
+  auto b = -180.0_deg;
+  auto c = -1_pi_rad;
 
   ASSERT_TRUE(b == c && a != c);
   ASSERT_TRUE(a > b && a >= b && a >= a);
@@ -48,8 +48,8 @@ TEST(AngleTest, ComparisonOperator) {
 }
 
 TEST(AngleTest, SelfAngleOperator) {
-  auto a = keisan::make_radian(1_pi);
-  auto b = keisan::make_degree(270.0);
+  auto a = 1_pi_rad;
+  auto b = 270.0_deg;
 
   a = b;
   ASSERT_DOUBLE_EQ(a.degree(), 270.0);
@@ -62,7 +62,7 @@ TEST(AngleTest, SelfAngleOperator) {
 }
 
 TEST(AngleTest, SelfValueOperator) {
-  auto angle = keisan::make_degree(270.0);
+  auto angle = 270.0_deg;
 
   angle *= 2.0;
   ASSERT_DOUBLE_EQ(angle.degree(), 540.0);
@@ -72,15 +72,15 @@ TEST(AngleTest, SelfValueOperator) {
 }
 
 TEST(AngleTest, AngleOperator) {
-  auto a = keisan::make_radian(1_pi);
-  auto b = keisan::make_degree(270.0);
+  auto a = 1_pi_rad;
+  auto b = 270.0_deg;
 
   ASSERT_DOUBLE_EQ((a + b).degree(), 450.0);
   ASSERT_DOUBLE_EQ((a - b).degree(), -90.0);
 }
 
 TEST(AngleTest, ValueOperator) {
-  auto angle = keisan::make_degree(270.0);
+  auto angle = 270.0_deg;
 
   ASSERT_DOUBLE_EQ((angle * 2.0).degree(), 540.0);
   ASSERT_DOUBLE_EQ((2.0 * angle).degree(), 540.0);
@@ -88,22 +88,22 @@ TEST(AngleTest, ValueOperator) {
 }
 
 TEST(AngleTest, NegationOperator) {
-  auto angle = -keisan::make_degree(90.0);
+  auto angle = -90.0_deg;
 
   ASSERT_DOUBLE_EQ(angle.degree(), -90.0);
 }
 
 TEST(AngleTest, NormalizeTest) {
-  auto a = keisan::make_degree(270.0);
-  auto b = keisan::make_radian(-4.5_pi);
+  auto a = 270.0_deg;
+  auto b = -4.5_pi_rad;
 
   ASSERT_DOUBLE_EQ(a.normalize().degree(), -90.0);
   ASSERT_DOUBLE_EQ(b.normalize().degree(), -90.0);
 }
 
 TEST(AngleTest, Difference) {
-  auto a = keisan::make_radian(-1_pi);
-  auto b = keisan::make_degree(270.0);
+  auto a = -1_pi_rad;
+  auto b = 270.0_deg;
 
   ASSERT_DOUBLE_EQ(a.difference_to(b).degree(), 90.0);
   ASSERT_DOUBLE_EQ(keisan::difference_between(b, a).radian(), -0.5_pi);

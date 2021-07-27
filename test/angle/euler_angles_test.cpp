@@ -21,15 +21,14 @@
 #include <gtest/gtest.h>
 #include <keisan/keisan.hpp>
 
-using keisan::literals::operator""_pi;
+using namespace keisan::literals;  // NOLINT
 
 TEST(EulerAnglesTest, Empty) {
   keisan::EulerAngles euler;
 }
 
 TEST(EulerAnglesTest, AssignValue) {
-  keisan::EulerAngles a(
-    keisan::make_degree(0.0), keisan::make_degree(90.0), keisan::make_degree(180.0));
+  keisan::EulerAngles a(0.0_deg, 90.0_deg, 180.0_deg);
 
   ASSERT_DOUBLE_EQ(a.roll.degree(), 0.0);
   ASSERT_DOUBLE_EQ(a.pitch.degree(), 90.0);
@@ -44,23 +43,21 @@ TEST(EulerAnglesTest, AssignValue) {
 }
 
 TEST(EulerAnglesTest, ComparisonOperator) {
-  keisan::EulerAngles a(
-    keisan::make_degree(0.0), keisan::make_degree(90.0), keisan::make_degree(180.0));
+  keisan::EulerAngles a(0.0_deg, 90.0_deg, 180.0_deg);
 
   keisan::EulerAngles b = a;
 
   ASSERT_TRUE(a == b);
   ASSERT_FALSE(a != b);
 
-  a.roll = keisan::make_radian(1_pi);
+  a.roll = 1_pi_rad;
 
   ASSERT_FALSE(a == b);
   ASSERT_TRUE(a != b);
 }
 
 TEST(EulerAnglesTest, QuaternionConversion) {
-  keisan::EulerAngles euler(
-    keisan::make_degree(0.0), keisan::make_degree(0.0), keisan::make_degree(90.0));
+  keisan::EulerAngles euler(0.0_deg, 0.0_deg, 90.0_deg);
 
   auto quaternion = euler.quaternion();
 

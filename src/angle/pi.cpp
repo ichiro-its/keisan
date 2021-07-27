@@ -18,25 +18,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__ANGLE__PI_HPP_
-#define KEISAN__ANGLE__PI_HPP_
-
-#include <cmath>
+#include <keisan/angle/pi.hpp>
 
 namespace keisan
 {
 
-template<typename T>
-const T pi = std::atan((T)1) * 4;
-
 namespace literals
 {
 
-double operator""_pi(long double value);
-double operator""_pi(unsigned long long int value);  // NOLINT
+double operator""_pi(long double value)
+{
+  return value * keisan::pi<double>;
+}
+
+double operator""_pi(unsigned long long int value)  // NOLINT
+{
+  return value * keisan::pi<double>;
+}
 
 }  // namespace literals
 
 }  // namespace keisan
-
-#endif  // KEISAN__ANGLE__PI_HPP_

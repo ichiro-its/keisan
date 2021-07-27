@@ -50,6 +50,7 @@ if(BUILD_TESTING)
   ament_add_gtest(${PROJECT_NAME}_tests
     "test/angle/angle_test.cpp"
     "test/angle/euler_angles_test.cpp"
+    "test/angle/pi_test.cpp"
     "test/angle/quaternion_test.cpp"
     "test/angle/trigonometry_test.cpp"
     "test/geometry/point_2_test.cpp"

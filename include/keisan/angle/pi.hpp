@@ -18,15 +18,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__KEISAN_HPP_
-#define KEISAN__KEISAN_HPP_
+#ifndef KEISAN__ANGLE__PI_HPP_
+#define KEISAN__ANGLE__PI_HPP_
 
-#include "./geometry/point_2.hpp"
-#include "./geometry/point_3.hpp"
-#include "./geometry/transform2.hpp"
+#include <cmath>
 
-#include "./angle.hpp"
-#include "./matrix.hpp"
-#include "./number.hpp"
+namespace keisan
+{
 
-#endif  // KEISAN__KEISAN_HPP_
+template<typename T>
+const T pi = std::atan((T)1) * 4;
+
+namespace literals
+{
+
+inline double operator""_pi(long double value)
+{
+  return value * keisan::pi<double>;
+}
+
+inline double operator""_pi(unsigned long long int value)  // NOLINT
+{
+  return value * keisan::pi<double>;
+}
+
+}  // namespace literals
+
+}  // namespace keisan
+
+#endif  // KEISAN__ANGLE__PI_HPP_

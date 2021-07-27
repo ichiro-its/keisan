@@ -21,31 +21,13 @@
 #ifndef KEISAN__ANGLE__ANGLE_HPP_
 #define KEISAN__ANGLE__ANGLE_HPP_
 
-#include <cmath>
 #include <iostream>
 
 #include "../number.hpp"
+#include "./pi.hpp"
 
 namespace keisan
 {
-
-template<typename T, enable_if_is_floating_point<T> = true>
-T pi = std::atan((T)1) * 4;
-
-namespace literals
-{
-
-inline double operator""_pi(long double value)
-{
-  return value * keisan::pi<double>;
-}
-
-inline double operator""_pi(unsigned long long int value)  // NOLINT
-{
-  return value * keisan::pi<double>;
-}
-
-}  // namespace literals
 
 template<typename T>
 class Angle;

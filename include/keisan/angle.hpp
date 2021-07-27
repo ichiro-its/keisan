@@ -24,6 +24,7 @@
 #include "./angle/angle.hpp"
 #include "./angle/equation.hpp"
 #include "./angle/euler_angles.hpp"
+#include "./angle/pi.hpp"
 #include "./angle/quaternion.hpp"
 #include "./angle/trigonometry.hpp"
 

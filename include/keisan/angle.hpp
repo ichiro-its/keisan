@@ -23,7 +23,6 @@
 
 #include "keisan/angle/angle.hpp"
 #include "keisan/angle/euler_angles.hpp"
-#include "keisan/angle/pi.hpp"
 #include "keisan/angle/quaternion.hpp"
 #include "keisan/angle/trigonometry.hpp"
 

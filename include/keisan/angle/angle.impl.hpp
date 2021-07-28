@@ -21,7 +21,9 @@
 #ifndef KEISAN__ANGLE__ANGLE_IMPL_HPP_
 #define KEISAN__ANGLE__ANGLE_IMPL_HPP_
 
+#include "keisan/number.hpp"
 #include "keisan/angle/angle.hpp"
+#include "keisan/angle/trigonometry.hpp"
 
 namespace keisan
 {

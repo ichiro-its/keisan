@@ -23,9 +23,6 @@
 
 #include <iostream>
 
-#include "keisan/number.hpp"
-#include "keisan/angle/pi.hpp"
-
 namespace keisan
 {
 

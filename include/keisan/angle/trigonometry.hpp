@@ -21,10 +21,24 @@
 #ifndef KEISAN__ANGLE__TRIGONOMETRY_HPP_
 #define KEISAN__ANGLE__TRIGONOMETRY_HPP_
 
-#include "keisan/angle/angle.hpp"
+#include <cmath>
 
 namespace keisan
 {
+
+template<typename T>
+class Angle;
+
+template<typename T>
+const T pi = std::atan((T)1) * 4;
+
+namespace literals
+{
+
+double operator""_pi(unsigned long long int value);  // NOLINT
+double operator""_pi(long double value);
+
+}  // namespace literals
 
 template<typename T>
 T sin(const Angle<T> & angle);

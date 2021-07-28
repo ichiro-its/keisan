@@ -24,6 +24,26 @@
 
 using namespace keisan::literals;  // NOLINT
 
+TEST(TrigonometryTest, PiValue)
+{
+  EXPECT_FLOAT_EQ(std::cos(keisan::pi<float>), -1.0f) << "cos(pi) = -1";
+  EXPECT_DOUBLE_EQ(std::cos(keisan::pi<double>), -1.0) << "cos(pi) = -1";
+}
+
+TEST(TrigonometryTest, PiIntegerLiterals)
+{
+  EXPECT_DOUBLE_EQ(0_pi, 0.0);
+  EXPECT_DOUBLE_EQ(1_pi, 1.0 * keisan::pi<double>);
+  EXPECT_DOUBLE_EQ(-2_pi, -2.0 * keisan::pi<double>);
+}
+
+TEST(TrigonometryTest, PiFloatingPointLiterals)
+{
+  EXPECT_DOUBLE_EQ(0.0_pi, 0.0);
+  EXPECT_DOUBLE_EQ(1.5_pi, 1.5 * keisan::pi<double>);
+  EXPECT_DOUBLE_EQ(-0.25_pi, -0.25 * keisan::pi<double>);
+}
+
 TEST(TrigonometryTest, Sin)
 {
   EXPECT_FLOAT_EQ(keisan::sin<float>(30_deg), 0.5f) << "sin(30) = 0.5";

@@ -46,6 +46,36 @@ Angle<double> operator""_pi_rad(long double value)
   return make_radian<double>(value * pi<double>);
 }
 
+double wrap_rad(double value)
+{
+  return make_radian(value).normalize().radian();
+}
+
+double wrap_deg(double value)
+{
+  return make_degree(value).normalize().degree();
+}
+
+double rad_to_deg(double value)
+{
+  return make_radian(value).normalize().degree();
+}
+
+double deg_to_rad(double value)
+{
+  return make_degree(value).normalize().radian();
+}
+
+double delta_rad(double value1, double value2)
+{
+  return difference_between(make_radian(value1), make_radian(value2)).radian();
+}
+
+double delta_deg(double value1, double value2)
+{
+  return difference_between(make_degree(value1), make_degree(value2)).degree();
+}
+
 }  // namespace literals
 
 }  // namespace keisan

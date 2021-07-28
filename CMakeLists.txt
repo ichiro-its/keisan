@@ -21,7 +21,6 @@ install(DIRECTORY "include" DESTINATION ".")
 
 add_library(${PROJECT_NAME} SHARED
   "src/angle/angle.cpp"
-  "src/angle/equation.cpp"
   "src/angle/euler_angles.cpp"
   "src/angle/pi.cpp"
   "src/angle/quaternion.cpp"

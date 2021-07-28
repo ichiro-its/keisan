@@ -104,6 +104,24 @@ private:
   bool is_degree;
 };
 
+[[deprecated("Use Angle::normalize() and Angle::radian() instead.")]]
+double wrap_rad(double value);
+
+[[deprecated("Use Angle::normalize() and Angle::degree() instead.")]]
+double wrap_deg(double value);
+
+[[deprecated("Use make_radian() and Angle::degree() instead.")]]
+double rad_to_deg(double value);
+
+[[deprecated("Use make_degree() and Angle::radian() instead.")]]
+double deg_to_rad(double value);
+
+[[deprecated("Use difference_between() instead.")]]
+double delta_rad(double value1, double value2);
+
+[[deprecated("Use difference_between() instead.")]]
+double delta_deg(double value1, double value2);
+
 }  // namespace keisan
 
 #include "keisan/angle/angle.impl.hpp"

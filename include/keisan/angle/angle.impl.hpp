@@ -44,8 +44,8 @@ std::ostream & operator<<(std::ostream & out, const Angle<T> & angle)
   return out << angle.degree();
 }
 
-template<typename T>
-Angle<T> operator*(const T & value, const Angle<T> & angle)
+template<typename T, typename U>
+Angle<T> operator*(const U & value, const Angle<T> & angle)
 {
   return angle * value;
 }
@@ -70,26 +70,9 @@ Angle<T>::Angle(const T & data, const bool & is_degree)
 
 template<typename T>
 template<typename U>
-Angle<T>::Angle(const Angle<U> & angle)
-{
-  *this = angle;
-}
-
-template<typename T>
-template<typename U>
 Angle<T>::operator Angle<U>() const
 {
   return Angle<U>(data, is_degree);
-}
-
-template<typename T>
-template<typename U>
-Angle<T> & Angle<T>::operator=(const Angle<U> & angle)
-{
-  data = angle.data;
-  is_degree = angle.is_degree;
-
-  return *this;
 }
 
 template<typename T>

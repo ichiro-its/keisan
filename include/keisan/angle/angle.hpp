@@ -52,8 +52,8 @@ Angle<double> operator""_pi_rad(long double value);
 template<typename T>
 std::ostream & operator<<(std::ostream & out, const Angle<T> & angle);
 
-template<typename T>
-Angle<T> operator*(const T & value, const Angle<T> & angle);
+template<typename T, typename U>
+Angle<T> operator*(const U & value, const Angle<T> & angle);
 
 template<typename T>
 Angle<T> difference_between(const Angle<T> & a, const Angle<T> & b);
@@ -62,17 +62,14 @@ template<typename T>
 class Angle
 {
 public:
+  template<typename U>
+  friend class Angle;
+
   Angle();
   explicit Angle(const T & data, const bool & is_degree = false);
 
   template<typename U>
-  Angle(const Angle<U> & angle);
-
-  template<typename U>
   operator Angle<U>() const;
-
-  template<typename U>
-  Angle<T> & operator=(const Angle<U> & angle);
 
   bool operator==(const Angle<T> & angle) const;
   bool operator!=(const Angle<T> & angle) const;

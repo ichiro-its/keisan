@@ -18,17 +18,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <gtest/gtest.h>
-#include <keisan/keisan.hpp>
+#include "gtest/gtest.h"
+
+#include "keisan/keisan.hpp"
 
 using namespace keisan::literals;  // NOLINT
 
-TEST(PiTest, PiValue) {
-  EXPECT_FLOAT_EQ(std::cos(keisan::pi<float>), -1.0) << "cos(pi) = -1";
+TEST(PiTest, PiValue)
+{
+  EXPECT_FLOAT_EQ(std::cos(keisan::pi<float>), -1.0f) << "cos(pi) = -1";
   EXPECT_DOUBLE_EQ(std::cos(keisan::pi<double>), -1.0) << "cos(pi) = -1";
 }
 
-TEST(PiTest, PiIntegerLiterals) {
+TEST(PiTest, PiIntegerLiterals)
+{
   EXPECT_DOUBLE_EQ(0_pi, 0.0);
   EXPECT_DOUBLE_EQ(1_pi, 1.0 * keisan::pi<double>);
   EXPECT_DOUBLE_EQ(-2_pi, -2.0 * keisan::pi<double>);

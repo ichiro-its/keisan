@@ -21,20 +21,34 @@
 #ifndef KEISAN__ANGLE__TRIGONOMETRY_HPP_
 #define KEISAN__ANGLE__TRIGONOMETRY_HPP_
 
-#include "./angle.hpp"
+#include "keisan/angle/angle.hpp"
 
 namespace keisan
 {
 
-double sin(const Angle<double> & angle);
-double cos(const Angle<double> & angle);
-double tan(const Angle<double> & angle);
+template<typename T>
+T sin(const Angle<T> & angle);
 
-Angle<double> arcsin(const double & value);
-Angle<double> arccos(const double & value);
-Angle<double> arctan(const double & value);
-Angle<double> signed_arctan(const double & y, const double & x);
+template<typename T>
+T cos(const Angle<T> & angle);
+
+template<typename T>
+T tan(const Angle<T> & angle);
+
+template<typename T>
+Angle<T> arcsin(const T & value);
+
+template<typename T>
+Angle<T> arccos(const T & value);
+
+template<typename T>
+Angle<T> arctan(const T & value);
+
+template<typename T>
+Angle<T> signed_arctan(const T & y, const T & x);
 
 }  // namespace keisan
+
+#include "keisan/angle/trigonometry.impl.hpp"
 
 #endif  // KEISAN__ANGLE__TRIGONOMETRY_HPP_

@@ -18,45 +18,57 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <keisan/angle/angle.hpp>
-#include <keisan/angle/trigonometry.hpp>
+#ifndef KEISAN__ANGLE__TRIGONOMETRY_IMPL_HPP_
+#define KEISAN__ANGLE__TRIGONOMETRY_IMPL_HPP_
+
+#include "keisan/angle/angle.hpp"
+#include "keisan/angle/trigonometry.hpp"
 
 namespace keisan
 {
 
-double sin(const Angle<double> & angle)
+template<typename T>
+T sin(const Angle<T> & angle)
 {
   return std::sin(angle.radian());
 }
 
-double cos(const Angle<double> & angle)
+template<typename T>
+T cos(const Angle<T> & angle)
 {
   return std::cos(angle.radian());
 }
 
-double tan(const Angle<double> & angle)
+template<typename T>
+T tan(const Angle<T> & angle)
 {
   return std::tan(angle.radian());
 }
 
-Angle<double> arcsin(const double & value)
+template<typename T>
+Angle<T> arcsin(const T & value)
 {
   return make_radian(std::asin(value));
 }
 
-Angle<double> arccos(const double & value)
+template<typename T>
+Angle<T> arccos(const T & value)
 {
   return make_radian(std::acos(value));
 }
 
-Angle<double> arctan(const double & value)
+template<typename T>
+Angle<T> arctan(const T & value)
 {
   return make_radian(std::atan(value));
 }
 
-Angle<double> signed_arctan(const double & y, const double & x)
+template<typename T>
+Angle<T> signed_arctan(const T & y, const T & x)
 {
   return make_radian(std::atan2(y, x));
 }
 
 }  // namespace keisan
+
+#endif  // KEISAN__ANGLE__TRIGONOMETRY_IMPL_HPP_

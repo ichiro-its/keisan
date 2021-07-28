@@ -24,7 +24,6 @@ add_library(${PROJECT_NAME} SHARED
   "src/angle/euler_angles.cpp"
   "src/angle/pi.cpp"
   "src/angle/quaternion.cpp"
-  "src/angle/trigonometry.cpp"
   "src/geometry/point_2.cpp"
   "src/geometry/point_3.cpp"
   "src/geometry/transform2.cpp"

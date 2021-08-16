@@ -69,12 +69,14 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">trigonometry.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="angle_2angle_8hpp_source.html">./angle.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;cmath&gt;</code><br />
+<code>#include &quot;<a class="el" href="trigonometry_8impl_8hpp_source.html">keisan/angle/trigonometry.impl.hpp</a>&quot;</code><br />
 </div>
 <p><a href="trigonometry_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -82,23 +84,42 @@ $(function() {
 Namespaces</h2></td></tr>
 <tr class="memitem:namespacekeisan"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html">keisan</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacekeisan_1_1literals"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan_1_1literals.html">keisan::literals</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a110e770ce7ad62165b9560fe847b4a39"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a110e770ce7ad62165b9560fe847b4a39">keisan::sin</a> (const Angle &amp;angle)</td></tr>
-<tr class="separator:a110e770ce7ad62165b9560fe847b4a39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6a97fa573764b02a8f859135e7bf69a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#ac6a97fa573764b02a8f859135e7bf69a">keisan::cos</a> (const Angle &amp;angle)</td></tr>
-<tr class="separator:ac6a97fa573764b02a8f859135e7bf69a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2662ab3159c181653993256fe123a963"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a2662ab3159c181653993256fe123a963">keisan::tan</a> (const Angle &amp;angle)</td></tr>
-<tr class="separator:a2662ab3159c181653993256fe123a963"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a9dce0e82c3cfcac0b3e9c8e8550c4e"><td class="memItemLeft" align="right" valign="top">Angle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a7a9dce0e82c3cfcac0b3e9c8e8550c4e">keisan::arcsin</a> (const double &amp;value)</td></tr>
-<tr class="separator:a7a9dce0e82c3cfcac0b3e9c8e8550c4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1617ca182a39dc91ea09894cfc41ed3b"><td class="memItemLeft" align="right" valign="top">Angle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a1617ca182a39dc91ea09894cfc41ed3b">keisan::arccos</a> (const double &amp;value)</td></tr>
-<tr class="separator:a1617ca182a39dc91ea09894cfc41ed3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fb4b092e5f1aceb4d5212000b95e7fb"><td class="memItemLeft" align="right" valign="top">Angle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a9fb4b092e5f1aceb4d5212000b95e7fb">keisan::arctan</a> (const double &amp;value)</td></tr>
-<tr class="separator:a9fb4b092e5f1aceb4d5212000b95e7fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a646d84ae73153a968a750e041d22c6e5"><td class="memItemLeft" align="right" valign="top">Angle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a646d84ae73153a968a750e041d22c6e5">keisan::signed_arctan</a> (const double &amp;y, const double &amp;x)</td></tr>
-<tr class="separator:a646d84ae73153a968a750e041d22c6e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a177fd4a378c681a84a60a581109304b9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan_1_1literals.html#a177fd4a378c681a84a60a581109304b9">keisan::literals::operator&quot;&quot;_pi</a> (unsigned long long int value)</td></tr>
+<tr class="separator:a177fd4a378c681a84a60a581109304b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e090cd2eb78b1532e70c59a5aeed053"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan_1_1literals.html#a4e090cd2eb78b1532e70c59a5aeed053">keisan::literals::operator&quot;&quot;_pi</a> (long double value)</td></tr>
+<tr class="separator:a4e090cd2eb78b1532e70c59a5aeed053"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3828d5e9c27a7974702a013912dbe71b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a3828d5e9c27a7974702a013912dbe71b"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a3828d5e9c27a7974702a013912dbe71b">keisan::sin</a> (const Angle&lt; T &gt; &amp;angle)</td></tr>
+<tr class="separator:a3828d5e9c27a7974702a013912dbe71b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b335965e763f66b494b9f2e345c2a72"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a6b335965e763f66b494b9f2e345c2a72"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a6b335965e763f66b494b9f2e345c2a72">keisan::cos</a> (const Angle&lt; T &gt; &amp;angle)</td></tr>
+<tr class="separator:a6b335965e763f66b494b9f2e345c2a72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12707db03b7fa3783fab62be01f96801"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a12707db03b7fa3783fab62be01f96801"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a12707db03b7fa3783fab62be01f96801">keisan::tan</a> (const Angle&lt; T &gt; &amp;angle)</td></tr>
+<tr class="separator:a12707db03b7fa3783fab62be01f96801"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeaa47790235786fc04b0eed64911817e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aeaa47790235786fc04b0eed64911817e"><td class="memTemplItemLeft" align="right" valign="top">Angle&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#aeaa47790235786fc04b0eed64911817e">keisan::arcsin</a> (const T &amp;value)</td></tr>
+<tr class="separator:aeaa47790235786fc04b0eed64911817e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a476dafce456057c7c10505c73e26a3db"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a476dafce456057c7c10505c73e26a3db"><td class="memTemplItemLeft" align="right" valign="top">Angle&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a476dafce456057c7c10505c73e26a3db">keisan::arccos</a> (const T &amp;value)</td></tr>
+<tr class="separator:a476dafce456057c7c10505c73e26a3db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11532f1a9b506079bba09108ce54c56d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a11532f1a9b506079bba09108ce54c56d"><td class="memTemplItemLeft" align="right" valign="top">Angle&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a11532f1a9b506079bba09108ce54c56d">keisan::arctan</a> (const T &amp;value)</td></tr>
+<tr class="separator:a11532f1a9b506079bba09108ce54c56d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af63f7d48d4cef54bf3f8a19c3c63e0ff"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:af63f7d48d4cef54bf3f8a19c3c63e0ff"><td class="memTemplItemLeft" align="right" valign="top">Angle&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#af63f7d48d4cef54bf3f8a19c3c63e0ff">keisan::signed_arctan</a> (const T &amp;y, const T &amp;x)</td></tr>
+<tr class="separator:af63f7d48d4cef54bf3f8a19c3c63e0ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a010c6c79d81ea06aed85ce25db285b58"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a010c6c79d81ea06aed85ce25db285b58"><td class="memTemplItemLeft" align="right" valign="top">const T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a010c6c79d81ea06aed85ce25db285b58">keisan::pi</a> = std::atan((T)1) * 4</td></tr>
+<tr class="separator:a010c6c79d81ea06aed85ce25db285b58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

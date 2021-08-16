@@ -26,7 +26,7 @@
 #include "./geometry/transform2.hpp"
 
 #include "./angle.hpp"
-#include "./number.hpp"
 #include "./matrix.hpp"
+#include "./number.hpp"
 
 #endif  // KEISAN__KEISAN_HPP_

@@ -34,7 +34,8 @@ EulerAngles::EulerAngles()
 {
 }
 
-EulerAngles::EulerAngles(const Angle & roll, const Angle & pitch, const Angle & yaw)
+EulerAngles::EulerAngles(
+  const Angle<double> & roll, const Angle<double> & pitch, const Angle<double> & yaw)
 : roll(roll), pitch(pitch), yaw(yaw)
 {
 }

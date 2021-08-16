@@ -38,18 +38,18 @@ public:
   Point2 operator*(const Point2 & point) const;
 
   void set_translation(const Point2 & translation);
-  void set_rotation(const Angle & rotation);
+  void set_rotation(const Angle<double> & rotation);
 
   void set_scale(const Point2 & scale);
   void set_scale(const double & scale);
 
   const Point2 & get_translation() const;
-  const Angle & get_rotation() const;
+  const Angle<double> & get_rotation() const;
   const Point2 & get_scale() const;
 
 private:
   Point2 translation;
-  Angle rotation;
+  Angle<double> rotation;
   Point2 scale;
 };
 

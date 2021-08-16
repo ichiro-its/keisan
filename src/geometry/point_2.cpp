@@ -36,7 +36,7 @@ double distance_between(const Point2 & a, const Point2 & b)
   return a.distance_to(b);
 }
 
-Angle angle_between(const Point2 & a, const Point2 & b)
+Angle<double> angle_between(const Point2 & a, const Point2 & b)
 {
   return difference_between(a.direction(), b.direction());
 }
@@ -181,7 +181,7 @@ double Point2::magnitude() const
   return std::hypot(x, y);
 }
 
-Angle Point2::direction() const
+Angle<double> Point2::direction() const
 {
   return signed_arctan(y, x);
 }
@@ -198,7 +198,7 @@ double Point2::distance_to(const Point2 & other) const
   return delta.magnitude();
 }
 
-Angle Point2::direction_to(const Point2 & other) const
+Angle<double> Point2::direction_to(const Point2 & other) const
 {
   auto delta = other - *this;
   return delta.direction();
@@ -219,7 +219,7 @@ Point2 Point2::scale(const double & scaling) const
   return scale({scaling, scaling});
 }
 
-Point2 Point2::rotate(const Angle & rotation) const
+Point2 Point2::rotate(const Angle<double> & rotation) const
 {
   Point2 point;
 
@@ -239,7 +239,7 @@ Point2 Point2::scale_from(const double & scaling, const Point2 & anchor)
   return translate(-anchor).scale(scaling).translate(anchor);
 }
 
-Point2 Point2::rotate_from(const Angle & rotation, const Point2 & anchor)
+Point2 Point2::rotate_from(const Angle<double> & rotation, const Point2 & anchor)
 {
   return translate(-anchor).rotate(rotation).translate(anchor);
 }

@@ -21,10 +21,9 @@
 #ifndef KEISAN__ANGLE_HPP_
 #define KEISAN__ANGLE_HPP_
 
-#include "./angle/angle.hpp"
-#include "./angle/equation.hpp"
-#include "./angle/euler_angles.hpp"
-#include "./angle/quaternion.hpp"
-#include "./angle/trigonometry.hpp"
+#include "keisan/angle/angle.hpp"
+#include "keisan/angle/euler_angles.hpp"
+#include "keisan/angle/quaternion.hpp"
+#include "keisan/angle/trigonometry.hpp"
 
 #endif  // KEISAN__ANGLE_HPP_

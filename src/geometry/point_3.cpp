@@ -36,7 +36,7 @@ double distance_between(const Point3 & a, const Point3 & b)
   return a.distance_to(b);
 }
 
-Angle angle_between(const Point3 & a, const Point3 & b)
+Angle<double> angle_between(const Point3 & a, const Point3 & b)
 {
   double dot = dot_product(a, b);
   double mag = a.magnitude() * b.magnitude();

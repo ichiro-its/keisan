@@ -21,68 +21,106 @@
 #ifndef KEISAN__ANGLE__ANGLE_HPP_
 #define KEISAN__ANGLE__ANGLE_HPP_
 
-#include <cmath>
 #include <iostream>
 
 namespace keisan
 {
 
-constexpr double pi = std::atan(1.0) * 4;
-
+template<typename T>
 class Angle;
 
-Angle make_degree(const double & value);
-Angle make_radian(const double & value);
+template<typename T>
+Angle<T> make_degree(const T & value);
 
-std::ostream & operator<<(std::ostream & out, const Angle & angle);
+template<typename T>
+Angle<T> make_radian(const T & value);
 
-Angle operator*(const double & value, const Angle & angle);
+namespace literals
+{
 
-Angle difference_between(const Angle & a, const Angle & b);
+Angle<double> operator""_deg(unsigned long long int value);  // NOLINT
+Angle<double> operator""_deg(long double value);
 
+Angle<double> operator""_pi_rad(unsigned long long int value);  // NOLINT
+Angle<double> operator""_pi_rad(long double value);
+
+}  // namespace literals
+
+template<typename T>
+std::ostream & operator<<(std::ostream & out, const Angle<T> & angle);
+
+template<typename T, typename U>
+Angle<T> operator*(const U & value, const Angle<T> & angle);
+
+template<typename T>
+Angle<T> difference_between(const Angle<T> & a, const Angle<T> & b);
+
+template<typename T>
 class Angle
 {
 public:
+  template<typename U>
+  friend class Angle;
+
   Angle();
-  explicit Angle(const double & data, const bool & is_degree = false);
+  explicit Angle(const T & data, const bool & is_degree = false);
 
-  Angle(const Angle & angle);
+  template<typename U>
+  operator Angle<U>() const;
 
-  Angle & operator=(const Angle & angle);
+  bool operator==(const Angle<T> & angle) const;
+  bool operator!=(const Angle<T> & angle) const;
+  bool operator>(const Angle<T> & angle) const;
+  bool operator>=(const Angle<T> & angle) const;
+  bool operator<(const Angle<T> & angle) const;
+  bool operator<=(const Angle<T> & angle) const;
 
-  bool operator==(const Angle & angle) const;
-  bool operator!=(const Angle & angle) const;
-  bool operator>(const Angle & angle) const;
-  bool operator>=(const Angle & angle) const;
-  bool operator<(const Angle & angle) const;
-  bool operator<=(const Angle & angle) const;
+  Angle<T> & operator+=(const Angle<T> & angle);
+  Angle<T> & operator-=(const Angle<T> & angle);
 
-  Angle & operator+=(const Angle & angle);
-  Angle & operator-=(const Angle & angle);
+  Angle<T> & operator*=(const T & value);
+  Angle<T> & operator/=(const T & value);
 
-  Angle & operator*=(const double & value);
-  Angle & operator/=(const double & value);
+  Angle<T> operator+(const Angle<T> & angle) const;
+  Angle<T> operator-(const Angle<T> & angle) const;
 
-  Angle operator+(const Angle & angle) const;
-  Angle operator-(const Angle & angle) const;
+  Angle<T> operator*(const T & value) const;
+  Angle<T> operator/(const T & value) const;
 
-  Angle operator*(const double & value) const;
-  Angle operator/(const double & value) const;
+  Angle<T> operator-() const;
 
-  Angle operator-() const;
+  T degree() const;
+  T radian() const;
 
-  double degree() const;
-  double radian() const;
+  Angle<T> normalize() const;
 
-  Angle normalize() const;
-
-  Angle difference_to(const Angle & angle) const;
+  Angle<T> difference_to(const Angle<T> & angle) const;
 
 private:
-  double data;
+  T data;
   bool is_degree;
 };
 
+[[deprecated("Use Angle::normalize() and Angle::radian() instead.")]]
+double wrap_rad(double value);
+
+[[deprecated("Use Angle::normalize() and Angle::degree() instead.")]]
+double wrap_deg(double value);
+
+[[deprecated("Use make_radian() and Angle::degree() instead.")]]
+double rad_to_deg(double value);
+
+[[deprecated("Use make_degree() and Angle::radian() instead.")]]
+double deg_to_rad(double value);
+
+[[deprecated("Use difference_between() instead.")]]
+double delta_rad(double value1, double value2);
+
+[[deprecated("Use difference_between() instead.")]]
+double delta_deg(double value1, double value2);
+
 }  // namespace keisan
+
+#include "keisan/angle/angle.impl.hpp"
 
 #endif  // KEISAN__ANGLE__ANGLE_HPP_

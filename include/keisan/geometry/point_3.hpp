@@ -34,7 +34,7 @@ struct Point3;
 std::ostream & operator<<(std::ostream & out, const Point3 point);
 
 double distance_between(const Point3 & a, const Point3 & b);
-Angle angle_between(const Point3 & a, const Point3 & b);
+Angle<double> angle_between(const Point3 & a, const Point3 & b);
 
 double dot_product(const Point3 & a, const Point3 & b);
 double cross_product(const Point3 & a, const Point3 & b);

@@ -18,40 +18,57 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <keisan/angle/angle.hpp>
-#include <keisan/angle/equation.hpp>
+#ifndef KEISAN__ANGLE__TRIGONOMETRY_IMPL_HPP_
+#define KEISAN__ANGLE__TRIGONOMETRY_IMPL_HPP_
+
+#include "keisan/angle/angle.hpp"
+#include "keisan/angle/trigonometry.hpp"
 
 namespace keisan
 {
 
-double wrap_rad(double value)
+template<typename T>
+T sin(const Angle<T> & angle)
 {
-  return make_radian(value).normalize().radian();
+  return std::sin(angle.radian());
 }
 
-double wrap_deg(double value)
+template<typename T>
+T cos(const Angle<T> & angle)
 {
-  return make_degree(value).normalize().degree();
+  return std::cos(angle.radian());
 }
 
-double rad_to_deg(double value)
+template<typename T>
+T tan(const Angle<T> & angle)
 {
-  return make_radian(value).normalize().degree();
+  return std::tan(angle.radian());
 }
 
-double deg_to_rad(double value)
+template<typename T>
+Angle<T> arcsin(const T & value)
 {
-  return make_degree(value).normalize().radian();
+  return make_radian(std::asin(value));
 }
 
-double delta_rad(double value1, double value2)
+template<typename T>
+Angle<T> arccos(const T & value)
 {
-  return difference_between(make_radian(value1), make_radian(value2)).radian();
+  return make_radian(std::acos(value));
 }
 
-double delta_deg(double value1, double value2)
+template<typename T>
+Angle<T> arctan(const T & value)
 {
-  return difference_between(make_degree(value1), make_degree(value2)).degree();
+  return make_radian(std::atan(value));
+}
+
+template<typename T>
+Angle<T> signed_arctan(const T & y, const T & x)
+{
+  return make_radian(std::atan2(y, x));
 }
 
 }  // namespace keisan
+
+#endif  // KEISAN__ANGLE__TRIGONOMETRY_IMPL_HPP_

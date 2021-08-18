@@ -27,6 +27,9 @@ namespace keisan
 {
 
 template<typename T>
+class Angle;
+
+template<typename T>
 using enable_if_is_integral = std::enable_if_t<std::is_integral<T>::value, bool>;
 
 template<typename T>
@@ -37,6 +40,9 @@ using enable_if_is_arithmetic = std::enable_if_t<std::is_arithmetic<T>::value, b
 
 template<typename T, enable_if_is_arithmetic<T> = true>
 T sign(const T & value);
+
+template<typename T>
+T sign(const Angle<T> & value);
 
 template<typename T, enable_if_is_arithmetic<T> = true>
 T scale(const T & value, const T & source, const T & target);

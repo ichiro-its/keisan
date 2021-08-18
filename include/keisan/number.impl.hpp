@@ -21,6 +21,7 @@
 #ifndef KEISAN__NUMBER_IMPL_HPP_
 #define KEISAN__NUMBER_IMPL_HPP_
 
+#include <keisan/angle.hpp>
 #include <keisan/number.hpp>
 
 #include <algorithm>
@@ -33,6 +34,12 @@ template<typename T, enable_if_is_arithmetic<T> = true>
 T sign(const T & value)
 {
   return (value >= 0) ? 1 : -1;
+}
+
+template<typename T>
+T sign(const Angle<T> & value)
+{
+  return (value >= make_degree<T>(0)) ? 1.0 : -1.0;
 }
 
 template<typename T, enable_if_is_arithmetic<T> = true>

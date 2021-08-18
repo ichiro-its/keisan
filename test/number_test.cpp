@@ -21,6 +21,8 @@
 #include <gtest/gtest.h>
 #include <keisan/keisan.hpp>
 
+using namespace keisan::literals;  // NOLINT
+
 TEST(NumberTest, SignIntegral)
 {
   EXPECT_EQ(keisan::sign(0), 1) << "Sign result must be positive for zero";
@@ -33,6 +35,13 @@ TEST(NumberTest, SignFloatingPoint)
   EXPECT_DOUBLE_EQ(keisan::sign(0.0), 1.0) << "Sign result must be positive for zero";
   EXPECT_DOUBLE_EQ(keisan::sign(5.0), 1.0) << "Sign result must be positive";
   EXPECT_DOUBLE_EQ(keisan::sign(-5.0), -1.0) << "Sign result must be negative";
+}
+
+TEST(NumberTest, SignAngle)
+{
+  EXPECT_DOUBLE_EQ(keisan::sign(0_deg), 1.0) << "Sign result must be positive for zero";
+  EXPECT_DOUBLE_EQ(keisan::sign(90_deg), 1.0) << "Sign result must be positive";
+  EXPECT_DOUBLE_EQ(keisan::sign(-900_deg), -1.0) << "Sign result must be negative";
 }
 
 TEST(NumberTest, ScaleIntegral)

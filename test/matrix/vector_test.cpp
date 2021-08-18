@@ -25,16 +25,18 @@
 
 #define ASSERT_VECTOR_N_EQ(N, VECTOR, ...) \
   { \
-    keisan::Vector<N> _vector = VECTOR; \
+    ksn::Vector<N> _vector = VECTOR; \
     double _values[] = {__VA_ARGS__}; \
     for (size_t i = 0; i < N; ++i) { \
       ASSERT_DOUBLE_EQ(_values[i], _vector[i]); \
     } \
   }
 
+namespace ksn = keisan;
+
 TEST(VectorTest, OutStream)
 {
-  auto a = keisan::Vector<2>(1.0, 2.0);
+  auto a = ksn::Vector<2>(1.0, 2.0);
 
   std::stringstream ss;
   ss << a;
@@ -44,25 +46,25 @@ TEST(VectorTest, OutStream)
 
 TEST(VectorTest, InitialValue)
 {
-  auto a = keisan::Vector<2>(1.0, 2.0);
+  auto a = ksn::Vector<2>(1.0, 2.0);
   ASSERT_VECTOR_N_EQ(2, a, 1.0, 2.0);
 
-  auto b = keisan::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0);
+  auto b = ksn::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0);
   ASSERT_VECTOR_N_EQ(5, b, 1.0, 2.0, 3.0, 4.0, 5.0);
 }
 
 TEST(VectorTest, ZeroValue)
 {
-  auto a = keisan::Vector<2>::zero();
+  auto a = ksn::Vector<2>::zero();
   ASSERT_VECTOR_N_EQ(2, a, 0.0, 0.0);
 
-  auto b = keisan::Vector<5>::zero();
+  auto b = ksn::Vector<5>::zero();
   ASSERT_VECTOR_N_EQ(5, b, 0.0, 0.0, 0.0, 0.0, 0.0);
 }
 
 TEST(VectorTest, ComparisonOperation)
 {
-  auto a = keisan::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0);
+  auto a = ksn::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0);
   auto b = a;
 
   ASSERT_TRUE(a == b);
@@ -76,31 +78,31 @@ TEST(VectorTest, ComparisonOperation)
 
 TEST(VectorTest, MatrixMultiplication)
 {
-  auto a = keisan::Matrix<3, 2>(
+  auto a = ksn::Matrix<3, 2>(
     1.0, 1.0,
     2.0, 2.0,
     3.0, 3.0);
 
-  auto b = keisan::Vector<2>(1.0, 2.0);
+  auto b = ksn::Vector<2>(1.0, 2.0);
 
   ASSERT_VECTOR_N_EQ(3, a * b, 3.0, 6.0, 9.0);
 }
 
 TEST(VectorTest, SquareMatrixMultiplication)
 {
-  auto a = keisan::SquareMatrix<2>(
+  auto a = ksn::SquareMatrix<2>(
     1.0, 1.0,
     2.0, 2.0);
 
-  auto b = keisan::Vector<2>(1.0, 2.0);
+  auto b = ksn::Vector<2>(1.0, 2.0);
 
   ASSERT_VECTOR_N_EQ(2, a * b, 3.0, 6.0);
 }
 
 TEST(VectorTest, VectorOperation)
 {
-  auto a = keisan::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0);
-  auto b = keisan::Vector<5>(6.0, 7.0, 8.0, 9.0, 10.0);
+  auto a = ksn::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0);
+  auto b = ksn::Vector<5>(6.0, 7.0, 8.0, 9.0, 10.0);
 
   ASSERT_VECTOR_N_EQ(5, a + b, 7.0, 9.0, 11.0, 13.0, 15.0);
   ASSERT_VECTOR_N_EQ(5, a - b, -5.0, -5.0, -5.0, -5.0, -5.0);
@@ -114,7 +116,7 @@ TEST(VectorTest, VectorOperation)
 
 TEST(VectorTest, ScalarOperation)
 {
-  auto a = keisan::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0);
+  auto a = ksn::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0);
 
   ASSERT_VECTOR_N_EQ(5, a + 2.0, 3.0, 4.0, 5.0, 6.0, 7.0);
   ASSERT_VECTOR_N_EQ(5, a - 2.0, -1.0, 0.0, 1.0, 2.0, 3.0);
@@ -136,6 +138,6 @@ TEST(VectorTest, ScalarOperation)
 
 TEST(VectorTest, NegationOperation)
 {
-  auto a = keisan::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0);
+  auto a = ksn::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0);
   ASSERT_VECTOR_N_EQ(5, -a, -1.0, -2.0, -3.0, -4.0, -5.0);
 }

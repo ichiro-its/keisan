@@ -23,9 +23,11 @@
 
 #include <sstream>
 
+namespace ksn = keisan;
+
 TEST(Point2Test, OutStream)
 {
-  auto point = keisan::Point2(1.0, 3.0);
+  auto point = ksn::Point2(1.0, 3.0);
 
   std::stringstream ss;
   ss << point;
@@ -35,7 +37,7 @@ TEST(Point2Test, OutStream)
 
 TEST(Point2Test, InitialValue)
 {
-  auto point = keisan::Point2(1.0, 3.0);
+  auto point = ksn::Point2(1.0, 3.0);
 
   ASSERT_DOUBLE_EQ(point.x, 1.0);
   ASSERT_DOUBLE_EQ(point.y, 3.0);
@@ -43,7 +45,7 @@ TEST(Point2Test, InitialValue)
 
 TEST(Point2Test, ZeroValue)
 {
-  auto point = keisan::Point2::zero();
+  auto point = ksn::Point2::zero();
 
   ASSERT_DOUBLE_EQ(point.x, 0.0);
   ASSERT_DOUBLE_EQ(point.y, 0.0);
@@ -51,7 +53,7 @@ TEST(Point2Test, ZeroValue)
 
 TEST(Point2Test, ComparisonOperation)
 {
-  auto a = keisan::Point2(1.0, 3.0);
+  auto a = ksn::Point2(1.0, 3.0);
   auto b = a;
 
   ASSERT_TRUE(a == b);
@@ -65,144 +67,144 @@ TEST(Point2Test, ComparisonOperation)
 
 TEST(Point2Test, SelfPointOperator)
 {
-  auto a = keisan::Point2(5.0, 4.0);
-  auto b = keisan::Point2(1.0, 3.0);
+  auto a = ksn::Point2(5.0, 4.0);
+  auto b = ksn::Point2(1.0, 3.0);
 
   a = b;
-  ASSERT_EQ(a, keisan::Point2(1.0, 3.0));
+  ASSERT_EQ(a, ksn::Point2(1.0, 3.0));
 
   a += b;
-  ASSERT_EQ(a, keisan::Point2(2.0, 6.0));
+  ASSERT_EQ(a, ksn::Point2(2.0, 6.0));
 
   a -= b;
-  ASSERT_EQ(a, keisan::Point2(1.0, 3.0));
+  ASSERT_EQ(a, ksn::Point2(1.0, 3.0));
 }
 
 TEST(Point2Test, SelfValueOperator)
 {
-  auto point = keisan::Point2(1.0, 3.0);
+  auto point = ksn::Point2(1.0, 3.0);
 
   point += 2.0;
-  ASSERT_EQ(point, keisan::Point2(3.0, 5.0));
+  ASSERT_EQ(point, ksn::Point2(3.0, 5.0));
 
   point -= 6.0;
-  ASSERT_EQ(point, keisan::Point2(-3.0, -1.0));
+  ASSERT_EQ(point, ksn::Point2(-3.0, -1.0));
 
   point *= 3.0;
-  ASSERT_EQ(point, keisan::Point2(-9.0, -3.0));
+  ASSERT_EQ(point, ksn::Point2(-9.0, -3.0));
 
   point /= 2.0;
-  ASSERT_EQ(point, keisan::Point2(-4.5, -1.5));
+  ASSERT_EQ(point, ksn::Point2(-4.5, -1.5));
 }
 
 TEST(Point2Test, PointOperator)
 {
-  auto a = keisan::Point2(1.0, 3.0);
-  auto b = keisan::Point2(2.0, 5.0);
+  auto a = ksn::Point2(1.0, 3.0);
+  auto b = ksn::Point2(2.0, 5.0);
 
-  ASSERT_EQ(a + b, keisan::Point2(3.0, 8.0));
-  ASSERT_EQ(a - b, keisan::Point2(-1.0, -2.0));
+  ASSERT_EQ(a + b, ksn::Point2(3.0, 8.0));
+  ASSERT_EQ(a - b, ksn::Point2(-1.0, -2.0));
 }
 
 TEST(Point2Test, ValueOperator)
 {
-  auto point = keisan::Point2(1.0, 3.0);
+  auto point = ksn::Point2(1.0, 3.0);
 
-  ASSERT_EQ(point + 5.0, keisan::Point2(6.0, 8.0));
-  ASSERT_EQ(point - 4.0, keisan::Point2(-3.0, -1.0));
-  ASSERT_EQ(point * 3.0, keisan::Point2(3.0, 9.0));
-  ASSERT_EQ(point / 2.0, keisan::Point2(0.5, 1.5));
+  ASSERT_EQ(point + 5.0, ksn::Point2(6.0, 8.0));
+  ASSERT_EQ(point - 4.0, ksn::Point2(-3.0, -1.0));
+  ASSERT_EQ(point * 3.0, ksn::Point2(3.0, 9.0));
+  ASSERT_EQ(point / 2.0, ksn::Point2(0.5, 1.5));
 }
 
 TEST(Point2Test, NegationOperator)
 {
-  auto point = keisan::Point2(1.0, 3.0);
-  ASSERT_EQ(-point, keisan::Point2(-1.0, -3.0));
+  auto point = ksn::Point2(1.0, 3.0);
+  ASSERT_EQ(-point, ksn::Point2(-1.0, -3.0));
 }
 
 TEST(Point2Test, Magnitude)
 {
-  auto point = keisan::Point2(3.0, 4.0);
+  auto point = ksn::Point2(3.0, 4.0);
   ASSERT_DOUBLE_EQ(point.magnitude(), 5.0);
 }
 
 TEST(Point2Test, Direction)
 {
-  auto point = keisan::Point2(0.0, 4.0);
+  auto point = ksn::Point2(0.0, 4.0);
   ASSERT_EQ(point.direction().degree(), 90.0);
 
-  point = keisan::Point2(-4.0, 0.0);
+  point = ksn::Point2(-4.0, 0.0);
   ASSERT_EQ(point.direction().degree(), 180.0);
 }
 
 TEST(Point2Test, Normalize)
 {
-  auto point = keisan::Point2(3.0, 4.0);
-  ASSERT_EQ(point.normalize(), keisan::Point2(0.6, 0.8));
+  auto point = ksn::Point2(3.0, 4.0);
+  ASSERT_EQ(point.normalize(), ksn::Point2(0.6, 0.8));
 }
 
 TEST(Point2Test, DirectionTo)
 {
-  auto a = keisan::Point2(5.0, 10.0);
-  auto b = keisan::Point2(5.0, 10.0 + 5.0);
+  auto a = ksn::Point2(5.0, 10.0);
+  auto b = ksn::Point2(5.0, 10.0 + 5.0);
 
   ASSERT_DOUBLE_EQ(a.direction_to(b).degree(), 90.0);
 }
 
 TEST(Point2Test, DistanceBetween)
 {
-  auto a = keisan::Point2(5.0, 10.0);
-  auto b = keisan::Point2(5.0 + 3.0, 10.0 + 4.0);
+  auto a = ksn::Point2(5.0, 10.0);
+  auto b = ksn::Point2(5.0 + 3.0, 10.0 + 4.0);
 
   ASSERT_DOUBLE_EQ(a.distance_to(b), 5.0);
-  ASSERT_DOUBLE_EQ(keisan::distance_between(a, b), 5.0);
+  ASSERT_DOUBLE_EQ(ksn::distance_between(a, b), 5.0);
 }
 
 TEST(Point2Test, AngleBetween)
 {
-  auto a = keisan::Point2(4.0, 3.0);
-  auto b = keisan::Point2(-3.0, 4.0);
+  auto a = ksn::Point2(4.0, 3.0);
+  auto b = ksn::Point2(-3.0, 4.0);
 
-  ASSERT_DOUBLE_EQ(keisan::angle_between(a, b).degree(), 90.0);
+  ASSERT_DOUBLE_EQ(ksn::angle_between(a, b).degree(), 90.0);
 }
 
 TEST(Point2Test, DotProduct)
 {
-  auto a = keisan::Point2(4.0, 3.0);
-  auto b = keisan::Point2(3.0, 4.0);
+  auto a = ksn::Point2(4.0, 3.0);
+  auto b = ksn::Point2(3.0, 4.0);
 
-  ASSERT_DOUBLE_EQ(keisan::dot_product(a, b), 24.0);
+  ASSERT_DOUBLE_EQ(ksn::dot_product(a, b), 24.0);
 }
 
 TEST(Point2Test, CrossProduct)
 {
-  auto a = keisan::Point2(4.0, 3.0);
-  auto b = keisan::Point2(-3.0, 4.0);
+  auto a = ksn::Point2(4.0, 3.0);
+  auto b = ksn::Point2(-3.0, 4.0);
 
-  ASSERT_DOUBLE_EQ(keisan::cross_product(a, b), 25.0);
+  ASSERT_DOUBLE_EQ(ksn::cross_product(a, b), 25.0);
 }
 
 TEST(Point2Test, Translation)
 {
-  auto point = keisan::Point2(4.0, 3.0);
-  ASSERT_EQ(point.translate({5.0, 10.0}), keisan::Point2(9.0, 13.0));
+  auto point = ksn::Point2(4.0, 3.0);
+  ASSERT_EQ(point.translate({5.0, 10.0}), ksn::Point2(9.0, 13.0));
 }
 
 TEST(Point2Test, Scaling)
 {
-  auto point = keisan::Point2(4.0, 3.0);
+  auto point = ksn::Point2(4.0, 3.0);
 
-  ASSERT_EQ(point.scale({2.0, 3.0}), keisan::Point2(8.0, 9.0));
-  ASSERT_EQ(point.scale(2.0), keisan::Point2(8.0, 6.0));
-  ASSERT_EQ(point.scale_from({2.0, 3.0}, {1.0, -1.0}), keisan::Point2(7.0, 11.0));
-  ASSERT_EQ(point.scale_from(2.0, {1.0, -1.0}), keisan::Point2(7.0, 7.0));
+  ASSERT_EQ(point.scale({2.0, 3.0}), ksn::Point2(8.0, 9.0));
+  ASSERT_EQ(point.scale(2.0), ksn::Point2(8.0, 6.0));
+  ASSERT_EQ(point.scale_from({2.0, 3.0}, {1.0, -1.0}), ksn::Point2(7.0, 11.0));
+  ASSERT_EQ(point.scale_from(2.0, {1.0, -1.0}), ksn::Point2(7.0, 7.0));
 }
 
 TEST(Point2Test, Rotation)
 {
-  auto point = keisan::Point2(4.0, 3.0);
+  auto point = ksn::Point2(4.0, 3.0);
 
-  ASSERT_EQ(point.rotate(keisan::make_degree(90.0)), keisan::Point2(-3.0, 4.0));
+  ASSERT_EQ(point.rotate(ksn::make_degree(90.0)), ksn::Point2(-3.0, 4.0));
   ASSERT_EQ(
-    point.rotate_from(keisan::make_degree(90.0), {1.0, -1.0}), keisan::Point2(-3.0, 2.0));
+    point.rotate_from(ksn::make_degree(90.0), {1.0, -1.0}), ksn::Point2(-3.0, 2.0));
 }

@@ -25,7 +25,7 @@
 
 #define ASSERT_SQUARE_MATRIX_N_EQ(N, SQUARE_MATRIX, ...) \
   { \
-    keisan::SquareMatrix<N> _square_matrix = SQUARE_MATRIX; \
+    ksn::SquareMatrix<N> _square_matrix = SQUARE_MATRIX; \
     double _values[] = {__VA_ARGS__}; \
     for (size_t i = 0; i < N; ++i) { \
       for (size_t j = 0; j < N; ++j) { \
@@ -34,9 +34,11 @@
     } \
   }
 
+namespace ksn = keisan;
+
 TEST(SquareMatrixTest, OutStream)
 {
-  auto a = keisan::SquareMatrix<2>(
+  auto a = ksn::SquareMatrix<2>(
     1.0, 1.0,
     2.0, 2.0);
 
@@ -48,7 +50,7 @@ TEST(SquareMatrixTest, OutStream)
 
 TEST(SquareMatrixTest, InitialValue)
 {
-  auto a = keisan::SquareMatrix<2>(
+  auto a = ksn::SquareMatrix<2>(
     1.0, 1.0,
     2.0, 2.0);
 
@@ -57,7 +59,7 @@ TEST(SquareMatrixTest, InitialValue)
     1.0, 1.0,
     2.0, 2.0);
 
-  auto b = keisan::SquareMatrix<4>(
+  auto b = ksn::SquareMatrix<4>(
     1.0, 1.0, 1.0, 1.0,
     2.0, 2.0, 2.0, 2.0,
     3.0, 3.0, 3.0, 3.0,
@@ -73,13 +75,13 @@ TEST(SquareMatrixTest, InitialValue)
 
 TEST(SquareMatrixTest, ZeroValue)
 {
-  auto a = keisan::SquareMatrix<2>::zero();
+  auto a = ksn::SquareMatrix<2>::zero();
   ASSERT_SQUARE_MATRIX_N_EQ(
     2, a,
     0.0, 0.0,
     0.0, 0.0);
 
-  auto b = keisan::SquareMatrix<4>::zero();
+  auto b = ksn::SquareMatrix<4>::zero();
   ASSERT_SQUARE_MATRIX_N_EQ(
     4, b,
     0.0, 0.0, 0.0, 0.0,
@@ -90,13 +92,13 @@ TEST(SquareMatrixTest, ZeroValue)
 
 TEST(SquareMatrixTest, IdentityValue)
 {
-  auto a = keisan::SquareMatrix<2>::identity();
+  auto a = ksn::SquareMatrix<2>::identity();
   ASSERT_SQUARE_MATRIX_N_EQ(
     2, a,
     1.0, 0.0,
     0.0, 1.0);
 
-  auto b = keisan::SquareMatrix<4>::identity();
+  auto b = ksn::SquareMatrix<4>::identity();
   ASSERT_SQUARE_MATRIX_N_EQ(
     4, b,
     1.0, 0.0, 0.0, 0.0,
@@ -107,7 +109,7 @@ TEST(SquareMatrixTest, IdentityValue)
 
 TEST(SquareMatrixTest, ComparisonOperation)
 {
-  auto a = keisan::SquareMatrix<2>(
+  auto a = ksn::SquareMatrix<2>(
     1.0, 1.0,
     2.0, 2.0);
 
@@ -124,11 +126,11 @@ TEST(SquareMatrixTest, ComparisonOperation)
 
 TEST(SquareMatrixTest, SquareMatrixMultiplication)
 {
-  auto a = keisan::SquareMatrix<2>(
+  auto a = ksn::SquareMatrix<2>(
     1.0, 1.0,
     2.0, 2.0);
 
-  auto b = keisan::SquareMatrix<2>(
+  auto b = ksn::SquareMatrix<2>(
     3.0, 3.0,
     4.0, 4.0);
 
@@ -140,12 +142,12 @@ TEST(SquareMatrixTest, SquareMatrixMultiplication)
 
 TEST(SquareMatrixTest, MatrixOperation)
 {
-  auto a = keisan::SquareMatrix<3>(
+  auto a = ksn::SquareMatrix<3>(
     1.0, 1.0, 1.0,
     2.0, 2.0, 2.0,
     3.0, 3.0, 3.0);
 
-  auto b = keisan::SquareMatrix<3>(
+  auto b = ksn::SquareMatrix<3>(
     1.0, 2.0, 3.0,
     1.0, 2.0, 3.0,
     1.0, 2.0, 3.0);
@@ -179,7 +181,7 @@ TEST(SquareMatrixTest, MatrixOperation)
 
 TEST(SquareMatrixTest, ScalarOperation)
 {
-  auto a = keisan::SquareMatrix<3>(
+  auto a = ksn::SquareMatrix<3>(
     1.0, 1.0, 1.0,
     2.0, 2.0, 2.0,
     3.0, 3.0, 3.0);
@@ -239,7 +241,7 @@ TEST(SquareMatrixTest, ScalarOperation)
 
 TEST(SquareMatrixTest, NegationOperation)
 {
-  auto a = keisan::SquareMatrix<3>(
+  auto a = ksn::SquareMatrix<3>(
     1.0, 1.0, 1.0,
     2.0, 2.0, 2.0,
     3.0, 3.0, 3.0);

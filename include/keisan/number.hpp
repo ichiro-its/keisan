@@ -55,6 +55,9 @@ T map(
 template<typename T, enable_if_is_arithmetic<T> = true>
 T clamp(const T & value, const T & min, const T & max);
 
+template<typename T>
+Angle<T> clamp(const Angle<T> & value, const Angle<T> & min, const Angle<T> & max);
+
 template<typename T, enable_if_is_floating_point<T> = true>
 T wrap(const T & value, const T & min, const T & max);
 

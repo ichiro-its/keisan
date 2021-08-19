@@ -108,6 +108,13 @@ TEST(NumberTest, ClampFloatingPoint)
   EXPECT_DOUBLE_EQ(ksn::clamp(5.5, -3.3, 2.2), 2.2) << "5.5 > 2.2";
 }
 
+TEST(NumberTest, ClampAngle)
+{
+  EXPECT_EQ(ksn::clamp(0_deg, -90_deg, 45_deg), 0_deg) << "-90 <= 0 <= 45";
+  EXPECT_EQ(ksn::clamp(-180_deg, -90_deg, 45_deg), -90_deg) << "-180 < -90";
+  EXPECT_EQ(ksn::clamp(90_deg, -90_deg, 45_deg), 45_deg) << "90 > 45";
+}
+
 TEST(NumberTest, WrapIntegral)
 {
   EXPECT_EQ(ksn::wrap(13, 10, 15), 13) <<

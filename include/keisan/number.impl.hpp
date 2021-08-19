@@ -62,6 +62,20 @@ T clamp(const T & value, const T & min, const T & max)
   return std::min(std::max(value, min), max);
 }
 
+template<typename T>
+Angle<T> clamp(const Angle<T> & value, const Angle<T> & min, const Angle<T> & max)
+{
+  if (value < min) {
+    return min;
+  }
+
+  if (value > max) {
+    return max;
+  }
+
+  return value;
+}
+
 template<typename T, enable_if_is_floating_point<T> = true>
 T wrap(const T & value, const T & min, const T & max)
 {

@@ -21,20 +21,22 @@
 #include <gtest/gtest.h>
 #include <keisan/keisan.hpp>
 
-using namespace keisan::literals;  // NOLINT
+namespace ksn = keisan;
+
+using namespace ksn::literals;  // NOLINT
 
 TEST(EulerAnglesTest, Empty) {
-  keisan::EulerAngles euler;
+  ksn::EulerAngles euler;
 }
 
 TEST(EulerAnglesTest, AssignValue) {
-  keisan::EulerAngles a(0.0_deg, 90.0_deg, 180.0_deg);
+  ksn::EulerAngles a(0.0_deg, 90.0_deg, 180.0_deg);
 
   ASSERT_DOUBLE_EQ(a.roll.degree(), 0.0);
   ASSERT_DOUBLE_EQ(a.pitch.degree(), 90.0);
   ASSERT_DOUBLE_EQ(a.yaw.degree(), 180.0);
 
-  keisan::EulerAngles b;
+  ksn::EulerAngles b;
   b = a;
 
   ASSERT_EQ(a.roll, b.roll);
@@ -43,9 +45,9 @@ TEST(EulerAnglesTest, AssignValue) {
 }
 
 TEST(EulerAnglesTest, ComparisonOperator) {
-  keisan::EulerAngles a(0.0_deg, 90.0_deg, 180.0_deg);
+  ksn::EulerAngles a(0.0_deg, 90.0_deg, 180.0_deg);
 
-  keisan::EulerAngles b = a;
+  ksn::EulerAngles b = a;
 
   ASSERT_TRUE(a == b);
   ASSERT_FALSE(a != b);
@@ -57,7 +59,7 @@ TEST(EulerAnglesTest, ComparisonOperator) {
 }
 
 TEST(EulerAnglesTest, QuaternionConversion) {
-  keisan::EulerAngles euler(0.0_deg, 0.0_deg, 90.0_deg);
+  ksn::EulerAngles euler(0.0_deg, 0.0_deg, 90.0_deg);
 
   auto quaternion = euler.quaternion();
 

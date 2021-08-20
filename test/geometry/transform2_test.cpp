@@ -29,16 +29,18 @@
     ASSERT_DOUBLE_EQ(temp_point.y, (point_y)); \
   }
 
+namespace ksn = keisan;
+
 TEST(Trasform2Test, GeometryTransformation)
 {
-  auto point = keisan::Point2(3.0, 5.0);
+  auto point = ksn::Point2(3.0, 5.0);
 
-  auto transform = keisan::Transform2();
+  auto transform = ksn::Transform2();
 
   transform.set_scale({2.0, 3.0});
   ASSERT_POINT2_EQ(transform * point, 6.0, 15.0);
 
-  transform.set_rotation(keisan::make_degree(90.0));
+  transform.set_rotation(ksn::make_degree(90.0));
   ASSERT_POINT2_EQ(transform * point, -15.0, 6.0);
 
   transform.set_translation({2.0, 3.0});
@@ -47,9 +49,9 @@ TEST(Trasform2Test, GeometryTransformation)
 
 TEST(Trasform2Test, Translation)
 {
-  auto point = keisan::Point2(3.0, 5.0);
+  auto point = ksn::Point2(3.0, 5.0);
 
-  auto transform = keisan::Transform2();
+  auto transform = ksn::Transform2();
 
   transform.set_translation({0.0, 0.0});
   ASSERT_POINT2_EQ(transform * point, 3.0, 5.0);
@@ -60,22 +62,22 @@ TEST(Trasform2Test, Translation)
 
 TEST(Trasform2Test, Rotation)
 {
-  auto point = keisan::Point2(3.0, 5.0);
+  auto point = ksn::Point2(3.0, 5.0);
 
-  auto transform = keisan::Transform2();
+  auto transform = ksn::Transform2();
 
-  transform.set_rotation(keisan::make_degree(0.0));
+  transform.set_rotation(ksn::make_degree(0.0));
   ASSERT_POINT2_EQ(transform * point, 3.0, 5.0);
 
-  transform.set_rotation(keisan::make_degree(180.0));
+  transform.set_rotation(ksn::make_degree(180.0));
   ASSERT_POINT2_EQ(transform * point, -3.0, -5.0);
 }
 
 TEST(Trasform2Test, Scaling)
 {
-  auto point = keisan::Point2(3.0, 5.0);
+  auto point = ksn::Point2(3.0, 5.0);
 
-  auto transform = keisan::Transform2();
+  auto transform = ksn::Transform2();
 
   transform.set_scale({1.0, 1.0});
   ASSERT_POINT2_EQ(transform * point, 3.0, 5.0);

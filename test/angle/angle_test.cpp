@@ -25,40 +25,42 @@
 
 #include "keisan/keisan.hpp"
 
-using namespace keisan::literals;  // NOLINT
+namespace ksn = keisan;
+
+using namespace ksn::literals;  // NOLINT
 
 TEST(AngleTest, MakeDegree)
 {
-  EXPECT_FLOAT_EQ(keisan::make_degree(90.0f).degree(), 90.0f);
-  EXPECT_DOUBLE_EQ(keisan::make_degree(-45.0).degree(), -45.0);
-  EXPECT_DOUBLE_EQ(keisan::make_degree(15.0l).degree(), 15.0l);
+  EXPECT_FLOAT_EQ(ksn::make_degree(90.0f).degree(), 90.0f);
+  EXPECT_DOUBLE_EQ(ksn::make_degree(-45.0).degree(), -45.0);
+  EXPECT_DOUBLE_EQ(ksn::make_degree(15.0l).degree(), 15.0l);
 }
 
 TEST(AngleTest, MakeRadian)
 {
-  EXPECT_FLOAT_EQ(keisan::make_radian<float>(0.5_pi).radian(), 0.5_pi);
-  EXPECT_DOUBLE_EQ(keisan::make_radian<double>(-0.25_pi).radian(), -0.25_pi);
-  EXPECT_DOUBLE_EQ(keisan::make_radian<long double>(0.1_pi).radian(), 0.1_pi);
+  EXPECT_FLOAT_EQ(ksn::make_radian<float>(0.5_pi).radian(), 0.5_pi);
+  EXPECT_DOUBLE_EQ(ksn::make_radian<double>(-0.25_pi).radian(), -0.25_pi);
+  EXPECT_DOUBLE_EQ(ksn::make_radian<long double>(0.1_pi).radian(), 0.1_pi);
 }
 
 TEST(AngleTest, DegLiterals)
 {
-  EXPECT_EQ(0_deg, keisan::make_degree(0.0));
-  EXPECT_EQ(90_deg, keisan::make_degree(90.0));
-  EXPECT_EQ(-45_deg, keisan::make_degree(-45.0));
-  EXPECT_EQ(0.0_deg, keisan::make_degree(0.0));
-  EXPECT_EQ(12.5_deg, keisan::make_degree(12.5));
-  EXPECT_EQ(-2.5_deg, keisan::make_degree(-2.5));
+  EXPECT_EQ(0_deg, ksn::make_degree(0.0));
+  EXPECT_EQ(90_deg, ksn::make_degree(90.0));
+  EXPECT_EQ(-45_deg, ksn::make_degree(-45.0));
+  EXPECT_EQ(0.0_deg, ksn::make_degree(0.0));
+  EXPECT_EQ(12.5_deg, ksn::make_degree(12.5));
+  EXPECT_EQ(-2.5_deg, ksn::make_degree(-2.5));
 }
 
 TEST(AngleTest, RadLiterals)
 {
-  EXPECT_EQ(0_pi_rad, keisan::make_radian<double>(0_pi));
-  EXPECT_EQ(1_pi_rad, keisan::make_radian<double>(1_pi));
-  EXPECT_EQ(-2_pi_rad, keisan::make_radian<double>(-2_pi));
-  EXPECT_EQ(0.0_pi_rad, keisan::make_radian<double>(0.0_pi));
-  EXPECT_EQ(0.5_pi_rad, keisan::make_radian<double>(0.5_pi));
-  EXPECT_EQ(-0.25_pi_rad, keisan::make_radian<double>(-0.25_pi));
+  EXPECT_EQ(0_pi_rad, ksn::make_radian<double>(0_pi));
+  EXPECT_EQ(1_pi_rad, ksn::make_radian<double>(1_pi));
+  EXPECT_EQ(-2_pi_rad, ksn::make_radian<double>(-2_pi));
+  EXPECT_EQ(0.0_pi_rad, ksn::make_radian<double>(0.0_pi));
+  EXPECT_EQ(0.5_pi_rad, ksn::make_radian<double>(0.5_pi));
+  EXPECT_EQ(-0.25_pi_rad, ksn::make_radian<double>(-0.25_pi));
 }
 
 TEST(AngleTest, OutputStream)
@@ -71,25 +73,25 @@ TEST(AngleTest, OutputStream)
 
 TEST(AngleTest, Empty)
 {
-  keisan::Angle<float> float_angle;
-  keisan::Angle<double> double_angle;
-  keisan::Angle<long double> long_double_angle;
+  ksn::Angle<float> float_angle;
+  ksn::Angle<double> double_angle;
+  ksn::Angle<long double> long_double_angle;
 }
 
 TEST(AngleTest, AssignmentConstructor)
 {
   #define EXPECT_CONVERSION_CONSTRUCTOR(TYPE, SOURCE) \
   { \
-    keisan::Angle<TYPE> a(SOURCE), b = SOURCE, c; \
+    ksn::Angle<TYPE> a(SOURCE), b = SOURCE, c; \
     c = SOURCE; \
     EXPECT_DOUBLE_EQ(a.degree(), SOURCE.degree()); \
     EXPECT_DOUBLE_EQ(b.degree(), SOURCE.degree()); \
     EXPECT_DOUBLE_EQ(c.degree(), SOURCE.degree()); \
   }
 
-  auto float_angle = keisan::make_degree(90.0f);
-  auto double_angle = keisan::make_degree(-45.0);
-  auto long_double_angle = keisan::make_degree(15.0l);
+  auto float_angle = ksn::make_degree(90.0f);
+  auto double_angle = ksn::make_degree(-45.0);
+  auto long_double_angle = ksn::make_degree(15.0l);
 
   #define LOOP_EXPECT_CONVERSION_CONSTRUCTOR(TYPE) \
   { \
@@ -176,7 +178,7 @@ TEST(AngleTest, Difference)
     "270 + (-1) * 360  = -90\n"
     "-90 - (-1pi) = 90";
 
-  EXPECT_EQ(keisan::difference_between(b, a), -0.5_pi_rad) <<
+  EXPECT_EQ(ksn::difference_between(b, a), -0.5_pi_rad) <<
     "-1pi + 0 * 2pi = -1pi\n"
     "270 + (-1) * 360  = -90\n"
     "-1pi - (-90) = -0.5pi";

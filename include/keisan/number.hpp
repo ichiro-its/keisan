@@ -21,12 +21,13 @@
 #ifndef KEISAN__NUMBER_HPP_
 #define KEISAN__NUMBER_HPP_
 
-#include <algorithm>
-#include <cmath>
 #include <type_traits>
 
 namespace keisan
 {
+
+template<typename T>
+class Angle;
 
 template<typename T>
 using enable_if_is_integral = std::enable_if_t<std::is_integral<T>::value, bool>;
@@ -38,48 +39,30 @@ template<typename T>
 using enable_if_is_arithmetic = std::enable_if_t<std::is_arithmetic<T>::value, bool>;
 
 template<typename T, enable_if_is_arithmetic<T> = true>
-T sign(const T & value)
-{
-  return (value >= 0) ? 1 : -1;
-}
+T sign(const T & value);
+
+template<typename T>
+T sign(const Angle<T> & value);
 
 template<typename T, enable_if_is_arithmetic<T> = true>
-T scale(const T & value, const T & source, const T & target)
-{
-  return value / source * target;
-}
+T scale(const T & value, const T & source, const T & target);
 
 template<typename T, enable_if_is_arithmetic<T> = true>
 T map(
   const T & value, const T & source_min, const T & source_max,
-  const T & target_min, const T & target_max)
-{
-  return target_min + scale(value - source_min, source_max - source_min, target_max - target_min);
-}
+  const T & target_min, const T & target_max);
 
 template<typename T, enable_if_is_arithmetic<T> = true>
-T clamp(const T & value, const T & min, const T & max)
-{
-  return std::min(std::max(value, min), max);
-}
+T clamp(const T & value, const T & min, const T & max);
+
+template<typename T>
+Angle<T> clamp(const Angle<T> & value, const Angle<T> & min, const Angle<T> & max);
 
 template<typename T, enable_if_is_floating_point<T> = true>
-T wrap(const T & value, const T & min, const T & max)
-{
-  auto min_value = value - min;
-  auto min_max = max - min;
-
-  return min + std::fmod(min_max + std::fmod(min_value, min_max), min_max);
-}
+T wrap(const T & value, const T & min, const T & max);
 
 template<typename T, enable_if_is_integral<T> = true>
-T wrap(const T & value, const T & min, const T & max)
-{
-  auto min_value = value - min;
-  auto min_max = max - min;
-
-  return min + (min_max + min_value % min_max) % min_max;
-}
+T wrap(const T & value, const T & min, const T & max);
 
 [[deprecated("Use sign() instead.")]]
 double sign_number(double value);
@@ -98,5 +81,7 @@ double clamp_number(double value, double min, double max);
 double wrap_number(double value, double min, double max);
 
 }  // namespace keisan
+
+#include <keisan/number.impl.hpp>  // NOLINT
 
 #endif  // KEISAN__NUMBER_HPP_

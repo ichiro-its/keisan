@@ -21,19 +21,21 @@
 #include <gtest/gtest.h>
 #include <keisan/keisan.hpp>
 
+namespace ksn = keisan;
+
 TEST(QuaternionTest, Empty) {
-  keisan::Quaternion quaternion;
+  ksn::Quaternion quaternion;
 }
 
 TEST(QuaternionTest, AssignValue) {
-  keisan::Quaternion a(1.0, 0.5, 0.0, -0.5);
+  ksn::Quaternion a(1.0, 0.5, 0.0, -0.5);
 
   ASSERT_DOUBLE_EQ(a.x, 1.0);
   ASSERT_DOUBLE_EQ(a.y, 0.5);
   ASSERT_DOUBLE_EQ(a.z, 0.0);
   ASSERT_DOUBLE_EQ(a.w, -0.5);
 
-  keisan::Quaternion b;
+  ksn::Quaternion b;
   b = a;
 
   ASSERT_DOUBLE_EQ(a.x, b.x);
@@ -43,8 +45,8 @@ TEST(QuaternionTest, AssignValue) {
 }
 
 TEST(QuaternionTest, ComparisonOperator) {
-  keisan::Quaternion a(1.0, 0.5, 0.0, -0.5);
-  keisan::Quaternion b = a;
+  ksn::Quaternion a(1.0, 0.5, 0.0, -0.5);
+  ksn::Quaternion b = a;
 
   ASSERT_TRUE(a == b);
   ASSERT_FALSE(a != b);

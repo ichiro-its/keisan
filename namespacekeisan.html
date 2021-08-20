@@ -198,6 +198,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a7df1dd08022e0d331dde63f92aaa5234"><td class="memTemplParams" colspan="2">template&lt;typename T , enable_if_is_arithmetic&lt; T &gt;  = true&gt; </td></tr>
 <tr class="memitem:a7df1dd08022e0d331dde63f92aaa5234"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a7df1dd08022e0d331dde63f92aaa5234">sign</a> (const T &amp;value)</td></tr>
 <tr class="separator:a7df1dd08022e0d331dde63f92aaa5234"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65f75ad1b011b2c91e65146d9acc702e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a65f75ad1b011b2c91e65146d9acc702e"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a65f75ad1b011b2c91e65146d9acc702e">sign</a> (const <a class="el" href="classkeisan_1_1Angle.html">Angle</a>&lt; T &gt; &amp;value)</td></tr>
+<tr class="separator:a65f75ad1b011b2c91e65146d9acc702e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0293a153d2138fbe11554c1149ff74b0"><td class="memTemplParams" colspan="2">template&lt;typename T , enable_if_is_arithmetic&lt; T &gt;  = true&gt; </td></tr>
 <tr class="memitem:a0293a153d2138fbe11554c1149ff74b0"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a0293a153d2138fbe11554c1149ff74b0">scale</a> (const T &amp;value, const T &amp;source, const T &amp;target)</td></tr>
 <tr class="separator:a0293a153d2138fbe11554c1149ff74b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -207,6 +210,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a874cd4c440b669c256002340d759e253"><td class="memTemplParams" colspan="2">template&lt;typename T , enable_if_is_arithmetic&lt; T &gt;  = true&gt; </td></tr>
 <tr class="memitem:a874cd4c440b669c256002340d759e253"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a874cd4c440b669c256002340d759e253">clamp</a> (const T &amp;value, const T &amp;min, const T &amp;max)</td></tr>
 <tr class="separator:a874cd4c440b669c256002340d759e253"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55ccc1fbf46ca81eec42716a572045a8"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a55ccc1fbf46ca81eec42716a572045a8"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classkeisan_1_1Angle.html">Angle</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a55ccc1fbf46ca81eec42716a572045a8">clamp</a> (const <a class="el" href="classkeisan_1_1Angle.html">Angle</a>&lt; T &gt; &amp;value, const <a class="el" href="classkeisan_1_1Angle.html">Angle</a>&lt; T &gt; &amp;min, const <a class="el" href="classkeisan_1_1Angle.html">Angle</a>&lt; T &gt; &amp;max)</td></tr>
+<tr class="separator:a55ccc1fbf46ca81eec42716a572045a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf3d244c758f5c547330b2178a973dd8"><td class="memTemplParams" colspan="2">template&lt;typename T , enable_if_is_floating_point&lt; T &gt;  = true&gt; </td></tr>
 <tr class="memitem:adf3d244c758f5c547330b2178a973dd8"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#adf3d244c758f5c547330b2178a973dd8">wrap</a> (const T &amp;value, const T &amp;min, const T &amp;max)</td></tr>
 <tr class="separator:adf3d244c758f5c547330b2178a973dd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1136,7 +1142,7 @@ template&lt;size_t N&gt; </div>
 </div>
 </div>
 <a id="a7df1dd08022e0d331dde63f92aaa5234"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7df1dd08022e0d331dde63f92aaa5234">&#9670;&nbsp;</a></span>sign()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7df1dd08022e0d331dde63f92aaa5234">&#9670;&nbsp;</a></span>sign() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1147,6 +1153,26 @@ template&lt;typename T , enable_if_is_arithmetic&lt; T &gt;  = true&gt; </div>
           <td class="memname">T keisan::sign </td>
           <td>(</td>
           <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a65f75ad1b011b2c91e65146d9acc702e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65f75ad1b011b2c91e65146d9acc702e">&#9670;&nbsp;</a></span>sign() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">T keisan::sign </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classkeisan_1_1Angle.html">Angle</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1240,7 +1266,7 @@ template&lt;typename T , enable_if_is_arithmetic&lt; T &gt;  = true&gt; </div>
 </div>
 </div>
 <a id="a874cd4c440b669c256002340d759e253"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a874cd4c440b669c256002340d759e253">&#9670;&nbsp;</a></span>clamp()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a874cd4c440b669c256002340d759e253">&#9670;&nbsp;</a></span>clamp() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1263,6 +1289,42 @@ template&lt;typename T , enable_if_is_arithmetic&lt; T &gt;  = true&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>max</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a55ccc1fbf46ca81eec42716a572045a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55ccc1fbf46ca81eec42716a572045a8">&#9670;&nbsp;</a></span>clamp() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classkeisan_1_1Angle.html">Angle</a>&lt; T &gt; keisan::clamp </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classkeisan_1_1Angle.html">Angle</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classkeisan_1_1Angle.html">Angle</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classkeisan_1_1Angle.html">Angle</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>max</em>&#160;</td>
         </tr>
         <tr>

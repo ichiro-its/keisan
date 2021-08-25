@@ -62,9 +62,15 @@ public:
   template<typename U>
   friend class Angle;
 
+  friend Angle<T> make_degree<T>(const T & value);
+  friend Angle<T> make_radian<T>(const T & value);
+
   Angle();
+
+private:
   explicit Angle(const T & data, const bool & is_degree = false);
 
+public:
   template<typename U>
   operator Angle<U>() const;
 

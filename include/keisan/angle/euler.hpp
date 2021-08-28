@@ -28,30 +28,36 @@
 namespace keisan
 {
 
+// Forward declaration
+template<typename T>
 struct Euler;
+
 struct Quaternion;
 
-std::ostream & operator<<(std::ostream & out, const Euler & euler);
+template<typename T>
+std::ostream & operator<<(std::ostream & out, const Euler<T> & euler);
 
+template<typename T>
 struct Euler
 {
   Euler();
-  Euler(const Angle<double> & roll, const Angle<double> & pitch, const Angle<double> & yaw);
+  Euler(const Angle<T> & roll, const Angle<T> & pitch, const Angle<T> & yaw);
 
-  Euler(const Euler & other);
+  template<typename U>
+  operator Euler<U>() const;
 
-  Euler & operator=(const Euler & other);
-
-  bool operator==(const Euler & other) const;
-  bool operator!=(const Euler & other) const;
+  bool operator==(const Euler<T> & other) const;
+  bool operator!=(const Euler<T> & other) const;
 
   Quaternion quaternion() const;
 
-  Angle<double> roll;
-  Angle<double> pitch;
-  Angle<double> yaw;
+  Angle<T> roll;
+  Angle<T> pitch;
+  Angle<T> yaw;
 };
 
 }  // namespace keisan
+
+#include "keisan/angle/euler.impl.hpp"
 
 #endif  // KEISAN__ANGLE__EULER_HPP_

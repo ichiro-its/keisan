@@ -96,20 +96,20 @@ TEST(AngleTest, AssignmentConstructor)
 
   #define LOOP_EXPECT_CONVERSION_CONSTRUCTOR(TYPE) \
   { \
-    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, float_angle); \
-    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, double_angle); \
-    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, long_double_angle); \
+    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, float_angle) \
+    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, double_angle) \
+    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, long_double_angle) \
   }
 
-  LOOP_EXPECT_CONVERSION_CONSTRUCTOR(float);
-  LOOP_EXPECT_CONVERSION_CONSTRUCTOR(double);
-  LOOP_EXPECT_CONVERSION_CONSTRUCTOR(long double);
+  LOOP_EXPECT_CONVERSION_CONSTRUCTOR(float)
+  LOOP_EXPECT_CONVERSION_CONSTRUCTOR(double)
+  LOOP_EXPECT_CONVERSION_CONSTRUCTOR(long double)
 }
 
 TEST(AngleTest, ComparisonOperator)
 {
-  auto a = 90.0_deg;
-  auto b = -180.0_deg;
+  auto a = 90_deg;
+  auto b = -180_deg;
   auto c = -1_pi_rad;
 
   EXPECT_TRUE(b == c && a != c) <<
@@ -154,7 +154,7 @@ TEST(AngleTest, NegationOperator)
 
 TEST(AngleTest, Conversion)
 {
-  auto a = 270.0_deg;
+  auto a = 270_deg;
   auto b = -0.5_pi_rad;
 
   EXPECT_DOUBLE_EQ(a.degree(), 270.0);
@@ -172,9 +172,9 @@ TEST(AngleTest, Normalize)
 TEST(AngleTest, Difference)
 {
   auto a = -1_pi_rad;
-  auto b = 270.0_deg;
+  auto b = 270_deg;
 
-  EXPECT_EQ(a.difference_to(b), 90.0_deg) <<
+  EXPECT_EQ(a.difference_to(b), 90_deg) <<
     "-1pi + 0 * 2pi = -1pi\n"
     "270 + (-1) * 360  = -90\n"
     "-90 - (-1pi) = 90";

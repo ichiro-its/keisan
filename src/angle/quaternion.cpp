@@ -66,9 +66,9 @@ bool Quaternion::operator!=(const Quaternion & other) const
   return x != other.x || y != other.y || z != other.z || w != other.w;
 }
 
-Euler Quaternion::euler() const
+Euler<double> Quaternion::euler() const
 {
-  Euler euler;
+  Euler<double> euler;
 
   double sqx = x * x;
   double sqy = y * y;

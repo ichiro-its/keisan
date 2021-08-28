@@ -18,6 +18,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#ifndef KEISAN__ANGLE__EULER_IMPL_HPP_
+#define KEISAN__ANGLE__EULER_IMPL_HPP_
+
 #include "keisan/angle/euler.hpp"
 #include "keisan/angle/quaternion.hpp"
 #include "keisan/angle/trigonometry.hpp"
@@ -25,46 +28,44 @@
 namespace keisan
 {
 
-std::ostream & operator<<(std::ostream & out, const Euler & euler)
+template<typename T>
+std::ostream & operator<<(std::ostream & out, const Euler<T> & euler)
 {
   return out << euler.roll << " " << euler.pitch << " " << euler.yaw;
 }
 
-Euler::Euler()
+template<typename T>
+Euler<T>::Euler()
 {
 }
 
-Euler::Euler(
-  const Angle<double> & roll, const Angle<double> & pitch, const Angle<double> & yaw)
+template<typename T>
+Euler<T>::Euler(const Angle<T> & roll, const Angle<T> & pitch, const Angle<T> & yaw)
 : roll(roll), pitch(pitch), yaw(yaw)
 {
 }
 
-Euler::Euler(const Euler & other)
-: roll(other.roll), pitch(other.pitch), yaw(other.yaw)
+template<typename T>
+template<typename U>
+Euler<T>::operator Euler<U>() const
 {
+  return Euler<U>(roll, pitch, yaw);
 }
 
-Euler & Euler::operator=(const Euler & other)
-{
-  roll = other.roll;
-  pitch = other.pitch;
-  yaw = other.yaw;
-
-  return *this;
-}
-
-bool Euler::operator==(const Euler & other) const
+template<typename T>
+bool Euler<T>::operator==(const Euler<T> & other) const
 {
   return roll == other.roll && yaw == other.yaw && pitch == other.pitch;
 }
 
-bool Euler::operator!=(const Euler & other) const
+template<typename T>
+bool Euler<T>::operator!=(const Euler<T> & other) const
 {
   return roll != other.roll || yaw != other.yaw || pitch != other.pitch;
 }
 
-Quaternion Euler::quaternion() const
+template<typename T>
+Quaternion Euler<T>::quaternion() const
 {
   Quaternion quaternion;
 
@@ -84,3 +85,5 @@ Quaternion Euler::quaternion() const
 }
 
 }  // namespace keisan
+
+#endif  // KEISAN__ANGLE__EULER_IMPL_HPP_

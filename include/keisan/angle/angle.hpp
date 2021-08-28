@@ -26,6 +26,7 @@
 namespace keisan
 {
 
+// Forward declaration
 template<typename T>
 class Angle;
 

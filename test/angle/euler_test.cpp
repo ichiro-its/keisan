@@ -26,29 +26,60 @@ namespace ksn = keisan;
 using ksn::literals::operator""_deg;
 using ksn::literals::operator""_pi_rad;
 
-TEST(EulerTest, Empty) {
-  ksn::Euler euler;
+TEST(EulerTest, Empty)
+{
+  ksn::Euler<float> float_euler;
+  ksn::Euler<double> double_euler;
+  ksn::Euler<long double> long_double_euler;
 }
 
-TEST(EulerTest, AssignValue) {
-  ksn::Euler a(0.0_deg, 90.0_deg, 180.0_deg);
+TEST(EulerTest, RpyConstructor)
+{
+  #define EXPECT_RPY_CONSTRUCTOR(TYPE) \
+  { \
+    ksn::Euler<TYPE> euler(0_deg, 90_deg, 180_deg); \
+    EXPECT_DOUBLE_EQ(euler.roll.degree(), 0.0); \
+    EXPECT_DOUBLE_EQ(euler.pitch.degree(), 90.0); \
+    EXPECT_DOUBLE_EQ(euler.yaw.degree(), 180.0); \
+  }
 
-  ASSERT_DOUBLE_EQ(a.roll.degree(), 0.0);
-  ASSERT_DOUBLE_EQ(a.pitch.degree(), 90.0);
-  ASSERT_DOUBLE_EQ(a.yaw.degree(), 180.0);
-
-  ksn::Euler b;
-  b = a;
-
-  ASSERT_EQ(a.roll, b.roll);
-  ASSERT_EQ(a.pitch, b.pitch);
-  ASSERT_EQ(a.yaw, b.yaw);
+  EXPECT_RPY_CONSTRUCTOR(float);
+  EXPECT_RPY_CONSTRUCTOR(double);
+  EXPECT_RPY_CONSTRUCTOR(long double);
 }
 
-TEST(EulerTest, ComparisonOperator) {
-  ksn::Euler a(0.0_deg, 90.0_deg, 180.0_deg);
+TEST(EulerTest, AssignmentConstructor)
+{
+  #define EXPECT_CONVERSION_CONSTRUCTOR(TYPE, SOURCE) \
+  { \
+    ksn::Euler<TYPE> a(SOURCE), b = SOURCE, c; \
+    c = SOURCE; \
+    EXPECT_EQ(a, SOURCE); \
+    EXPECT_EQ(b, SOURCE); \
+    EXPECT_EQ(c, SOURCE); \
+  }
 
-  ksn::Euler b = a;
+  ksn::Euler<float> float_euler(90_deg, 90_deg, 90_deg);
+  ksn::Euler<double> double_euler(-45_deg, -45_deg, -45_deg);
+  ksn::Euler<long double> long_double_euler(15_deg, 15_deg, 15_deg);
+
+  #define LOOP_EXPECT_CONVERSION_CONSTRUCTOR(TYPE) \
+  { \
+    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, float_euler) \
+    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, double_euler) \
+    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, long_double_euler) \
+  }
+
+  LOOP_EXPECT_CONVERSION_CONSTRUCTOR(float)
+  LOOP_EXPECT_CONVERSION_CONSTRUCTOR(double)
+  LOOP_EXPECT_CONVERSION_CONSTRUCTOR(long double)
+}
+
+TEST(EulerTest, ComparisonOperator)
+{
+  ksn::Euler<double> a(0.0_deg, 90.0_deg, 180.0_deg);
+
+  auto b = a;
 
   ASSERT_TRUE(a == b);
   ASSERT_FALSE(a != b);
@@ -59,8 +90,9 @@ TEST(EulerTest, ComparisonOperator) {
   ASSERT_TRUE(a != b);
 }
 
-TEST(EulerTest, QuaternionConversion) {
-  ksn::Euler euler(0.0_deg, 0.0_deg, 90.0_deg);
+TEST(EulerTest, QuaternionConversion)
+{
+  ksn::Euler<double> euler(0.0_deg, 0.0_deg, 90.0_deg);
 
   auto quaternion = euler.quaternion();
 

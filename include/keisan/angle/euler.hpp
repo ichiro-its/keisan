@@ -32,6 +32,8 @@ namespace keisan
 template<typename T>
 struct Euler;
 
+// Forward declaration
+template<typename T>
 struct Quaternion;
 
 template<typename T>
@@ -49,7 +51,7 @@ struct Euler
   bool operator==(const Euler<T> & other) const;
   bool operator!=(const Euler<T> & other) const;
 
-  Quaternion quaternion() const;
+  Quaternion<T> quaternion() const;
 
   Angle<T> roll;
   Angle<T> pitch;

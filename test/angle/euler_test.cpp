@@ -43,9 +43,9 @@ TEST(EulerTest, RpyConstructor)
     EXPECT_DOUBLE_EQ(euler.yaw.degree(), 180.0); \
   }
 
-  EXPECT_RPY_CONSTRUCTOR(float);
-  EXPECT_RPY_CONSTRUCTOR(double);
-  EXPECT_RPY_CONSTRUCTOR(long double);
+  EXPECT_RPY_CONSTRUCTOR(float)
+  EXPECT_RPY_CONSTRUCTOR(double)
+  EXPECT_RPY_CONSTRUCTOR(long double)
 }
 
 TEST(EulerTest, AssignmentConstructor)

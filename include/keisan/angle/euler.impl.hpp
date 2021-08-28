@@ -65,16 +65,16 @@ bool Euler<T>::operator!=(const Euler<T> & other) const
 }
 
 template<typename T>
-Quaternion Euler<T>::quaternion() const
+Quaternion<T> Euler<T>::quaternion() const
 {
-  Quaternion quaternion;
+  Quaternion<T> quaternion;
 
-  double sr = sin(0.5 * roll);
-  double cr = cos(0.5 * roll);
-  double sp = sin(0.5 * pitch);
-  double cp = cos(0.5 * pitch);
-  double sy = sin(0.5 * yaw);
-  double cy = cos(0.5 * yaw);
+  T sr = sin(0.5 * roll);
+  T cr = cos(0.5 * roll);
+  T sp = sin(0.5 * pitch);
+  T cp = cos(0.5 * pitch);
+  T sy = sin(0.5 * yaw);
+  T cy = cos(0.5 * yaw);
 
   quaternion.x = sr * cp * cy - cr * sp * sy;
   quaternion.y = cr * sp * cy + sr * cp * sy;

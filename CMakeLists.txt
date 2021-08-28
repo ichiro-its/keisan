@@ -21,7 +21,6 @@ install(DIRECTORY "include" DESTINATION ".")
 
 add_library(${PROJECT_NAME} SHARED
   "src/angle/angle.cpp"
-  "src/angle/quaternion.cpp"
   "src/angle/trigonometry.cpp"
   "src/geometry/point_2.cpp"
   "src/geometry/point_3.cpp"

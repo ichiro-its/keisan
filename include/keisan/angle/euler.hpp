@@ -18,32 +18,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__ANGLE__EULER_ANGLES_HPP_
-#define KEISAN__ANGLE__EULER_ANGLES_HPP_
+#ifndef KEISAN__ANGLE__EULER_HPP_
+#define KEISAN__ANGLE__EULER_HPP_
 
 #include <iostream>
 
-#include "./angle.hpp"
+#include "keisan/angle/angle.hpp"
 
 namespace keisan
 {
 
-struct EulerAngles;
+struct Euler;
 struct Quaternion;
 
-std::ostream & operator<<(std::ostream & out, const EulerAngles & euler);
+std::ostream & operator<<(std::ostream & out, const Euler & euler);
 
-struct EulerAngles
+struct Euler
 {
-  EulerAngles();
-  EulerAngles(const Angle<double> & roll, const Angle<double> & pitch, const Angle<double> & yaw);
+  Euler();
+  Euler(const Angle<double> & roll, const Angle<double> & pitch, const Angle<double> & yaw);
 
-  EulerAngles(const EulerAngles & other);
+  Euler(const Euler & other);
 
-  EulerAngles & operator=(const EulerAngles & other);
+  Euler & operator=(const Euler & other);
 
-  bool operator==(const EulerAngles & other) const;
-  bool operator!=(const EulerAngles & other) const;
+  bool operator==(const Euler & other) const;
+  bool operator!=(const Euler & other) const;
 
   Quaternion quaternion() const;
 
@@ -54,4 +54,4 @@ struct EulerAngles
 
 }  // namespace keisan
 
-#endif  // KEISAN__ANGLE__EULER_ANGLES_HPP_
+#endif  // KEISAN__ANGLE__EULER_HPP_

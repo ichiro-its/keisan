@@ -18,25 +18,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <gtest/gtest.h>
-#include <keisan/keisan.hpp>
+#include "gtest/gtest.h"
+#include "keisan/keisan.hpp"
 
 namespace ksn = keisan;
 
-using namespace ksn::literals;  // NOLINT
+using ksn::literals::operator""_deg;
+using ksn::literals::operator""_pi_rad;
 
-TEST(EulerAnglesTest, Empty) {
-  ksn::EulerAngles euler;
+TEST(EulerTest, Empty) {
+  ksn::Euler euler;
 }
 
-TEST(EulerAnglesTest, AssignValue) {
-  ksn::EulerAngles a(0.0_deg, 90.0_deg, 180.0_deg);
+TEST(EulerTest, AssignValue) {
+  ksn::Euler a(0.0_deg, 90.0_deg, 180.0_deg);
 
   ASSERT_DOUBLE_EQ(a.roll.degree(), 0.0);
   ASSERT_DOUBLE_EQ(a.pitch.degree(), 90.0);
   ASSERT_DOUBLE_EQ(a.yaw.degree(), 180.0);
 
-  ksn::EulerAngles b;
+  ksn::Euler b;
   b = a;
 
   ASSERT_EQ(a.roll, b.roll);
@@ -44,10 +45,10 @@ TEST(EulerAnglesTest, AssignValue) {
   ASSERT_EQ(a.yaw, b.yaw);
 }
 
-TEST(EulerAnglesTest, ComparisonOperator) {
-  ksn::EulerAngles a(0.0_deg, 90.0_deg, 180.0_deg);
+TEST(EulerTest, ComparisonOperator) {
+  ksn::Euler a(0.0_deg, 90.0_deg, 180.0_deg);
 
-  ksn::EulerAngles b = a;
+  ksn::Euler b = a;
 
   ASSERT_TRUE(a == b);
   ASSERT_FALSE(a != b);
@@ -58,8 +59,8 @@ TEST(EulerAnglesTest, ComparisonOperator) {
   ASSERT_TRUE(a != b);
 }
 
-TEST(EulerAnglesTest, QuaternionConversion) {
-  ksn::EulerAngles euler(0.0_deg, 0.0_deg, 90.0_deg);
+TEST(EulerTest, QuaternionConversion) {
+  ksn::Euler euler(0.0_deg, 0.0_deg, 90.0_deg);
 
   auto quaternion = euler.quaternion();
 

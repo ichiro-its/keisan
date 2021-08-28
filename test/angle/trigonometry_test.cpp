@@ -19,7 +19,6 @@
 // THE SOFTWARE.
 
 #include "gtest/gtest.h"
-
 #include "keisan/keisan.hpp"
 
 namespace ksn = keisan;

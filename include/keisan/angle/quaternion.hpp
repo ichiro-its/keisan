@@ -26,7 +26,7 @@
 namespace keisan
 {
 
-struct EulerAngles;
+struct Euler;
 struct Quaternion;
 
 std::ostream & operator<<(std::ostream & out, const Quaternion & quaternion);
@@ -43,7 +43,7 @@ struct Quaternion
   bool operator==(const Quaternion & other) const;
   bool operator!=(const Quaternion & other) const;
 
-  EulerAngles euler() const;
+  Euler euler() const;
 
   double x;
   double y;

@@ -22,12 +22,13 @@
 #include <sstream>
 
 #include "gtest/gtest.h"
-
 #include "keisan/keisan.hpp"
 
 namespace ksn = keisan;
 
-using namespace ksn::literals;  // NOLINT
+using ksn::literals::operator""_deg;
+using ksn::literals::operator""_pi;
+using ksn::literals::operator""_pi_rad;
 
 TEST(AngleTest, MakeDegree)
 {

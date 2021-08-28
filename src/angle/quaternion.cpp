@@ -18,9 +18,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <keisan/angle/euler_angles.hpp>
-#include <keisan/angle/quaternion.hpp>
-#include <keisan/angle/trigonometry.hpp>
+#include "keisan/angle/euler.hpp"
+#include "keisan/angle/quaternion.hpp"
+#include "keisan/angle/trigonometry.hpp"
 
 using keisan::literals::operator""_pi;
 
@@ -66,9 +66,9 @@ bool Quaternion::operator!=(const Quaternion & other) const
   return x != other.x || y != other.y || z != other.z || w != other.w;
 }
 
-EulerAngles Quaternion::euler() const
+Euler Quaternion::euler() const
 {
-  EulerAngles euler;
+  Euler euler;
 
   double sqx = x * x;
   double sqy = y * y;

@@ -18,64 +18,65 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <keisan/angle/euler_angles.hpp>
-#include <keisan/angle/quaternion.hpp>
-#include <keisan/angle/trigonometry.hpp>
+#ifndef KEISAN__ANGLE__QUATERNION_IMPL_HPP_
+#define KEISAN__ANGLE__QUATERNION_IMPL_HPP_
+
+#include "keisan/angle/euler.hpp"
+#include "keisan/angle/quaternion.hpp"
+#include "keisan/angle/trigonometry.hpp"
 
 using keisan::literals::operator""_pi;
 
 namespace keisan
 {
 
-std::ostream & operator<<(std::ostream & out, const Quaternion & quaternion)
+template<typename T>
+std::ostream & operator<<(std::ostream & out, const Quaternion<T> & quaternion)
 {
   return out << quaternion.x << " " << quaternion.y << " " << quaternion.z << " " << quaternion.w;
 }
 
-Quaternion::Quaternion()
+template<typename T>
+Quaternion<T>::Quaternion()
 {
 }
 
-Quaternion::Quaternion(const double & x, const double & y, const double & z, const double & w)
+template<typename T>
+Quaternion<T>::Quaternion(const T & x, const T & y, const T & z, const T & w)
 : x(x), y(y), z(z), w(w)
 {
 }
 
-Quaternion::Quaternion(const Quaternion & other)
-: x(other.x), y(other.y), z(other.z), w(other.w)
+template<typename T>
+template<typename U>
+Quaternion<T>::operator Quaternion<U>() const
 {
+  return Quaternion<U>(x, y, z, w);
 }
 
-Quaternion & Quaternion::operator=(const Quaternion & other)
-{
-  x = other.x;
-  y = other.y;
-  z = other.z;
-  w = other.w;
-
-  return *this;
-}
-
-bool Quaternion::operator==(const Quaternion & other) const
+template<typename T>
+bool Quaternion<T>::operator==(const Quaternion<T> & other) const
 {
   return x == other.x && y == other.y && z == other.z && w == other.w;
 }
 
-bool Quaternion::operator!=(const Quaternion & other) const
+template<typename T>
+bool Quaternion<T>::operator!=(const Quaternion<T> & other) const
 {
   return x != other.x || y != other.y || z != other.z || w != other.w;
 }
 
-EulerAngles Quaternion::euler() const
+template<typename T>
+Euler<T> Quaternion<T>::euler() const
 {
-  EulerAngles euler;
+  Euler<T> euler;
 
-  double sqx = x * x;
-  double sqy = y * y;
-  double sqz = z * z;
-  double sqw = w * w;
+  T sqx = x * x;
+  T sqy = y * y;
+  T sqz = z * z;
+  T sqw = w * w;
 
-  double sarg = -2 * (x * z - w * y) / (sqx + sqy + sqz + sqw);
+  T sarg = -2 * (x * z - w * y) / (sqx + sqy + sqz + sqw);
   if (sarg <= -0.99999) {
     euler.roll = make_radian(0.0);
     euler.pitch = make_radian(-0.5_pi);
@@ -98,3 +99,5 @@ EulerAngles Quaternion::euler() const
 }
 
 }  // namespace keisan
+
+#endif  // KEISAN__ANGLE__QUATERNION_IMPL_HPP_

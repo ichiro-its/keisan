@@ -174,7 +174,7 @@ Angle<T> Angle<T>::operator-() const
 template<typename T>
 T Angle<T>::degree() const
 {
-  using namespace keisan::literals;  // NOLINT
+  using keisan::literals::operator""_pi;
 
   return is_degree ? data : scale<T>(data, 1_pi, 180.0);
 }
@@ -182,7 +182,7 @@ T Angle<T>::degree() const
 template<typename T>
 T Angle<T>::radian() const
 {
-  using namespace keisan::literals;  // NOLINT
+  using keisan::literals::operator""_pi;
 
   return is_degree ? scale<T>(data, 180.0, 1_pi) : data;
 }
@@ -190,7 +190,7 @@ T Angle<T>::radian() const
 template<typename T>
 Angle<T> Angle<T>::normalize() const
 {
-  using namespace keisan::literals;  // NOLINT
+  using keisan::literals::operator""_pi;
 
   if (is_degree) {
     return make_degree(wrap<T>(data, -180.0, 180.0));

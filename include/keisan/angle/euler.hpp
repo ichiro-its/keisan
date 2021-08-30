@@ -18,40 +18,48 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__ANGLE__EULER_ANGLES_HPP_
-#define KEISAN__ANGLE__EULER_ANGLES_HPP_
+#ifndef KEISAN__ANGLE__EULER_HPP_
+#define KEISAN__ANGLE__EULER_HPP_
 
 #include <iostream>
 
-#include "./angle.hpp"
+#include "keisan/angle/angle.hpp"
 
 namespace keisan
 {
 
-struct EulerAngles;
+// Forward declaration
+template<typename T>
+struct Euler;
+
+// Forward declaration
+template<typename T>
 struct Quaternion;
 
-std::ostream & operator<<(std::ostream & out, const EulerAngles & euler);
+template<typename T>
+std::ostream & operator<<(std::ostream & out, const Euler<T> & euler);
 
-struct EulerAngles
+template<typename T>
+struct Euler
 {
-  EulerAngles();
-  EulerAngles(const Angle<double> & roll, const Angle<double> & pitch, const Angle<double> & yaw);
+  Euler();
+  Euler(const Angle<T> & roll, const Angle<T> & pitch, const Angle<T> & yaw);
 
-  EulerAngles(const EulerAngles & other);
+  template<typename U>
+  operator Euler<U>() const;
 
-  EulerAngles & operator=(const EulerAngles & other);
+  bool operator==(const Euler<T> & other) const;
+  bool operator!=(const Euler<T> & other) const;
 
-  bool operator==(const EulerAngles & other) const;
-  bool operator!=(const EulerAngles & other) const;
+  Quaternion<T> quaternion() const;
 
-  Quaternion quaternion() const;
-
-  Angle<double> roll;
-  Angle<double> pitch;
-  Angle<double> yaw;
+  Angle<T> roll;
+  Angle<T> pitch;
+  Angle<T> yaw;
 };
 
 }  // namespace keisan
 
-#endif  // KEISAN__ANGLE__EULER_ANGLES_HPP_
+#include "keisan/angle/euler.impl.hpp"
+
+#endif  // KEISAN__ANGLE__EULER_HPP_

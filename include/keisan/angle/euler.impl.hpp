@@ -18,62 +18,63 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <keisan/angle/euler_angles.hpp>
-#include <keisan/angle/quaternion.hpp>
-#include <keisan/angle/trigonometry.hpp>
+#ifndef KEISAN__ANGLE__EULER_IMPL_HPP_
+#define KEISAN__ANGLE__EULER_IMPL_HPP_
+
+#include "keisan/angle/euler.hpp"
+#include "keisan/angle/quaternion.hpp"
+#include "keisan/angle/trigonometry.hpp"
 
 namespace keisan
 {
 
-std::ostream & operator<<(std::ostream & out, const EulerAngles & euler)
+template<typename T>
+std::ostream & operator<<(std::ostream & out, const Euler<T> & euler)
 {
   return out << euler.roll << " " << euler.pitch << " " << euler.yaw;
 }
 
-EulerAngles::EulerAngles()
+template<typename T>
+Euler<T>::Euler()
 {
 }
 
-EulerAngles::EulerAngles(
-  const Angle<double> & roll, const Angle<double> & pitch, const Angle<double> & yaw)
+template<typename T>
+Euler<T>::Euler(const Angle<T> & roll, const Angle<T> & pitch, const Angle<T> & yaw)
 : roll(roll), pitch(pitch), yaw(yaw)
 {
 }
 
-EulerAngles::EulerAngles(const EulerAngles & other)
-: roll(other.roll), pitch(other.pitch), yaw(other.yaw)
+template<typename T>
+template<typename U>
+Euler<T>::operator Euler<U>() const
 {
+  return Euler<U>(roll, pitch, yaw);
 }
 
-EulerAngles & EulerAngles::operator=(const EulerAngles & other)
-{
-  roll = other.roll;
-  pitch = other.pitch;
-  yaw = other.yaw;
-
-  return *this;
-}
-
-bool EulerAngles::operator==(const EulerAngles & other) const
+template<typename T>
+bool Euler<T>::operator==(const Euler<T> & other) const
 {
   return roll == other.roll && yaw == other.yaw && pitch == other.pitch;
 }
 
-bool EulerAngles::operator!=(const EulerAngles & other) const
+template<typename T>
+bool Euler<T>::operator!=(const Euler<T> & other) const
 {
   return roll != other.roll || yaw != other.yaw || pitch != other.pitch;
 }
 
-Quaternion EulerAngles::quaternion() const
+template<typename T>
+Quaternion<T> Euler<T>::quaternion() const
 {
-  Quaternion quaternion;
+  Quaternion<T> quaternion;
 
-  double sr = sin(0.5 * roll);
-  double cr = cos(0.5 * roll);
-  double sp = sin(0.5 * pitch);
-  double cp = cos(0.5 * pitch);
-  double sy = sin(0.5 * yaw);
-  double cy = cos(0.5 * yaw);
+  T sr = sin(0.5 * roll);
+  T cr = cos(0.5 * roll);
+  T sp = sin(0.5 * pitch);
+  T cp = cos(0.5 * pitch);
+  T sy = sin(0.5 * yaw);
+  T cy = cos(0.5 * yaw);
 
   quaternion.x = sr * cp * cy - cr * sp * sy;
   quaternion.y = cr * sp * cy + sr * cp * sy;
@@ -84,3 +85,5 @@ Quaternion EulerAngles::quaternion() const
 }
 
 }  // namespace keisan
+
+#endif  // KEISAN__ANGLE__EULER_IMPL_HPP_

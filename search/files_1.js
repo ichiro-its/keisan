@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['euler_5fangles_2ehpp_138',['euler_angles.hpp',['../euler__angles_8hpp.html',1,'']]]
+  ['euler_2ehpp_142',['euler.hpp',['../euler_8hpp.html',1,'']]],
+  ['euler_2eimpl_2ehpp_143',['euler.impl.hpp',['../euler_8impl_8hpp.html',1,'']]]
 ];

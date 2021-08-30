@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['w_243',['w',['../structkeisan_1_1Quaternion.html#a3deb4829a6195a339970831febe530d0',1,'keisan::Quaternion']]]
+  ['w_251',['w',['../structkeisan_1_1Quaternion.html#a6ffa0a71e2d3aef023f2192f52a782b4',1,'keisan::Quaternion']]]
 ];

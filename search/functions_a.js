@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['quaternion_214',['quaternion',['../structkeisan_1_1EulerAngles.html#abb75920218e26def85aaa5b991d71ef3',1,'keisan::EulerAngles']]],
-  ['quaternion_215',['Quaternion',['../structkeisan_1_1Quaternion.html#adf3597bc83327234b9835c2fbd108b28',1,'keisan::Quaternion::Quaternion()'],['../structkeisan_1_1Quaternion.html#a66c4f3af507ffcfd02886f93c63d61f3',1,'keisan::Quaternion::Quaternion(const double &amp;x, const double &amp;y, const double &amp;z, const double &amp;w)'],['../structkeisan_1_1Quaternion.html#ad2fd0c64a0896dcd1bddf15b06744120',1,'keisan::Quaternion::Quaternion(const Quaternion &amp;other)']]]
+  ['quaternion_222',['Quaternion',['../structkeisan_1_1Quaternion.html#a5b3c2c96e1369c724033682d61e640b6',1,'keisan::Quaternion::Quaternion()'],['../structkeisan_1_1Quaternion.html#a076bbef9ab69826524c608a3005a5d85',1,'keisan::Quaternion::Quaternion(const T &amp;x, const T &amp;y, const T &amp;z, const T &amp;w)']]],
+  ['quaternion_223',['quaternion',['../structkeisan_1_1Euler.html#a26bb888463f634fd457720c9a605c4c5',1,'keisan::Euler']]]
 ];

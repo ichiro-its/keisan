@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['eulerangles_124',['EulerAngles',['../structkeisan_1_1EulerAngles.html',1,'keisan']]]
+  ['euler_128',['Euler',['../structkeisan_1_1Euler.html',1,'keisan']]]
 ];

@@ -93,11 +93,11 @@ $(function() {
 
 
 <h3><a id="index_e"></a>- e -</h3><ul>
-<li>euler()
-: <a class="el" href="structkeisan_1_1Quaternion.html#a7e9c5698500b88e357514d3e6362765b">keisan::Quaternion</a>
+<li>Euler()
+: <a class="el" href="structkeisan_1_1Euler.html#a02191eb66ed96dc557bacb9e79f2b8e2">keisan::Euler&lt; T &gt;</a>
 </li>
-<li>EulerAngles()
-: <a class="el" href="structkeisan_1_1EulerAngles.html#aadbc4b3cafed42fa64b3bcdb0507aa44">keisan::EulerAngles</a>
+<li>euler()
+: <a class="el" href="structkeisan_1_1Quaternion.html#a0051157ea46a940c636185507c077a6e">keisan::Quaternion&lt; T &gt;</a>
 </li>
 </ul>
 
@@ -152,11 +152,17 @@ $(function() {
 <li>operator Angle&lt; U &gt;()
 : <a class="el" href="classkeisan_1_1Angle.html#a1653ee9c3f7f63b1e79aa9ffb25da12d">keisan::Angle&lt; T &gt;</a>
 </li>
+<li>operator Euler&lt; U &gt;()
+: <a class="el" href="structkeisan_1_1Euler.html#ace56819b7b0ac06538c2fbe4e3885338">keisan::Euler&lt; T &gt;</a>
+</li>
 <li>operator Matrix&lt; N, 1 &gt;()
 : <a class="el" href="classkeisan_1_1Vector.html#aa77511639d45e7bda85476037ce6c471">keisan::Vector&lt; N &gt;</a>
 </li>
 <li>operator Matrix&lt; N, N &gt;()
 : <a class="el" href="classkeisan_1_1SquareMatrix.html#af146c973026ead735d2d1f9b0437f499">keisan::SquareMatrix&lt; N &gt;</a>
+</li>
+<li>operator Quaternion&lt; U &gt;()
+: <a class="el" href="structkeisan_1_1Quaternion.html#a39df3a1259ba7a935d04c6bdb3ea8508">keisan::Quaternion&lt; T &gt;</a>
 </li>
 <li>operator SquareMatrix&lt; 3 &gt;()
 : <a class="el" href="classkeisan_1_1Transform2.html#ab7feea3b48ec4bd604c6f6268778566a">keisan::Transform2</a>
@@ -173,11 +179,11 @@ $(function() {
 </li>
 <li>operator!=()
 : <a class="el" href="classkeisan_1_1Angle.html#a9746b5356ec2df224d4f5041956b4477">keisan::Angle&lt; T &gt;</a>
-, <a class="el" href="structkeisan_1_1EulerAngles.html#a3e12924b2304867bc8baf3a4b58bd017">keisan::EulerAngles</a>
+, <a class="el" href="structkeisan_1_1Euler.html#aeab83bbbcb24b13149b4ddef82922533">keisan::Euler&lt; T &gt;</a>
 , <a class="el" href="classkeisan_1_1Matrix.html#a2ef260cf8b9a3dfa6e318b4c13344a91">keisan::Matrix&lt; M, N &gt;</a>
 , <a class="el" href="structkeisan_1_1Point2.html#a9d909e7c7b9c0d0e6ffac66bc0b49a1c">keisan::Point2</a>
 , <a class="el" href="structkeisan_1_1Point3.html#a190ed90c643834c0dcdc57dec1e05884">keisan::Point3</a>
-, <a class="el" href="structkeisan_1_1Quaternion.html#a9abe5801d969b143ebdea353762a3d48">keisan::Quaternion</a>
+, <a class="el" href="structkeisan_1_1Quaternion.html#a357ccf0bafcb657b1e6d65a95d783d07">keisan::Quaternion&lt; T &gt;</a>
 , <a class="el" href="classkeisan_1_1SquareMatrix.html#a11ee060111f23d4bf24ab19ce7565de2">keisan::SquareMatrix&lt; N &gt;</a>
 , <a class="el" href="classkeisan_1_1Vector.html#aab53968703cc33418ac0b8d28d914b32">keisan::Vector&lt; N &gt;</a>
 </li>
@@ -209,7 +215,7 @@ $(function() {
 <li>operator+=()
 : <a class="el" href="classkeisan_1_1Angle.html#ae1621caf1997494789273466c66c6ab6">keisan::Angle&lt; T &gt;</a>
 , <a class="el" href="classkeisan_1_1Matrix.html#a1da829e83f8413ad0266503c13eccf86">keisan::Matrix&lt; M, N &gt;</a>
-, <a class="el" href="structkeisan_1_1Point2.html#a3039006e47d3b4423d0a52d61dc0d769">keisan::Point2</a>
+, <a class="el" href="structkeisan_1_1Point2.html#a4bacb9db4bd6f231d79923012ee76b6e">keisan::Point2</a>
 , <a class="el" href="structkeisan_1_1Point3.html#aab9dfeed64d154705b13baefd0b27c70">keisan::Point3</a>
 , <a class="el" href="classkeisan_1_1SquareMatrix.html#a477223e97a606e7cd3d362081cf8ff5b">keisan::SquareMatrix&lt; N &gt;</a>
 , <a class="el" href="classkeisan_1_1Vector.html#a5ae4c51efddffa84601d1ab7d0dc4cb9">keisan::Vector&lt; N &gt;</a>
@@ -217,16 +223,16 @@ $(function() {
 <li>operator-()
 : <a class="el" href="classkeisan_1_1Angle.html#a26ab406c08ceb316932e1b19a1109c8d">keisan::Angle&lt; T &gt;</a>
 , <a class="el" href="classkeisan_1_1Matrix.html#afb664783b526e6b40385eb9ad06fb406">keisan::Matrix&lt; M, N &gt;</a>
-, <a class="el" href="structkeisan_1_1Point2.html#a030bfec3c119ea957336aefc6a2c04cb">keisan::Point2</a>
+, <a class="el" href="structkeisan_1_1Point2.html#a0b38eeda23b6ede18e7e43623eb151cd">keisan::Point2</a>
 , <a class="el" href="structkeisan_1_1Point3.html#a7220d6c4b50938bdc5b9f71f68b8f15f">keisan::Point3</a>
 , <a class="el" href="classkeisan_1_1SquareMatrix.html#ae55d245126f8f8be114796de85e04111">keisan::SquareMatrix&lt; N &gt;</a>
 , <a class="el" href="classkeisan_1_1Vector.html#aa9d2e5784244f9753a41a53ad4fcbb21">keisan::Vector&lt; N &gt;</a>
 </li>
 <li>operator-=()
 : <a class="el" href="classkeisan_1_1Angle.html#ad77fd1da6a44abcb8b108b220ba22e23">keisan::Angle&lt; T &gt;</a>
-, <a class="el" href="classkeisan_1_1Matrix.html#a292206175c5acfd10ece5f273f1d374c">keisan::Matrix&lt; M, N &gt;</a>
-, <a class="el" href="structkeisan_1_1Point2.html#a990aaf417265d37978974c7d49688f21">keisan::Point2</a>
-, <a class="el" href="structkeisan_1_1Point3.html#aa39eb0098f8791541764e853f75cc58b">keisan::Point3</a>
+, <a class="el" href="classkeisan_1_1Matrix.html#a2f27c28702d92b33361f4a3db72ca6e5">keisan::Matrix&lt; M, N &gt;</a>
+, <a class="el" href="structkeisan_1_1Point2.html#a2b564de08a91a0a877d36918536d812d">keisan::Point2</a>
+, <a class="el" href="structkeisan_1_1Point3.html#ad38a052f5eb1bcfd79ab254def94791f">keisan::Point3</a>
 , <a class="el" href="classkeisan_1_1SquareMatrix.html#a0ea932e566060e71d0e10399160c9b95">keisan::SquareMatrix&lt; N &gt;</a>
 , <a class="el" href="classkeisan_1_1Vector.html#ae0dc365a47da50e8435d2719c42998df">keisan::Vector&lt; N &gt;</a>
 </li>
@@ -253,21 +259,19 @@ $(function() {
 : <a class="el" href="classkeisan_1_1Angle.html#a3d53246523e02a7f1a0614ead983cee3">keisan::Angle&lt; T &gt;</a>
 </li>
 <li>operator=()
-: <a class="el" href="structkeisan_1_1EulerAngles.html#a774e18273d766cb46125be60b1f652b6">keisan::EulerAngles</a>
-, <a class="el" href="classkeisan_1_1Matrix.html#acb923b0e0e17ee55218d4c4a958c9d30">keisan::Matrix&lt; M, N &gt;</a>
+: <a class="el" href="classkeisan_1_1Matrix.html#acb923b0e0e17ee55218d4c4a958c9d30">keisan::Matrix&lt; M, N &gt;</a>
 , <a class="el" href="structkeisan_1_1Point2.html#a586e37d2ad1c5b58058c756dbb9b6bc9">keisan::Point2</a>
 , <a class="el" href="structkeisan_1_1Point3.html#a7f8e5a19d306a57aa273b98e5c2ac58e">keisan::Point3</a>
-, <a class="el" href="structkeisan_1_1Quaternion.html#acc40b0a21200f128f63b45bebc1caf10">keisan::Quaternion</a>
 , <a class="el" href="classkeisan_1_1SquareMatrix.html#a614dcd2bb3c734e7f98e7ccb40cd0f80">keisan::SquareMatrix&lt; N &gt;</a>
 , <a class="el" href="classkeisan_1_1Vector.html#aeb3b7d5821a3da38a6cc2696a87bf8e5">keisan::Vector&lt; N &gt;</a>
 </li>
 <li>operator==()
 : <a class="el" href="classkeisan_1_1Angle.html#a39b74e16e2e772100a1c9815e7346846">keisan::Angle&lt; T &gt;</a>
-, <a class="el" href="structkeisan_1_1EulerAngles.html#adffeaf48ffa0b2bcf32ab957d0c27770">keisan::EulerAngles</a>
+, <a class="el" href="structkeisan_1_1Euler.html#aa98c1843f75717b1894730c461b7bb1f">keisan::Euler&lt; T &gt;</a>
 , <a class="el" href="classkeisan_1_1Matrix.html#aead0f1c25cd21ce7961a67bf77305f44">keisan::Matrix&lt; M, N &gt;</a>
 , <a class="el" href="structkeisan_1_1Point2.html#afeee2edd521201bfb8b2222e0d85c28f">keisan::Point2</a>
 , <a class="el" href="structkeisan_1_1Point3.html#a9cc6470522fbd43d1b91040659408578">keisan::Point3</a>
-, <a class="el" href="structkeisan_1_1Quaternion.html#a6d76a86fdc369e89f0ce389a290b08ff">keisan::Quaternion</a>
+, <a class="el" href="structkeisan_1_1Quaternion.html#a22e2641e74992055ff0acd84762bb895">keisan::Quaternion&lt; T &gt;</a>
 , <a class="el" href="classkeisan_1_1SquareMatrix.html#a8fa0b9c0b61cb6543cd5737ee69e17d4">keisan::SquareMatrix&lt; N &gt;</a>
 , <a class="el" href="classkeisan_1_1Vector.html#a8593ea943b4307735a7cf1924232d323">keisan::Vector&lt; N &gt;</a>
 </li>
@@ -287,7 +291,7 @@ $(function() {
 
 <h3><a id="index_p"></a>- p -</h3><ul>
 <li>pitch
-: <a class="el" href="structkeisan_1_1EulerAngles.html#ab3ce7e8470afc1c7d00d5c181c78e373">keisan::EulerAngles</a>
+: <a class="el" href="structkeisan_1_1Euler.html#a7193699839db9d82949a12440c2e9834">keisan::Euler&lt; T &gt;</a>
 </li>
 <li>Point2()
 : <a class="el" href="structkeisan_1_1Point2.html#a5cbb6cbae9ce67874f89e7070fee2abb">keisan::Point2</a>
@@ -300,10 +304,10 @@ $(function() {
 
 <h3><a id="index_q"></a>- q -</h3><ul>
 <li>quaternion()
-: <a class="el" href="structkeisan_1_1EulerAngles.html#abb75920218e26def85aaa5b991d71ef3">keisan::EulerAngles</a>
+: <a class="el" href="structkeisan_1_1Euler.html#a26bb888463f634fd457720c9a605c4c5">keisan::Euler&lt; T &gt;</a>
 </li>
 <li>Quaternion()
-: <a class="el" href="structkeisan_1_1Quaternion.html#adf3597bc83327234b9835c2fbd108b28">keisan::Quaternion</a>
+: <a class="el" href="structkeisan_1_1Quaternion.html#a5b3c2c96e1369c724033682d61e640b6">keisan::Quaternion&lt; T &gt;</a>
 </li>
 </ul>
 
@@ -313,7 +317,7 @@ $(function() {
 : <a class="el" href="classkeisan_1_1Angle.html#a3dcda6435a699be62b639d4eb56dce9a">keisan::Angle&lt; T &gt;</a>
 </li>
 <li>roll
-: <a class="el" href="structkeisan_1_1EulerAngles.html#af05b4afab2c1586e5d2e9553f4c143d8">keisan::EulerAngles</a>
+: <a class="el" href="structkeisan_1_1Euler.html#a9fbe35e998d0931bff9994bd4d4053b0">keisan::Euler&lt; T &gt;</a>
 </li>
 <li>rotate()
 : <a class="el" href="structkeisan_1_1Point2.html#a1dfc8da21b58a29f1e9b6349a7f299e6">keisan::Point2</a>
@@ -365,7 +369,7 @@ $(function() {
 
 <h3><a id="index_w"></a>- w -</h3><ul>
 <li>w
-: <a class="el" href="structkeisan_1_1Quaternion.html#a3deb4829a6195a339970831febe530d0">keisan::Quaternion</a>
+: <a class="el" href="structkeisan_1_1Quaternion.html#a6ffa0a71e2d3aef023f2192f52a782b4">keisan::Quaternion&lt; T &gt;</a>
 </li>
 </ul>
 
@@ -374,7 +378,7 @@ $(function() {
 <li>x
 : <a class="el" href="structkeisan_1_1Point2.html#a0830e67d7be6e93afe0c2c8f5b333e4b">keisan::Point2</a>
 , <a class="el" href="structkeisan_1_1Point3.html#abc06ff0784b7804542761f05ed803ecb">keisan::Point3</a>
-, <a class="el" href="structkeisan_1_1Quaternion.html#a906b388dc2f592c3541873d5534fb6ff">keisan::Quaternion</a>
+, <a class="el" href="structkeisan_1_1Quaternion.html#accd0882b2f3f7af553147ad6784240fe">keisan::Quaternion&lt; T &gt;</a>
 </li>
 </ul>
 
@@ -383,10 +387,10 @@ $(function() {
 <li>y
 : <a class="el" href="structkeisan_1_1Point2.html#a69907fe938465fd9805c4328008db1fa">keisan::Point2</a>
 , <a class="el" href="structkeisan_1_1Point3.html#a3c78eb3321ffb4bb8aee95322d3468ce">keisan::Point3</a>
-, <a class="el" href="structkeisan_1_1Quaternion.html#a5795e6770c484c6d6f73f9a1f4c2ee85">keisan::Quaternion</a>
+, <a class="el" href="structkeisan_1_1Quaternion.html#a03cebc95d24913c1a0edea9890f3b1f0">keisan::Quaternion&lt; T &gt;</a>
 </li>
 <li>yaw
-: <a class="el" href="structkeisan_1_1EulerAngles.html#a85cd39c4e2f75c028a8f43f471910462">keisan::EulerAngles</a>
+: <a class="el" href="structkeisan_1_1Euler.html#adebad5f48ab709890787e5d7db2ec30f">keisan::Euler&lt; T &gt;</a>
 </li>
 </ul>
 
@@ -394,7 +398,7 @@ $(function() {
 <h3><a id="index_z"></a>- z -</h3><ul>
 <li>z
 : <a class="el" href="structkeisan_1_1Point3.html#a2ca55d77711970e2171c1d093f7db617">keisan::Point3</a>
-, <a class="el" href="structkeisan_1_1Quaternion.html#a64440e88ba1b3504c5743a3d183cf603">keisan::Quaternion</a>
+, <a class="el" href="structkeisan_1_1Quaternion.html#a1b8364295e6d7504525bc74e0e3f52b1">keisan::Quaternion&lt; T &gt;</a>
 </li>
 <li>zero()
 : <a class="el" href="classkeisan_1_1Matrix.html#a3c03b394bb088638627b99db9cde4e7e">keisan::Matrix&lt; M, N &gt;</a>

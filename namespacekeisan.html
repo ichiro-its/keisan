@@ -83,7 +83,7 @@ Namespaces</h2></td></tr>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkeisan_1_1Angle.html">Angle</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkeisan_1_1EulerAngles.html">EulerAngles</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkeisan_1_1Euler.html">Euler</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkeisan_1_1Quaternion.html">Quaternion</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,10 +141,12 @@ Functions</h2></td></tr>
 <tr class="separator:ae5836dfa15d59182ae6763824c17b251"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a5f7000489c4b1ce8c2e67444c870dc"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a0a5f7000489c4b1ce8c2e67444c870dc">delta_deg</a> (double value1, double value2)</td></tr>
 <tr class="separator:a0a5f7000489c4b1ce8c2e67444c870dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a784daa739ac97bdd35d210e68b789fa7"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a784daa739ac97bdd35d210e68b789fa7">operator&lt;&lt;</a> (std::ostream &amp;out, const <a class="el" href="structkeisan_1_1EulerAngles.html">EulerAngles</a> &amp;euler)</td></tr>
-<tr class="separator:a784daa739ac97bdd35d210e68b789fa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a496bb26bb25b63c1b0bc935c9b02e70e"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a496bb26bb25b63c1b0bc935c9b02e70e">operator&lt;&lt;</a> (std::ostream &amp;out, const <a class="el" href="structkeisan_1_1Quaternion.html">Quaternion</a> &amp;quaternion)</td></tr>
-<tr class="separator:a496bb26bb25b63c1b0bc935c9b02e70e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7b74b697f2a52d16882e8da8ff2b247"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:af7b74b697f2a52d16882e8da8ff2b247"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#af7b74b697f2a52d16882e8da8ff2b247">operator&lt;&lt;</a> (std::ostream &amp;out, const <a class="el" href="structkeisan_1_1Euler.html">Euler</a>&lt; T &gt; &amp;euler)</td></tr>
+<tr class="separator:af7b74b697f2a52d16882e8da8ff2b247"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2fd44e898318d316cee40e81c4acc2a"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aa2fd44e898318d316cee40e81c4acc2a"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#aa2fd44e898318d316cee40e81c4acc2a">operator&lt;&lt;</a> (std::ostream &amp;out, const <a class="el" href="structkeisan_1_1Quaternion.html">Quaternion</a>&lt; T &gt; &amp;quaternion)</td></tr>
+<tr class="separator:aa2fd44e898318d316cee40e81c4acc2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3828d5e9c27a7974702a013912dbe71b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a3828d5e9c27a7974702a013912dbe71b"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a3828d5e9c27a7974702a013912dbe71b">sin</a> (const <a class="el" href="classkeisan_1_1Angle.html">Angle</a>&lt; T &gt; &amp;angle)</td></tr>
 <tr class="separator:a3828d5e9c27a7974702a013912dbe71b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -541,14 +543,16 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a784daa739ac97bdd35d210e68b789fa7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a784daa739ac97bdd35d210e68b789fa7">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[2/8]</span></h2>
+<a id="af7b74b697f2a52d16882e8da8ff2b247"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7b74b697f2a52d16882e8da8ff2b247">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[2/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::ostream&amp; keisan::operator&lt;&lt; </td>
+          <td class="memname">std::ostream &amp; keisan::operator&lt;&lt; </td>
           <td>(</td>
           <td class="paramtype">std::ostream &amp;&#160;</td>
           <td class="paramname"><em>out</em>, </td>
@@ -556,7 +560,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structkeisan_1_1EulerAngles.html">EulerAngles</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="structkeisan_1_1Euler.html">Euler</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>euler</em>&#160;</td>
         </tr>
         <tr>
@@ -569,14 +573,16 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a496bb26bb25b63c1b0bc935c9b02e70e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a496bb26bb25b63c1b0bc935c9b02e70e">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[3/8]</span></h2>
+<a id="aa2fd44e898318d316cee40e81c4acc2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2fd44e898318d316cee40e81c4acc2a">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[3/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::ostream&amp; keisan::operator&lt;&lt; </td>
+          <td class="memname">std::ostream &amp; keisan::operator&lt;&lt; </td>
           <td>(</td>
           <td class="paramtype">std::ostream &amp;&#160;</td>
           <td class="paramname"><em>out</em>, </td>
@@ -584,7 +590,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structkeisan_1_1Quaternion.html">Quaternion</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="structkeisan_1_1Quaternion.html">Quaternion</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>quaternion</em>&#160;</td>
         </tr>
         <tr>

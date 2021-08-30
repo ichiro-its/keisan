@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['roll_242',['roll',['../structkeisan_1_1EulerAngles.html#af05b4afab2c1586e5d2e9553f4c143d8',1,'keisan::EulerAngles']]]
+  ['roll_250',['roll',['../structkeisan_1_1Euler.html#a9fbe35e998d0931bff9994bd4d4053b0',1,'keisan::Euler']]]
 ];

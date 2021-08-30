@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['angle_0',['Angle',['../classkeisan_1_1Angle.html#a892b5ad4926d001da60b464b61d8d263',1,'keisan::Angle::Angle()'],['../classkeisan_1_1Angle.html#af17cd57bb050abee6259062bfafc253d',1,'keisan::Angle::Angle()'],['../classkeisan_1_1Angle.html#acf7ab253e5b8c5696e0d0da0ffa56a31',1,'keisan::Angle::Angle(const T &amp;data, const bool &amp;is_degree=false)'],['../classkeisan_1_1Angle.html',1,'keisan::Angle&lt; T &gt;']]],
+  ['angle_0',['Angle',['../classkeisan_1_1Angle.html#a892b5ad4926d001da60b464b61d8d263',1,'keisan::Angle::Angle()'],['../classkeisan_1_1Angle.html#af17cd57bb050abee6259062bfafc253d',1,'keisan::Angle::Angle()'],['../classkeisan_1_1Angle.html',1,'keisan::Angle&lt; T &gt;']]],
   ['angle_2ehpp_1',['angle.hpp',['../angle_2angle_8hpp.html',1,'(Global Namespace)'],['../angle_8hpp.html',1,'(Global Namespace)']]],
   ['angle_2eimpl_2ehpp_2',['angle.impl.hpp',['../angle_8impl_8hpp.html',1,'']]],
   ['angle_3c_20double_20_3e_3',['Angle&lt; double &gt;',['../classkeisan_1_1Angle.html',1,'keisan']]],

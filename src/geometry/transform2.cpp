@@ -26,9 +26,11 @@
 namespace keisan
 {
 
+using namespace keisan::literals;  // NOLINT
+
 Transform2::Transform2()
 : translation(0.0, 0.0),
-  rotation(0.0),
+  rotation(0_deg),
   scale(1.0, 1.0)
 {
 }

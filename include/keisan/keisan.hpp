@@ -23,7 +23,6 @@
 
 #include "./geometry/point_2.hpp"
 #include "./geometry/point_3.hpp"
-#include "./geometry/transform2.hpp"
 
 #include "./angle.hpp"
 #include "./matrix.hpp"

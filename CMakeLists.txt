@@ -24,7 +24,6 @@ add_library(${PROJECT_NAME} SHARED
   "src/angle/trigonometry.cpp"
   "src/geometry/point_2.cpp"
   "src/geometry/point_3.cpp"
-  "src/geometry/transform2.cpp"
   "src/number.cpp")
 
 ament_target_dependencies(${PROJECT_NAME} gtest_vendor)
@@ -50,7 +49,6 @@ if(BUILD_TESTING)
     "test/angle/trigonometry_test.cpp"
     "test/geometry/point_2_test.cpp"
     "test/geometry/point_3_test.cpp"
-    "test/geometry/transform2_test.cpp"
     "test/matrix/matrix_test.cpp"
     "test/matrix/square_matrix_test.cpp"
     "test/matrix/vector_test.cpp"

@@ -23,8 +23,7 @@ add_library(${PROJECT_NAME} SHARED
   "src/angle/angle.cpp"
   "src/angle/trigonometry.cpp"
   "src/geometry/point_2.cpp"
-  "src/geometry/point_3.cpp"
-  "src/number.cpp")
+  "src/geometry/point_3.cpp")
 
 ament_target_dependencies(${PROJECT_NAME} gtest_vendor)
 

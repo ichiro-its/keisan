@@ -64,22 +64,6 @@ T wrap(const T & value, const T & min, const T & max);
 template<typename T, enable_if_is_integral<T> = true>
 T wrap(const T & value, const T & min, const T & max);
 
-[[deprecated("Use sign() instead.")]]
-double sign_number(double value);
-
-[[deprecated("Use scale() instead.")]]
-double scale_number(double value, double source, double target);
-
-[[deprecated("Use map() instead.")]]
-double map_number(
-  double value, double source_min, double source_max, double target_min, double target_max);
-
-[[deprecated("Use clamp() instead.")]]
-double clamp_number(double value, double min, double max);
-
-[[deprecated("Use wrap() instead.")]]
-double wrap_number(double value, double min, double max);
-
 }  // namespace keisan
 
 #include <keisan/number.impl.hpp>  // NOLINT

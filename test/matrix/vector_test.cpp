@@ -88,17 +88,6 @@ TEST(VectorTest, MatrixMultiplication)
   ASSERT_VECTOR_N_EQ(3, a * b, 3.0, 6.0, 9.0);
 }
 
-TEST(VectorTest, SquareMatrixMultiplication)
-{
-  auto a = ksn::SquareMatrix<2>(
-    1.0, 1.0,
-    2.0, 2.0);
-
-  auto b = ksn::Vector<2>(1.0, 2.0);
-
-  ASSERT_VECTOR_N_EQ(2, a * b, 3.0, 6.0);
-}
-
 TEST(VectorTest, VectorOperation)
 {
   auto a = ksn::Vector<5>(1.0, 2.0, 3.0, 4.0, 5.0);

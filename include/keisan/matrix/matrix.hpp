@@ -33,9 +33,6 @@ template<size_t M, size_t N>
 class Matrix;
 
 template<size_t N>
-class SquareMatrix;
-
-template<size_t N>
 class Vector;
 
 template<size_t M, size_t N>
@@ -70,7 +67,6 @@ public:
   template<size_t O>
   inline Matrix<M, O> operator*(const Matrix<N, O> & matrix);
 
-  inline Matrix<M, N> operator*(const SquareMatrix<N> & square_matrix);
   inline Vector<M> operator*(const Vector<N> & vector);
 
   inline Matrix<M, N> operator+(const Matrix<M, N> & matrix) const;
@@ -250,12 +246,6 @@ Matrix<M, O> Matrix<M, N>::operator*(const Matrix<N, O> & matrix)
   }
 
   return new_matrix;
-}
-
-template<size_t M, size_t N>
-Matrix<M, N> Matrix<M, N>::operator*(const SquareMatrix<N> & square_matrix)
-{
-  return operator*((Matrix<N, N>& )square_matrix);
 }
 
 template<size_t M, size_t N>

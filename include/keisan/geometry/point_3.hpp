@@ -29,16 +29,6 @@
 namespace keisan
 {
 
-struct Point3;
-
-std::ostream & operator<<(std::ostream & out, const Point3 point);
-
-double distance_between(const Point3 & a, const Point3 & b);
-Angle<double> angle_between(const Point3 & a, const Point3 & b);
-
-double dot_product(const Point3 & a, const Point3 & b);
-double cross_product(const Point3 & a, const Point3 & b);
-
 struct Point3
 {
   Point3();
@@ -86,6 +76,14 @@ struct Point3
   double z;
 };
 
+double distance_between(const Point3 & a, const Point3 & b);
+Angle<double> angle_between(const Point3 & a, const Point3 & b);
+
+double dot_product(const Point3 & a, const Point3 & b);
+double cross_product(const Point3 & a, const Point3 & b);
+
 }  // namespace keisan
+
+std::ostream & operator<<(std::ostream & out, const keisan::Point3 point);
 
 #endif  // KEISAN__GEOMETRY__POINT_3_HPP_

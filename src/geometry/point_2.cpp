@@ -23,13 +23,13 @@
 
 #include <math.h>
 
-namespace keisan
-{
-
-std::ostream & operator<<(std::ostream & out, const Point2 & point)
+std::ostream & operator<<(std::ostream & out, const keisan::Point2 & point)
 {
   return out << "{" << point.x << "," << point.y << "}";
 }
+
+namespace keisan
+{
 
 double distance_between(const Point2 & a, const Point2 & b)
 {

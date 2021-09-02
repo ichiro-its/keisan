@@ -36,26 +36,6 @@ Angle<T> make_degree(const T & value);
 template<typename T>
 Angle<T> make_radian(const T & value);
 
-namespace literals
-{
-
-Angle<double> operator""_deg(unsigned long long int value);  // NOLINT
-Angle<double> operator""_deg(long double value);
-
-Angle<double> operator""_pi_rad(unsigned long long int value);  // NOLINT
-Angle<double> operator""_pi_rad(long double value);
-
-}  // namespace literals
-
-template<typename T>
-std::ostream & operator<<(std::ostream & out, const Angle<T> & angle);
-
-template<typename T, typename U>
-Angle<T> operator*(const U & value, const Angle<T> & angle);
-
-template<typename T>
-Angle<T> difference_between(const Angle<T> & a, const Angle<T> & b);
-
 template<typename T>
 class Angle
 {
@@ -108,7 +88,27 @@ private:
   bool is_degree;
 };
 
+template<typename T, typename U>
+Angle<T> operator*(const U & value, const Angle<T> & angle);
+
+template<typename T>
+Angle<T> difference_between(const Angle<T> & a, const Angle<T> & b);
+
+namespace literals
+{
+
+Angle<double> operator""_deg(unsigned long long int value);  // NOLINT
+Angle<double> operator""_deg(long double value);
+
+Angle<double> operator""_pi_rad(unsigned long long int value);  // NOLINT
+Angle<double> operator""_pi_rad(long double value);
+
+}  // namespace literals
+
 }  // namespace keisan
+
+template<typename T>
+std::ostream & operator<<(std::ostream & out, const keisan::Angle<T> & angle);
 
 #include "keisan/angle/angle.impl.hpp"
 

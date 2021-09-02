@@ -30,13 +30,6 @@ namespace keisan
 template<typename T>
 struct Euler;
 
-// Forward declaration
-template<typename T>
-struct Quaternion;
-
-template<typename T>
-std::ostream & operator<<(std::ostream & out, const Quaternion<T> & quaternion);
-
 template<typename T>
 struct Quaternion
 {
@@ -58,6 +51,9 @@ struct Quaternion
 };
 
 }  // namespace keisan
+
+template<typename T>
+std::ostream & operator<<(std::ostream & out, const keisan::Quaternion<T> & quaternion);
 
 #include "keisan/angle/quaternion.impl.hpp"
 

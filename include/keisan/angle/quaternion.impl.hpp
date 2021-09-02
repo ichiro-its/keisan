@@ -27,14 +27,14 @@
 
 using keisan::literals::operator""_pi;
 
-namespace keisan
-{
-
 template<typename T>
-std::ostream & operator<<(std::ostream & out, const Quaternion<T> & quaternion)
+std::ostream & operator<<(std::ostream & out, const keisan::Quaternion<T> & quaternion)
 {
   return out << quaternion.x << " " << quaternion.y << " " << quaternion.z << " " << quaternion.w;
 }
+
+namespace keisan
+{
 
 template<typename T>
 Quaternion<T>::Quaternion()

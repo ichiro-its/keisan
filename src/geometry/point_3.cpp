@@ -23,13 +23,13 @@
 #include <keisan/angle.hpp>
 #include <keisan/geometry/point_3.hpp>
 
-namespace keisan
-{
-
-std::ostream & operator<<(std::ostream & out, const Point3 point)
+std::ostream & operator<<(std::ostream & out, const keisan::Point3 point)
 {
   return out << "{" << point.x << "," << point.y << "," << point.z << "}";
 }
+
+namespace keisan
+{
 
 double distance_between(const Point3 & a, const Point3 & b)
 {

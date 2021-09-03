@@ -41,9 +41,9 @@ TEST(NumberTest, SignFloatingPoint)
 
 TEST(NumberTest, SignAngle)
 {
-  EXPECT_DOUBLE_EQ(ksn::sign(0_deg), 1.0) << "Sign result must be positive for zero";
-  EXPECT_DOUBLE_EQ(ksn::sign(90_deg), 1.0) << "Sign result must be positive";
-  EXPECT_DOUBLE_EQ(ksn::sign(-900_deg), -1.0) << "Sign result must be negative";
+  EXPECT_DOUBLE_EQ(ksn::sign(ksn::make_degree(0)), 1.0) << "Sign result must be positive for zero";
+  EXPECT_DOUBLE_EQ(ksn::sign(ksn::make_degree(90)), 1.0) << "Sign result must be positive";
+  EXPECT_DOUBLE_EQ(ksn::sign(ksn::make_degree(-900)), -1.0) << "Sign result must be negative";
 }
 
 TEST(NumberTest, ScaleIntegral)

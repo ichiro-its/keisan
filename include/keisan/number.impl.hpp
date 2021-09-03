@@ -30,7 +30,7 @@
 namespace keisan
 {
 
-template<typename T, enable_if_is_arithmetic<T> = true>
+template<typename T>
 T sign(const T & value)
 {
   return (value >= 0) ? 1 : -1;
@@ -42,13 +42,13 @@ T sign(const Angle<T> & value)
   return (value >= make_degree<T>(0)) ? 1.0 : -1.0;
 }
 
-template<typename T, enable_if_is_arithmetic<T> = true>
+template<typename T>
 T scale(const T & value, const T & source, const T & target)
 {
   return value / source * target;
 }
 
-template<typename T, enable_if_is_arithmetic<T> = true>
+template<typename T>
 T map(
   const T & value, const T & source_min, const T & source_max,
   const T & target_min, const T & target_max)
@@ -56,7 +56,7 @@ T map(
   return target_min + scale(value - source_min, source_max - source_min, target_max - target_min);
 }
 
-template<typename T, enable_if_is_arithmetic<T> = true>
+template<typename T>
 T clamp(const T & value, const T & min, const T & max)
 {
   return std::min(std::max(value, min), max);

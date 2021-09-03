@@ -36,23 +36,20 @@ template<typename T>
 using enable_if_is_floating_point = std::enable_if_t<std::is_floating_point<T>::value, bool>;
 
 template<typename T>
-using enable_if_is_arithmetic = std::enable_if_t<std::is_arithmetic<T>::value, bool>;
-
-template<typename T, enable_if_is_arithmetic<T> = true>
 T sign(const T & value);
 
 template<typename T>
 T sign(const Angle<T> & value);
 
-template<typename T, enable_if_is_arithmetic<T> = true>
+template<typename T>
 T scale(const T & value, const T & source, const T & target);
 
-template<typename T, enable_if_is_arithmetic<T> = true>
+template<typename T>
 T map(
   const T & value, const T & source_min, const T & source_max,
   const T & target_min, const T & target_max);
 
-template<typename T, enable_if_is_arithmetic<T> = true>
+template<typename T>
 T clamp(const T & value, const T & min, const T & max);
 
 template<typename T>

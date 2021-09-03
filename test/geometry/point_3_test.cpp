@@ -18,11 +18,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <gtest/gtest.h>
-#include <keisan/keisan.hpp>
-
 #include <sstream>
 #include <cmath>
+
+#include "gtest/gtest.h"
+#include "keisan/keisan.hpp"
 
 namespace ksn = keisan;
 

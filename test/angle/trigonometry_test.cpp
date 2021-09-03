@@ -23,7 +23,8 @@
 
 namespace ksn = keisan;
 
-using namespace ksn::literals;  // NOLINT
+using ksn::literals::operator""_deg;
+using ksn::literals::operator""_pi;
 
 TEST(TrigonometryTest, PiValue)
 {

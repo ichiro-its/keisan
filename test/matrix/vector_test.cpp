@@ -18,10 +18,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <gtest/gtest.h>
-#include <keisan/keisan.hpp>
-
 #include <sstream>
+
+#include "gtest/gtest.h"
+#include "keisan/keisan.hpp"
 
 #define ASSERT_VECTOR_N_EQ(N, VECTOR, ...) \
   { \

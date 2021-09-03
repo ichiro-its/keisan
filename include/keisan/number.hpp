@@ -66,6 +66,6 @@ T wrap(const T & value, const T & min, const T & max);
 
 }  // namespace keisan
 
-#include <keisan/number.impl.hpp>  // NOLINT
+#include "keisan/number.impl.hpp"
 
 #endif  // KEISAN__NUMBER_HPP_

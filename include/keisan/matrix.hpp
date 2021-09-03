@@ -21,7 +21,7 @@
 #ifndef KEISAN__MATRIX_HPP_
 #define KEISAN__MATRIX_HPP_
 
-#include "./matrix/matrix.hpp"
-#include "./matrix/vector.hpp"
+#include "keisan/matrix/matrix.hpp"
+#include "keisan/matrix/vector.hpp"
 
 #endif  // KEISAN__MATRIX_HPP_

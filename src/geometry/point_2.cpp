@@ -18,10 +18,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <keisan/angle.hpp>
-#include <keisan/geometry/point_2.hpp>
+#include <cmath>
 
-#include <math.h>
+#include "keisan/angle.hpp"
+#include "keisan/geometry/point_2.hpp"
 
 std::ostream & operator<<(std::ostream & out, const keisan::Point2 & point)
 {

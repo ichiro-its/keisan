@@ -18,10 +18,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <gtest/gtest.h>
-#include <keisan/keisan.hpp>
-
 #include <sstream>
+
+#include "gtest/gtest.h"
+#include "keisan/keisan.hpp"
 
 #define ASSERT_MATRIX_M_N_EQ(M, N, MATRIX, ...) \
   { \

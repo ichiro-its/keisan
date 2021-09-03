@@ -21,11 +21,11 @@
 #ifndef KEISAN__NUMBER_IMPL_HPP_
 #define KEISAN__NUMBER_IMPL_HPP_
 
-#include <keisan/angle.hpp>
-#include <keisan/number.hpp>
-
 #include <algorithm>
 #include <cmath>
+
+#include "keisan/angle.hpp"
+#include "keisan/number.hpp"
 
 namespace keisan
 {

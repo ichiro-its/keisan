@@ -18,12 +18,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <gtest/gtest.h>
-#include <keisan/keisan.hpp>
+#include "gtest/gtest.h"
+#include "keisan/keisan.hpp"
 
 namespace ksn = keisan;
 
-using namespace ksn::literals;  // NOLINT
+using ksn::literals::operator""_deg;
 
 TEST(NumberTest, SignIntegral)
 {

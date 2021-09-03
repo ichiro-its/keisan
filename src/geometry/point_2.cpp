@@ -38,7 +38,7 @@ double distance_between(const Point2 & a, const Point2 & b)
 
 Angle<double> angle_between(const Point2 & a, const Point2 & b)
 {
-  return difference_between(a.direction(), b.direction());
+  return (b.direction() - a.direction()).normalize();
 }
 
 double dot_product(const Point2 & a, const Point2 & b)

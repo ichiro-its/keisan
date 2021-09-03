@@ -53,12 +53,6 @@ Angle<T> operator*(const U & value, const Angle<T> & angle)
 }
 
 template<typename T>
-Angle<T> difference_between(const Angle<T> & a, const Angle<T> & b)
-{
-  return a.difference_to(b);
-}
-
-template<typename T>
 Angle<T>::Angle()
 {
 }
@@ -197,12 +191,6 @@ Angle<T> Angle<T>::normalize() const
   } else {
     return make_radian(wrap<T>(data, -1_pi, 1_pi));
   }
-}
-
-template<typename T>
-Angle<T> Angle<T>::difference_to(const Angle<T> & angle) const
-{
-  return (angle - *this).normalize();
 }
 
 }  // namespace keisan

@@ -81,8 +81,6 @@ public:
 
   Angle<T> normalize() const;
 
-  Angle<T> difference_to(const Angle<T> & angle) const;
-
 private:
   T data;
   bool is_degree;
@@ -90,9 +88,6 @@ private:
 
 template<typename T, typename U>
 Angle<T> operator*(const U & value, const Angle<T> & angle);
-
-template<typename T>
-Angle<T> difference_between(const Angle<T> & a, const Angle<T> & b);
 
 namespace literals
 {

@@ -168,19 +168,3 @@ TEST(AngleTest, Normalize)
   EXPECT_EQ((270_deg).normalize(), -90_deg) << "270 = 1 * 360 + (-90)";
   EXPECT_EQ((-0.5_pi_rad).normalize(), -0.5_pi_rad) << "-0.5pi = 0 * 2pi + (-0.5pi)";
 }
-
-TEST(AngleTest, Difference)
-{
-  auto a = -1_pi_rad;
-  auto b = 270_deg;
-
-  EXPECT_EQ(a.difference_to(b), 90_deg) <<
-    "-1pi + 0 * 2pi = -1pi\n"
-    "270 + (-1) * 360  = -90\n"
-    "-90 - (-1pi) = 90";
-
-  EXPECT_EQ(ksn::difference_between(b, a), -0.5_pi_rad) <<
-    "-1pi + 0 * 2pi = -1pi\n"
-    "270 + (-1) * 360  = -90\n"
-    "-1pi - (-90) = -0.5pi";
-}

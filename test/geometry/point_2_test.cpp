@@ -165,7 +165,7 @@ TEST(Point2Test, DotProduct)
   auto a = ksn::Point2(4.0, 3.0);
   auto b = ksn::Point2(3.0, 4.0);
 
-  ASSERT_DOUBLE_EQ(ksn::dot_product(a, b), 24.0);
+  ASSERT_DOUBLE_EQ(a.dot(b), 24.0);
 }
 
 TEST(Point2Test, CrossProduct)
@@ -173,7 +173,7 @@ TEST(Point2Test, CrossProduct)
   auto a = ksn::Point2(4.0, 3.0);
   auto b = ksn::Point2(-3.0, 4.0);
 
-  ASSERT_DOUBLE_EQ(ksn::cross_product(a, b), 25.0);
+  ASSERT_DOUBLE_EQ(a.cross(b), 25.0);
 }
 
 TEST(Point2Test, Translation)

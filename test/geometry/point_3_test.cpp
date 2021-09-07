@@ -151,14 +151,14 @@ TEST(Point3Test, DotProduct)
   auto a = ksn::Point3(4.0, 3.0, 2.0);
   auto b = ksn::Point3(3.0, 4.0, 5.0);
 
-  ASSERT_DOUBLE_EQ(ksn::dot_product(a, b), 34.0);
+  ASSERT_DOUBLE_EQ(a.dot(b), 34.0);
 }
 
 TEST(Point3Test, CrossProduct)
 {
   auto a = ksn::Point3(4.0, 3.0, 2.0);
   auto b = ksn::Point3(3.0, 4.0, 5.0);
-  auto c = ksn::cross_product(a, b);
+  auto c = a.cross(b);
 
   ASSERT_DOUBLE_EQ(c.x, 7.0);
   ASSERT_DOUBLE_EQ(c.y, -14.0);

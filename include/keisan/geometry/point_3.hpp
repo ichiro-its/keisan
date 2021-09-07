@@ -71,15 +71,15 @@ struct Point3
 
   double distance_to(const Point3 & other) const;
 
+  double dot(const Point3 & other) const;
+  Point3 cross(const Point3 & other) const;
+
   double x;
   double y;
   double z;
 };
 
 double distance_between(const Point3 & a, const Point3 & b);
-
-double dot_product(const Point3 & a, const Point3 & b);
-Point3 cross_product(const Point3 & a, const Point3 & b);
 
 }  // namespace keisan
 

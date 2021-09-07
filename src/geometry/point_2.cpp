@@ -36,16 +36,6 @@ double distance_between(const Point2 & a, const Point2 & b)
   return a.distance_to(b);
 }
 
-double dot_product(const Point2 & a, const Point2 & b)
-{
-  return a.x * b.x + a.y * b.y;
-}
-
-double cross_product(const Point2 & a, const Point2 & b)
-{
-  return a.x * b.y - a.y * b.x;
-}
-
 Point2::Point2()
 {
 }
@@ -199,6 +189,16 @@ Angle<double> Point2::direction_to(const Point2 & other) const
   return delta.direction();
 }
 
+double Point2::dot(const Point2 & other) const
+{
+  return x * other.x + y * other.y;
+}
+
+double Point2::cross(const Point2 & other) const
+{
+  return x * other.y - y * other.x;
+}
+
 Point2 Point2::translate(const Point2 & translation) const
 {
   return *this + translation;
@@ -224,17 +224,17 @@ Point2 Point2::rotate(const Angle<double> & rotation) const
   return point;
 }
 
-Point2 Point2::scale_from(const Point2 & scaling, const Point2 & anchor)
+Point2 Point2::scale_from(const Point2 & scaling, const Point2 & anchor) const
 {
   return translate(-anchor).scale(scaling).translate(anchor);
 }
 
-Point2 Point2::scale_from(const double & scaling, const Point2 & anchor)
+Point2 Point2::scale_from(const double & scaling, const Point2 & anchor) const
 {
   return translate(-anchor).scale(scaling).translate(anchor);
 }
 
-Point2 Point2::rotate_from(const Angle<double> & rotation, const Point2 & anchor)
+Point2 Point2::rotate_from(const Angle<double> & rotation, const Point2 & anchor) const
 {
   return translate(-anchor).rotate(rotation).translate(anchor);
 }

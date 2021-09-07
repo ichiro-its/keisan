@@ -36,19 +36,6 @@ double distance_between(const Point3 & a, const Point3 & b)
   return a.distance_to(b);
 }
 
-double dot_product(const Point3 & a, const Point3 & b)
-{
-  return a.x * b.x + a.y * b.y + a.z * b.z;
-}
-
-Point3 cross_product(const Point3 & a, const Point3 & b)
-{
-  return Point3(
-    a.y * b.z - a.z * b.y,
-    a.z * b.x - a.x * b.z,
-    a.x * b.y - a.y * b.x);
-}
-
 Point3::Point3()
 {
 }
@@ -193,6 +180,19 @@ Point3 Point3::normalize() const
 double Point3::distance_to(const Point3 & other) const
 {
   return (other - *this).magnitude();
+}
+
+double Point3::dot(const Point3 & other) const
+{
+  return x * other.x + y * other.y + z * other.z;
+}
+
+Point3 Point3::cross(const Point3 & other) const
+{
+  return Point3(
+    y * other.z - z * other.y,
+    z * other.x - x * other.z,
+    x * other.y - y * other.x);
 }
 
 }  // namespace keisan

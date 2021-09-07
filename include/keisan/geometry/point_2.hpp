@@ -70,9 +70,6 @@ struct Point2
 
   Point2 normalize() const;
 
-  double distance_to(const Point2 & other) const;
-  Angle<double> direction_to(const Point2 & other) const;
-
   double dot(const Point2 & other) const;
   double cross(const Point2 & other) const;
 
@@ -91,8 +88,6 @@ struct Point2
   double x;
   double y;
 };
-
-double distance_between(const Point2 & a, const Point2 & b);
 
 }  // namespace keisan
 

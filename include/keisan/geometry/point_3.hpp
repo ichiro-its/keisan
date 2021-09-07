@@ -69,8 +69,6 @@ struct Point3
 
   Point3 normalize() const;
 
-  double distance_to(const Point3 & other) const;
-
   double dot(const Point3 & other) const;
   Point3 cross(const Point3 & other) const;
 
@@ -78,8 +76,6 @@ struct Point3
   double y;
   double z;
 };
-
-double distance_between(const Point3 & a, const Point3 & b);
 
 }  // namespace keisan
 

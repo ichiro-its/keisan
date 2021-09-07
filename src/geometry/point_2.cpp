@@ -31,11 +31,6 @@ std::ostream & operator<<(std::ostream & out, const keisan::Point2 & point)
 namespace keisan
 {
 
-double distance_between(const Point2 & a, const Point2 & b)
-{
-  return a.distance_to(b);
-}
-
 Point2::Point2()
 {
 }
@@ -175,18 +170,6 @@ Point2 Point2::normalize() const
 {
   double mag = magnitude();
   return Point2(x / mag, y / mag);
-}
-
-double Point2::distance_to(const Point2 & other) const
-{
-  auto delta = other - *this;
-  return delta.magnitude();
-}
-
-Angle<double> Point2::direction_to(const Point2 & other) const
-{
-  auto delta = other - *this;
-  return delta.direction();
 }
 
 double Point2::dot(const Point2 & other) const

@@ -137,15 +137,6 @@ TEST(Point3Test, Normalize)
   ASSERT_EQ(point.normalize(), ksn::Point3(0.6, 0.0, 0.8));
 }
 
-TEST(Point3Test, DistanceBetween)
-{
-  auto a = ksn::Point3(1.0, 3.0, 5.0);
-  auto b = ksn::Point3(1.0 + 3.0, 3.0, 5.0 + 4.0);
-
-  ASSERT_DOUBLE_EQ(a.distance_to(b), 5.0);
-  ASSERT_DOUBLE_EQ(ksn::distance_between(a, b), 5.0);
-}
-
 TEST(Point3Test, DotProduct)
 {
   auto a = ksn::Point3(4.0, 3.0, 2.0);

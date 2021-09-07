@@ -160,14 +160,6 @@ TEST(Point2Test, DistanceBetween)
   ASSERT_DOUBLE_EQ(ksn::distance_between(a, b), 5.0);
 }
 
-TEST(Point2Test, AngleBetween)
-{
-  auto a = ksn::Point2(4.0, 3.0);
-  auto b = ksn::Point2(-3.0, 4.0);
-
-  ASSERT_DOUBLE_EQ(ksn::angle_between(a, b).degree(), 90.0);
-}
-
 TEST(Point2Test, DotProduct)
 {
   auto a = ksn::Point2(4.0, 3.0);

@@ -77,10 +77,9 @@ struct Point3
 };
 
 double distance_between(const Point3 & a, const Point3 & b);
-Angle<double> angle_between(const Point3 & a, const Point3 & b);
 
 double dot_product(const Point3 & a, const Point3 & b);
-double cross_product(const Point3 & a, const Point3 & b);
+Point3 cross_product(const Point3 & a, const Point3 & b);
 
 }  // namespace keisan
 

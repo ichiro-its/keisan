@@ -36,11 +36,6 @@ double distance_between(const Point2 & a, const Point2 & b)
   return a.distance_to(b);
 }
 
-Angle<double> angle_between(const Point2 & a, const Point2 & b)
-{
-  return (b.direction() - a.direction()).normalize();
-}
-
 double dot_product(const Point2 & a, const Point2 & b)
 {
   return a.x * b.x + a.y * b.y;
@@ -48,7 +43,7 @@ double dot_product(const Point2 & a, const Point2 & b)
 
 double cross_product(const Point2 & a, const Point2 & b)
 {
-  return a.magnitude() * b.magnitude() * sin(angle_between(a, b));
+  return a.x * b.y - a.y * b.x;
 }
 
 Point2::Point2()

@@ -90,7 +90,6 @@ struct Point2
 };
 
 double distance_between(const Point2 & a, const Point2 & b);
-Angle<double> angle_between(const Point2 & a, const Point2 & b);
 
 double dot_product(const Point2 & a, const Point2 & b);
 double cross_product(const Point2 & a, const Point2 & b);

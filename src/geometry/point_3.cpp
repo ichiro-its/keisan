@@ -36,22 +36,17 @@ double distance_between(const Point3 & a, const Point3 & b)
   return a.distance_to(b);
 }
 
-Angle<double> angle_between(const Point3 & a, const Point3 & b)
-{
-  double dot = dot_product(a, b);
-  double mag = a.magnitude() * b.magnitude();
-
-  return arccos(dot / mag);
-}
-
 double dot_product(const Point3 & a, const Point3 & b)
 {
   return a.x * b.x + a.y * b.y + a.z * b.z;
 }
 
-double cross_product(const Point3 & a, const Point3 & b)
+Point3 cross_product(const Point3 & a, const Point3 & b)
 {
-  return a.magnitude() * b.magnitude() * sin(angle_between(a, b));
+  return Point3(
+    a.y * b.z - a.z * b.y,
+    a.z * b.x - a.x * b.z,
+    a.x * b.y - a.y * b.x);
 }
 
 Point3::Point3()

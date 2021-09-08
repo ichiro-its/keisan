@@ -79,6 +79,9 @@ private:
 template<size_t N>
 inline std::ostream & operator<<(std::ostream & out, const keisan::Vector<N> & vector);
 
+template<size_t N>
+inline keisan::Vector<N> operator*(const double & value, const keisan::Vector<N> & vector);
+
 #include "keisan/matrix/vector.impl.hpp"
 
 #endif  // KEISAN__MATRIX__VECTOR_HPP_

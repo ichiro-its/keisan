@@ -85,10 +85,6 @@ private:
   T data;
   bool is_degree;
 };
-
-template<typename T, typename U>
-Angle<T> operator*(const U & value, const Angle<T> & angle);
-
 namespace literals
 {
 
@@ -104,6 +100,9 @@ Angle<double> operator""_pi_rad(long double value);
 
 template<typename T>
 std::ostream & operator<<(std::ostream & out, const keisan::Angle<T> & angle);
+
+template<typename T, typename U>
+keisan::Angle<T> operator*(const U & value, const keisan::Angle<T> & angle);
 
 #include "keisan/angle/angle.impl.hpp"
 

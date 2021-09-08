@@ -116,6 +116,7 @@ TEST(Point3Test, ValueOperator)
   ASSERT_EQ(point + 5.0, ksn::Point3(6.0, 8.0, 10.0));
   ASSERT_EQ(point - 4.0, ksn::Point3(-3.0, -1.0, 1.0));
   ASSERT_EQ(point * 3.0, ksn::Point3(3.0, 9.0, 15.0));
+  ASSERT_EQ(3.0 * point, ksn::Point3(3.0, 9.0, 15.0));
   ASSERT_EQ(point / 2.0, ksn::Point3(0.5, 1.5, 2.5));
 }
 

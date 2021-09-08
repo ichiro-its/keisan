@@ -53,6 +53,12 @@ std::ostream & operator<<(std::ostream & out, const keisan::Matrix<M, N> & matri
   return out;
 }
 
+template<size_t M, size_t N>
+inline keisan::Matrix<M, N> operator*(const double & value, const keisan::Matrix<M, N> & matrix)
+{
+  return matrix * value;
+}
+
 namespace keisan
 {
 

@@ -81,4 +81,6 @@ struct Point3
 
 std::ostream & operator<<(std::ostream & out, const keisan::Point3 point);
 
+keisan::Point3 operator*(const double & value, const keisan::Point3 & point);
+
 #endif  // KEISAN__GEOMETRY__POINT_3_HPP_

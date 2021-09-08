@@ -31,6 +31,12 @@ std::ostream & operator<<(std::ostream & out, const keisan::Angle<T> & angle)
   return out << angle.degree();
 }
 
+template<typename T, typename U>
+keisan::Angle<T> operator*(const U & value, const keisan::Angle<T> & angle)
+{
+  return angle * value;
+}
+
 namespace keisan
 {
 
@@ -44,12 +50,6 @@ template<typename T>
 Angle<T> make_radian(const T & value)
 {
   return Angle<T>(value, false);
-}
-
-template<typename T, typename U>
-Angle<T> operator*(const U & value, const Angle<T> & angle)
-{
-  return angle * value;
 }
 
 template<typename T>

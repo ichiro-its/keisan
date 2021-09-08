@@ -42,6 +42,12 @@ std::ostream & operator<<(std::ostream & out, const keisan::Vector<N> & vector)
   return out;
 }
 
+template<size_t N>
+inline keisan::Vector<N> operator*(const double & value, const keisan::Vector<N> & vector)
+{
+  return vector * value;
+}
+
 namespace keisan
 {
 

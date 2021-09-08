@@ -28,6 +28,11 @@ std::ostream & operator<<(std::ostream & out, const keisan::Point3 point)
   return out << "{" << point.x << "," << point.y << "," << point.z << "}";
 }
 
+keisan::Point3 operator*(const double & value, const keisan::Point3 & point)
+{
+  return point * value;
+}
+
 namespace keisan
 {
 

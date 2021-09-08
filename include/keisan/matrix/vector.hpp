@@ -32,43 +32,43 @@ template<size_t N>
 class Vector
 {
 public:
-  inline Vector();
-  inline explicit Vector(const Matrix<N, 1> & matrix);
+  Vector();
+  explicit Vector(const Matrix<N, 1> & matrix);
 
   template<typename ... Types>
-  inline explicit Vector(const double & value, Types ... the_rest);
+  explicit Vector(const double & value, Types ... the_rest);
 
-  inline Vector(const Vector<N> & vector);
+  Vector(const Vector<N> & vector);
 
-  inline operator Matrix<N, 1>() const;
+  operator Matrix<N, 1>() const;
 
-  inline static Vector<N> zero();
+  static Vector<N> zero();
 
-  inline Vector<N> & operator=(const Vector<N> & vector);
+  Vector<N> & operator=(const Vector<N> & vector);
 
-  inline bool operator==(const Vector<N> & vector) const;
-  inline bool operator!=(const Vector<N> & vector) const;
+  bool operator==(const Vector<N> & vector) const;
+  bool operator!=(const Vector<N> & vector) const;
 
-  inline Vector<N> & operator+=(const Vector<N> & vector);
-  inline Vector<N> & operator-=(const Vector<N> & vector);
+  Vector<N> & operator+=(const Vector<N> & vector);
+  Vector<N> & operator-=(const Vector<N> & vector);
 
-  inline Vector<N> & operator+=(const double & value);
-  inline Vector<N> & operator-=(const double & value);
-  inline Vector<N> & operator*=(const double & value);
-  inline Vector<N> & operator/=(const double & value);
+  Vector<N> & operator+=(const double & value);
+  Vector<N> & operator-=(const double & value);
+  Vector<N> & operator*=(const double & value);
+  Vector<N> & operator/=(const double & value);
 
-  inline Vector<N> operator+(const Vector<N> & matrix) const;
-  inline Vector<N> operator-(const Vector<N> & matrix) const;
+  Vector<N> operator+(const Vector<N> & matrix) const;
+  Vector<N> operator-(const Vector<N> & matrix) const;
 
-  inline Vector<N> operator+(const double & value) const;
-  inline Vector<N> operator-(const double & value) const;
-  inline Vector<N> operator*(const double & value) const;
-  inline Vector<N> operator/(const double & value) const;
+  Vector<N> operator+(const double & value) const;
+  Vector<N> operator-(const double & value) const;
+  Vector<N> operator*(const double & value) const;
+  Vector<N> operator/(const double & value) const;
 
-  inline Vector<N> operator-() const;
+  Vector<N> operator-() const;
 
-  inline double & operator[](size_t pos);
-  inline const double & operator[](size_t pos) const;
+  double & operator[](size_t pos);
+  const double & operator[](size_t pos) const;
 
 private:
   Matrix<N, 1> matrix;
@@ -77,10 +77,10 @@ private:
 }  // namespace keisan
 
 template<size_t N>
-inline std::ostream & operator<<(std::ostream & out, const keisan::Vector<N> & vector);
+std::ostream & operator<<(std::ostream & out, const keisan::Vector<N> & vector);
 
 template<size_t N>
-inline keisan::Vector<N> operator*(const double & value, const keisan::Vector<N> & vector);
+keisan::Vector<N> operator*(const double & value, const keisan::Vector<N> & vector);
 
 #include "keisan/matrix/vector.impl.hpp"
 

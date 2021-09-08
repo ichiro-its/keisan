@@ -34,45 +34,45 @@ template<size_t M, size_t N>
 class Matrix
 {
 public:
-  inline Matrix();
+  Matrix();
 
   template<typename ... Types>
-  inline explicit Matrix(const double & value, Types ... the_rest);
+  explicit Matrix(const double & value, Types ... the_rest);
 
-  inline Matrix(const Matrix<M, N> & matrix);
+  Matrix(const Matrix<M, N> & matrix);
 
-  inline static Matrix<M, N> zero();
+  static Matrix<M, N> zero();
 
-  inline Matrix<M, N> & operator=(const Matrix<M, N> & matrix);
+  Matrix<M, N> & operator=(const Matrix<M, N> & matrix);
 
-  inline bool operator==(const Matrix<M, N> & matrix) const;
-  inline bool operator!=(const Matrix<M, N> & matrix) const;
+  bool operator==(const Matrix<M, N> & matrix) const;
+  bool operator!=(const Matrix<M, N> & matrix) const;
 
-  inline Matrix<M, N> & operator+=(const Matrix<M, N> & matrix);
-  inline Matrix<M, N> & operator-=(const Matrix<M, N> & matrix);
+  Matrix<M, N> & operator+=(const Matrix<M, N> & matrix);
+  Matrix<M, N> & operator-=(const Matrix<M, N> & matrix);
 
-  inline Matrix<M, N> & operator+=(const double & value);
-  inline Matrix<M, N> & operator-=(const double & value);
-  inline Matrix<M, N> & operator*=(const double & value);
-  inline Matrix<M, N> & operator/=(const double & value);
+  Matrix<M, N> & operator+=(const double & value);
+  Matrix<M, N> & operator-=(const double & value);
+  Matrix<M, N> & operator*=(const double & value);
+  Matrix<M, N> & operator/=(const double & value);
 
   template<size_t O>
-  inline Matrix<M, O> operator*(const Matrix<N, O> & matrix);
+  Matrix<M, O> operator*(const Matrix<N, O> & matrix);
 
-  inline Vector<M> operator*(const Vector<N> & vector);
+  Vector<M> operator*(const Vector<N> & vector);
 
-  inline Matrix<M, N> operator+(const Matrix<M, N> & matrix) const;
-  inline Matrix<M, N> operator-(const Matrix<M, N> & matrix) const;
+  Matrix<M, N> operator+(const Matrix<M, N> & matrix) const;
+  Matrix<M, N> operator-(const Matrix<M, N> & matrix) const;
 
-  inline Matrix<M, N> operator+(const double & value) const;
-  inline Matrix<M, N> operator-(const double & value) const;
-  inline Matrix<M, N> operator*(const double & value) const;
-  inline Matrix<M, N> operator/(const double & value) const;
+  Matrix<M, N> operator+(const double & value) const;
+  Matrix<M, N> operator-(const double & value) const;
+  Matrix<M, N> operator*(const double & value) const;
+  Matrix<M, N> operator/(const double & value) const;
 
-  inline Matrix<M, N> operator-() const;
+  Matrix<M, N> operator-() const;
 
-  inline double * operator[](size_t pos);
-  inline const double * operator[](size_t pos) const;
+  double * operator[](size_t pos);
+  const double * operator[](size_t pos) const;
 
 private:
   double data[M * N];
@@ -81,10 +81,10 @@ private:
 }  // namespace keisan
 
 template<size_t M, size_t N>
-inline std::ostream & operator<<(std::ostream & out, const keisan::Matrix<M, N> & matrix);
+std::ostream & operator<<(std::ostream & out, const keisan::Matrix<M, N> & matrix);
 
 template<size_t M, size_t N>
-inline keisan::Matrix<M, N> operator*(const double & value, const keisan::Matrix<M, N> & matrix);
+keisan::Matrix<M, N> operator*(const double & value, const keisan::Matrix<M, N> & matrix);
 
 #include "keisan/matrix/matrix.impl.hpp"
 

@@ -44,19 +44,19 @@ struct Point2
 
   Point2 & operator=(const Point2 & point);
 
-  bool operator==(const Point2 & point) const;
-  bool operator!=(const Point2 & point) const;
+  bool operator==(const Point2 & other) const;
+  bool operator!=(const Point2 & other) const;
 
-  Point2 & operator+=(const Point2 & point);
-  Point2 & operator-=(const Point2 & point);
+  Point2 & operator+=(const Point2 & other);
+  Point2 & operator-=(const Point2 & other);
 
   Point2 & operator+=(const double & value);
   Point2 & operator-=(const double & value);
   Point2 & operator*=(const double & value);
   Point2 & operator/=(const double & value);
 
-  Point2 operator+(const Point2 & point) const;
-  Point2 operator-(const Point2 & point) const;
+  Point2 operator+(const Point2 & other) const;
+  Point2 operator-(const Point2 & other) const;
 
   Point2 operator+(const double & value) const;
   Point2 operator-(const double & value) const;

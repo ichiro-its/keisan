@@ -75,7 +75,7 @@ Point2::operator Vector<3>() const
 
 Point2 Point2::zero()
 {
-  return Point2(Vector<2>::zero());
+  return Point2(0.0, 0.0);
 }
 
 Point2 & Point2::operator=(const Point2 & point)
@@ -86,79 +86,97 @@ Point2 & Point2::operator=(const Point2 & point)
   return *this;
 }
 
-bool Point2::operator==(const Point2 & point) const
+bool Point2::operator==(const Point2 & other) const
 {
-  return (Vector<2>)(*this) == (Vector<2>)point;
+  return x == other.x && y == other.y;
 }
 
-bool Point2::operator!=(const Point2 & point) const
+bool Point2::operator!=(const Point2 & other) const
 {
-  return (Vector<2>)(*this) != (Vector<2>)point;
+  return x != other.x || y != other.y;
 }
 
-Point2 & Point2::operator+=(const Point2 & point)
+Point2 & Point2::operator+=(const Point2 & other)
 {
-  return *this = *this + point;
+  x += other.x;
+  y += other.y;
+
+  return *this;
 }
 
-Point2 & Point2::operator-=(const Point2 & point)
+Point2 & Point2::operator-=(const Point2 & other)
 {
-  return *this = *this - point;
+  x -= other.x;
+  y -= other.y;
+
+  return *this;
 }
 
 Point2 & Point2::operator+=(const double & value)
 {
-  return *this = *this + value;
+  x += value;
+  y += value;
+
+  return *this;
 }
 
 Point2 & Point2::operator-=(const double & value)
 {
-  return *this = *this - value;
+  x -= value;
+  y -= value;
+
+  return *this;
 }
 
 Point2 & Point2::operator*=(const double & value)
 {
-  return *this = *this * value;
+  x *= value;
+  y *= value;
+
+  return *this;
 }
 
 Point2 & Point2::operator/=(const double & value)
 {
-  return *this = *this / value;
+  x /= value;
+  y /= value;
+
+  return *this;
 }
 
-Point2 Point2::operator+(const Point2 & point) const
+Point2 Point2::operator+(const Point2 & other) const
 {
-  return Point2((Vector<2>)(*this) + (Vector<2>)point);
+  return Point2(x + other.x, y + other.y);
 }
 
-Point2 Point2::operator-(const Point2 & point) const
+Point2 Point2::operator-(const Point2 & other) const
 {
-  return Point2((Vector<2>)(*this) - (Vector<2>)point);
+  return Point2(x - other.x, y - other.y);
 }
 
 Point2 Point2::operator+(const double & value) const
 {
-  return Point2((Vector<2>)(*this) + value);
+  return Point2(x + value, y + value);
 }
 
 Point2 Point2::operator-(const double & value) const
 {
-  return Point2((Vector<2>)(*this) - value);
+  return Point2(x - value, y - value);
 }
 
 Point2 Point2::operator*(const double & value) const
 {
-  return Point2((Vector<2>)(*this) * value);
+  return Point2(x * value, y * value);
 }
 
 Point2 Point2::operator/(const double & value) const
 {
-  return Point2((Vector<2>)(*this) / value);
+  return Point2(x / value, y / value);
 }
 
 Point2 Point2::operator-() const
 {
-  return Point2(-(Vector<2>)(*this));
+  return Point2(-x, -y);
 }
 
 double Point2::magnitude() const

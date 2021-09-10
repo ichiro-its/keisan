@@ -44,19 +44,19 @@ struct Point3
 
   Point3 & operator=(const Point3 & point);
 
-  bool operator==(const Point3 & point) const;
-  bool operator!=(const Point3 & point) const;
+  bool operator==(const Point3 & other) const;
+  bool operator!=(const Point3 & other) const;
 
-  Point3 & operator+=(const Point3 & point);
-  Point3 & operator-=(const Point3 & point);
+  Point3 & operator+=(const Point3 & other);
+  Point3 & operator-=(const Point3 & other);
 
   Point3 & operator+=(const double & value);
   Point3 & operator-=(const double & value);
   Point3 & operator*=(const double & value);
   Point3 & operator/=(const double & value);
 
-  Point3 operator+(const Point3 & point) const;
-  Point3 operator-(const Point3 & point) const;
+  Point3 operator+(const Point3 & other) const;
+  Point3 operator-(const Point3 & other) const;
 
   Point3 operator+(const double & value) const;
   Point3 operator-(const double & value) const;

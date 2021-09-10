@@ -78,7 +78,7 @@ Point3::operator Vector<4>() const
 
 Point3 Point3::zero()
 {
-  return Point3(Vector<3>::zero());
+  return Point3(0.0, 0.0, 0.0);
 }
 
 Point3 & Point3::operator=(const Point3 & point)
@@ -90,79 +90,103 @@ Point3 & Point3::operator=(const Point3 & point)
   return *this;
 }
 
-bool Point3::operator==(const Point3 & point) const
+bool Point3::operator==(const Point3 & other) const
 {
-  return (Vector<3>)(*this) == (Vector<3>)point;
+  return x == other.x && y == other.y && z == other.z;
 }
 
-bool Point3::operator!=(const Point3 & point) const
+bool Point3::operator!=(const Point3 & other) const
 {
-  return (Vector<3>)(*this) != (Vector<3>)point;
+  return x != other.x || y != other.y || z != other.z;
 }
 
-Point3 & Point3::operator+=(const Point3 & point)
+Point3 & Point3::operator+=(const Point3 & other)
 {
-  return *this = *this + point;
+  x += other.x;
+  y += other.y;
+  z += other.z;
+
+  return *this;
 }
 
-Point3 & Point3::operator-=(const Point3 & point)
+Point3 & Point3::operator-=(const Point3 & other)
 {
-  return *this = *this - point;
+  x -= other.x;
+  y -= other.y;
+  z -= other.z;
+
+  return *this;
 }
 
 Point3 & Point3::operator+=(const double & value)
 {
-  return *this = *this + value;
+  x += value;
+  y += value;
+  z += value;
+
+  return *this;
 }
 
 Point3 & Point3::operator-=(const double & value)
 {
-  return *this = *this - value;
+  x -= value;
+  y -= value;
+  z -= value;
+
+  return *this;
 }
 
 Point3 & Point3::operator*=(const double & value)
 {
-  return *this = *this * value;
+  x *= value;
+  y *= value;
+  z *= value;
+
+  return *this;
 }
 
 Point3 & Point3::operator/=(const double & value)
 {
-  return *this = *this / value;
+  x /= value;
+  y /= value;
+  z /= value;
+
+  return *this;
 }
 
-Point3 Point3::operator+(const Point3 & point) const
+Point3 Point3::operator+(const Point3 & other) const
 {
-  return Point3((Vector<3>)(*this) + (Vector<3>)point);
+  return Point3(x + other.x, y + other.y, z + other.z);
 }
 
-Point3 Point3::operator-(const Point3 & point) const
+Point3 Point3::operator-(const Point3 & other) const
 {
-  return Point3((Vector<3>)(*this) - (Vector<3>)point);
+  return Point3(x - other.x, y - other.y, z - other.z);
 }
 
 Point3 Point3::operator+(const double & value) const
 {
-  return Point3((Vector<3>)(*this) + value);
+  return Point3(x + value, y + value, z + value);
 }
 
 Point3 Point3::operator-(const double & value) const
 {
-  return Point3((Vector<3>)(*this) - value);
+  return Point3(x - value, y - value, z - value);
 }
 
 Point3 Point3::operator*(const double & value) const
 {
-  return Point3((Vector<3>)(*this) * value);
+  return Point3(x * value, y * value, z * value);
 }
 
 Point3 Point3::operator/(const double & value) const
 {
-  return Point3((Vector<3>)(*this) / value);
+  return Point3(x / value, y / value, z / value);
 }
 
 Point3 Point3::operator-() const
 {
-  return Point3(-(Vector<3>)(*this));
+  return Point3(-x, -y, -z);
 }
 
 double Point3::magnitude() const

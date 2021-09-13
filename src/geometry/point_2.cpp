@@ -23,11 +23,6 @@
 #include "keisan/angle.hpp"
 #include "keisan/geometry/point_2.hpp"
 
-std::ostream & operator<<(std::ostream & out, const keisan::Point2 & point)
-{
-  return out << "{" << point.x << "," << point.y << "}";
-}
-
 keisan::Point2 operator*(const double & value, const keisan::Point2 & point)
 {
   return point * value;

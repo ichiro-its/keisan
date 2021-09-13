@@ -91,8 +91,6 @@ struct Point2
 
 }  // namespace keisan
 
-std::ostream & operator<<(std::ostream & out, const keisan::Point2 & point);
-
 keisan::Point2 operator*(const double & value, const keisan::Point2 & point);
 
 #endif  // KEISAN__GEOMETRY__POINT_2_HPP_

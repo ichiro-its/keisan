@@ -97,7 +97,6 @@ template<size_t M, size_t N>
 Matrix<M, N> & Matrix<M, N>::operator=(const Matrix<M, N> & matrix)
 {
   std::copy(matrix.data, matrix.data + M * N, data);
-
   return *this;
 }
 
@@ -201,7 +200,15 @@ Matrix<M, O> Matrix<M, N>::operator*(const Matrix<N, O> & matrix)
 template<size_t M, size_t N>
 Vector<M> Matrix<M, N>::operator*(const Vector<N> & vector)
 {
-  return (Vector<M>) operator*((Matrix<N, 1>& )vector);
+  Vector<M> new_vector;
+  for (size_t i = 0; i < M; ++i) {
+    new_vector[i] = 0.0;
+    for (size_t j = 0; j < N; ++j) {
+      new_vector[i] += (*this)[i][j] * vector[j];
+    }
+  }
+
+  return new_vector;
 }
 
 template<size_t M, size_t N>

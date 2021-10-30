@@ -23,8 +23,6 @@
 
 #include <ostream>
 
-#include "keisan/matrix/matrix.hpp"
-
 namespace keisan
 {
 
@@ -33,14 +31,11 @@ class Vector
 {
 public:
   Vector();
-  explicit Vector(const Matrix<N, 1> & matrix);
 
   template<typename ... Types>
   explicit Vector(const double & value, Types ... the_rest);
 
   Vector(const Vector<N> & vector);
-
-  operator Matrix<N, 1>() const;
 
   static Vector<N> zero();
 
@@ -71,7 +66,7 @@ public:
   const double & operator[](size_t pos) const;
 
 private:
-  Matrix<N, 1> matrix;
+  double data[N];
 };
 
 }  // namespace keisan

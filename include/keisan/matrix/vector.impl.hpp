@@ -21,6 +21,7 @@
 #ifndef KEISAN__MATRIX__VECTOR_IMPL_HPP_
 #define KEISAN__MATRIX__VECTOR_IMPL_HPP_
 
+#include <algorithm>
 #include <ostream>
 
 #include "keisan/matrix/vector.hpp"
@@ -57,149 +58,189 @@ Vector<N>::Vector()
 }
 
 template<size_t N>
-Vector<N>::Vector(const Matrix<N, 1> & matrix)
-: matrix(matrix)
-{
-}
-
-template<size_t N>
 template<typename ... Types>
 Vector<N>::Vector(const double & value, Types ... the_rest)
-: matrix(value, the_rest ...)
+: data{value, the_rest ...}
 {
 }
 
 template<size_t N>
 Vector<N>::Vector(const Vector<N> & vector)
-: matrix(vector)
 {
-}
-
-template<size_t N>
-Vector<N>::operator Matrix<N, 1>() const
-{
-  return matrix;
+  *this = vector;
 }
 
 template<size_t N>
 Vector<N> Vector<N>::zero()
 {
-  return Vector<N>(Matrix<N, 1>::zero());
+  Vector<N> vector;
+  for (size_t i = 0; i < N; ++i) {
+    vector[i] = 0.0;
+  }
+
+  return vector;
 }
 
 template<size_t N>
 Vector<N> & Vector<N>::operator=(const Vector<N> & vector)
 {
-  matrix = vector.matrix;
+  std::copy(vector.data, vector.data + N, data);
   return *this;
 }
 
 template<size_t N>
 bool Vector<N>::operator==(const Vector<N> & vector) const
 {
-  return (Matrix<N, 1>)(*this) == (Matrix<N, 1>)vector;
+  using testing::internal::FloatingPoint;
+  for (size_t i = 0; i < N; ++i) {
+    if (!FloatingPoint<double>(data[i]).AlmostEquals(FloatingPoint<double>(vector.data[i]))) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 template<size_t N>
 bool Vector<N>::operator!=(const Vector<N> & vector) const
 {
-  return (Matrix<N, 1>)(*this) != (Matrix<N, 1>)vector;
+  return !(*this == vector);
 }
 
 template<size_t N>
 Vector<N> & Vector<N>::operator+=(const Vector<N> & vector)
 {
-  matrix += vector.matrix;
+  for (size_t i = 0; i < N; ++i) {
+    data[i] += vector.data[i];
+  }
+
   return *this;
 }
 
 template<size_t N>
 Vector<N> & Vector<N>::operator-=(const Vector<N> & vector)
 {
-  matrix -= vector.matrix;
+  for (size_t i = 0; i < N; ++i) {
+    data[i] -= vector.data[i];
+  }
+
   return *this;
 }
 
 template<size_t N>
 Vector<N> & Vector<N>::operator+=(const double & value)
 {
-  matrix += value;
+  for (size_t i = 0; i < N; ++i) {
+    data[i] += value;
+  }
+
   return *this;
 }
 
 template<size_t N>
 Vector<N> & Vector<N>::operator-=(const double & value)
 {
-  matrix -= value;
+  for (size_t i = 0; i < N; ++i) {
+    data[i] -= value;
+  }
+
   return *this;
 }
 
 template<size_t N>
 Vector<N> & Vector<N>::operator*=(const double & value)
 {
-  matrix *= value;
+  for (size_t i = 0; i < N; ++i) {
+    data[i] *= value;
+  }
+
   return *this;
 }
 
 template<size_t N>
 Vector<N> & Vector<N>::operator/=(const double & value)
 {
-  matrix /= value;
+  for (size_t i = 0; i < N; ++i) {
+    data[i] /= value;
+  }
+
   return *this;
 }
 
 template<size_t N>
 Vector<N> Vector<N>::operator+(const Vector<N> & vector) const
 {
-  return Vector<N>(matrix + vector.matrix);
+  auto new_vector = *this;
+  new_vector += vector;
+
+  return new_vector;
 }
 
 template<size_t N>
 Vector<N> Vector<N>::operator-(const Vector<N> & vector) const
 {
-  return Vector<N>(matrix - vector.matrix);
+  auto new_vector = *this;
+  new_vector -= vector;
+
+  return new_vector;
 }
 
 template<size_t N>
 Vector<N> Vector<N>::operator+(const double & value) const
 {
-  return Vector<N>(matrix + value);
+  auto new_vector = *this;
+  new_vector += value;
+
+  return new_vector;
 }
 
 template<size_t N>
 Vector<N> Vector<N>::operator-(const double & value) const
 {
-  return Vector<N>(matrix - value);
+  auto new_vector = *this;
+  new_vector -= value;
+
+  return new_vector;
 }
 
 template<size_t N>
 Vector<N> Vector<N>::operator*(const double & value) const
 {
-  return Vector<N>(matrix * value);
+  auto new_vector = *this;
+  new_vector *= value;
+
+  return new_vector;
 }
 
 template<size_t N>
 Vector<N> Vector<N>::operator/(const double & value) const
 {
-  return Vector<N>(matrix / value);
+  auto new_vector = *this;
+  new_vector /= value;
+  return new_vector;
 }
 
 template<size_t N>
 Vector<N> Vector<N>::operator-() const
 {
-  return Vector<N>(-matrix);
+  Vector<N> vector;
+  for (size_t i = 0; i < N; ++i) {
+    vector.data[i] = -data[i];
+  }
+
+  return vector;
 }
 
 template<size_t N>
 double & Vector<N>::operator[](size_t pos)
 {
-  return matrix[pos][0];
+  return data[pos];
 }
 
 template<size_t N>
 const double & Vector<N>::operator[](size_t pos) const
 {
-  return matrix[pos][0];
+  return data[pos];
 }
 
 }  // namespace keisan

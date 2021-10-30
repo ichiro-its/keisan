@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['get_5frotation_31',['get_rotation',['../classkeisan_1_1Transform2.html#a515d839affa8bfbb6c3a0eddfee1f299',1,'keisan::Transform2']]],
-  ['get_5fscale_32',['get_scale',['../classkeisan_1_1Transform2.html#a5f6c092c652689cfdf96209c01730773',1,'keisan::Transform2']]],
-  ['get_5ftranslation_33',['get_translation',['../classkeisan_1_1Transform2.html#a16a0e63e89c99f1f19272033846b2558',1,'keisan::Transform2']]]
+  ['keisan_18',['keisan',['../namespacekeisan.html',1,'']]],
+  ['keisan_20_28計算_29_19',['Keisan (計算)',['../index.html',1,'']]],
+  ['keisan_2ehpp_20',['keisan.hpp',['../keisan_8hpp.html',1,'']]],
+  ['literals_21',['literals',['../namespacekeisan_1_1literals.html',1,'keisan']]]
 ];

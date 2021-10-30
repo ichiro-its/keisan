@@ -108,28 +108,74 @@ Functions</h2></td></tr>
 <tr class="separator:a63ef98542527acb5c9c6630ea5070fcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40e2dc40759d207897562a3c62826930"><td class="memItemLeft" align="right" valign="top">Angle&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan_1_1literals.html#a40e2dc40759d207897562a3c62826930">keisan::literals::operator&quot;&quot;_pi_rad</a> (long double value)</td></tr>
 <tr class="separator:a40e2dc40759d207897562a3c62826930"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9e9846b92a12e97b083de6bf7778eb9"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ab9e9846b92a12e97b083de6bf7778eb9"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#ab9e9846b92a12e97b083de6bf7778eb9">keisan::operator&lt;&lt;</a> (std::ostream &amp;out, const Angle&lt; T &gt; &amp;angle)</td></tr>
-<tr class="separator:ab9e9846b92a12e97b083de6bf7778eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24c7bdf8dad7d113de51d06ace1cde27"><td class="memTemplParams" colspan="2">template&lt;typename T , typename U &gt; </td></tr>
-<tr class="memitem:a24c7bdf8dad7d113de51d06ace1cde27"><td class="memTemplItemLeft" align="right" valign="top">Angle&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a24c7bdf8dad7d113de51d06ace1cde27">keisan::operator*</a> (const U &amp;value, const Angle&lt; T &gt; &amp;angle)</td></tr>
-<tr class="separator:a24c7bdf8dad7d113de51d06ace1cde27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a304ca5397dd314cfaa892c0019769ab0"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a304ca5397dd314cfaa892c0019769ab0"><td class="memTemplItemLeft" align="right" valign="top">Angle&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a304ca5397dd314cfaa892c0019769ab0">keisan::difference_between</a> (const Angle&lt; T &gt; &amp;a, const Angle&lt; T &gt; &amp;b)</td></tr>
-<tr class="separator:a304ca5397dd314cfaa892c0019769ab0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae75a08e0287945bd65d6545a2e05dce7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#ae75a08e0287945bd65d6545a2e05dce7">keisan::wrap_rad</a> (double value)</td></tr>
-<tr class="separator:ae75a08e0287945bd65d6545a2e05dce7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af214dae497162c98306a7074200b8353"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#af214dae497162c98306a7074200b8353">keisan::wrap_deg</a> (double value)</td></tr>
-<tr class="separator:af214dae497162c98306a7074200b8353"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae76de275693f4f0233b1294d3a3a5374"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#ae76de275693f4f0233b1294d3a3a5374">keisan::rad_to_deg</a> (double value)</td></tr>
-<tr class="separator:ae76de275693f4f0233b1294d3a3a5374"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fb2004d2df4e3adbbbc1bbfa5685faf"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a7fb2004d2df4e3adbbbc1bbfa5685faf">keisan::deg_to_rad</a> (double value)</td></tr>
-<tr class="separator:a7fb2004d2df4e3adbbbc1bbfa5685faf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5836dfa15d59182ae6763824c17b251"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#ae5836dfa15d59182ae6763824c17b251">keisan::delta_rad</a> (double value1, double value2)</td></tr>
-<tr class="separator:ae5836dfa15d59182ae6763824c17b251"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a5f7000489c4b1ce8c2e67444c870dc"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a0a5f7000489c4b1ce8c2e67444c870dc">keisan::delta_deg</a> (double value1, double value2)</td></tr>
-<tr class="separator:a0a5f7000489c4b1ce8c2e67444c870dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a6a65dc6a594184601b18c00751f4d2"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a4a6a65dc6a594184601b18c00751f4d2"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="angle_2angle_8hpp.html#a4a6a65dc6a594184601b18c00751f4d2">operator&lt;&lt;</a> (std::ostream &amp;out, const <a class="el" href="classkeisan_1_1Angle.html">keisan::Angle</a>&lt; T &gt; &amp;angle)</td></tr>
+<tr class="separator:a4a6a65dc6a594184601b18c00751f4d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ca444bd1a66a77305abe1fda75d6bff"><td class="memTemplParams" colspan="2">template&lt;typename T , typename U &gt; </td></tr>
+<tr class="memitem:a0ca444bd1a66a77305abe1fda75d6bff"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classkeisan_1_1Angle.html">keisan::Angle</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="angle_2angle_8hpp.html#a0ca444bd1a66a77305abe1fda75d6bff">operator*</a> (const U &amp;value, const <a class="el" href="classkeisan_1_1Angle.html">keisan::Angle</a>&lt; T &gt; &amp;angle)</td></tr>
+<tr class="separator:a0ca444bd1a66a77305abe1fda75d6bff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a4a6a65dc6a594184601b18c00751f4d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a6a65dc6a594184601b18c00751f4d2">&#9670;&nbsp;</a></span>operator&lt;&lt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classkeisan_1_1Angle.html">keisan::Angle</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>angle</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0ca444bd1a66a77305abe1fda75d6bff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ca444bd1a66a77305abe1fda75d6bff">&#9670;&nbsp;</a></span>operator*()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename U &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classkeisan_1_1Angle.html">keisan::Angle</a>&lt;T&gt; operator* </td>
+          <td>(</td>
+          <td class="paramtype">const U &amp;&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classkeisan_1_1Angle.html">keisan::Angle</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>angle</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

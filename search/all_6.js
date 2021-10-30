@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['keisan_35',['keisan',['../namespacekeisan.html',1,'']]],
-  ['keisan_20_28計算_29_36',['Keisan (計算)',['../index.html',1,'']]],
-  ['keisan_2ehpp_37',['keisan.hpp',['../keisan_8hpp.html',1,'']]],
-  ['literals_38',['literals',['../namespacekeisan_1_1literals.html',1,'keisan']]]
+  ['normalize_29',['normalize',['../classkeisan_1_1Angle.html#a81425701bf42df67b4500f2d1fc85cdb',1,'keisan::Angle::normalize()'],['../structkeisan_1_1Point2.html#a99204468ad69a65568d5fef37623b82b',1,'keisan::Point2::normalize()'],['../structkeisan_1_1Point3.html#a40d6ff27bdaf0bd34ea07fa8509739e5',1,'keisan::Point3::normalize()']]],
+  ['number_2ehpp_30',['number.hpp',['../number_8hpp.html',1,'']]],
+  ['number_2eimpl_2ehpp_31',['number.impl.hpp',['../number_8impl_8hpp.html',1,'']]]
 ];

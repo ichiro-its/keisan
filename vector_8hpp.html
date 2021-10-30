@@ -76,7 +76,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;ostream&gt;</code><br />
-<code>#include &quot;<a class="el" href="matrix_2matrix_8hpp_source.html">./matrix.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="vector_8impl_8hpp_source.html">keisan/matrix/vector.impl.hpp</a>&quot;</code><br />
 </div>
 <p><a href="vector_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -92,10 +92,82 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ad0c6a65299d21cbec0902e71eeab497c"><td class="memTemplParams" colspan="2">template&lt;size_t N&gt; </td></tr>
-<tr class="memitem:ad0c6a65299d21cbec0902e71eeab497c"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#ad0c6a65299d21cbec0902e71eeab497c">keisan::operator&lt;&lt;</a> (std::ostream &amp;out, const Vector&lt; N &gt; &amp;vector)</td></tr>
-<tr class="separator:ad0c6a65299d21cbec0902e71eeab497c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40519ffea4e0b067fc335f49b5f6a673"><td class="memTemplParams" colspan="2">template&lt;size_t N&gt; </td></tr>
+<tr class="memitem:a40519ffea4e0b067fc335f49b5f6a673"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="vector_8hpp.html#a40519ffea4e0b067fc335f49b5f6a673">operator&lt;&lt;</a> (std::ostream &amp;out, const <a class="el" href="classkeisan_1_1Vector.html">keisan::Vector</a>&lt; N &gt; &amp;vector)</td></tr>
+<tr class="separator:a40519ffea4e0b067fc335f49b5f6a673"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada736a7ad7362cddffd1ab69cd304cbe"><td class="memTemplParams" colspan="2">template&lt;size_t N&gt; </td></tr>
+<tr class="memitem:ada736a7ad7362cddffd1ab69cd304cbe"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classkeisan_1_1Vector.html">keisan::Vector</a>&lt; N &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="vector_8hpp.html#ada736a7ad7362cddffd1ab69cd304cbe">operator*</a> (const double &amp;value, const <a class="el" href="classkeisan_1_1Vector.html">keisan::Vector</a>&lt; N &gt; &amp;vector)</td></tr>
+<tr class="separator:ada736a7ad7362cddffd1ab69cd304cbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a40519ffea4e0b067fc335f49b5f6a673"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40519ffea4e0b067fc335f49b5f6a673">&#9670;&nbsp;</a></span>operator&lt;&lt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t N&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classkeisan_1_1Vector.html">keisan::Vector</a>&lt; N &gt; &amp;&#160;</td>
+          <td class="paramname"><em>vector</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ada736a7ad7362cddffd1ab69cd304cbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada736a7ad7362cddffd1ab69cd304cbe">&#9670;&nbsp;</a></span>operator*()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t N&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classkeisan_1_1Vector.html">keisan::Vector</a>&lt;N&gt; operator* </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classkeisan_1_1Vector.html">keisan::Vector</a>&lt; N &gt; &amp;&#160;</td>
+          <td class="paramname"><em>vector</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

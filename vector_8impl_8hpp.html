@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Keisan: include/keisan/angle/quaternion.hpp File Reference</title>
+<title>Keisan: include/keisan/matrix/vector.impl.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,28 +63,23 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_ab41049d213b997739a9d88b0f473239.html">keisan</a></li><li class="navelem"><a class="el" href="dir_5a7b4ec4efbd24b218493a6575bd5548.html">angle</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_ab41049d213b997739a9d88b0f473239.html">keisan</a></li><li class="navelem"><a class="el" href="dir_55f66ca9a4d96a8415632833bb34640e.html">matrix</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">quaternion.hpp File Reference</div>  </div>
+<div class="title">vector.impl.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
-<code>#include &quot;<a class="el" href="quaternion_8impl_8hpp_source.html">keisan/angle/quaternion.impl.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;ostream&gt;</code><br />
+<code>#include &quot;<a class="el" href="vector_8hpp_source.html">keisan/matrix/vector.hpp</a>&quot;</code><br />
 </div>
-<p><a href="quaternion_8hpp_source.html">Go to the source code of this file.</a></p>
+<p><a href="vector_8impl_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkeisan_1_1Quaternion.html">keisan::Quaternion&lt; T &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespacekeisan"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html">keisan</a></td></tr>
@@ -92,18 +87,21 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a577bed37b4ccb9f17206c94cfaecb674"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a577bed37b4ccb9f17206c94cfaecb674"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="quaternion_8hpp.html#a577bed37b4ccb9f17206c94cfaecb674">operator&lt;&lt;</a> (std::ostream &amp;out, const <a class="el" href="structkeisan_1_1Quaternion.html">keisan::Quaternion</a>&lt; T &gt; &amp;quaternion)</td></tr>
-<tr class="separator:a577bed37b4ccb9f17206c94cfaecb674"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40519ffea4e0b067fc335f49b5f6a673"><td class="memTemplParams" colspan="2">template&lt;size_t N&gt; </td></tr>
+<tr class="memitem:a40519ffea4e0b067fc335f49b5f6a673"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="vector_8impl_8hpp.html#a40519ffea4e0b067fc335f49b5f6a673">operator&lt;&lt;</a> (std::ostream &amp;out, const <a class="el" href="classkeisan_1_1Vector.html">keisan::Vector</a>&lt; N &gt; &amp;vector)</td></tr>
+<tr class="separator:a40519ffea4e0b067fc335f49b5f6a673"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada736a7ad7362cddffd1ab69cd304cbe"><td class="memTemplParams" colspan="2">template&lt;size_t N&gt; </td></tr>
+<tr class="memitem:ada736a7ad7362cddffd1ab69cd304cbe"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classkeisan_1_1Vector.html">keisan::Vector</a>&lt; N &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="vector_8impl_8hpp.html#ada736a7ad7362cddffd1ab69cd304cbe">operator*</a> (const double &amp;value, const <a class="el" href="classkeisan_1_1Vector.html">keisan::Vector</a>&lt; N &gt; &amp;vector)</td></tr>
+<tr class="separator:ada736a7ad7362cddffd1ab69cd304cbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a577bed37b4ccb9f17206c94cfaecb674"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a577bed37b4ccb9f17206c94cfaecb674">&#9670;&nbsp;</a></span>operator&lt;&lt;()</h2>
+<a id="a40519ffea4e0b067fc335f49b5f6a673"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40519ffea4e0b067fc335f49b5f6a673">&#9670;&nbsp;</a></span>operator&lt;&lt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;size_t N&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
@@ -114,8 +112,8 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structkeisan_1_1Quaternion.html">keisan::Quaternion</a>&lt; T &gt; &amp;&#160;</td>
-          <td class="paramname"><em>quaternion</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="classkeisan_1_1Vector.html">keisan::Vector</a>&lt; N &gt; &amp;&#160;</td>
+          <td class="paramname"><em>vector</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -123,6 +121,44 @@ template&lt;typename T &gt; </div>
           <td></td><td></td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ada736a7ad7362cddffd1ab69cd304cbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada736a7ad7362cddffd1ab69cd304cbe">&#9670;&nbsp;</a></span>operator*()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t N&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classkeisan_1_1Vector.html">keisan::Vector</a>&lt;N&gt; operator* </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classkeisan_1_1Vector.html">keisan::Vector</a>&lt; N &gt; &amp;&#160;</td>
+          <td class="paramname"><em>vector</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>

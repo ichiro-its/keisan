@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['w_116',['w',['../structkeisan_1_1Quaternion.html#a6ffa0a71e2d3aef023f2192f52a782b4',1,'keisan::Quaternion']]],
-  ['wrap_117',['wrap',['../namespacekeisan.html#adf3d244c758f5c547330b2178a973dd8',1,'keisan']]],
-  ['wrap_5fdeg_118',['wrap_deg',['../namespacekeisan.html#af214dae497162c98306a7074200b8353',1,'keisan']]],
-  ['wrap_5fnumber_119',['wrap_number',['../namespacekeisan.html#a4598f98a542804fafc211c9f55e06240',1,'keisan']]],
-  ['wrap_5frad_120',['wrap_rad',['../namespacekeisan.html#ae75a08e0287945bd65d6545a2e05dce7',1,'keisan']]]
+  ['y_88',['y',['../structkeisan_1_1Quaternion.html#a03cebc95d24913c1a0edea9890f3b1f0',1,'keisan::Quaternion::y()'],['../structkeisan_1_1Point2.html#a69907fe938465fd9805c4328008db1fa',1,'keisan::Point2::y()'],['../structkeisan_1_1Point3.html#a3c78eb3321ffb4bb8aee95322d3468ce',1,'keisan::Point3::y()']]],
+  ['yaw_89',['yaw',['../structkeisan_1_1Euler.html#adebad5f48ab709890787e5d7db2ec30f',1,'keisan::Euler']]]
 ];

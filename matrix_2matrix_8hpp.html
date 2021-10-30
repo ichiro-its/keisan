@@ -75,9 +75,8 @@ $(function() {
 <div class="title">matrix.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;gtest/gtest.h&gt;</code><br />
-<code>#include &lt;algorithm&gt;</code><br />
-<code>#include &lt;ostream&gt;</code><br />
+<div class="textblock"><code>#include &lt;ostream&gt;</code><br />
+<code>#include &quot;<a class="el" href="matrix_8impl_8hpp_source.html">keisan/matrix/matrix.impl.hpp</a>&quot;</code><br />
 </div>
 <p><a href="matrix_2matrix_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -93,10 +92,82 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a59b5c58e7517d5ebf03d4c7298e8eb10"><td class="memTemplParams" colspan="2">template&lt;size_t M, size_t N&gt; </td></tr>
-<tr class="memitem:a59b5c58e7517d5ebf03d4c7298e8eb10"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a59b5c58e7517d5ebf03d4c7298e8eb10">keisan::operator&lt;&lt;</a> (std::ostream &amp;out, const Matrix&lt; M, N &gt; &amp;matrix)</td></tr>
-<tr class="separator:a59b5c58e7517d5ebf03d4c7298e8eb10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a742cccea72194735725e770f8e3dcb18"><td class="memTemplParams" colspan="2">template&lt;size_t M, size_t N&gt; </td></tr>
+<tr class="memitem:a742cccea72194735725e770f8e3dcb18"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="matrix_2matrix_8hpp.html#a742cccea72194735725e770f8e3dcb18">operator&lt;&lt;</a> (std::ostream &amp;out, const <a class="el" href="classkeisan_1_1Matrix.html">keisan::Matrix</a>&lt; M, N &gt; &amp;matrix)</td></tr>
+<tr class="separator:a742cccea72194735725e770f8e3dcb18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0ddf3db1002a3e30c91cbe9d024d718"><td class="memTemplParams" colspan="2">template&lt;size_t M, size_t N&gt; </td></tr>
+<tr class="memitem:ac0ddf3db1002a3e30c91cbe9d024d718"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classkeisan_1_1Matrix.html">keisan::Matrix</a>&lt; M, N &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="matrix_2matrix_8hpp.html#ac0ddf3db1002a3e30c91cbe9d024d718">operator*</a> (const double &amp;value, const <a class="el" href="classkeisan_1_1Matrix.html">keisan::Matrix</a>&lt; M, N &gt; &amp;matrix)</td></tr>
+<tr class="separator:ac0ddf3db1002a3e30c91cbe9d024d718"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a742cccea72194735725e770f8e3dcb18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a742cccea72194735725e770f8e3dcb18">&#9670;&nbsp;</a></span>operator&lt;&lt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t M, size_t N&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classkeisan_1_1Matrix.html">keisan::Matrix</a>&lt; M, N &gt; &amp;&#160;</td>
+          <td class="paramname"><em>matrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac0ddf3db1002a3e30c91cbe9d024d718"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0ddf3db1002a3e30c91cbe9d024d718">&#9670;&nbsp;</a></span>operator*()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t M, size_t N&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classkeisan_1_1Matrix.html">keisan::Matrix</a>&lt;M, N&gt; operator* </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classkeisan_1_1Matrix.html">keisan::Matrix</a>&lt; M, N &gt; &amp;&#160;</td>
+          <td class="paramname"><em>matrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

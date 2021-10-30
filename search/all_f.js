@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['vector_114',['Vector',['../classkeisan_1_1Vector.html',1,'keisan::Vector&lt; N &gt;'],['../classkeisan_1_1Vector.html#a56bb112a9c9f30e54290798f28555905',1,'keisan::Vector::Vector()'],['../classkeisan_1_1Vector.html#a9ef51d50d5e350178c24a2c0f0c7391e',1,'keisan::Vector::Vector(const Matrix&lt; N, 1 &gt; &amp;matrix)'],['../classkeisan_1_1Vector.html#a2cc6371bb5802f36a74b26267f295393',1,'keisan::Vector::Vector(const double &amp;value, Types ... the_rest)'],['../classkeisan_1_1Vector.html#a3cff4b1c3fb7a2210b425be92f1288c2',1,'keisan::Vector::Vector(const Vector&lt; N &gt; &amp;vector)']]],
-  ['vector_2ehpp_115',['vector.hpp',['../vector_8hpp.html',1,'']]]
+  ['x_87',['x',['../structkeisan_1_1Quaternion.html#accd0882b2f3f7af553147ad6784240fe',1,'keisan::Quaternion::x()'],['../structkeisan_1_1Point2.html#a0830e67d7be6e93afe0c2c8f5b333e4b',1,'keisan::Point2::x()'],['../structkeisan_1_1Point3.html#abc06ff0784b7804542761f05ed803ecb',1,'keisan::Point3::x()']]]
 ];

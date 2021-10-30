@@ -26,19 +26,12 @@
 namespace keisan
 {
 
+// Forward declaration
 template<typename T>
 class Angle;
 
 template<typename T>
 const T pi = std::atan((T)1) * 4;
-
-namespace literals
-{
-
-double operator""_pi(unsigned long long int value);  // NOLINT
-double operator""_pi(long double value);
-
-}  // namespace literals
 
 template<typename T>
 T sin(const Angle<T> & angle);
@@ -60,6 +53,14 @@ Angle<T> arctan(const T & value);
 
 template<typename T>
 Angle<T> signed_arctan(const T & y, const T & x);
+
+namespace literals
+{
+
+double operator""_pi(unsigned long long int value);  // NOLINT
+double operator""_pi(long double value);
+
+}  // namespace literals
 
 }  // namespace keisan
 

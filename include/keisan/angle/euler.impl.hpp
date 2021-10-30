@@ -25,14 +25,14 @@
 #include "keisan/angle/quaternion.hpp"
 #include "keisan/angle/trigonometry.hpp"
 
-namespace keisan
-{
-
 template<typename T>
-std::ostream & operator<<(std::ostream & out, const Euler<T> & euler)
+std::ostream & operator<<(std::ostream & out, const keisan::Euler<T> & euler)
 {
   return out << euler.roll << " " << euler.pitch << " " << euler.yaw;
 }
+
+namespace keisan
+{
 
 template<typename T>
 Euler<T>::Euler()

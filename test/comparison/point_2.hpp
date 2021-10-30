@@ -18,34 +18,48 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include "keisan/angle/angle.hpp"
+#ifndef COMPARISON__POINT_2_HPP_
+#define COMPARISON__POINT_2_HPP_
 
-namespace keisan
+#include <limits>
+#include <string>
+
+#include "keisan/keisan.hpp"
+
+#include "./almost_equal.hpp"
+
+namespace testing
 {
 
-namespace literals
+std::string point2_print_string(const keisan::Point2 & point)
 {
+  std::stringstream ss;
+  ss << std::setprecision(std::numeric_limits<double>::digits10 + 2) <<
+    "{" << point.x << ", " << point.y << "}";
 
-Angle<double> operator""_deg(unsigned long long int value)  // NOLINT
-{
-  return make_degree<double>(value);
+  return internal::StringStreamToString(&ss);
 }
 
-Angle<double> operator""_deg(long double value)
+AssertionResult point2_equal(
+  const char * lhs_expression, const char * rhs_expression,
+  const keisan::Point2 & lhs_value, const keisan::Point2 & rhs_value)
 {
-  return make_degree<double>(value);
+  if (almost_equal(lhs_value.x, rhs_value.x) && almost_equal(lhs_value.y, rhs_value.y)) {
+    return AssertionSuccess();
+  }
+
+  return internal::EqFailure(
+    lhs_expression, rhs_expression,
+    point2_print_string(lhs_value), point2_print_string(rhs_value),
+    false);
 }
 
-Angle<double> operator""_pi_rad(unsigned long long int value)  // NOLINT
-{
-  return make_radian<double>(value * pi<double>);
-}
+#define EXPECT_POINT2_EQ(val1, val2) \
+  EXPECT_PRED_FORMAT2(testing::point2_equal, val1, val2)
 
-Angle<double> operator""_pi_rad(long double value)
-{
-  return make_radian<double>(value * pi<double>);
-}
+#define ASSERT_POINT2_EQ(val1, val2) \
+  ASSERT_PRED_FORMAT2(testing::point2_equal, val1, val2)
 
-}  // namespace literals
+}  // namespace testing
 
-}  // namespace keisan
+#endif  // COMPARISON__POINT_2_HPP_

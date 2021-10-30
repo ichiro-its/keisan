@@ -18,38 +18,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <keisan/angle.hpp>
-#include <keisan/geometry/point_2.hpp>
+#include <cmath>
 
-#include <math.h>
+#include "keisan/angle.hpp"
+#include "keisan/geometry/point_2.hpp"
+
+keisan::Point2 operator*(const double & value, const keisan::Point2 & point)
+{
+  return point * value;
+}
 
 namespace keisan
 {
-
-std::ostream & operator<<(std::ostream & out, const Point2 & point)
-{
-  return out << "{" << point.x << "," << point.y << "}";
-}
-
-double distance_between(const Point2 & a, const Point2 & b)
-{
-  return a.distance_to(b);
-}
-
-Angle<double> angle_between(const Point2 & a, const Point2 & b)
-{
-  return difference_between(a.direction(), b.direction());
-}
-
-double dot_product(const Point2 & a, const Point2 & b)
-{
-  return a.x * b.x + a.y * b.y;
-}
-
-double cross_product(const Point2 & a, const Point2 & b)
-{
-  return a.magnitude() * b.magnitude() * sin(angle_between(a, b));
-}
 
 Point2::Point2()
 {
@@ -90,7 +70,7 @@ Point2::operator Vector<3>() const
 
 Point2 Point2::zero()
 {
-  return Point2(Vector<2>::zero());
+  return Point2(0.0, 0.0);
 }
 
 Point2 & Point2::operator=(const Point2 & point)
@@ -101,79 +81,97 @@ Point2 & Point2::operator=(const Point2 & point)
   return *this;
 }
 
-bool Point2::operator==(const Point2 & point) const
+bool Point2::operator==(const Point2 & other) const
 {
-  return (Vector<2>)(*this) == (Vector<2>)point;
+  return x == other.x && y == other.y;
 }
 
-bool Point2::operator!=(const Point2 & point) const
+bool Point2::operator!=(const Point2 & other) const
 {
-  return (Vector<2>)(*this) != (Vector<2>)point;
+  return x != other.x || y != other.y;
 }
 
-Point2 & Point2::operator+=(const Point2 & point)
+Point2 & Point2::operator+=(const Point2 & other)
 {
-  return *this = *this + point;
+  x += other.x;
+  y += other.y;
+
+  return *this;
 }
 
-Point2 & Point2::operator-=(const Point2 & point)
+Point2 & Point2::operator-=(const Point2 & other)
 {
-  return *this = *this - point;
+  x -= other.x;
+  y -= other.y;
+
+  return *this;
 }
 
 Point2 & Point2::operator+=(const double & value)
 {
-  return *this = *this + value;
+  x += value;
+  y += value;
+
+  return *this;
 }
 
 Point2 & Point2::operator-=(const double & value)
 {
-  return *this = *this - value;
+  x -= value;
+  y -= value;
+
+  return *this;
 }
 
 Point2 & Point2::operator*=(const double & value)
 {
-  return *this = *this * value;
+  x *= value;
+  y *= value;
+
+  return *this;
 }
 
 Point2 & Point2::operator/=(const double & value)
 {
-  return *this = *this / value;
+  x /= value;
+  y /= value;
+
+  return *this;
 }
 
-Point2 Point2::operator+(const Point2 & point) const
+Point2 Point2::operator+(const Point2 & other) const
 {
-  return Point2((Vector<2>)(*this) + (Vector<2>)point);
+  return Point2(x + other.x, y + other.y);
 }
 
-Point2 Point2::operator-(const Point2 & point) const
+Point2 Point2::operator-(const Point2 & other) const
 {
-  return Point2((Vector<2>)(*this) - (Vector<2>)point);
+  return Point2(x - other.x, y - other.y);
 }
 
 Point2 Point2::operator+(const double & value) const
 {
-  return Point2((Vector<2>)(*this) + value);
+  return Point2(x + value, y + value);
 }
 
 Point2 Point2::operator-(const double & value) const
 {
-  return Point2((Vector<2>)(*this) - value);
+  return Point2(x - value, y - value);
 }
 
 Point2 Point2::operator*(const double & value) const
 {
-  return Point2((Vector<2>)(*this) * value);
+  return Point2(x * value, y * value);
 }
 
 Point2 Point2::operator/(const double & value) const
 {
-  return Point2((Vector<2>)(*this) / value);
+  return Point2(x / value, y / value);
 }
 
 Point2 Point2::operator-() const
 {
-  return Point2(-(Vector<2>)(*this));
+  return Point2(-x, -y);
 }
 
 double Point2::magnitude() const
@@ -192,16 +190,14 @@ Point2 Point2::normalize() const
   return Point2(x / mag, y / mag);
 }
 
-double Point2::distance_to(const Point2 & other) const
+double Point2::dot(const Point2 & other) const
 {
-  auto delta = other - *this;
-  return delta.magnitude();
+  return x * other.x + y * other.y;
 }
 
-Angle<double> Point2::direction_to(const Point2 & other) const
+double Point2::cross(const Point2 & other) const
 {
-  auto delta = other - *this;
-  return delta.direction();
+  return x * other.y - y * other.x;
 }
 
 Point2 Point2::translate(const Point2 & translation) const
@@ -229,17 +225,17 @@ Point2 Point2::rotate(const Angle<double> & rotation) const
   return point;
 }
 
-Point2 Point2::scale_from(const Point2 & scaling, const Point2 & anchor)
+Point2 Point2::scale_from(const Point2 & scaling, const Point2 & anchor) const
 {
   return translate(-anchor).scale(scaling).translate(anchor);
 }
 
-Point2 Point2::scale_from(const double & scaling, const Point2 & anchor)
+Point2 Point2::scale_from(const double & scaling, const Point2 & anchor) const
 {
   return translate(-anchor).scale(scaling).translate(anchor);
 }
 
-Point2 Point2::rotate_from(const Angle<double> & rotation, const Point2 & anchor)
+Point2 Point2::rotate_from(const Angle<double> & rotation, const Point2 & anchor) const
 {
   return translate(-anchor).rotate(rotation).translate(anchor);
 }

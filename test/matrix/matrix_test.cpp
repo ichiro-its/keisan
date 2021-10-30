@@ -18,10 +18,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <gtest/gtest.h>
-#include <keisan/keisan.hpp>
-
 #include <sstream>
+
+#include "gtest/gtest.h"
+#include "keisan/keisan.hpp"
 
 #define ASSERT_MATRIX_M_N_EQ(M, N, MATRIX, ...) \
   { \
@@ -115,33 +115,6 @@ TEST(MatrixTest, MatrixMultiplication)
     9.0, 9.0);
 }
 
-TEST(MatrixTest, SquareMatrixMultiplication)
-{
-  auto a = ksn::SquareMatrix<2>(
-    1.0, 1.0,
-    2.0, 2.0);
-
-  auto b = ksn::Matrix<2, 3>(
-    1.0, 1.0, 1.0,
-    2.0, 2.0, 2.0);
-
-  auto c = ksn::Matrix<3, 2>(
-    1.0, 1.0,
-    2.0, 2.0,
-    3.0, 3.0);
-
-  ASSERT_MATRIX_M_N_EQ(
-    2, 3, a * b,
-    3.0, 3.0, 3.0,
-    6.0, 6.0, 6.0);
-
-  ASSERT_MATRIX_M_N_EQ(
-    3, 2, c * a,
-    3.0, 3.0,
-    6.0, 6.0,
-    9.0, 9.0);
-}
-
 TEST(MatrixTest, MatrixOperation)
 {
   auto a = ksn::Matrix<3, 4>(
@@ -202,6 +175,12 @@ TEST(MatrixTest, ScalarOperation)
 
   ASSERT_MATRIX_M_N_EQ(
     3, 4, a * 2.0,
+    2.0, 2.0, 2.0, 2.0,
+    4.0, 4.0, 4.0, 4.0,
+    6.0, 6.0, 6.0, 6.0);
+
+  ASSERT_MATRIX_M_N_EQ(
+    3, 4, 2.0 * a,
     2.0, 2.0, 2.0, 2.0,
     4.0, 4.0, 4.0, 4.0,
     6.0, 6.0, 6.0, 6.0);

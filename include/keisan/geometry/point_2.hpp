@@ -23,21 +23,11 @@
 
 #include <ostream>
 
-#include "../angle.hpp"
-#include "../matrix.hpp"
+#include "keisan/angle.hpp"
+#include "keisan/matrix.hpp"
 
 namespace keisan
 {
-
-struct Point2;
-
-std::ostream & operator<<(std::ostream & out, const Point2 & point);
-
-double distance_between(const Point2 & a, const Point2 & b);
-Angle<double> angle_between(const Point2 & a, const Point2 & b);
-
-double dot_product(const Point2 & a, const Point2 & b);
-double cross_product(const Point2 & a, const Point2 & b);
 
 struct Point2
 {
@@ -54,19 +44,19 @@ struct Point2
 
   Point2 & operator=(const Point2 & point);
 
-  bool operator==(const Point2 & point) const;
-  bool operator!=(const Point2 & point) const;
+  bool operator==(const Point2 & other) const;
+  bool operator!=(const Point2 & other) const;
 
-  Point2 & operator+=(const Point2 & point);
-  Point2 & operator-=(const Point2 & point);
+  Point2 & operator+=(const Point2 & other);
+  Point2 & operator-=(const Point2 & other);
 
   Point2 & operator+=(const double & value);
   Point2 & operator-=(const double & value);
   Point2 & operator*=(const double & value);
   Point2 & operator/=(const double & value);
 
-  Point2 operator+(const Point2 & point) const;
-  Point2 operator-(const Point2 & point) const;
+  Point2 operator+(const Point2 & other) const;
+  Point2 operator-(const Point2 & other) const;
 
   Point2 operator+(const double & value) const;
   Point2 operator-(const double & value) const;
@@ -80,8 +70,8 @@ struct Point2
 
   Point2 normalize() const;
 
-  double distance_to(const Point2 & other) const;
-  Angle<double> direction_to(const Point2 & other) const;
+  double dot(const Point2 & other) const;
+  double cross(const Point2 & other) const;
 
   Point2 translate(const Point2 & translation) const;
 
@@ -90,15 +80,17 @@ struct Point2
 
   Point2 rotate(const Angle<double> & rotation) const;
 
-  Point2 scale_from(const Point2 & scaling, const Point2 & anchor);
-  Point2 scale_from(const double & scaling, const Point2 & anchor);
+  Point2 scale_from(const Point2 & scaling, const Point2 & anchor) const;
+  Point2 scale_from(const double & scaling, const Point2 & anchor) const;
 
-  Point2 rotate_from(const Angle<double> & rotation, const Point2 & anchor);
+  Point2 rotate_from(const Angle<double> & rotation, const Point2 & anchor) const;
 
   double x;
   double y;
 };
 
 }  // namespace keisan
+
+keisan::Point2 operator*(const double & value, const keisan::Point2 & point);
 
 #endif  // KEISAN__GEOMETRY__POINT_2_HPP_

@@ -18,41 +18,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <math.h>
+#include <cmath>
 
-#include <keisan/angle.hpp>
-#include <keisan/geometry/point_3.hpp>
+#include "keisan/angle.hpp"
+#include "keisan/geometry/point_3.hpp"
 
-namespace keisan
-{
-
-std::ostream & operator<<(std::ostream & out, const Point3 point)
+std::ostream & operator<<(std::ostream & out, const keisan::Point3 point)
 {
   return out << "{" << point.x << "," << point.y << "," << point.z << "}";
 }
 
-double distance_between(const Point3 & a, const Point3 & b)
+keisan::Point3 operator*(const double & value, const keisan::Point3 & point)
 {
-  return a.distance_to(b);
+  return point * value;
 }
 
-Angle<double> angle_between(const Point3 & a, const Point3 & b)
+namespace keisan
 {
-  double dot = dot_product(a, b);
-  double mag = a.magnitude() * b.magnitude();
-
-  return arccos(dot / mag);
-}
-
-double dot_product(const Point3 & a, const Point3 & b)
-{
-  return a.x * b.x + a.y * b.y + a.z * b.z;
-}
-
-double cross_product(const Point3 & a, const Point3 & b)
-{
-  return a.magnitude() * b.magnitude() * sin(angle_between(a, b));
-}
 
 Point3::Point3()
 {
@@ -96,7 +78,7 @@ Point3::operator Vector<4>() const
 
 Point3 Point3::zero()
 {
-  return Point3(Vector<3>::zero());
+  return Point3(0.0, 0.0, 0.0);
 }
 
 Point3 & Point3::operator=(const Point3 & point)
@@ -108,79 +90,103 @@ Point3 & Point3::operator=(const Point3 & point)
   return *this;
 }
 
-bool Point3::operator==(const Point3 & point) const
+bool Point3::operator==(const Point3 & other) const
 {
-  return (Vector<3>)(*this) == (Vector<3>)point;
+  return x == other.x && y == other.y && z == other.z;
 }
 
-bool Point3::operator!=(const Point3 & point) const
+bool Point3::operator!=(const Point3 & other) const
 {
-  return (Vector<3>)(*this) != (Vector<3>)point;
+  return x != other.x || y != other.y || z != other.z;
 }
 
-Point3 & Point3::operator+=(const Point3 & point)
+Point3 & Point3::operator+=(const Point3 & other)
 {
-  return *this = *this + point;
+  x += other.x;
+  y += other.y;
+  z += other.z;
+
+  return *this;
 }
 
-Point3 & Point3::operator-=(const Point3 & point)
+Point3 & Point3::operator-=(const Point3 & other)
 {
-  return *this = *this - point;
+  x -= other.x;
+  y -= other.y;
+  z -= other.z;
+
+  return *this;
 }
 
 Point3 & Point3::operator+=(const double & value)
 {
-  return *this = *this + value;
+  x += value;
+  y += value;
+  z += value;
+
+  return *this;
 }
 
 Point3 & Point3::operator-=(const double & value)
 {
-  return *this = *this - value;
+  x -= value;
+  y -= value;
+  z -= value;
+
+  return *this;
 }
 
 Point3 & Point3::operator*=(const double & value)
 {
-  return *this = *this * value;
+  x *= value;
+  y *= value;
+  z *= value;
+
+  return *this;
 }
 
 Point3 & Point3::operator/=(const double & value)
 {
-  return *this = *this / value;
+  x /= value;
+  y /= value;
+  z /= value;
+
+  return *this;
 }
 
-Point3 Point3::operator+(const Point3 & point) const
+Point3 Point3::operator+(const Point3 & other) const
 {
-  return Point3((Vector<3>)(*this) + (Vector<3>)point);
+  return Point3(x + other.x, y + other.y, z + other.z);
 }
 
-Point3 Point3::operator-(const Point3 & point) const
+Point3 Point3::operator-(const Point3 & other) const
 {
-  return Point3((Vector<3>)(*this) - (Vector<3>)point);
+  return Point3(x - other.x, y - other.y, z - other.z);
 }
 
 Point3 Point3::operator+(const double & value) const
 {
-  return Point3((Vector<3>)(*this) + value);
+  return Point3(x + value, y + value, z + value);
 }
 
 Point3 Point3::operator-(const double & value) const
 {
-  return Point3((Vector<3>)(*this) - value);
+  return Point3(x - value, y - value, z - value);
 }
 
 Point3 Point3::operator*(const double & value) const
 {
-  return Point3((Vector<3>)(*this) * value);
+  return Point3(x * value, y * value, z * value);
 }
 
 Point3 Point3::operator/(const double & value) const
 {
-  return Point3((Vector<3>)(*this) / value);
+  return Point3(x / value, y / value, z / value);
 }
 
 Point3 Point3::operator-() const
 {
-  return Point3(-(Vector<3>)(*this));
+  return Point3(-x, -y, -z);
 }
 
 double Point3::magnitude() const
@@ -195,9 +201,17 @@ Point3 Point3::normalize() const
   return Point3(x / mag, y / mag, z / mag);
 }
 
-double Point3::distance_to(const Point3 & other) const
+double Point3::dot(const Point3 & other) const
 {
-  return (other - *this).magnitude();
+  return x * other.x + y * other.y + z * other.z;
+}
+
+Point3 Point3::cross(const Point3 & other) const
+{
+  return Point3(
+    y * other.z - z * other.y,
+    z * other.x - x * other.z,
+    x * other.y - y * other.x);
 }
 
 }  // namespace keisan

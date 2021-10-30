@@ -23,21 +23,11 @@
 
 #include <ostream>
 
-#include "../angle.hpp"
-#include "../matrix.hpp"
+#include "keisan/angle.hpp"
+#include "keisan/matrix.hpp"
 
 namespace keisan
 {
-
-struct Point3;
-
-std::ostream & operator<<(std::ostream & out, const Point3 point);
-
-double distance_between(const Point3 & a, const Point3 & b);
-Angle<double> angle_between(const Point3 & a, const Point3 & b);
-
-double dot_product(const Point3 & a, const Point3 & b);
-double cross_product(const Point3 & a, const Point3 & b);
 
 struct Point3
 {
@@ -54,19 +44,19 @@ struct Point3
 
   Point3 & operator=(const Point3 & point);
 
-  bool operator==(const Point3 & point) const;
-  bool operator!=(const Point3 & point) const;
+  bool operator==(const Point3 & other) const;
+  bool operator!=(const Point3 & other) const;
 
-  Point3 & operator+=(const Point3 & point);
-  Point3 & operator-=(const Point3 & point);
+  Point3 & operator+=(const Point3 & other);
+  Point3 & operator-=(const Point3 & other);
 
   Point3 & operator+=(const double & value);
   Point3 & operator-=(const double & value);
   Point3 & operator*=(const double & value);
   Point3 & operator/=(const double & value);
 
-  Point3 operator+(const Point3 & point) const;
-  Point3 operator-(const Point3 & point) const;
+  Point3 operator+(const Point3 & other) const;
+  Point3 operator-(const Point3 & other) const;
 
   Point3 operator+(const double & value) const;
   Point3 operator-(const double & value) const;
@@ -79,7 +69,8 @@ struct Point3
 
   Point3 normalize() const;
 
-  double distance_to(const Point3 & other) const;
+  double dot(const Point3 & other) const;
+  Point3 cross(const Point3 & other) const;
 
   double x;
   double y;
@@ -87,5 +78,9 @@ struct Point3
 };
 
 }  // namespace keisan
+
+std::ostream & operator<<(std::ostream & out, const keisan::Point3 point);
+
+keisan::Point3 operator*(const double & value, const keisan::Point3 & point);
 
 #endif  // KEISAN__GEOMETRY__POINT_3_HPP_

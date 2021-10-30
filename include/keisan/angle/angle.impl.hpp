@@ -25,6 +25,18 @@
 #include "keisan/angle/angle.hpp"
 #include "keisan/angle/trigonometry.hpp"
 
+template<typename T>
+std::ostream & operator<<(std::ostream & out, const keisan::Angle<T> & angle)
+{
+  return out << angle.degree();
+}
+
+template<typename T, typename U>
+keisan::Angle<T> operator*(const U & value, const keisan::Angle<T> & angle)
+{
+  return angle * value;
+}
+
 namespace keisan
 {
 
@@ -38,24 +50,6 @@ template<typename T>
 Angle<T> make_radian(const T & value)
 {
   return Angle<T>(value, false);
-}
-
-template<typename T>
-std::ostream & operator<<(std::ostream & out, const Angle<T> & angle)
-{
-  return out << angle.degree();
-}
-
-template<typename T, typename U>
-Angle<T> operator*(const U & value, const Angle<T> & angle)
-{
-  return angle * value;
-}
-
-template<typename T>
-Angle<T> difference_between(const Angle<T> & a, const Angle<T> & b)
-{
-  return a.difference_to(b);
 }
 
 template<typename T>
@@ -197,12 +191,6 @@ Angle<T> Angle<T>::normalize() const
   } else {
     return make_radian(wrap<T>(data, -1_pi, 1_pi));
   }
-}
-
-template<typename T>
-Angle<T> Angle<T>::difference_to(const Angle<T> & angle) const
-{
-  return (angle - *this).normalize();
 }
 
 }  // namespace keisan

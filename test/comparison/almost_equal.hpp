@@ -18,38 +18,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <keisan/number.hpp>
+#ifndef COMPARISON__ALMOST_EQUAL_HPP_
+#define COMPARISON__ALMOST_EQUAL_HPP_
 
-#include <algorithm>
-#include <cmath>
+#include "gtest/gtest.h"
 
-namespace keisan
+namespace testing
 {
 
-double sign_number(double value)
+template<typename T>
+bool almost_equal(const T & a, const T & b)
 {
-  return sign(value);
+  return internal::FloatingPoint<T>(a).AlmostEquals(internal::FloatingPoint<T>(b));
 }
 
-double scale_number(double value, double source, double target)
-{
-  return scale(value, source, target);
-}
+}  // namespace testing
 
-double map_number(
-  double value, double source_min, double source_max, double target_min, double target_max)
-{
-  return map(value, source_min, source_max, target_min, target_max);
-}
-
-double clamp_number(double value, double min, double max)
-{
-  return clamp(value, min, max);
-}
-
-double wrap_number(double value, double min, double max)
-{
-  return wrap(value, min, max);
-}
-
-}  // namespace keisan
+#endif  // COMPARISON__ALMOST_EQUAL_HPP_

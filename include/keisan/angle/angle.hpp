@@ -36,26 +36,6 @@ Angle<T> make_degree(const T & value);
 template<typename T>
 Angle<T> make_radian(const T & value);
 
-namespace literals
-{
-
-Angle<double> operator""_deg(unsigned long long int value);  // NOLINT
-Angle<double> operator""_deg(long double value);
-
-Angle<double> operator""_pi_rad(unsigned long long int value);  // NOLINT
-Angle<double> operator""_pi_rad(long double value);
-
-}  // namespace literals
-
-template<typename T>
-std::ostream & operator<<(std::ostream & out, const Angle<T> & angle);
-
-template<typename T, typename U>
-Angle<T> operator*(const U & value, const Angle<T> & angle);
-
-template<typename T>
-Angle<T> difference_between(const Angle<T> & a, const Angle<T> & b);
-
 template<typename T>
 class Angle
 {
@@ -101,32 +81,28 @@ public:
 
   Angle<T> normalize() const;
 
-  Angle<T> difference_to(const Angle<T> & angle) const;
-
 private:
   T data;
   bool is_degree;
 };
+namespace literals
+{
 
-[[deprecated("Use Angle::normalize() and Angle::radian() instead.")]]
-double wrap_rad(double value);
+Angle<double> operator""_deg(unsigned long long int value);  // NOLINT
+Angle<double> operator""_deg(long double value);
 
-[[deprecated("Use Angle::normalize() and Angle::degree() instead.")]]
-double wrap_deg(double value);
+Angle<double> operator""_pi_rad(unsigned long long int value);  // NOLINT
+Angle<double> operator""_pi_rad(long double value);
 
-[[deprecated("Use make_radian() and Angle::degree() instead.")]]
-double rad_to_deg(double value);
-
-[[deprecated("Use make_degree() and Angle::radian() instead.")]]
-double deg_to_rad(double value);
-
-[[deprecated("Use difference_between() instead.")]]
-double delta_rad(double value1, double value2);
-
-[[deprecated("Use difference_between() instead.")]]
-double delta_deg(double value1, double value2);
+}  // namespace literals
 
 }  // namespace keisan
+
+template<typename T>
+std::ostream & operator<<(std::ostream & out, const keisan::Angle<T> & angle);
+
+template<typename T, typename U>
+keisan::Angle<T> operator*(const U & value, const keisan::Angle<T> & angle);
 
 #include "keisan/angle/angle.impl.hpp"
 

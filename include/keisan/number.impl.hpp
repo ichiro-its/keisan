@@ -36,10 +36,10 @@ T sign(const T & value)
   return (value >= 0) ? 1 : -1;
 }
 
-template<typename T>
-T sign(const Angle<T> & value)
+template<AngleType E, typename T>
+T sign(const Angle<E, T> & angle)
 {
-  return (value >= make_degree<T>(0)) ? 1.0 : -1.0;
+  return (angle >= Angle<E, T>(0)) ? 1.0 : -1.0;
 }
 
 template<typename T>
@@ -62,18 +62,16 @@ T clamp(const T & value, const T & min, const T & max)
   return std::min(std::max(value, min), max);
 }
 
-template<typename T>
-Angle<T> clamp(const Angle<T> & value, const Angle<T> & min, const Angle<T> & max)
+template<AngleType E, typename T>
+Angle<E, T> clamp(const Angle<E, T> & angle, const Angle<E, T> & min, const Angle<E, T> & max)
 {
-  if (value < min) {
+  if (angle < min) {
     return min;
-  }
-
-  if (value > max) {
+  } else if (angle > max) {
     return max;
   }
 
-  return value;
+  return angle;
 }
 
 template<typename T, enable_if_is_floating_point<T> = true>

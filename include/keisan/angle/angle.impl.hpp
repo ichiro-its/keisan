@@ -25,14 +25,14 @@
 #include "keisan/angle/angle.hpp"
 #include "keisan/angle/trigonometry.hpp"
 
-template<typename T>
-std::ostream & operator<<(std::ostream & out, const keisan::Angle<T> & angle)
+template<keisan::AngleType E, typename T>
+std::ostream & operator<<(std::ostream & out, const keisan::Angle<E, T> & angle)
 {
-  return out << angle.degree();
+  return out << angle.value;
 }
 
-template<typename T, typename U>
-keisan::Angle<T> operator*(const U & value, const keisan::Angle<T> & angle)
+template<keisan::AngleType E, typename T, typename U>
+keisan::Angle<E, T> operator*(const U & value, const keisan::Angle<E, T> & angle)
 {
   return angle * value;
 }
@@ -40,157 +40,145 @@ keisan::Angle<T> operator*(const U & value, const keisan::Angle<T> & angle)
 namespace keisan
 {
 
-template<typename T>
-Angle<T> make_degree(const T & value)
-{
-  return Angle<T>(value, true);
-}
-
-template<typename T>
-Angle<T> make_radian(const T & value)
-{
-  return Angle<T>(value, false);
-}
-
-template<typename T>
-Angle<T>::Angle()
+template<AngleType E, typename T>
+Angle<E, T>::Angle()
 {
 }
 
-template<typename T>
-Angle<T>::Angle(const T & data, const bool & is_degree)
-: data(data),
-  is_degree(is_degree)
+template<AngleType E, typename T>
+Angle<E, T>::Angle(const T & value)
+: value(value)
 {
 }
 
-template<typename T>
-template<typename U>
-Angle<T>::operator Angle<U>() const
+// template<typename T>
+// template<typename U>
+// Angle<T>::operator Angle<U>() const
+// {
+//   return Angle<U>(data, is_degree);
+// }
+
+template<AngleType E, typename T>
+bool Angle<E, T>::operator==(const Angle<E, T> & other) const
 {
-  return Angle<U>(data, is_degree);
+  return value == other.value;
 }
 
-template<typename T>
-bool Angle<T>::operator==(const Angle<T> & angle) const
+template<AngleType E, typename T>
+bool Angle<E, T>::operator!=(const Angle<E, T> & other) const
 {
-  return data == (is_degree ? angle.degree() : angle.radian());
+  return value != other.value;
 }
 
-template<typename T>
-bool Angle<T>::operator!=(const Angle<T> & angle) const
+template<AngleType E, typename T>
+bool Angle<E, T>::operator>(const Angle<E, T> & other) const
 {
-  return data != (is_degree ? angle.degree() : angle.radian());
+  return value > other.value;
 }
 
-template<typename T>
-bool Angle<T>::operator>(const Angle<T> & angle) const
+template<AngleType E, typename T>
+bool Angle<E, T>::operator>=(const Angle<E, T> & other) const
 {
-  return data > (is_degree ? angle.degree() : angle.radian());
+  return value >= other.value;
 }
 
-template<typename T>
-bool Angle<T>::operator>=(const Angle<T> & angle) const
+template<AngleType E, typename T>
+bool Angle<E, T>::operator<(const Angle<E, T> & other) const
 {
-  return data >= (is_degree ? angle.degree() : angle.radian());
+  return value < other.value;
 }
 
-template<typename T>
-bool Angle<T>::operator<(const Angle<T> & angle) const
+template<AngleType E, typename T>
+bool Angle<E, T>::operator<=(const Angle<E, T> & other) const
 {
-  return data < (is_degree ? angle.degree() : angle.radian());
+  return value <= other.value;
 }
 
-template<typename T>
-bool Angle<T>::operator<=(const Angle<T> & angle) const
+template<AngleType E, typename T>
+Angle<E, T> & Angle<E, T>::operator+=(const Angle<E, T> & other)
 {
-  return data <= (is_degree ? angle.degree() : angle.radian());
-}
-
-template<typename T>
-Angle<T> & Angle<T>::operator+=(const Angle<T> & angle)
-{
-  data += is_degree ? angle.degree() : angle.radian();
+  value += other.value;
   return *this;
 }
 
-template<typename T>
-Angle<T> & Angle<T>::operator-=(const Angle<T> & angle)
+template<AngleType E, typename T>
+Angle<E, T> & Angle<E, T>::operator-=(const Angle<E, T> & other)
 {
-  data -= is_degree ? angle.degree() : angle.radian();
+  value -= other.value;
   return *this;
 }
 
-template<typename T>
-Angle<T> & Angle<T>::operator*=(const T & value)
+template<AngleType E, typename T>
+Angle<E, T> & Angle<E, T>::operator*=(const T & value)
 {
-  data *= value;
+  this->value *= value;
   return *this;
 }
 
-template<typename T>
-Angle<T> & Angle<T>::operator/=(const T & value)
+template<AngleType E, typename T>
+Angle<E, T> & Angle<E, T>::operator/=(const T & value)
 {
-  data /= value;
+  this->value /= value;
   return *this;
 }
 
-template<typename T>
-Angle<T> Angle<T>::operator+(const Angle<T> & angle) const
+template<AngleType E, typename T>
+Angle<E, T> Angle<E, T>::operator+(const Angle<E, T> & other) const
 {
-  return Angle(data + (is_degree ? angle.degree() : angle.radian()), is_degree);
+  return Angle<E, T>(value + other.value);
+}
+
+template<AngleType E, typename T>
+Angle<E, T> Angle<E, T>::operator-(const Angle<E, T> & other) const
+{
+  return Angle<E, T>(value - other.value);
+}
+
+template<AngleType E, typename T>
+Angle<E, T> Angle<E, T>::operator*(const T & value) const
+{
+  return Angle<E, T>(this->value * value);
+}
+
+template<AngleType E, typename T>
+Angle<E, T> Angle<E, T>::operator/(const T & value) const
+{
+  return Angle<E, T>(this->value / value);
+}
+
+template<AngleType E, typename T>
+Angle<E, T> Angle<E, T>::operator-() const
+{
+  return Angle<E, T>(-value);
+}
+
+// template<typename T>
+// T Angle<T>::degree() const
+// {
+//   using keisan::literals::operator""_pi;
+
+//   return is_degree ? data : scale<T>(data, 1_pi, 180.0);
+// }
+
+// template<typename T>
+// T Angle<T>::radian() const
+// {
+//   using keisan::literals::operator""_pi;
+
+//   return is_degree ? scale<T>(data, 180.0, 1_pi) : data;
+// }
+
+template<typename T>
+DegAngle<T> Angle<AngleType::Degree, T>::normalize() const
+{
+  return Degree(wrap<T>(value, -180, 180));
 }
 
 template<typename T>
-Angle<T> Angle<T>::operator-(const Angle<T> & angle) const
-{
-  return Angle(data - (is_degree ? angle.degree() : angle.radian()), is_degree);
-}
-
-template<typename T>
-Angle<T> Angle<T>::operator*(const T & value) const
-{
-  return Angle(data * value, is_degree);
-}
-
-template<typename T>
-Angle<T> Angle<T>::operator/(const T & value) const
-{
-  return Angle(data / value, is_degree);
-}
-
-template<typename T>
-Angle<T> Angle<T>::operator-() const
-{
-  return Angle(-data, is_degree);
-}
-
-template<typename T>
-T Angle<T>::degree() const
+RadAngle<T> Angle<AngleType::Radian, T>::normalize() const
 {
   using keisan::literals::operator""_pi;
-
-  return is_degree ? data : scale<T>(data, 1_pi, 180.0);
-}
-
-template<typename T>
-T Angle<T>::radian() const
-{
-  using keisan::literals::operator""_pi;
-
-  return is_degree ? scale<T>(data, 180.0, 1_pi) : data;
-}
-
-template<typename T>
-Angle<T> Angle<T>::normalize() const
-{
-  using keisan::literals::operator""_pi;
-
-  if (is_degree) {
-    return make_degree(wrap<T>(data, -180.0, 180.0));
-  } else {
-    return make_radian(wrap<T>(data, -1_pi, 1_pi));
-  }
+  return Radian(wrap<T>(value, -1_pi, 1_pi));
 }
 
 }  // namespace keisan

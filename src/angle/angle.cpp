@@ -19,6 +19,7 @@
 // THE SOFTWARE.
 
 #include "keisan/angle/angle.hpp"
+#include "keisan/angle/trigonometry.hpp"
 
 namespace keisan
 {
@@ -26,24 +27,24 @@ namespace keisan
 namespace literals
 {
 
-Angle<double> operator""_deg(unsigned long long int value)  // NOLINT
+DegAngle<long long int> operator""_deg(unsigned long long int value)  // NOLINT
 {
-  return make_degree<double>(value);
+  return DegAngle<long long int>(value);
 }
 
-Angle<double> operator""_deg(long double value)
+DegAngle<long double> operator""_deg(long double value)
 {
-  return make_degree<double>(value);
+  return DegAngle<long double>(value);
 }
 
-Angle<double> operator""_pi_rad(unsigned long long int value)  // NOLINT
+RadAngle<long double> operator""_pi_rad(unsigned long long int value)  // NOLINT
 {
-  return make_radian<double>(value * pi<double>);
+  return RadAngle<long double>(value * pi<long double>);
 }
 
-Angle<double> operator""_pi_rad(long double value)
+RadAngle<long double> operator""_pi_rad(long double value)
 {
-  return make_radian<double>(value * pi<double>);
+  return RadAngle<long double>(value * pi<long double>);
 }
 
 }  // namespace literals

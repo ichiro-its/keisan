@@ -179,7 +179,7 @@ double Point2::magnitude() const
   return std::hypot(x, y);
 }
 
-Angle<double> Point2::direction() const
+RadAngle<double> Point2::direction() const
 {
   return signed_arctan(y, x);
 }
@@ -215,7 +215,7 @@ Point2 Point2::scale(const double & scaling) const
   return scale({scaling, scaling});
 }
 
-Point2 Point2::rotate(const Angle<double> & rotation) const
+Point2 Point2::rotate(const RadAngle<double> & rotation) const
 {
   Point2 point;
 
@@ -235,7 +235,7 @@ Point2 Point2::scale_from(const double & scaling, const Point2 & anchor) const
   return translate(-anchor).scale(scaling).translate(anchor);
 }
 
-Point2 Point2::rotate_from(const Angle<double> & rotation, const Point2 & anchor) const
+Point2 Point2::rotate_from(const RadAngle<double> & rotation, const Point2 & anchor) const
 {
   return translate(-anchor).rotate(rotation).translate(anchor);
 }

@@ -23,11 +23,13 @@
 
 #include <type_traits>
 
+#include "keisan/angle/angle_type.hpp"
+
 namespace keisan
 {
 
-template<typename T>
-class Angle;
+template<AngleType E, typename T>
+struct Angle;
 
 template<typename T>
 using enable_if_is_integral = std::enable_if_t<std::is_integral<T>::value, bool>;
@@ -38,8 +40,8 @@ using enable_if_is_floating_point = std::enable_if_t<std::is_floating_point<T>::
 template<typename T>
 T sign(const T & value);
 
-template<typename T>
-T sign(const Angle<T> & value);
+template<AngleType E, typename T>
+T sign(const Angle<E, T> & angle);
 
 template<typename T>
 T scale(const T & value, const T & source, const T & target);
@@ -52,8 +54,8 @@ T map(
 template<typename T>
 T clamp(const T & value, const T & min, const T & max);
 
-template<typename T>
-Angle<T> clamp(const Angle<T> & value, const Angle<T> & min, const Angle<T> & max);
+template<AngleType E, typename T>
+Angle<E, T> clamp(const Angle<E, T> & angle, const Angle<E, T> & min, const Angle<E, T> & max);
 
 template<typename T, enable_if_is_floating_point<T> = true>
 T wrap(const T & value, const T & min, const T & max);

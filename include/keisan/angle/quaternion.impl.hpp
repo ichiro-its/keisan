@@ -67,9 +67,9 @@ bool Quaternion<T>::operator!=(const Quaternion<T> & other) const
 }
 
 template<typename T>
-Euler<T> Quaternion<T>::euler() const
+RadEuler<T> Quaternion<T>::to_rad_euler() const
 {
-  Euler<T> euler;
+  RadEuler<T> rad_euler;
 
   T sqx = x * x;
   T sqy = y * y;
@@ -78,24 +78,24 @@ Euler<T> Quaternion<T>::euler() const
 
   T sarg = -2 * (x * z - w * y) / (sqx + sqy + sqz + sqw);
   if (sarg <= -0.99999) {
-    euler.roll = make_radian(0.0);
-    euler.pitch = make_radian(-0.5_pi);
-    euler.yaw = -2.0 * signed_arctan(y, x);
+    rad_euler.roll = RadAngle<T>(0.0);
+    rad_euler.pitch = RadAngle<T>(-0.5_pi);
+    rad_euler.yaw = -2.0 * signed_arctan(y, x);
   } else if (sarg >= 0.99999) {
-    euler.roll = make_radian(0.0);
-    euler.pitch = make_radian(0.5_pi);
-    euler.yaw = 2.0 * signed_arctan(y, x);
+    rad_euler.roll = RadAngle<T>(0.0);
+    rad_euler.pitch = RadAngle<T>(0.5_pi);
+    rad_euler.yaw = 2.0 * signed_arctan(y, x);
   } else {
-    euler.roll = signed_arctan(2 * (y * z + w * x), sqw - sqx - sqy + sqz);
-    euler.pitch = arcsin(sarg);
-    euler.yaw = signed_arctan(2 * (x * y + w * z), sqw + sqx - sqy - sqz);
+    rad_euler.roll = signed_arctan(2 * (y * z + w * x), sqw - sqx - sqy + sqz);
+    rad_euler.pitch = arcsin(sarg);
+    rad_euler.yaw = signed_arctan(2 * (x * y + w * z), sqw + sqx - sqy - sqz);
   }
 
-  euler.roll = euler.roll.normalize();
-  euler.pitch = euler.pitch.normalize();
-  euler.yaw = euler.yaw.normalize();
+  rad_euler.roll = rad_euler.roll.normalize();
+  rad_euler.pitch = rad_euler.pitch.normalize();
+  rad_euler.yaw = rad_euler.yaw.normalize();
 
-  return euler;
+  return rad_euler;
 }
 
 }  // namespace keisan

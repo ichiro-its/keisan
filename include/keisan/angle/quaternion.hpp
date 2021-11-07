@@ -23,11 +23,13 @@
 
 #include <iostream>
 
+#include "keisan/angle/angle_type.hpp"
+
 namespace keisan
 {
 
 // Forward declaration
-template<typename T>
+template<AngleType E, typename T>
 struct Euler;
 
 template<typename T>
@@ -42,7 +44,7 @@ struct Quaternion
   bool operator==(const Quaternion<T> & other) const;
   bool operator!=(const Quaternion<T> & other) const;
 
-  Euler<T> euler() const;
+  RadEuler<T> to_rad_euler() const;
 
   T x;
   T y;

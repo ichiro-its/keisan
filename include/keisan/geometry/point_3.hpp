@@ -23,7 +23,6 @@
 
 #include <ostream>
 
-#include "keisan/angle.hpp"
 #include "keisan/matrix.hpp"
 
 namespace keisan

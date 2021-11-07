@@ -23,36 +23,38 @@
 
 #include <cmath>
 
+#include "keisan/angle/angle_type.hpp"
+
 namespace keisan
 {
 
 // Forward declaration
-template<typename T>
+template<AngleType E, typename T>
 class Angle;
 
 template<typename T>
 const T pi = std::atan((T)1) * 4;
 
 template<typename T>
-T sin(const Angle<T> & angle);
+T sin(const Angle<AngleType::Radian, T> & angle);
 
 template<typename T>
-T cos(const Angle<T> & angle);
+T cos(const Angle<AngleType::Radian, T> & angle);
 
 template<typename T>
-T tan(const Angle<T> & angle);
+T tan(const Angle<AngleType::Radian, T> & angle);
 
 template<typename T>
-Angle<T> arcsin(const T & value);
+Angle<AngleType::Radian, T> arcsin(const T & value);
 
 template<typename T>
-Angle<T> arccos(const T & value);
+Angle<AngleType::Radian, T> arccos(const T & value);
 
 template<typename T>
-Angle<T> arctan(const T & value);
+Angle<AngleType::Radian, T> arctan(const T & value);
 
 template<typename T>
-Angle<T> signed_arctan(const T & y, const T & x);
+Angle<AngleType::Radian, T> signed_arctan(const T & y, const T & x);
 
 namespace literals
 {

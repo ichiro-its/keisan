@@ -23,86 +23,73 @@
 
 #include <iostream>
 
+#include "keisan/angle/angle_type.hpp"
+
 namespace keisan
 {
 
-// Forward declaration
-template<typename T>
-class Angle;
-
-template<typename T>
-Angle<T> make_degree(const T & value);
-
-template<typename T>
-Angle<T> make_radian(const T & value);
-
-template<typename T>
-class Angle
+template<AngleType E, typename T>
+struct Angle
 {
-public:
-  template<typename U>
-  friend class Angle;
+  T value;
 
-  friend Angle<T> make_degree<T>(const T & value);
-  friend Angle<T> make_radian<T>(const T & value);
+  // template<typename U>
+  // friend class Angle;
 
   Angle();
+  explicit Angle(const T & value);
 
-private:
-  explicit Angle(const T & data, const bool & is_degree = false);
+  // template<typename U>
+  // operator Angle<U>() const;
 
-public:
-  template<typename U>
-  operator Angle<U>() const;
+  bool operator==(const Angle<E, T> & other) const;
+  bool operator!=(const Angle<E, T> & other) const;
+  bool operator>(const Angle<E, T> & other) const;
+  bool operator>=(const Angle<E, T> & other) const;
+  bool operator<(const Angle<E, T> & other) const;
+  bool operator<=(const Angle<E, T> & other) const;
 
-  bool operator==(const Angle<T> & angle) const;
-  bool operator!=(const Angle<T> & angle) const;
-  bool operator>(const Angle<T> & angle) const;
-  bool operator>=(const Angle<T> & angle) const;
-  bool operator<(const Angle<T> & angle) const;
-  bool operator<=(const Angle<T> & angle) const;
+  Angle<E, T> & operator+=(const Angle<E, T> & other);
+  Angle<E, T> & operator-=(const Angle<E, T> & other);
 
-  Angle<T> & operator+=(const Angle<T> & angle);
-  Angle<T> & operator-=(const Angle<T> & angle);
+  Angle<E, T> & operator*=(const T & value);
+  Angle<E, T> & operator/=(const T & value);
 
-  Angle<T> & operator*=(const T & value);
-  Angle<T> & operator/=(const T & value);
+  Angle<E, T> operator+(const Angle<E, T> & other) const;
+  Angle<E, T> operator-(const Angle<E, T> & other) const;
 
-  Angle<T> operator+(const Angle<T> & angle) const;
-  Angle<T> operator-(const Angle<T> & angle) const;
+  Angle<E, T> operator*(const T & value) const;
+  Angle<E, T> operator/(const T & value) const;
 
-  Angle<T> operator*(const T & value) const;
-  Angle<T> operator/(const T & value) const;
+  Angle<E, T> operator-() const;
 
-  Angle<T> operator-() const;
-
-  T degree() const;
-  T radian() const;
-
-  Angle<T> normalize() const;
-
-private:
-  T data;
-  bool is_degree;
+  Angle<E, T> normalize() const;
 };
+
+template<typename T>
+using DegAngle = Angle<AngleType::Degree, T>;
+
+template<typename T>
+using RadAngle = Angle<AngleType::Radian, T>;
+
 namespace literals
 {
 
-Angle<double> operator""_deg(unsigned long long int value);  // NOLINT
-Angle<double> operator""_deg(long double value);
+DegAngle<long long int> operator""_deg(unsigned long long int value);  // NOLINT
+DegAngle<long double> operator""_deg(long double value);
 
-Angle<double> operator""_pi_rad(unsigned long long int value);  // NOLINT
-Angle<double> operator""_pi_rad(long double value);
+RadAngle<long double> operator""_pi_rad(unsigned long long int value);  // NOLINT
+RadAngle<long double> operator""_pi_rad(long double value);
 
 }  // namespace literals
 
 }  // namespace keisan
 
-template<typename T>
-std::ostream & operator<<(std::ostream & out, const keisan::Angle<T> & angle);
+template<keisan::AngleType E, typename T>
+std::ostream & operator<<(std::ostream & out, const keisan::Angle<E, T> & angle);
 
-template<typename T, typename U>
-keisan::Angle<T> operator*(const U & value, const keisan::Angle<T> & angle);
+template<keisan::AngleType E, typename T, typename U>
+keisan::Angle<E, T> operator*(const U & value, const keisan::Angle<E, T> & angle);
 
 #include "keisan/angle/angle.impl.hpp"
 

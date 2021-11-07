@@ -18,57 +18,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__ANGLE__TRIGONOMETRY_IMPL_HPP_
-#define KEISAN__ANGLE__TRIGONOMETRY_IMPL_HPP_
-
-#include "keisan/angle/angle.hpp"
-#include "keisan/angle/trigonometry.hpp"
+#ifndef KEISAN__ANGLE__ANGLE_IMPL_HPP_
+#define KEISAN__ANGLE__ANGLE_IMPL_HPP_
 
 namespace keisan
 {
 
-template<typename T>
-T sin(const RadAngle<T> & rad_angle)
+enum class AngleType
 {
-  return std::sin(rad_angle.value);
+  Degree,
+  Radian
+};
+
 }
 
-template<typename T>
-T cos(const RadAngle<T> & rad_angle)
-{
-  return std::cos(rad_angle.value);
-}
-
-template<typename T>
-T tan(const RadAngle<T> & rad_angle)
-{
-  return std::tan(rad_angle.value);
-}
-
-template<typename T>
-RadAngle<T> arcsin(const T & value)
-{
-  return RadAngle<T>(std::asin(value));
-}
-
-template<typename T>
-RadAngle<T> arccos(const T & value)
-{
-  return RadAngle<T>(std::acos(value));
-}
-
-template<typename T>
-RadAngle<T> arctan(const T & value)
-{
-  return RadAngle<T>(std::atan(value));
-}
-
-template<typename T>
-RadAngle<T> signed_arctan(const T & y, const T & x)
-{
-  return RadAngle<T>(std::atan2(y, x));
-}
-
-}  // namespace keisan
-
-#endif  // KEISAN__ANGLE__TRIGONOMETRY_IMPL_HPP_
+#endif  // KEISAN__ANGLE__ANGLE_TYPE_HPP_

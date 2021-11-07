@@ -23,6 +23,7 @@
 
 #include <iostream>
 
+#include "keisan/angle/angle_type.hpp"
 #include "keisan/angle/angle.hpp"
 
 namespace keisan
@@ -32,29 +33,35 @@ namespace keisan
 template<typename T>
 struct Quaternion;
 
-template<typename T>
+template<AngleType E, typename T>
 struct Euler
 {
   Euler();
-  Euler(const Angle<T> & roll, const Angle<T> & pitch, const Angle<T> & yaw);
+  Euler(const Angle<E, T> & roll, const Angle<E, T> & pitch, const Angle<E, T> & yaw);
 
   template<typename U>
-  operator Euler<U>() const;
+  operator Euler<E, U>() const;
 
-  bool operator==(const Euler<T> & other) const;
-  bool operator!=(const Euler<T> & other) const;
+  bool operator==(const Euler<E, T> & other) const;
+  bool operator!=(const Euler<E, T> & other) const;
 
-  Quaternion<T> quaternion() const;
+  Quaternion<T> to_quaternion() const;
 
-  Angle<T> roll;
-  Angle<T> pitch;
-  Angle<T> yaw;
+  Angle<E, T> roll;
+  Angle<E, T> pitch;
+  Angle<E, T> yaw;
 };
+
+template<typename T>
+using DegEuler = Euler<AngleType::Degree, T>;
+
+template<typename T>
+using RadEuler = Euler<AngleType::Radian, T>;
 
 }  // namespace keisan
 
-template<typename T>
-std::ostream & operator<<(std::ostream & out, const keisan::Euler<T> & euler);
+template<keisan::AngleType E, typename T>
+std::ostream & operator<<(std::ostream & out, const keisan::Euler<E, T> & euler);
 
 #include "keisan/angle/euler.impl.hpp"
 

@@ -114,9 +114,6 @@ Angle<double> operator""_pi_rad(long double value);
 
 }  // namespace keisan
 
-template<typename T>
-std::ostream & operator<<(std::ostream & out, const keisan::Angle<T> & angle);
-
 template<typename T, typename U>
 keisan::Angle<T> operator*(const U & value, const keisan::Angle<T> & angle);
 

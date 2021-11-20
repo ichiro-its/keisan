@@ -18,11 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <iomanip>
-#include <sstream>
-
-#include "gtest/gtest.h"
-#include "keisan/keisan.hpp"
+#include "../comparison/angle.hpp"
 
 namespace ksn = keisan;
 
@@ -46,59 +42,51 @@ TEST(AngleTest, MakeRadian)
 
 TEST(AngleTest, DegLiterals)
 {
-  EXPECT_EQ(0_deg, ksn::make_degree(0.0));
-  EXPECT_EQ(90_deg, ksn::make_degree(90.0));
-  EXPECT_EQ(-45_deg, ksn::make_degree(-45.0));
-  EXPECT_EQ(0.0_deg, ksn::make_degree(0.0));
-  EXPECT_EQ(12.5_deg, ksn::make_degree(12.5));
-  EXPECT_EQ(-2.5_deg, ksn::make_degree(-2.5));
+  EXPECT_ANGLE_EQ(0_deg, ksn::make_degree(0.0));
+  EXPECT_ANGLE_EQ(90_deg, ksn::make_degree(90.0));
+  EXPECT_ANGLE_EQ(-45_deg, ksn::make_degree(-45.0));
+  EXPECT_ANGLE_EQ(0.0_deg, ksn::make_degree(0.0));
+  EXPECT_ANGLE_EQ(12.5_deg, ksn::make_degree(12.5));
+  EXPECT_ANGLE_EQ(-2.5_deg, ksn::make_degree(-2.5));
 }
 
 TEST(AngleTest, RadLiterals)
 {
-  EXPECT_EQ(0_pi_rad, ksn::make_radian<double>(0_pi));
-  EXPECT_EQ(1_pi_rad, ksn::make_radian<double>(1_pi));
-  EXPECT_EQ(-2_pi_rad, ksn::make_radian<double>(-2_pi));
-  EXPECT_EQ(0.0_pi_rad, ksn::make_radian<double>(0.0_pi));
-  EXPECT_EQ(0.5_pi_rad, ksn::make_radian<double>(0.5_pi));
-  EXPECT_EQ(-0.25_pi_rad, ksn::make_radian<double>(-0.25_pi));
+  EXPECT_ANGLE_EQ(0_pi_rad, ksn::make_radian<double>(0_pi));
+  EXPECT_ANGLE_EQ(1_pi_rad, ksn::make_radian<double>(1_pi));
+  EXPECT_ANGLE_EQ(-2_pi_rad, ksn::make_radian<double>(-2_pi));
+  EXPECT_ANGLE_EQ(0.0_pi_rad, ksn::make_radian<double>(0.0_pi));
+  EXPECT_ANGLE_EQ(0.5_pi_rad, ksn::make_radian<double>(0.5_pi));
+  EXPECT_ANGLE_EQ(-0.25_pi_rad, ksn::make_radian<double>(-0.25_pi));
 }
 
 TEST(AngleTest, ArcSin)
 {
-  EXPECT_DOUBLE_EQ(ksn::arcsin(0).degree(), 0) << "sin(0) = 0";
-  EXPECT_DOUBLE_EQ(ksn::arcsin(0.5).degree(), 30) << "sin(30) = 0.5";
-  EXPECT_DOUBLE_EQ(ksn::arcsin(1).degree(), 90) << "sin(90) = 1";
+  EXPECT_ANGLE_EQ(ksn::arcsin(0), 0_deg) << "sin(0) = 0";
+  EXPECT_ANGLE_EQ(ksn::arcsin(0.5), 30_deg) << "sin(30) = 0.5";
+  EXPECT_ANGLE_EQ(ksn::arcsin(1), 90_deg) << "sin(90) = 1";
 }
 
 TEST(AngleTest, ArcCos)
 {
-  EXPECT_DOUBLE_EQ(ksn::arccos(0).degree(), 90) << "cos(90) = 0";
-  EXPECT_DOUBLE_EQ(ksn::arccos(0.5).degree(), 60) << "cos(60) = 0.5";
-  EXPECT_DOUBLE_EQ(ksn::arccos(1).degree(), 0) << "cos(0) = 1";
+  EXPECT_ANGLE_EQ(ksn::arccos(0), 90_deg) << "cos(90) = 0";
+  EXPECT_ANGLE_EQ(ksn::arccos(0.5), 60_deg) << "cos(60) = 0.5";
+  EXPECT_ANGLE_EQ(ksn::arccos(1), 0_deg) << "cos(0) = 1";
 }
 
 TEST(AngleTest, ArcTan)
 {
-  EXPECT_DOUBLE_EQ(ksn::arctan(0).degree(), 0) << "tan(0) = 0";
-  EXPECT_DOUBLE_EQ(ksn::arctan(1).degree(), 45) << "tan(45) = 1";
-  EXPECT_DOUBLE_EQ(ksn::arctan(-1).degree(), -45) << "tan(-45) = -1";
+  EXPECT_ANGLE_EQ(ksn::arctan(0), 0_deg) << "tan(0) = 0";
+  EXPECT_ANGLE_EQ(ksn::arctan(1), 45_deg) << "tan(45) = 1";
+  EXPECT_ANGLE_EQ(ksn::arctan(-1), -45_deg) << "tan(-45) = -1";
 }
 
 TEST(AngleTest, SignedArcTan)
 {
-  EXPECT_DOUBLE_EQ(ksn::signed_arctan(0, 5).degree(), 0) << "tan(0) = 0 / 1";
-  EXPECT_DOUBLE_EQ(ksn::signed_arctan(0.5, 0.5).degree(), 45) << "tan(45) = 0.5 / 0.5";
-  EXPECT_DOUBLE_EQ(ksn::signed_arctan(-5, 5).degree(), -45) << "tan(-45) = -5 / 5";
-  EXPECT_DOUBLE_EQ(ksn::signed_arctan(5, -5).degree(), 135) << "tan(135) = 5 / -5";
-}
-
-TEST(AngleTest, OutputStream)
-{
-  std::stringstream ss;
-  ss << 90_deg << " " << -1_pi_rad;
-
-  EXPECT_STREQ(ss.str().c_str(), "90 -180");
+  EXPECT_ANGLE_EQ(ksn::signed_arctan(0, 5), 0_deg) << "tan(0) = 0 / 1";
+  EXPECT_ANGLE_EQ(ksn::signed_arctan(0.5, 0.5), 45_deg) << "tan(45) = 0.5 / 0.5";
+  EXPECT_ANGLE_EQ(ksn::signed_arctan(-5, 5), -45_deg) << "tan(-45) = -5 / 5";
+  EXPECT_ANGLE_EQ(ksn::signed_arctan(5, -5), 135_deg) << "tan(135) = 5 / -5";
 }
 
 TEST(AngleTest, Empty)
@@ -168,11 +156,11 @@ TEST(AngleTest, SelfMathOperator)
 
 TEST(AngleTest, MathOperator)
 {
-  EXPECT_EQ(1_pi_rad + 90_deg, 270_deg) << "1pi + 90 = 270";
-  EXPECT_EQ(270_deg - 1_pi_rad, 90_deg) << "270 - 1pi = 90";
-  EXPECT_EQ(90_deg * 2, 180_deg) << "90 * 2 = 180";
-  EXPECT_EQ(2 * 90_deg, 180_deg) << "2 * 90 = 180";
-  EXPECT_EQ(180_deg / 3, 60_deg) << "180 / 3 = 60";
+  EXPECT_ANGLE_EQ(1_pi_rad + 90_deg, 270_deg) << "1pi + 90 = 270";
+  EXPECT_ANGLE_EQ(270_deg - 1_pi_rad, 90_deg) << "270 - 1pi = 90";
+  EXPECT_ANGLE_EQ(90_deg * 2, 180_deg) << "90 * 2 = 180";
+  EXPECT_ANGLE_EQ(2 * 90_deg, 180_deg) << "2 * 90 = 180";
+  EXPECT_ANGLE_EQ(180_deg / 3, 60_deg) << "180 / 3 = 60";
 }
 
 TEST(AngleTest, NegationOperator)
@@ -194,8 +182,8 @@ TEST(AngleTest, Conversion)
 
 TEST(AngleTest, Normalize)
 {
-  EXPECT_EQ((270_deg).normalize(), -90_deg) << "270 = 1 * 360 + (-90)";
-  EXPECT_EQ((-0.5_pi_rad).normalize(), -0.5_pi_rad) << "-0.5pi = 0 * 2pi + (-0.5pi)";
+  EXPECT_ANGLE_EQ((270_deg).normalize(), -90_deg) << "270 = 1 * 360 + (-90)";
+  EXPECT_ANGLE_EQ((-0.5_pi_rad).normalize(), -0.5_pi_rad) << "-0.5pi = 0 * 2pi + (-0.5pi)";
 }
 
 TEST(AngleTest, Sin)

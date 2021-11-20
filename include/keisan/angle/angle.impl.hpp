@@ -24,12 +24,6 @@
 #include "keisan/constant.hpp"
 #include "keisan/number.hpp"
 
-template<typename T>
-std::ostream & operator<<(std::ostream & out, const keisan::Angle<T> & angle)
-{
-  return out << angle.degree();
-}
-
 template<typename T, typename U>
 keisan::Angle<T> operator*(const U & value, const keisan::Angle<T> & angle)
 {

@@ -21,9 +21,8 @@
 #ifndef KEISAN__ANGLE__EULER_IMPL_HPP_
 #define KEISAN__ANGLE__EULER_IMPL_HPP_
 
-#include "keisan/angle/euler.hpp"
 #include "keisan/angle/quaternion.hpp"
-#include "keisan/angle/trigonometry.hpp"
+#include "keisan/constant.hpp"
 
 template<typename T>
 std::ostream & operator<<(std::ostream & out, const keisan::Euler<T> & euler)
@@ -69,12 +68,12 @@ Quaternion<T> Euler<T>::quaternion() const
 {
   Quaternion<T> quaternion;
 
-  T sr = sin(0.5 * roll);
-  T cr = cos(0.5 * roll);
-  T sp = sin(0.5 * pitch);
-  T cp = cos(0.5 * pitch);
-  T sy = sin(0.5 * yaw);
-  T cy = cos(0.5 * yaw);
+  T sr = (0.5 * roll).sin();
+  T cr = (0.5 * roll).cos();
+  T sp = (0.5 * pitch).sin();
+  T cp = (0.5 * pitch).cos();
+  T sy = (0.5 * yaw).sin();
+  T cy = (0.5 * yaw).cos();
 
   quaternion.x = sr * cp * cy - cr * sp * sy;
   quaternion.y = cr * sp * cy + sr * cp * sy;

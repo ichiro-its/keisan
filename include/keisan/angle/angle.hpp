@@ -32,9 +32,17 @@ class Angle;
 
 template<typename T>
 Angle<T> make_degree(const T & value);
-
 template<typename T>
 Angle<T> make_radian(const T & value);
+
+template<typename T>
+Angle<T> arcsin(const T & value);
+template<typename T>
+Angle<T> arccos(const T & value);
+template<typename T>
+Angle<T> arctan(const T & value);
+template<typename T>
+Angle<T> signed_arctan(const T & y, const T & x);
 
 template<typename T>
 class Angle
@@ -81,10 +89,15 @@ public:
 
   Angle<T> normalize() const;
 
+  T sin() const;
+  T cos() const;
+  T tan() const;
+
 private:
   T data;
   bool is_degree;
 };
+
 namespace literals
 {
 

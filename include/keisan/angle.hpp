@@ -24,6 +24,5 @@
 #include "keisan/angle/angle.hpp"
 #include "keisan/angle/euler.hpp"
 #include "keisan/angle/quaternion.hpp"
-#include "keisan/angle/trigonometry.hpp"
 
 #endif  // KEISAN__ANGLE_HPP_

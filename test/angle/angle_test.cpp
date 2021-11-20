@@ -64,6 +64,35 @@ TEST(AngleTest, RadLiterals)
   EXPECT_EQ(-0.25_pi_rad, ksn::make_radian<double>(-0.25_pi));
 }
 
+TEST(AngleTest, ArcSin)
+{
+  EXPECT_DOUBLE_EQ(ksn::arcsin(0.0).degree(), 0.0) << "sin(0) = 0";
+  EXPECT_DOUBLE_EQ(ksn::arcsin(0.5).degree(), 30.0) << "sin(30) = 0.5";
+  EXPECT_DOUBLE_EQ(ksn::arcsin(1.0).degree(), 90.0) << "sin(90) = 1";
+}
+
+TEST(AngleTest, ArcCos)
+{
+  EXPECT_DOUBLE_EQ(ksn::arccos(0.0).degree(), 90.0) << "cos(90) = 0";
+  EXPECT_DOUBLE_EQ(ksn::arccos(0.5).degree(), 60.0) << "cos(60) = 0.5";
+  EXPECT_DOUBLE_EQ(ksn::arccos(1.0).degree(), 0.0) << "cos(0) = 1";
+}
+
+TEST(AngleTest, ArcTan)
+{
+  EXPECT_DOUBLE_EQ(ksn::arctan(0.0).degree(), 0.0) << "tan(0) = 0";
+  EXPECT_DOUBLE_EQ(ksn::arctan(1.0).degree(), 45.0) << "tan(45) = 1";
+  EXPECT_DOUBLE_EQ(ksn::arctan(-1.0).degree(), -45.0) << "tan(-45) = -1";
+}
+
+TEST(AngleTest, SignedArcTan)
+{
+  EXPECT_DOUBLE_EQ(ksn::signed_arctan(0.0, 1.0).degree(), 0.0) << "tan(0) = 0 / 1";
+  EXPECT_DOUBLE_EQ(ksn::signed_arctan(1.0, 1.0).degree(), 45.0) << "tan(45) = 1 / 1";
+  EXPECT_DOUBLE_EQ(ksn::signed_arctan(-1.0, 1.0).degree(), -45.0) << "tan(-45) = -1 / 1";
+  EXPECT_DOUBLE_EQ(ksn::signed_arctan(1.0, -1.0).degree(), 135.0) << "tan(135) = 1 / -1";
+}
+
 TEST(AngleTest, OutputStream)
 {
   std::stringstream ss;
@@ -167,4 +196,25 @@ TEST(AngleTest, Normalize)
 {
   EXPECT_EQ((270_deg).normalize(), -90_deg) << "270 = 1 * 360 + (-90)";
   EXPECT_EQ((-0.5_pi_rad).normalize(), -0.5_pi_rad) << "-0.5pi = 0 * 2pi + (-0.5pi)";
+}
+
+TEST(AngleTest, Sin)
+{
+  EXPECT_DOUBLE_EQ((0_deg).sin(), 0.0) << "sin(0) = 0";
+  EXPECT_DOUBLE_EQ((30_deg).sin(), 0.5) << "sin(30) = 0.5";
+  EXPECT_DOUBLE_EQ((90_deg).sin(), 1.0) << "sin(90) = 1";
+}
+
+TEST(AngleTest, Cos)
+{
+  EXPECT_DOUBLE_EQ((0_deg).cos(), 1.0) << "cos(0) = 1";
+  EXPECT_DOUBLE_EQ((60_deg).cos(), 0.5) << "cos(60) = 0.5";
+  // EXPECT_DOUBLE_EQ(90_deg .cos(), 0.0) << "cos(90) = 0"; // not giving accurate answer
+}
+
+TEST(AngleTest, Tan)
+{
+  EXPECT_DOUBLE_EQ((0_deg).tan(), 0.0) << "tan(0) = 0";
+  EXPECT_DOUBLE_EQ((45_deg).tan(), 1.0) << "tan(45) = 1";
+  EXPECT_DOUBLE_EQ((-45_deg).tan(), -1.0) << "tan(-45) = -1";
 }

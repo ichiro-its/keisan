@@ -22,8 +22,7 @@
 #define KEISAN__ANGLE__QUATERNION_IMPL_HPP_
 
 #include "keisan/angle/euler.hpp"
-#include "keisan/angle/quaternion.hpp"
-#include "keisan/angle/trigonometry.hpp"
+#include "keisan/constant.hpp"
 
 using keisan::literals::operator""_pi;
 

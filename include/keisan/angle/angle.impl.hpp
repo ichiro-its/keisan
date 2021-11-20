@@ -21,8 +21,8 @@
 #ifndef KEISAN__ANGLE__ANGLE_IMPL_HPP_
 #define KEISAN__ANGLE__ANGLE_IMPL_HPP_
 
+#include "keisan/constant.hpp"
 #include "keisan/number.hpp"
-#include "keisan/angle/trigonometry.hpp"
 
 template<typename T>
 std::ostream & operator<<(std::ostream & out, const keisan::Angle<T> & angle)
@@ -49,6 +49,30 @@ template<typename T>
 Angle<T> make_radian(const T & value)
 {
   return Angle<T>(value, false);
+}
+
+template<typename T>
+Angle<T> arcsin(const T & value)
+{
+  return make_radian<T>(std::asin(value));
+}
+
+template<typename T>
+Angle<T> arccos(const T & value)
+{
+  return make_radian<T>(std::acos(value));
+}
+
+template<typename T>
+Angle<T> arctan(const T & value)
+{
+  return make_radian<T>(std::atan(value));
+}
+
+template<typename T>
+Angle<T> signed_arctan(const T & y, const T & x)
+{
+  return make_radian<T>(std::atan2(y, x));
 }
 
 template<typename T>
@@ -190,6 +214,24 @@ Angle<T> Angle<T>::normalize() const
   } else {
     return make_radian(wrap<T>(data, -1_pi, 1_pi));
   }
+}
+
+template<typename T>
+T Angle<T>::sin() const
+{
+  return std::sin(radian());
+}
+
+template<typename T>
+T Angle<T>::cos() const
+{
+  return std::cos(radian());
+}
+
+template<typename T>
+T Angle<T>::tan() const
+{
+  return std::tan(radian());
 }
 
 }  // namespace keisan

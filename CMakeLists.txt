@@ -45,7 +45,6 @@ if(BUILD_TESTING)
     "test/angle/angle_test.cpp"
     "test/angle/euler_test.cpp"
     "test/angle/quaternion_test.cpp"
-    "test/angle/trigonometry_test.cpp"
     "test/geometry/point_2_test.cpp"
     "test/geometry/point_3_test.cpp"
     "test/matrix/matrix_test.cpp"

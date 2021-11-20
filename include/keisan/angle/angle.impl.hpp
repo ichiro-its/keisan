@@ -22,7 +22,6 @@
 #define KEISAN__ANGLE__ANGLE_IMPL_HPP_
 
 #include "keisan/number.hpp"
-#include "keisan/angle/angle.hpp"
 #include "keisan/angle/trigonometry.hpp"
 
 template<typename T>

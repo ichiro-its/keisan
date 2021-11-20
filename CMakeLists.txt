@@ -21,9 +21,9 @@ install(DIRECTORY "include" DESTINATION ".")
 
 add_library(${PROJECT_NAME} SHARED
   "src/angle/angle.cpp"
-  "src/angle/trigonometry.cpp"
   "src/geometry/point_2.cpp"
-  "src/geometry/point_3.cpp")
+  "src/geometry/point_3.cpp"
+  "src/constant.cpp")
 
 ament_target_dependencies(${PROJECT_NAME} gtest_vendor)
 
@@ -50,6 +50,7 @@ if(BUILD_TESTING)
     "test/geometry/point_3_test.cpp"
     "test/matrix/matrix_test.cpp"
     "test/matrix/vector_test.cpp"
+    "test/constant_test.cpp"
     "test/number_test.cpp")
 
   target_include_directories(${PROJECT_NAME}_tests PUBLIC

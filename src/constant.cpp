@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include "keisan/angle/trigonometry.hpp"
+#include "keisan/constant.hpp"
 
 namespace keisan
 {

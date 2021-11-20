@@ -18,41 +18,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__ANGLE__TRIGONOMETRY_HPP_
-#define KEISAN__ANGLE__TRIGONOMETRY_HPP_
+#include "gtest/gtest.h"
+#include "keisan/keisan.hpp"
 
-#include <cmath>
+namespace ksn = keisan;
 
-namespace keisan
+using ksn::literals::operator""_deg;
+using ksn::literals::operator""_pi;
+
+TEST(ConstantTest, PiValue)
 {
+  EXPECT_FLOAT_EQ(std::cos(ksn::pi<float>), -1.0f) << "cos(pi) = -1";
+  EXPECT_DOUBLE_EQ(std::cos(ksn::pi<double>), -1.0) << "cos(pi) = -1";
+}
 
-// Forward declaration
-template<typename T>
-class Angle;
+TEST(ConstantTest, PiIntegerLiterals)
+{
+  EXPECT_DOUBLE_EQ(0_pi, 0.0);
+  EXPECT_DOUBLE_EQ(1_pi, 1.0 * ksn::pi<double>);
+  EXPECT_DOUBLE_EQ(-2_pi, -2.0 * ksn::pi<double>);
+}
 
-template<typename T>
-T sin(const Angle<T> & angle);
-
-template<typename T>
-T cos(const Angle<T> & angle);
-
-template<typename T>
-T tan(const Angle<T> & angle);
-
-template<typename T>
-Angle<T> arcsin(const T & value);
-
-template<typename T>
-Angle<T> arccos(const T & value);
-
-template<typename T>
-Angle<T> arctan(const T & value);
-
-template<typename T>
-Angle<T> signed_arctan(const T & y, const T & x);
-
-}  // namespace keisan
-
-#include "keisan/angle/trigonometry.impl.hpp"
-
-#endif  // KEISAN__ANGLE__TRIGONOMETRY_HPP_
+TEST(ConstantTest, PiFloatingPointLiterals)
+{
+  EXPECT_DOUBLE_EQ(0.0_pi, 0.0);
+  EXPECT_DOUBLE_EQ(1.5_pi, 1.5 * ksn::pi<double>);
+  EXPECT_DOUBLE_EQ(-0.25_pi, -0.25 * ksn::pi<double>);
+}

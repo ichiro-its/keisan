@@ -26,26 +26,6 @@ namespace ksn = keisan;
 using ksn::literals::operator""_deg;
 using ksn::literals::operator""_pi;
 
-TEST(TrigonometryTest, PiValue)
-{
-  EXPECT_FLOAT_EQ(std::cos(ksn::pi<float>), -1.0f) << "cos(pi) = -1";
-  EXPECT_DOUBLE_EQ(std::cos(ksn::pi<double>), -1.0) << "cos(pi) = -1";
-}
-
-TEST(TrigonometryTest, PiIntegerLiterals)
-{
-  EXPECT_DOUBLE_EQ(0_pi, 0.0);
-  EXPECT_DOUBLE_EQ(1_pi, 1.0 * ksn::pi<double>);
-  EXPECT_DOUBLE_EQ(-2_pi, -2.0 * ksn::pi<double>);
-}
-
-TEST(TrigonometryTest, PiFloatingPointLiterals)
-{
-  EXPECT_DOUBLE_EQ(0.0_pi, 0.0);
-  EXPECT_DOUBLE_EQ(1.5_pi, 1.5 * ksn::pi<double>);
-  EXPECT_DOUBLE_EQ(-0.25_pi, -0.25 * ksn::pi<double>);
-}
-
 TEST(TrigonometryTest, Sin)
 {
   EXPECT_FLOAT_EQ(ksn::sin<float>(30_deg), 0.5f) << "sin(30) = 0.5";

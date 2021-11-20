@@ -29,6 +29,14 @@ namespace keisan
 template<typename T>
 const T pi = std::atan((T)1) * 4;
 
+namespace literals
+{
+
+double operator""_pi(unsigned long long int value);  // NOLINT
+double operator""_pi(long double value);
+
+}  // namespace literals
+
 }  // namespace keisan
 
 #endif  // KEISAN__CONSTANT_HPP_

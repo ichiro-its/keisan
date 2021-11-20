@@ -66,31 +66,31 @@ TEST(AngleTest, RadLiterals)
 
 TEST(AngleTest, ArcSin)
 {
-  EXPECT_DOUBLE_EQ(ksn::arcsin(0.0).degree(), 0.0) << "sin(0) = 0";
-  EXPECT_DOUBLE_EQ(ksn::arcsin(0.5).degree(), 30.0) << "sin(30) = 0.5";
-  EXPECT_DOUBLE_EQ(ksn::arcsin(1.0).degree(), 90.0) << "sin(90) = 1";
+  EXPECT_DOUBLE_EQ(ksn::arcsin(0).degree(), 0) << "sin(0) = 0";
+  EXPECT_DOUBLE_EQ(ksn::arcsin(0.5).degree(), 30) << "sin(30) = 0.5";
+  EXPECT_DOUBLE_EQ(ksn::arcsin(1).degree(), 90) << "sin(90) = 1";
 }
 
 TEST(AngleTest, ArcCos)
 {
-  EXPECT_DOUBLE_EQ(ksn::arccos(0.0).degree(), 90.0) << "cos(90) = 0";
-  EXPECT_DOUBLE_EQ(ksn::arccos(0.5).degree(), 60.0) << "cos(60) = 0.5";
-  EXPECT_DOUBLE_EQ(ksn::arccos(1.0).degree(), 0.0) << "cos(0) = 1";
+  EXPECT_DOUBLE_EQ(ksn::arccos(0).degree(), 90) << "cos(90) = 0";
+  EXPECT_DOUBLE_EQ(ksn::arccos(0.5).degree(), 60) << "cos(60) = 0.5";
+  EXPECT_DOUBLE_EQ(ksn::arccos(1).degree(), 0) << "cos(0) = 1";
 }
 
 TEST(AngleTest, ArcTan)
 {
-  EXPECT_DOUBLE_EQ(ksn::arctan(0.0).degree(), 0.0) << "tan(0) = 0";
-  EXPECT_DOUBLE_EQ(ksn::arctan(1.0).degree(), 45.0) << "tan(45) = 1";
-  EXPECT_DOUBLE_EQ(ksn::arctan(-1.0).degree(), -45.0) << "tan(-45) = -1";
+  EXPECT_DOUBLE_EQ(ksn::arctan(0).degree(), 0) << "tan(0) = 0";
+  EXPECT_DOUBLE_EQ(ksn::arctan(1).degree(), 45) << "tan(45) = 1";
+  EXPECT_DOUBLE_EQ(ksn::arctan(-1).degree(), -45) << "tan(-45) = -1";
 }
 
 TEST(AngleTest, SignedArcTan)
 {
-  EXPECT_DOUBLE_EQ(ksn::signed_arctan(0.0, 1.0).degree(), 0.0) << "tan(0) = 0 / 1";
-  EXPECT_DOUBLE_EQ(ksn::signed_arctan(1.0, 1.0).degree(), 45.0) << "tan(45) = 1 / 1";
-  EXPECT_DOUBLE_EQ(ksn::signed_arctan(-1.0, 1.0).degree(), -45.0) << "tan(-45) = -1 / 1";
-  EXPECT_DOUBLE_EQ(ksn::signed_arctan(1.0, -1.0).degree(), 135.0) << "tan(135) = 1 / -1";
+  EXPECT_DOUBLE_EQ(ksn::signed_arctan(0, 5).degree(), 0) << "tan(0) = 0 / 1";
+  EXPECT_DOUBLE_EQ(ksn::signed_arctan(0.5, 0.5).degree(), 45) << "tan(45) = 0.5 / 0.5";
+  EXPECT_DOUBLE_EQ(ksn::signed_arctan(-5, 5).degree(), -45) << "tan(-45) = -5 / 5";
+  EXPECT_DOUBLE_EQ(ksn::signed_arctan(5, -5).degree(), 135) << "tan(135) = 5 / -5";
 }
 
 TEST(AngleTest, OutputStream)
@@ -201,20 +201,20 @@ TEST(AngleTest, Normalize)
 TEST(AngleTest, Sin)
 {
   EXPECT_DOUBLE_EQ((0_deg).sin(), 0.0) << "sin(0) = 0";
-  EXPECT_DOUBLE_EQ((30_deg).sin(), 0.5) << "sin(30) = 0.5";
+  EXPECT_DOUBLE_EQ(ksn::make_degree(30).sin(), 0.5) << "sin(30) = 0.5";
   EXPECT_DOUBLE_EQ((90_deg).sin(), 1.0) << "sin(90) = 1";
 }
 
 TEST(AngleTest, Cos)
 {
   EXPECT_DOUBLE_EQ((0_deg).cos(), 1.0) << "cos(0) = 1";
-  EXPECT_DOUBLE_EQ((60_deg).cos(), 0.5) << "cos(60) = 0.5";
-  // EXPECT_DOUBLE_EQ(90_deg .cos(), 0.0) << "cos(90) = 0"; // not giving accurate answer
+  EXPECT_DOUBLE_EQ(ksn::make_degree(60).cos(), 0.5) << "cos(60) = 0.5";
+  // EXPECT_DOUBLE_EQ(90_deg .cos(), 0.0) << "cos(90) = 0";  // not giving accurate answer
 }
 
 TEST(AngleTest, Tan)
 {
   EXPECT_DOUBLE_EQ((0_deg).tan(), 0.0) << "tan(0) = 0";
-  EXPECT_DOUBLE_EQ((45_deg).tan(), 1.0) << "tan(45) = 1";
+  EXPECT_DOUBLE_EQ(ksn::make_degree(45).tan(), 1.0) << "tan(45) = 1";
   EXPECT_DOUBLE_EQ((-45_deg).tan(), -1.0) << "tan(-45) = -1";
 }

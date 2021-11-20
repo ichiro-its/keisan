@@ -26,6 +26,9 @@
 namespace keisan
 {
 
+template<typename T, typename U>
+using IfElseFloat = typename std::conditional<std::is_floating_point<T>::value, T, U>::type;
+
 // Forward declaration
 template<typename T>
 class Angle;
@@ -36,13 +39,13 @@ template<typename T>
 Angle<T> make_radian(const T & value);
 
 template<typename T>
-Angle<T> arcsin(const T & value);
+Angle<IfElseFloat<T, double>> arcsin(const T & value);
 template<typename T>
-Angle<T> arccos(const T & value);
+Angle<IfElseFloat<T, double>> arccos(const T & value);
 template<typename T>
-Angle<T> arctan(const T & value);
+Angle<IfElseFloat<T, double>> arctan(const T & value);
 template<typename T>
-Angle<T> signed_arctan(const T & y, const T & x);
+Angle<IfElseFloat<T, double>> signed_arctan(const T & y, const T & x);
 
 template<typename T>
 class Angle
@@ -89,9 +92,9 @@ public:
 
   Angle<T> normalize() const;
 
-  T sin() const;
-  T cos() const;
-  T tan() const;
+  IfElseFloat<T, double> sin() const;
+  IfElseFloat<T, double> cos() const;
+  IfElseFloat<T, double> tan() const;
 
 private:
   T data;

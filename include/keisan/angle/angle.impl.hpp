@@ -52,27 +52,43 @@ Angle<T> make_radian(const T & value)
 }
 
 template<typename T>
-Angle<T> arcsin(const T & value)
+Angle<IfElseFloat<T, double>> arcsin(const T & value)
 {
-  return make_radian<T>(std::asin(value));
+  if constexpr (std::is_floating_point<T>::value) {
+    return make_radian<T>(std::asin(value));
+  } else {
+    return arcsin<double>(static_cast<double>(value));
+  }
 }
 
 template<typename T>
-Angle<T> arccos(const T & value)
+Angle<IfElseFloat<T, double>> arccos(const T & value)
 {
-  return make_radian<T>(std::acos(value));
+  if constexpr (std::is_floating_point<T>::value) {
+    return make_radian<T>(std::acos(value));
+  } else {
+    return arccos<double>(static_cast<double>(value));
+  }
 }
 
 template<typename T>
-Angle<T> arctan(const T & value)
+Angle<IfElseFloat<T, double>> arctan(const T & value)
 {
-  return make_radian<T>(std::atan(value));
+  if constexpr (std::is_floating_point<T>::value) {
+    return make_radian<T>(std::atan(value));
+  } else {
+    return arctan<double>(static_cast<double>(value));
+  }
 }
 
 template<typename T>
-Angle<T> signed_arctan(const T & y, const T & x)
+Angle<IfElseFloat<T, double>> signed_arctan(const T & y, const T & x)
 {
-  return make_radian<T>(std::atan2(y, x));
+  if constexpr (std::is_floating_point<T>::value) {
+    return make_radian<T>(std::atan2(y, x));
+  } else {
+    return signed_arctan<double>(static_cast<double>(y), static_cast<double>(x));
+  }
 }
 
 template<typename T>
@@ -217,21 +233,33 @@ Angle<T> Angle<T>::normalize() const
 }
 
 template<typename T>
-T Angle<T>::sin() const
+IfElseFloat<T, double> Angle<T>::sin() const
 {
-  return std::sin(radian());
+  if constexpr (std::is_floating_point<T>::value) {
+    return std::sin(radian());
+  } else {
+    return Angle<double>(*this).sin();
+  }
 }
 
 template<typename T>
-T Angle<T>::cos() const
+IfElseFloat<T, double> Angle<T>::cos() const
 {
-  return std::cos(radian());
+  if constexpr (std::is_floating_point<T>::value) {
+    return std::cos(radian());
+  } else {
+    return Angle<double>(*this).cos();
+  }
 }
 
 template<typename T>
-T Angle<T>::tan() const
+IfElseFloat<T, double> Angle<T>::tan() const
 {
-  return std::tan(radian());
+  if constexpr (std::is_floating_point<T>::value) {
+    return std::tan(radian());
+  } else {
+    return Angle<double>(*this).tan();
+  }
 }
 
 }  // namespace keisan

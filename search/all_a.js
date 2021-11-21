@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['radian_68',['radian',['../classkeisan_1_1Angle.html#a3dcda6435a699be62b639d4eb56dce9a',1,'keisan::Angle']]],
-  ['readme_2emd_69',['README.md',['../README_8md.html',1,'']]],
-  ['roll_70',['roll',['../structkeisan_1_1Euler.html#a9fbe35e998d0931bff9994bd4d4053b0',1,'keisan::Euler']]],
-  ['rotate_71',['rotate',['../structkeisan_1_1Point2.html#a1dfc8da21b58a29f1e9b6349a7f299e6',1,'keisan::Point2']]],
-  ['rotate_5ffrom_72',['rotate_from',['../structkeisan_1_1Point2.html#ac46ae42f438920495310935654ba0a52',1,'keisan::Point2']]]
+  ['quaternion_66',['Quaternion',['../structkeisan_1_1Quaternion.html',1,'keisan::Quaternion&lt; T &gt;'],['../structkeisan_1_1Quaternion.html#a5b3c2c96e1369c724033682d61e640b6',1,'keisan::Quaternion::Quaternion()'],['../structkeisan_1_1Quaternion.html#a076bbef9ab69826524c608a3005a5d85',1,'keisan::Quaternion::Quaternion(const T &amp;x, const T &amp;y, const T &amp;z, const T &amp;w)']]],
+  ['quaternion_67',['quaternion',['../structkeisan_1_1Euler.html#a26bb888463f634fd457720c9a605c4c5',1,'keisan::Euler']]],
+  ['quaternion_2ehpp_68',['quaternion.hpp',['../quaternion_8hpp.html',1,'']]],
+  ['quaternion_2eimpl_2ehpp_69',['quaternion.impl.hpp',['../quaternion_8impl_8hpp.html',1,'']]]
 ];

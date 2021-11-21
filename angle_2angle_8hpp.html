@@ -70,6 +70,7 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">angle.hpp File Reference</div>  </div>
@@ -92,6 +93,12 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespacekeisan_1_1literals"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan_1_1literals.html">keisan::literals</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a96888c885c085d9b6954882af24d538b"><td class="memTemplParams" colspan="2">template&lt;typename T , typename U &gt; </td></tr>
+<tr class="memitem:a96888c885c085d9b6954882af24d538b"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a96888c885c085d9b6954882af24d538b">keisan::IfElseFloat</a> = typename std::conditional&lt; std::is_floating_point&lt; T &gt;::value, T, U &gt;::type</td></tr>
+<tr class="separator:a96888c885c085d9b6954882af24d538b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a750bc74f1ad05f878862df434ed1ad73"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
@@ -100,6 +107,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a4f5866fce72dac599ce6d680e81b575e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a4f5866fce72dac599ce6d680e81b575e"><td class="memTemplItemLeft" align="right" valign="top">Angle&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a4f5866fce72dac599ce6d680e81b575e">keisan::make_radian</a> (const T &amp;value)</td></tr>
 <tr class="separator:a4f5866fce72dac599ce6d680e81b575e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe782ccde0020c0b489d8b2edcc26ce8"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:afe782ccde0020c0b489d8b2edcc26ce8"><td class="memTemplItemLeft" align="right" valign="top">Angle&lt; IfElseFloat&lt; T, double &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#afe782ccde0020c0b489d8b2edcc26ce8">keisan::arcsin</a> (const T &amp;value)</td></tr>
+<tr class="separator:afe782ccde0020c0b489d8b2edcc26ce8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9accbb046e78946d229dcd5dcf26e77"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aa9accbb046e78946d229dcd5dcf26e77"><td class="memTemplItemLeft" align="right" valign="top">Angle&lt; IfElseFloat&lt; T, double &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#aa9accbb046e78946d229dcd5dcf26e77">keisan::arccos</a> (const T &amp;value)</td></tr>
+<tr class="separator:aa9accbb046e78946d229dcd5dcf26e77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a357125dbeaa3df0b251241cdb5e7a3a4"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a357125dbeaa3df0b251241cdb5e7a3a4"><td class="memTemplItemLeft" align="right" valign="top">Angle&lt; IfElseFloat&lt; T, double &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a357125dbeaa3df0b251241cdb5e7a3a4">keisan::arctan</a> (const T &amp;value)</td></tr>
+<tr class="separator:a357125dbeaa3df0b251241cdb5e7a3a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac930806e03009d83ce3050d961e5ed3b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ac930806e03009d83ce3050d961e5ed3b"><td class="memTemplItemLeft" align="right" valign="top">Angle&lt; IfElseFloat&lt; T, double &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#ac930806e03009d83ce3050d961e5ed3b">keisan::signed_arctan</a> (const T &amp;y, const T &amp;x)</td></tr>
+<tr class="separator:ac930806e03009d83ce3050d961e5ed3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43333e84e55f171c03bc5b81b9beb385"><td class="memItemLeft" align="right" valign="top">Angle&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan_1_1literals.html#a43333e84e55f171c03bc5b81b9beb385">keisan::literals::operator&quot;&quot;_deg</a> (unsigned long long int value)</td></tr>
 <tr class="separator:a43333e84e55f171c03bc5b81b9beb385"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbfad535b2b3657cd885c911cf793003"><td class="memItemLeft" align="right" valign="top">Angle&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan_1_1literals.html#adbfad535b2b3657cd885c911cf793003">keisan::literals::operator&quot;&quot;_deg</a> (long double value)</td></tr>
@@ -108,44 +127,11 @@ Functions</h2></td></tr>
 <tr class="separator:a63ef98542527acb5c9c6630ea5070fcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40e2dc40759d207897562a3c62826930"><td class="memItemLeft" align="right" valign="top">Angle&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan_1_1literals.html#a40e2dc40759d207897562a3c62826930">keisan::literals::operator&quot;&quot;_pi_rad</a> (long double value)</td></tr>
 <tr class="separator:a40e2dc40759d207897562a3c62826930"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a6a65dc6a594184601b18c00751f4d2"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a4a6a65dc6a594184601b18c00751f4d2"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="angle_2angle_8hpp.html#a4a6a65dc6a594184601b18c00751f4d2">operator&lt;&lt;</a> (std::ostream &amp;out, const <a class="el" href="classkeisan_1_1Angle.html">keisan::Angle</a>&lt; T &gt; &amp;angle)</td></tr>
-<tr class="separator:a4a6a65dc6a594184601b18c00751f4d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ca444bd1a66a77305abe1fda75d6bff"><td class="memTemplParams" colspan="2">template&lt;typename T , typename U &gt; </td></tr>
 <tr class="memitem:a0ca444bd1a66a77305abe1fda75d6bff"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classkeisan_1_1Angle.html">keisan::Angle</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="angle_2angle_8hpp.html#a0ca444bd1a66a77305abe1fda75d6bff">operator*</a> (const U &amp;value, const <a class="el" href="classkeisan_1_1Angle.html">keisan::Angle</a>&lt; T &gt; &amp;angle)</td></tr>
 <tr class="separator:a0ca444bd1a66a77305abe1fda75d6bff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a4a6a65dc6a594184601b18c00751f4d2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a6a65dc6a594184601b18c00751f4d2">&#9670;&nbsp;</a></span>operator&lt;&lt;()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
-          <td>(</td>
-          <td class="paramtype">std::ostream &amp;&#160;</td>
-          <td class="paramname"><em>out</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classkeisan_1_1Angle.html">keisan::Angle</a>&lt; T &gt; &amp;&#160;</td>
-          <td class="paramname"><em>angle</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a0ca444bd1a66a77305abe1fda75d6bff"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0ca444bd1a66a77305abe1fda75d6bff">&#9670;&nbsp;</a></span>operator*()</h2>
 

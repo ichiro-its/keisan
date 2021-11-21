@@ -219,8 +219,8 @@ Point2 Point2::rotate(const Angle<double> & rotation) const
 {
   Point2 point;
 
-  point.x = x * cos(rotation) - y * sin(rotation);
-  point.y = x * sin(rotation) + y * cos(rotation);
+  point.x = x * rotation.cos() - y * rotation.sin();
+  point.y = x * rotation.sin() + y * rotation.cos();
 
   return point;
 }

@@ -18,41 +18,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__ANGLE__TRIGONOMETRY_HPP_
-#define KEISAN__ANGLE__TRIGONOMETRY_HPP_
+#ifndef KEISAN__CONSTANT_HPP_
+#define KEISAN__CONSTANT_HPP_
 
 #include <cmath>
 
 namespace keisan
 {
 
-// Forward declaration
-template<typename T>
-class Angle;
-
 template<typename T>
 const T pi = std::atan((T)1) * 4;
-
-template<typename T>
-T sin(const Angle<T> & angle);
-
-template<typename T>
-T cos(const Angle<T> & angle);
-
-template<typename T>
-T tan(const Angle<T> & angle);
-
-template<typename T>
-Angle<T> arcsin(const T & value);
-
-template<typename T>
-Angle<T> arccos(const T & value);
-
-template<typename T>
-Angle<T> arctan(const T & value);
-
-template<typename T>
-Angle<T> signed_arctan(const T & y, const T & x);
 
 namespace literals
 {
@@ -64,6 +39,4 @@ double operator""_pi(long double value);
 
 }  // namespace keisan
 
-#include "keisan/angle/trigonometry.impl.hpp"
-
-#endif  // KEISAN__ANGLE__TRIGONOMETRY_HPP_
+#endif  // KEISAN__CONSTANT_HPP_

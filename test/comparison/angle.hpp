@@ -18,57 +18,51 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__ANGLE__TRIGONOMETRY_IMPL_HPP_
-#define KEISAN__ANGLE__TRIGONOMETRY_IMPL_HPP_
+#ifndef COMPARISON__ANGLE_HPP_
+#define COMPARISON__ANGLE_HPP_
 
-#include "keisan/angle/angle.hpp"
-#include "keisan/angle/trigonometry.hpp"
+#include <limits>
+#include <string>
 
-namespace keisan
+#include "keisan/keisan.hpp"
+
+#include "./almost_equal.hpp"
+
+namespace testing
 {
 
 template<typename T>
-T sin(const Angle<T> & angle)
+std::string to_string(const keisan::Angle<T> & angle)
 {
-  return std::sin(angle.radian());
+  std::stringstream ss;
+  ss << angle.degree();
+  return internal::StringStreamToString(&ss);
 }
 
 template<typename T>
-T cos(const Angle<T> & angle)
+AssertionResult angle_equal(
+  const char * lhs_exp, const char * rhs_exp,
+  const keisan::Angle<T> & lhs, const keisan::Angle<T> & rhs)
 {
-  return std::cos(angle.radian());
+  if constexpr (std::is_floating_point<T>::value) {
+    if (almost_equal(lhs.radian(), rhs.radian()) || almost_equal(lhs.degree(), rhs.degree())) {
+      return AssertionSuccess();
+    }
+  } else {
+    if (lhs == rhs) {
+      return AssertionSuccess();
+    }
+  }
+
+  return internal::EqFailure(lhs_exp, rhs_exp, to_string(lhs), to_string(rhs), false);
 }
 
-template<typename T>
-T tan(const Angle<T> & angle)
-{
-  return std::tan(angle.radian());
-}
+#define EXPECT_ANGLE_EQ(lhs, rhs) \
+  EXPECT_PRED_FORMAT2(testing::angle_equal, lhs, rhs)
 
-template<typename T>
-Angle<T> arcsin(const T & value)
-{
-  return make_radian(std::asin(value));
-}
+#define ASSERT_ANGLE_EQ(lhs, rhs) \
+  ASSERT_PRED_FORMAT2(testing::angle_equal, lhs, rhs)
 
-template<typename T>
-Angle<T> arccos(const T & value)
-{
-  return make_radian(std::acos(value));
-}
+}  // namespace testing
 
-template<typename T>
-Angle<T> arctan(const T & value)
-{
-  return make_radian(std::atan(value));
-}
-
-template<typename T>
-Angle<T> signed_arctan(const T & y, const T & x)
-{
-  return make_radian(std::atan2(y, x));
-}
-
-}  // namespace keisan
-
-#endif  // KEISAN__ANGLE__TRIGONOMETRY_IMPL_HPP_
+#endif  // COMPARISON__ANGLE_HPP_

@@ -25,6 +25,7 @@
 #include "keisan/geometry/point_3.hpp"
 
 #include "keisan/angle.hpp"
+#include "keisan/constant.hpp"
 #include "keisan/matrix.hpp"
 #include "keisan/number.hpp"
 

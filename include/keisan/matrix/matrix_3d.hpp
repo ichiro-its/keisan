@@ -24,11 +24,12 @@
 #include <memory>
 
 #include "keisan/matrix/matrix.hpp"
-#include "keisan/geometry/point_3.hpp"
 #include "keisan/matrix/vector.hpp"
 
 namespace keisan
 {
+
+class Point3;
 
 class Matrix3D
 {
@@ -37,8 +38,7 @@ public:
 
   static bool inverse(std::shared_ptr<Matrix<4, 4>> matrix);
 
-  static void transform(std::shared_ptr<Matrix<4, 4>> matrix,
-    const Point3 & point, const Vector<3> & angle);
+  static Matrix<4, 4> transform(const Point3 & point, const Vector<3> & angle);
 };
 
 }  // namespace keisan

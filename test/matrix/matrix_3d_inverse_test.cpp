@@ -18,11 +18,5 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__MATRIX_HPP_
-#define KEISAN__MATRIX_HPP_
-
-#include "keisan/matrix/matrix_3d.hpp"
-#include "keisan/matrix/matrix.hpp"
-#include "keisan/matrix/vector.hpp"
-
-#endif  // KEISAN__MATRIX_HPP_
+#include "gtest/gtest.h"
+#include "keisan/keisan.hpp"

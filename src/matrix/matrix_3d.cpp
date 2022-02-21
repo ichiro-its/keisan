@@ -18,6 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#include <memory>
+
 #include "keisan/matrix/matrix_3d.hpp"
 
 #include "keisan/matrix/matrix.hpp"
@@ -166,7 +168,7 @@ bool Matrix3D::inverse(std::shared_ptr<Matrix<4, 4>> matrix)
   return true;
 }
 
-Matrix<4, 4> Matrix3D::transform(const Point3 & point, const Vector<3> & angle)
+Matrix<4, 4> Matrix3D::transformation_of(const Point3 & point, const Vector<3> & angle)
 {
   double cos_x = cos(angle[0]);
   double cos_y = cos(angle[1]);

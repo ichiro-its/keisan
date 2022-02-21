@@ -61,7 +61,7 @@ TEST(Matrix3DTest, Transform)
   auto angle = ksn::Vector<3>(0.0, 0.0, 0.0);
 
   ASSERT_MATRIX3D_EQ(
-    ksn::Matrix3D::transform(point, angle),
+    ksn::Matrix3D::transformation_of(point, angle),
     1.0, 0.0, 0.0, 0.0,
     0.0, 1.0, 0.0, 0.0,
     0.0, 0.0, 1.0, 0.0,
@@ -71,7 +71,7 @@ TEST(Matrix3DTest, Transform)
   angle[0] = ksn::pi<double>;
 
   ASSERT_MATRIX3D_NEAR(
-    ksn::Matrix3D::transform(point, angle),
+    ksn::Matrix3D::transformation_of(point, angle),
     1.0, 0.0, 0.0, 1.0,
     0.0, -1.0, -1e-16, 0.0,
     0.0, 1e-16, -1.0, 0.0,
@@ -81,7 +81,7 @@ TEST(Matrix3DTest, Transform)
   angle[0] /= 2.0;
 
   ASSERT_MATRIX3D_NEAR(
-    ksn::Matrix3D::transform(point, angle),
+    ksn::Matrix3D::transformation_of(point, angle),
     1.0, 0.0, 0.0, 1.0,
     0.0, 6e-17, -1.0, 0.0,
     0.0, 1.0, 6e-17, 1.0,
@@ -91,7 +91,7 @@ TEST(Matrix3DTest, Transform)
   angle[1] = ksn::pi<double>;
 
   ASSERT_MATRIX3D_NEAR(
-    ksn::Matrix3D::transform(point, angle),
+    ksn::Matrix3D::transformation_of(point, angle),
     -1.0, 0.0, 1e-16, 1.0,
     0.0, 1.0, 0.0, 0.0,
     -1e-16, 0.0, -1.0, 1.0,
@@ -100,7 +100,7 @@ TEST(Matrix3DTest, Transform)
   angle[2] = ksn::pi<double>;
 
   ASSERT_MATRIX3D_NEAR(
-    ksn::Matrix3D::transform(point, angle),
+    ksn::Matrix3D::transformation_of(point, angle),
     1.0, -1e-16, 1e-16, 1.0,
     -1e-16, -1.0, 1e-32, 0.0,
     -1e-16, 0.0, -1.0, 1.0,

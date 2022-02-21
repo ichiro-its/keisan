@@ -118,7 +118,7 @@ bool Matrix3D::inverse(std::shared_ptr<Matrix<4, 4>> matrix)
     source[3][0] * source[0][1] * source[1][3] -
     source[3][0] * source[0][3] * source[1][1];
 
-  inverse[2][3] = -source[0][0] * source[1][1] * source[3][2] +
+  inverse[3][2] = -source[0][0] * source[1][1] * source[3][2] +
     source[0][0] * source[1][2] * source[3][1] +
     source[1][0] * source[0][1] * source[3][2] -
     source[1][0] * source[0][2] * source[3][1] -
@@ -161,7 +161,7 @@ bool Matrix3D::inverse(std::shared_ptr<Matrix<4, 4>> matrix)
   }
 
   inverse *= (1.0 / determinant);
-  matrix = std::make_shared<Matrix<4, 4>>(inverse);
+  (*matrix) = inverse;
 
   return true;
 }

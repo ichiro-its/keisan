@@ -46,8 +46,8 @@ protected:
     auto params = GetParam();
 
     if (ksn::Matrix3D::inverse(matrix) != params.is_invertible) {
-      return testing::AssertionFailure() << "the invertible check is failed, both are " <<
-             (params.is_invertible ? "true" : "false");
+      return testing::AssertionFailure() << "the invertible check is failed, matrix is " <<
+             (params.is_invertible ? "not" : "") << " invertible";
     }
 
     if (((*matrix) == params.inverse) != params.is_valid) {

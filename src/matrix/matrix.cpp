@@ -18,8 +18,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <memory>
-
 #include "keisan/matrix/matrix.hpp"
 
 #include "keisan/angle/angle.hpp"
@@ -30,36 +28,57 @@
 namespace keisan
 {
 
-Matrix<4, 4> translation_matrix(const Point3 & point) {}
-Matrix<3, 3> translation_matrix(const Point2 & point) {}
+Matrix<4, 4> translation_matrix(const Point3 & point)
+{
+  auto matrix = Matrix<4, 4>::identity();
+  matrix[0][3] = point.x;
+  matrix[1][3] = point.y;
+  matrix[2][3] = point.z;
 
-Matrix<4, 4> rotation_matrix(const Euler<double> & angle) {}
-Matrix<3, 3> rotation_matrix(const Angle<double> & angle) {}
+  return matrix;
+}
 
-// Matrix<4, 4> Matrix3D::transformation_of(const Point3 & point, const Vector<3> & angle)
-// {
-//   double cos_x = cos(angle[0]);
-//   double cos_y = cos(angle[1]);
-//   double cos_z = cos(angle[2]);
-//   double sin_x = sin(angle[0]);
-//   double sin_y = sin(angle[1]);
-//   double sin_z = sin(angle[2]);
+Matrix<3, 3> translation_matrix(const Point2 & point)
+{
+  auto matrix = Matrix<3, 3>::identity();
+  matrix[0][2] = point.x;
+  matrix[1][2] = point.y;
 
-//   auto result = Matrix<4, 4>::identity();
-//   result[0][0] = cos_z * cos_y;
-//   result[0][1] = cos_z * sin_y * sin_x - sin_z * cos_x;
-//   result[0][2] = cos_z * sin_y * cos_x + sin_z * sin_x;
-//   result[0][3] = point.x;
-//   result[1][0] = sin_z * cos_y;
-//   result[1][1] = sin_z * sin_y * sin_x + cos_z * cos_x;
-//   result[1][2] = sin_z * sin_y * cos_x - cos_z * sin_x;
-//   result[1][3] = point.y;
-//   result[2][0] = -sin_y;
-//   result[2][1] = cos_y * sin_x;
-//   result[2][2] = cos_y * cos_x;
-//   result[2][3] = point.z;
+  return matrix;
+}
 
-//   return result;
-// }
+Matrix<4, 4> rotation_matrix(const Euler<double> & angle)
+{
+  auto roll = Matrix<4, 4>::identity();
+  roll[1][1] = angle.roll.cos();
+  roll[1][2] = -angle.roll.sin();
+  roll[2][1] = angle.roll.sin();
+  roll[2][2] = angle.roll.cos();
+
+  auto pitch = Matrix<4, 4>::identity();
+  pitch[0][0] = angle.pitch.cos();
+  pitch[0][2] = -angle.pitch.sin();
+  pitch[0][2] = angle.pitch.sin();
+  pitch[2][2] = angle.pitch.cos();
+
+  auto yaw = Matrix<4, 4>::identity();
+  yaw[0][0] = angle.yaw.cos();
+  yaw[0][1] = -angle.yaw.sin();
+  yaw[1][0] = angle.yaw.sin();
+  yaw[1][1] = angle.yaw.cos();
+
+  return (yaw * pitch) * roll;
+}
+
+Matrix<3, 3> rotation_matrix(const Angle<double> & angle)
+{
+  auto matrix = Matrix<3, 3>::identity();
+  matrix[0][0] = angle.cos();
+  matrix[0][1] = -angle.sin();
+  matrix[1][0] = angle.sin();
+  matrix[1][1] = angle.cos();
+
+  return matrix;
+}
 
 }  // namespace keisan

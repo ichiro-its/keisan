@@ -83,18 +83,20 @@ private:
 
 struct Point3;
 
+Matrix<4, 4> translation_matrix(const Point3 & point);
+
 struct Point2;
+
+Matrix<3, 3> translation_matrix(const Point2 & point);
 
 template<typename T>
 class Euler;
 
+Matrix<4, 4> rotation_matrix(const Euler<double> & angle);
+
 template<typename T>
 class Angle;
 
-Matrix<4, 4> translation_matrix(const Point3 & point);
-Matrix<3, 3> translation_matrix(const Point2 & point);
-
-Matrix<4, 4> rotation_matrix(const Euler<double> & angle);
 Matrix<3, 3> rotation_matrix(const Angle<double> & angle);
 
 }  // namespace keisan

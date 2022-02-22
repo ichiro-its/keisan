@@ -49,6 +49,7 @@ if(BUILD_TESTING)
     "test/geometry/point_2_test.cpp"
     "test/geometry/point_3_test.cpp"
     "test/matrix/matrix_inverse_test.cpp"
+    "test/matrix/matrix_transformation_test.cpp"
     "test/matrix/matrix_test.cpp"
     "test/matrix/vector_test.cpp"
     "test/constant_test.cpp"

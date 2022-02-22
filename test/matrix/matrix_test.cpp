@@ -79,6 +79,25 @@ TEST(MatrixTest, ZeroValue)
     0.0, 0.0, 0.0, 0.0);
 }
 
+TEST(MatrixTest, Identity)
+{
+  auto a = ksn::Matrix<2, 2>::identity();
+
+  ASSERT_MATRIX_M_N_EQ(
+    2, 2, a,
+    1.0, 0.0,
+    0.0, 1.0);
+
+  auto b = ksn::Matrix<4, 4>::identity();
+
+  ASSERT_MATRIX_M_N_EQ(
+    4, 4, b,
+    1.0, 0.0, 0.0, 0.0,
+    0.0, 1.0, 0.0, 0.0,
+    0.0, 0.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 1.0);
+}
+
 TEST(MatrixTest, ComparisonOperation)
 {
   auto a = ksn::Matrix<3, 4>(

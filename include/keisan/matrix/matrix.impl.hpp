@@ -94,6 +94,23 @@ Matrix<M, N> Matrix<M, N>::zero()
 }
 
 template<size_t M, size_t N>
+Matrix<N, N> Matrix<M, N>::identity()
+{
+  static_assert(M == N,
+    "The dimensions of matrix are not matched. "
+    "There is no identity matrix for non-square matrix!");
+
+  Matrix<N, N> matrix;
+  for (size_t i = 0; i < N; ++i) {
+    for (size_t j = 0; j < N; ++j) {
+      matrix[i][j] = (i == j) ? 1.0 : 0.0;
+    }
+  }
+
+  return matrix;
+}
+
+template<size_t M, size_t N>
 Matrix<M, N> & Matrix<M, N>::operator=(const Matrix<M, N> & matrix)
 {
   std::copy(matrix.data, matrix.data + M * N, data);
@@ -286,6 +303,143 @@ template<size_t M, size_t N>
 const double * Matrix<M, N>::operator[](size_t pos) const
 {
   return data + (pos * N);
+}
+
+template<size_t M, size_t N>
+bool Matrix<M, N>::inverse() const
+{
+  static_assert(M == N,
+    "The dimensions of matrix are not matched. "
+    "There is no inverse matrix for non-square matrix!");
+
+  static_assert(M == 4,
+    "Inverse matrix operation only available for 4 by 4 matrix.");
+
+  auto inverse = Matrix<M, N>::zero();
+  auto source = *this;
+
+  inverse[0][0] = source[1][1] * source[2][2] * source[3][3] -
+    source[1][1] * source[2][3] * source[3][2] -
+    source[2][1] * source[1][2] * source[3][3] +
+    source[2][1] * source[1][3] * source[3][2] +
+    source[3][1] * source[1][2] * source[2][3] -
+    source[3][1] * source[1][3] * source[2][2];
+
+  inverse[1][0] = -source[1][0] * source[2][2] * source[3][3] +
+    source[1][0] * source[2][3] * source[3][2] +
+    source[2][0] * source[1][2] * source[3][3] -
+    source[2][0] * source[1][3] * source[3][2] -
+    source[3][0] * source[1][2] * source[2][3] +
+    source[3][0] * source[1][3] * source[2][2];
+
+  inverse[2][0] = source[1][0] * source[2][1] * source[3][3] -
+    source[1][0] * source[2][3] * source[3][1] -
+    source[2][0] * source[1][1] * source[3][3] +
+    source[2][0] * source[1][3] * source[3][1] +
+    source[3][0] * source[1][1] * source[2][3] -
+    source[3][0] * source[1][3] * source[2][1];
+
+  inverse[3][0] = -source[1][0] * source[2][1] * source[3][2] +
+    source[1][0] * source[2][2] * source[3][1] +
+    source[2][0] * source[1][1] * source[3][2] -
+    source[2][0] * source[1][2] * source[3][1] -
+    source[3][0] * source[1][1] * source[2][2] +
+    source[3][0] * source[1][2] * source[2][1];
+
+  inverse[0][1] = -source[0][1] * source[2][2] * source[3][3] +
+    source[0][1] * source[2][3] * source[3][2] +
+    source[2][1] * source[0][2] * source[3][3] -
+    source[2][1] * source[0][3] * source[3][2] -
+    source[3][1] * source[0][2] * source[2][3] +
+    source[3][1] * source[0][3] * source[2][2];
+
+  inverse[1][1] = source[0][0] * source[2][2] * source[3][3] -
+    source[0][0] * source[2][3] * source[3][2] -
+    source[2][0] * source[0][2] * source[3][3] +
+    source[2][0] * source[0][3] * source[3][2] +
+    source[3][0] * source[0][2] * source[2][3] -
+    source[3][0] * source[0][3] * source[2][2];
+
+  inverse[2][1] = -source[0][0] * source[2][1] * source[3][3] +
+    source[0][0] * source[2][3] * source[3][1] +
+    source[2][0] * source[0][1] * source[3][3] -
+    source[2][0] * source[0][3] * source[3][1] -
+    source[3][0] * source[0][1] * source[2][3] +
+    source[3][0] * source[0][3] * source[2][1];
+
+  inverse[3][1] = source[0][0] * source[2][1] * source[3][2] -
+    source[0][0] * source[2][2] * source[3][1] -
+    source[2][0] * source[0][1] * source[3][2] +
+    source[2][0] * source[0][2] * source[3][1] +
+    source[3][0] * source[0][1] * source[2][2] -
+    source[3][0] * source[0][2] * source[2][1];
+
+  inverse[0][2] = source[0][1] * source[1][2] * source[3][3] -
+    source[0][1] * source[1][3] * source[3][2] -
+    source[1][1] * source[0][2] * source[3][3] +
+    source[1][1] * source[0][3] * source[3][2] +
+    source[3][1] * source[0][2] * source[1][3] -
+    source[3][1] * source[0][3] * source[1][2];
+
+  inverse[1][2] = -source[0][0] * source[1][2] * source[3][3] +
+    source[0][0] * source[1][3] * source[3][2] +
+    source[1][0] * source[0][2] * source[3][3] -
+    source[1][0] * source[0][3] * source[3][2] -
+    source[3][0] * source[0][2] * source[1][3] +
+    source[3][0] * source[0][3] * source[1][2];
+
+  inverse[2][2] = source[0][0] * source[1][1] * source[3][3] -
+    source[0][0] * source[1][3] * source[3][1] -
+    source[1][0] * source[0][1] * source[3][3] +
+    source[1][0] * source[0][3] * source[3][1] +
+    source[3][0] * source[0][1] * source[1][3] -
+    source[3][0] * source[0][3] * source[1][1];
+
+  inverse[3][2] = -source[0][0] * source[1][1] * source[3][2] +
+    source[0][0] * source[1][2] * source[3][1] +
+    source[1][0] * source[0][1] * source[3][2] -
+    source[1][0] * source[0][2] * source[3][1] -
+    source[3][0] * source[0][1] * source[1][2] +
+    source[3][0] * source[0][2] * source[1][1];
+
+  inverse[0][3] = -source[0][1] * source[1][2] * source[2][3] +
+    source[0][1] * source[1][3] * source[2][2] +
+    source[1][1] * source[0][2] * source[2][3] -
+    source[1][1] * source[0][3] * source[2][2] -
+    source[2][1] * source[0][2] * source[1][3] +
+    source[2][1] * source[0][3] * source[1][2];
+
+  inverse[1][3] = source[0][0] * source[1][2] * source[2][3] -
+    source[0][0] * source[1][3] * source[2][2] -
+    source[1][0] * source[0][2] * source[2][3] +
+    source[1][0] * source[0][3] * source[2][2] +
+    source[2][0] * source[0][2] * source[1][3] -
+    source[2][0] * source[0][3] * source[1][2];
+
+  inverse[2][3] = -source[0][0] * source[1][1] * source[2][3] +
+    source[0][0] * source[1][3] * source[2][1] +
+    source[1][0] * source[0][1] * source[2][3] -
+    source[1][0] * source[0][3] * source[2][1] -
+    source[2][0] * source[0][1] * source[1][3] +
+    source[2][0] * source[0][3] * source[1][1];
+
+  inverse[3][3] = source[0][0] * source[1][1] * source[2][2] -
+    source[0][0] * source[1][2] * source[2][1] -
+    source[1][0] * source[0][1] * source[2][2] +
+    source[1][0] * source[0][2] * source[2][1] +
+    source[2][0] * source[0][1] * source[1][2] -
+    source[2][0] * source[0][2] * source[1][1];
+
+  double determinant = source[0][0] * inverse[0][0] + source[0][1] * inverse[1][0] +
+    source[0][2] * inverse[2][0] + source[0][3] * inverse[3][0];
+
+  if (determinant == 0) {
+    return false;
+  }
+
+  source = inverse * (1.0 / determinant);
+
+  return true;
 }
 
 }  // namespace keisan

@@ -42,6 +42,7 @@ public:
   Matrix(const Matrix<M, N> & matrix);
 
   static Matrix<M, N> zero();
+  static Matrix<N, N> identity();
 
   Matrix<M, N> & operator=(const Matrix<M, N> & matrix);
 
@@ -73,6 +74,8 @@ public:
 
   double * operator[](size_t pos);
   const double * operator[](size_t pos) const;
+
+  bool inverse() const;
 
 private:
   double data[M * N];

@@ -34,10 +34,6 @@ class Point3;
 class Matrix3D
 {
 public:
-  static Matrix<4, 4> identity();
-
-  static bool inverse(std::shared_ptr<Matrix<4, 4>> matrix);
-
   static Matrix<4, 4> transformation_of(const Point3 & point, const Vector<3> & angle);
 };
 

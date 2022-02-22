@@ -33,10 +33,10 @@ struct matrix_3d_inverse_args
   bool is_valid;
 };
 
-class Matrix3DInverseTest : public ::testing::TestWithParam<matrix_3d_inverse_args>
+class MatrixInverseTest : public ::testing::TestWithParam<matrix_3d_inverse_args>
 {
 protected:
-  Matrix3DInverseTest()
+  MatrixInverseTest()
   : matrix(std::make_shared<ksn::Matrix<4, 4>>(GetParam().origin))
   {
   }
@@ -45,7 +45,7 @@ protected:
   {
     auto params = GetParam();
 
-    if (ksn::Matrix3D::inverse(matrix) != params.is_invertible) {
+    if (matrix->inverse() != params.is_invertible) {
       return testing::AssertionFailure() << "the invertible check is failed, matrix is " <<
              (params.is_invertible ? "not" : "") << " invertible";
     }
@@ -62,7 +62,7 @@ protected:
   std::shared_ptr<ksn::Matrix<4, 4>> matrix;
 };
 
-TEST_P(Matrix3DInverseTest, Inverse)
+TEST_P(MatrixInverseTest, Inverse)
 {
   EXPECT_TRUE(do_test());
 }
@@ -155,7 +155,7 @@ matrix_3d_inverse_args test_case_6 = {
 
 INSTANTIATE_TEST_CASE_P(
   InverseTest,
-  Matrix3DInverseTest,
+  MatrixInverseTest,
   testing::Values(
     test_case_1, test_case_2, test_case_3,
     test_case_4, test_case_5, test_case_6));

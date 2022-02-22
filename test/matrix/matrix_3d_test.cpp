@@ -36,8 +36,10 @@ namespace ksn = keisan;
 
 TEST(Matrix3DTest, Identity)
 {
+  auto matrix = ksn::Matrix<4, 4>::identity();
+
   ASSERT_MATRIX3D_EQ(
-    ksn::Matrix3D::identity(),
+    matrix,
     1.0, 0.0, 0.0, 0.0,
     0.0, 1.0, 0.0, 0.0,
     0.0, 0.0, 1.0, 0.0,

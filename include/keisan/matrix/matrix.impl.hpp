@@ -96,7 +96,8 @@ Matrix<M, N> Matrix<M, N>::zero()
 template<size_t M, size_t N>
 Matrix<N, N> Matrix<M, N>::identity()
 {
-  static_assert(M == N,
+  static_assert(
+    M == N,
     "The dimensions of matrix are not matched. "
     "There is no identity matrix for non-square matrix!");
 
@@ -306,13 +307,15 @@ const double * Matrix<M, N>::operator[](size_t pos) const
 }
 
 template<size_t M, size_t N>
-bool Matrix<M, N>::inverse() const
+bool Matrix<M, N>::inverse()
 {
-  static_assert(M == N,
+  static_assert(
+    M == N,
     "The dimensions of matrix are not matched. "
     "There is no inverse matrix for non-square matrix!");
 
-  static_assert(M == 4,
+  static_assert(
+    M == 4,
     "Inverse matrix operation only available for 4 by 4 matrix.");
 
   auto inverse = Matrix<M, N>::zero();
@@ -437,7 +440,7 @@ bool Matrix<M, N>::inverse() const
     return false;
   }
 
-  source = inverse * (1.0 / determinant);
+  (*this) = inverse * (1.0 / determinant);
 
   return true;
 }

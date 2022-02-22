@@ -75,11 +75,27 @@ public:
   double * operator[](size_t pos);
   const double * operator[](size_t pos) const;
 
-  bool inverse() const;
+  bool inverse();
 
 private:
   double data[M * N];
 };
+
+struct Point3;
+
+struct Point2;
+
+template<typename T>
+class Euler;
+
+template<typename T>
+class Angle;
+
+Matrix<4, 4> translation_matrix(const Point3 & point);
+Matrix<3, 3> translation_matrix(const Point2 & point);
+
+Matrix<4, 4> rotation_matrix(const Euler<double> & angle);
+Matrix<3, 3> rotation_matrix(const Angle<double> & angle);
 
 }  // namespace keisan
 

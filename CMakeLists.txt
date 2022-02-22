@@ -23,7 +23,7 @@ add_library(${PROJECT_NAME} SHARED
   "src/angle/angle.cpp"
   "src/geometry/point_2.cpp"
   "src/geometry/point_3.cpp"
-  "src/matrix/matrix_3d.cpp"
+  "src/matrix/matrix.cpp"
   "src/constant.cpp")
 
 ament_target_dependencies(${PROJECT_NAME} gtest_vendor)
@@ -48,7 +48,6 @@ if(BUILD_TESTING)
     "test/angle/quaternion_test.cpp"
     "test/geometry/point_2_test.cpp"
     "test/geometry/point_3_test.cpp"
-    "test/matrix/matrix_3d_test.cpp"
     "test/matrix/matrix_inverse_test.cpp"
     "test/matrix/matrix_test.cpp"
     "test/matrix/vector_test.cpp"

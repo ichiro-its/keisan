@@ -153,3 +153,62 @@ TEST(MatrixTransformationTest, Rotation)
     -1e-16, 0.0, -1.0, 0.0,
     0.0, 0.0, 0.0, 1.0);
 }
+
+TEST(MatrixTransformationTest, Transformation)
+{
+  auto point2 = ksn::Point2(1.0, 0.0);
+  auto angle = ksn::make_radian(ksn::pi<double>);
+
+  ASSERT_MATRIX_M_N_NEAR(
+    3, 3,
+    ksn::translation_matrix(point2) * ksn::rotation_matrix(angle),
+    -1.0, 0.0, 1.0,
+    0.0, -1.0, 0.0,
+    0.0, 0.0, 1.0);
+
+  point2.y = 2.0;
+  angle /= 4;
+
+  ASSERT_MATRIX_M_N_NEAR(
+    3, 3,
+    ksn::translation_matrix(point2) * ksn::rotation_matrix(angle),
+    0.7, -0.7, 1.0,
+    0.7, 0.7, 2.0,
+    0.0, 0.0, 1.0);
+
+  auto point3 = ksn::Point3(0.0, 2.0, 0.0);
+  auto euler = ksn::Euler<double>(
+    ksn::make_radian(ksn::pi<double>),
+    ksn::make_radian(0.0), ksn::make_radian(0.0));
+
+  ASSERT_MATRIX_M_N_NEAR(
+    4, 4,
+    ksn::translation_matrix(point3) * ksn::rotation_matrix(euler),
+    1.0, 0.0, 0.0, 0.0,
+    0.0, -1.0, -1e-16, 2.0,
+    0.0, 1e-16, -1.0, 0.0,
+    0.0, 0.0, 0.0, 1.0);
+
+  point3.z = 3.0;
+  euler.roll = ksn::make_radian(0.0);
+  euler.pitch = ksn::make_radian(ksn::pi<double>);
+
+  ASSERT_MATRIX_M_N_NEAR(
+    4, 4,
+    ksn::translation_matrix(point3) * ksn::rotation_matrix(euler),
+    -1.0, 0.0, 1e-16, 0.0,
+    0.0, 1.0, 0.0, 2.0,
+    -1e-16, 0.0, -1.0, 3.0,
+    0.0, 0.0, 0.0, 1.0);
+
+  point3.z = 1.0;
+  euler.yaw = ksn::make_radian(ksn::pi<double>);
+
+  ASSERT_MATRIX_M_N_NEAR(
+    4, 4,
+    ksn::translation_matrix(point3) * ksn::rotation_matrix(euler),
+    1.0, -1e-16, 1e-16, 0.0,
+    -1e-16, -1.0, 1e-32, 2.0,
+    -1e-16, 0.0, -1.0, 1.0,
+    0.0, 0.0, 0.0, 1.0);
+}

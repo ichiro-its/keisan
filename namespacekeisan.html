@@ -85,7 +85,7 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkeisan_1_1Quaternion.html">Quaternion</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkeisan_1_1Euler.html">Euler</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkeisan_1_1Euler.html">Euler</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkeisan_1_1Point2.html">Point2</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -128,6 +128,14 @@ Functions</h2></td></tr>
 <tr class="memitem:ac930806e03009d83ce3050d961e5ed3b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ac930806e03009d83ce3050d961e5ed3b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classkeisan_1_1Angle.html">Angle</a>&lt; <a class="el" href="namespacekeisan.html#a96888c885c085d9b6954882af24d538b">IfElseFloat</a>&lt; T, double &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#ac930806e03009d83ce3050d961e5ed3b">signed_arctan</a> (const T &amp;y, const T &amp;x)</td></tr>
 <tr class="separator:ac930806e03009d83ce3050d961e5ed3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6abc06b4df3c17930cd5ac403631397"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classkeisan_1_1Matrix.html">Matrix</a>&lt; 4, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#ac6abc06b4df3c17930cd5ac403631397">translation_matrix</a> (const <a class="el" href="structkeisan_1_1Point3.html">Point3</a> &amp;point)</td></tr>
+<tr class="separator:ac6abc06b4df3c17930cd5ac403631397"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a4fa13153ff96b5ca148554c3ed560c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classkeisan_1_1Matrix.html">Matrix</a>&lt; 3, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a5a4fa13153ff96b5ca148554c3ed560c">translation_matrix</a> (const <a class="el" href="structkeisan_1_1Point2.html">Point2</a> &amp;point)</td></tr>
+<tr class="separator:a5a4fa13153ff96b5ca148554c3ed560c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9858b1f3b80093ad91bf78b3b6edd90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classkeisan_1_1Matrix.html">Matrix</a>&lt; 4, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#ae9858b1f3b80093ad91bf78b3b6edd90">rotation_matrix</a> (const <a class="el" href="structkeisan_1_1Euler.html">Euler</a>&lt; double &gt; &amp;angle)</td></tr>
+<tr class="separator:ae9858b1f3b80093ad91bf78b3b6edd90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a332cc3fab9f47b1b292bec82c5775bd2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classkeisan_1_1Matrix.html">Matrix</a>&lt; 3, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a332cc3fab9f47b1b292bec82c5775bd2">rotation_matrix</a> (const <a class="el" href="classkeisan_1_1Angle.html">Angle</a>&lt; double &gt; &amp;angle)</td></tr>
+<tr class="separator:a332cc3fab9f47b1b292bec82c5775bd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e90306447fed9f87a796953301d1d43"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a0e90306447fed9f87a796953301d1d43"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacekeisan.html#a0e90306447fed9f87a796953301d1d43">sign</a> (const T &amp;value)</td></tr>
 <tr class="separator:a0e90306447fed9f87a796953301d1d43"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -330,6 +338,78 @@ template&lt;typename T &gt; </div>
           <td></td>
           <td>)</td>
           <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac6abc06b4df3c17930cd5ac403631397"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6abc06b4df3c17930cd5ac403631397">&#9670;&nbsp;</a></span>translation_matrix() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classkeisan_1_1Matrix.html">Matrix</a>&lt;4, 4&gt; keisan::translation_matrix </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structkeisan_1_1Point3.html">Point3</a> &amp;&#160;</td>
+          <td class="paramname"><em>point</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5a4fa13153ff96b5ca148554c3ed560c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a4fa13153ff96b5ca148554c3ed560c">&#9670;&nbsp;</a></span>translation_matrix() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classkeisan_1_1Matrix.html">Matrix</a>&lt;3, 3&gt; keisan::translation_matrix </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structkeisan_1_1Point2.html">Point2</a> &amp;&#160;</td>
+          <td class="paramname"><em>point</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae9858b1f3b80093ad91bf78b3b6edd90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9858b1f3b80093ad91bf78b3b6edd90">&#9670;&nbsp;</a></span>rotation_matrix() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classkeisan_1_1Matrix.html">Matrix</a>&lt;4, 4&gt; keisan::rotation_matrix </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structkeisan_1_1Euler.html">Euler</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>angle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a332cc3fab9f47b1b292bec82c5775bd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a332cc3fab9f47b1b292bec82c5775bd2">&#9670;&nbsp;</a></span>rotation_matrix() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classkeisan_1_1Matrix.html">Matrix</a>&lt;3, 3&gt; keisan::rotation_matrix </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classkeisan_1_1Angle.html">Angle</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>angle</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">

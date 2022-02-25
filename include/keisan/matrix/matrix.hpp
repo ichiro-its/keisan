@@ -42,6 +42,7 @@ public:
   Matrix(const Matrix<M, N> & matrix);
 
   static Matrix<M, N> zero();
+  static Matrix<N, N> identity();
 
   Matrix<M, N> & operator=(const Matrix<M, N> & matrix);
 
@@ -74,9 +75,29 @@ public:
   double * operator[](size_t pos);
   const double * operator[](size_t pos) const;
 
+  bool inverse();
+
 private:
   double data[M * N];
 };
+
+struct Point3;
+
+Matrix<4, 4> translation_matrix(const Point3 & point);
+
+struct Point2;
+
+Matrix<3, 3> translation_matrix(const Point2 & point);
+
+template<typename T>
+class Euler;
+
+Matrix<4, 4> rotation_matrix(const Euler<double> & angle);
+
+template<typename T>
+class Angle;
+
+Matrix<3, 3> rotation_matrix(const Angle<double> & angle);
 
 }  // namespace keisan
 

@@ -166,7 +166,7 @@ TEST(Point2Test, Rotation)
 {
   auto point = ksn::Point2(4.0, 3.0);
 
-  EXPECT_POINT2_EQ(point.rotate(ksn::make_degree(90.0)), ksn::Point2(-3.0, 4.0));
+  EXPECT_POINT2_EQ(point.rotate(ksn::angle::from_degree(90.0)), ksn::Point2(-3.0, 4.0));
   EXPECT_POINT2_EQ(
-    point.rotate_from(ksn::make_degree(90.0), {1.0, -1.0}), ksn::Point2(-3.0, 2.0));
+    point.rotate_from(ksn::angle::from_degree(90.0), {1.0, -1.0}), ksn::Point2(-3.0, 2.0));
 }

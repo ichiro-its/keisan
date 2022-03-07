@@ -35,14 +35,14 @@ class Angle;
 template<typename T>
 const T pi = std::atan((T)1) * 4;
 
-template<typename T>
-T sin(const Angle<AngleType::Radian, T> & angle);
+template<AngleType E, typename T>
+T sin(const Angle<E, T> & angle);
 
-template<typename T>
-T cos(const Angle<AngleType::Radian, T> & angle);
+template<AngleType E, typename T>
+T cos(const Angle<E, T> & angle);
 
-template<typename T>
-T tan(const Angle<AngleType::Radian, T> & angle);
+template<AngleType E, typename T>
+T tan(const Angle<E, T> & angle);
 
 template<typename T>
 Angle<AngleType::Radian, T> arcsin(const T & value);

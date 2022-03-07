@@ -27,22 +27,22 @@
 namespace keisan
 {
 
-template<typename T>
-T sin(const RadAngle<T> & rad_angle)
+template<AngleType E, typename T>
+T sin(const Angle<E, T> & rad_angle)
 {
-  return std::sin(rad_angle.value);
+  return std::sin(rad_angle.radian());
 }
 
-template<typename T>
-T cos(const RadAngle<T> & rad_angle)
+template<AngleType E, typename T>
+T cos(const Angle<E, T> & rad_angle)
 {
-  return std::cos(rad_angle.value);
+  return std::cos(rad_angle.radian());
 }
 
-template<typename T>
-T tan(const RadAngle<T> & rad_angle)
+template<AngleType E, typename T>
+T tan(const Angle<E, T> & rad_angle)
 {
-  return std::tan(rad_angle.value);
+  return std::tan(rad_angle.radian());
 }
 
 template<typename T>

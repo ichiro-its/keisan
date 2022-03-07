@@ -29,42 +29,7 @@ namespace keisan
 {
 
 template<AngleType E, typename T>
-struct Angle
-{
-  T value;
-
-  // template<typename U>
-  // friend class Angle;
-
-  Angle();
-  explicit Angle(const T & value);
-
-  // template<typename U>
-  // operator Angle<U>() const;
-
-  bool operator==(const Angle<E, T> & other) const;
-  bool operator!=(const Angle<E, T> & other) const;
-  bool operator>(const Angle<E, T> & other) const;
-  bool operator>=(const Angle<E, T> & other) const;
-  bool operator<(const Angle<E, T> & other) const;
-  bool operator<=(const Angle<E, T> & other) const;
-
-  Angle<E, T> & operator+=(const Angle<E, T> & other);
-  Angle<E, T> & operator-=(const Angle<E, T> & other);
-
-  Angle<E, T> & operator*=(const T & value);
-  Angle<E, T> & operator/=(const T & value);
-
-  Angle<E, T> operator+(const Angle<E, T> & other) const;
-  Angle<E, T> operator-(const Angle<E, T> & other) const;
-
-  Angle<E, T> operator*(const T & value) const;
-  Angle<E, T> operator/(const T & value) const;
-
-  Angle<E, T> operator-() const;
-
-  Angle<E, T> normalize() const;
-};
+struct Angle;
 
 template<typename T>
 using DegAngle = Angle<AngleType::Degree, T>;
@@ -72,15 +37,99 @@ using DegAngle = Angle<AngleType::Degree, T>;
 template<typename T>
 using RadAngle = Angle<AngleType::Radian, T>;
 
+template<AngleType E, typename T>
+class Angle
+{
+private:
+  T value;
+
+public:
+  Angle();
+  explicit Angle(const T & value);
+
+  template<AngleType F, typename U>
+  operator Angle<F, U>() const;
+
+  template<AngleType F, typename U>
+  bool operator==(const Angle<F, U> & other) const;
+
+  template<AngleType F, typename U>
+  bool operator!=(const Angle<F, U> & other) const;
+
+  template<AngleType F, typename U>
+  bool operator>(const Angle<F, U> & other) const;
+
+  template<AngleType F, typename U>
+  bool operator>=(const Angle<F, U> & other) const;
+
+  template<AngleType F, typename U>
+  bool operator<(const Angle<F, U> & other) const;
+
+  template<AngleType F, typename U>
+  bool operator<=(const Angle<F, U> & other) const;
+
+  template<AngleType F, typename U>
+  Angle<E, T> & operator+=(const Angle<F, U> & other);
+
+  template<AngleType F, typename U>
+  Angle<E, T> & operator-=(const Angle<F, U> & other);
+
+  template<typename U>
+  Angle<E, T> & operator*=(U value);
+
+  template<typename U>
+  Angle<E, T> & operator/=(U value);
+
+  template<AngleType F, typename U>
+  Angle<E, T> operator+(const Angle<F, U> & other) const;
+
+  template<AngleType F, typename U>
+  Angle<E, T> operator-(const Angle<F, U> & other) const;
+
+  template<typename U>
+  Angle<E, T> operator*(U value) const;
+
+  template<typename U>
+  Angle<E, T> operator/(U value) const;
+
+  Angle<E, T> operator-() const;
+
+  DegAngle<T> to_deg_angle() const;
+  RadAngle<T> to_rad_angle() const;
+
+  template<AngleType F>
+  T value_in() const;
+
+  T degree() const;
+  T radian() const;
+
+  Angle<E, T> normalize() const;
+};
+
+namespace angle
+{
+template<typename T>
+DegAngle<T> from_degree(T value);
+
+template<typename T>
+RadAngle<T> from_radian(T value);
+}  // namespace angle
+
+template<typename T>
+[[deprecated("use keisan::angle::from_degree instead")]]
+DegAngle<T> make_degree(T value);
+
+template<typename T>
+[[deprecated("use keisan::angle::from_radian instead")]]
+RadAngle<T> make_radian(T value);
+
 namespace literals
 {
-
 DegAngle<long long int> operator""_deg(unsigned long long int value);  // NOLINT
 DegAngle<long double> operator""_deg(long double value);
 
 RadAngle<long double> operator""_pi_rad(unsigned long long int value);  // NOLINT
 RadAngle<long double> operator""_pi_rad(long double value);
-
 }  // namespace literals
 
 }  // namespace keisan

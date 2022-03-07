@@ -23,61 +23,98 @@
 
 namespace ksn = keisan;
 
+#define FOREACH_ANGLE_TYPE_DO(MACRO, ...) \
+  MACRO(ksn::AngleType::Degree, __VA_ARGS__) \
+  MACRO(ksn::AngleType::Radian, __VA_ARGS__)
+
+#define FOREACH_TYPE_DO(MACRO, ...) \
+  MACRO(float, __VA_ARGS__) \
+  MACRO(double, __VA_ARGS__) \
+  MACRO(long double, __VA_ARGS__) \
+  MACRO(int, __VA_ARGS__) \
+  MACRO(int32_t, __VA_ARGS__) \
+  MACRO(int64_t, __VA_ARGS__)
+
+#define FOREACH_TYPE_DO2(MACRO, ...) \
+  MACRO(float, __VA_ARGS__) \
+  MACRO(double, __VA_ARGS__) \
+  MACRO(long double, __VA_ARGS__) \
+  MACRO(int, __VA_ARGS__) \
+  MACRO(int32_t, __VA_ARGS__) \
+  MACRO(int64_t, __VA_ARGS__)
+
+#define PASS_RANDOM_ANGLES(MACRO, TYPE, ANGLE_TYPE, ...) \
+  { \
+    ksn::Angle<ANGLE_TYPE, TYPE> angles[3]; \
+    for (size_t i = 0; i < 3; ++i) { \
+      angles[i] = ksn::Angle<ANGLE_TYPE, TYPE>(std::rand() % 200 - 100); \
+    } \
+    MACRO(angles, TYPE, ANGLE_TYPE, __VA_ARGS__) \
+  }
+
 using ksn::literals::operator""_deg;
 using ksn::literals::operator""_pi_rad;
 
+// This one will test whether ksn::Euler could be declared without initial value
 TEST(EulerTest, Empty)
 {
-  ksn::Euler<float> float_euler;
-  ksn::Euler<double> double_euler;
-  ksn::Euler<long double> long_double_euler;
+#define EXPECT_COMPILED(TYPE, ANGLE_TYPE) { ksn::Euler<ANGLE_TYPE, TYPE> euler; }
+#define ITERATE_TYPE(ANGLE_TYPE, ...) FOREACH_TYPE_DO(EXPECT_COMPILED, ANGLE_TYPE)
+
+  FOREACH_ANGLE_TYPE_DO(ITERATE_TYPE)
 }
 
+// This one will test whether ksn::Euler could be declared with roll pitch yaw value
 TEST(EulerTest, RpyConstructor)
 {
-  #define EXPECT_RPY_CONSTRUCTOR(TYPE) \
+#define EXPECT_CORRECT(ANGLES, TYPE, ANGLE_TYPE, ...) \
   { \
-    ksn::Euler<TYPE> euler(0_deg, 90_deg, 180_deg); \
-    EXPECT_DOUBLE_EQ(euler.roll.degree(), 0.0); \
-    EXPECT_DOUBLE_EQ(euler.pitch.degree(), 90.0); \
-    EXPECT_DOUBLE_EQ(euler.yaw.degree(), 180.0); \
+    ksn::Euler<ANGLE_TYPE, TYPE> euler(ANGLES[0], ANGLES[1], ANGLES[2]); \
+    EXPECT_EQ(euler.roll, ANGLES[0]); \
+    EXPECT_EQ(euler.pitch, ANGLES[1]); \
+    ASSERT_EQ(euler.yaw, ANGLES[2]); \
   }
+#define PASS_ANGLES(TYPE, ANGLE_TYPE) PASS_RANDOM_ANGLES(EXPECT_CORRECT, TYPE, ANGLE_TYPE)
 
-  EXPECT_RPY_CONSTRUCTOR(float)
-  EXPECT_RPY_CONSTRUCTOR(double)
-  EXPECT_RPY_CONSTRUCTOR(long double)
+#undef ITERATE_TYPE
+#define ITERATE_TYPE(ANGLE_TYPE, ...) FOREACH_TYPE_DO(PASS_ANGLES, ANGLE_TYPE)
+
+  FOREACH_ANGLE_TYPE_DO(ITERATE_TYPE)
 }
 
+// This one will test whether ksn::Euler could be assigned to other ksn::Euler
+// with the same angle type but different value type
 TEST(EulerTest, AssignmentConstructor)
 {
-  #define EXPECT_CONVERSION_CONSTRUCTOR(TYPE, SOURCE) \
+#undef EXPECT_CORRECT
+#define EXPECT_CORRECT(TYPE, ANGLE_TYPE, SOURCE) \
   { \
-    ksn::Euler<TYPE> a(SOURCE), b = SOURCE, c; \
+    ksn::Euler<ANGLE_TYPE, TYPE> a(SOURCE), b = SOURCE, c; \
     c = SOURCE; \
     EXPECT_EQ(a, SOURCE); \
     EXPECT_EQ(b, SOURCE); \
-    EXPECT_EQ(c, SOURCE); \
+    ASSERT_EQ(c, SOURCE); \
   }
 
-  ksn::Euler<float> float_euler(90_deg, 90_deg, 90_deg);
-  ksn::Euler<double> double_euler(-45_deg, -45_deg, -45_deg);
-  ksn::Euler<long double> long_double_euler(15_deg, 15_deg, 15_deg);
-
-  #define LOOP_EXPECT_CONVERSION_CONSTRUCTOR(TYPE) \
+#undef ITERATE_TYPE
+#define ITERATE_TYPE(ANGLES, SOURCE_TYPE, ANGLE_TYPE, ...) \
   { \
-    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, float_euler) \
-    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, double_euler) \
-    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, long_double_euler) \
+    auto source = ksn::Euler<ANGLE_TYPE, SOURCE_TYPE>(ANGLES[0], ANGLES[1], ANGLES[2]); \
+    FOREACH_TYPE_DO(EXPECT_CORRECT, ANGLE_TYPE, source) \
   }
 
-  LOOP_EXPECT_CONVERSION_CONSTRUCTOR(float)
-  LOOP_EXPECT_CONVERSION_CONSTRUCTOR(double)
-  LOOP_EXPECT_CONVERSION_CONSTRUCTOR(long double)
+#undef PASS_ANGLES
+#define PASS_ANGLES(SOURCE_TYPE, ANGLE_TYPE) \
+  PASS_RANDOM_ANGLES(ITERATE_TYPE, SOURCE_TYPE, ANGLE_TYPE)
+
+#define ITERATE_SOURCE_TYPE(ANGLE_TYPE, ...) FOREACH_TYPE_DO2(PASS_ANGLES, ANGLE_TYPE)
+
+  FOREACH_ANGLE_TYPE_DO(ITERATE_SOURCE_TYPE)
 }
 
 TEST(EulerTest, ComparisonOperator)
 {
-  ksn::Euler<double> a(0.0_deg, 90.0_deg, 180.0_deg);
+  ksn::DegEuler<double> a(0.0_deg, 90.0_deg, 180.0_deg);
 
   auto b = a;
 
@@ -92,9 +129,9 @@ TEST(EulerTest, ComparisonOperator)
 
 TEST(EulerTest, QuaternionConversion)
 {
-  ksn::Euler<double> euler(0.0_deg, 0.0_deg, 90.0_deg);
+  ksn::DegEuler<double> euler(0.0_deg, 0.0_deg, 90.0_deg);
 
-  auto quaternion = euler.quaternion();
+  auto quaternion = euler.to_quaternion();
 
-  ASSERT_EQ(quaternion.euler(), euler);
+  ASSERT_EQ(quaternion.to_rad_euler(), euler);
 }

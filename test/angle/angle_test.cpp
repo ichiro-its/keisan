@@ -18,13 +18,34 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#include <cstdlib>
 #include <iomanip>
 #include <sstream>
 
 #include "gtest/gtest.h"
-#include "keisan/keisan.hpp"
+#include "keisan/angle/angle.hpp"
 
 namespace ksn = keisan;
+
+#define FOREACH_ANGLE_TYPE_DO(MACRO, ...) \
+  MACRO(ksn::AngleType::Degree, __VA_ARGS__) \
+  MACRO(ksn::AngleType::Radian, __VA_ARGS__)
+
+#define FOREACH_TYPE_DO(MACRO, ...) \
+  MACRO(float, __VA_ARGS__) \
+  MACRO(double, __VA_ARGS__) \
+  MACRO(long double, __VA_ARGS__) \
+  MACRO(int, __VA_ARGS__) \
+  MACRO(int32_t, __VA_ARGS__) \
+  MACRO(int64_t, __VA_ARGS__)
+
+#define FOREACH_TYPE_DO2(MACRO, ...) \
+  MACRO(float, __VA_ARGS__) \
+  MACRO(double, __VA_ARGS__) \
+  MACRO(long double, __VA_ARGS__) \
+  MACRO(int, __VA_ARGS__) \
+  MACRO(int32_t, __VA_ARGS__) \
+  MACRO(int64_t, __VA_ARGS__)
 
 using ksn::literals::operator""_deg;
 using ksn::literals::operator""_pi;
@@ -32,36 +53,36 @@ using ksn::literals::operator""_pi_rad;
 
 TEST(AngleTest, MakeDegree)
 {
-  EXPECT_FLOAT_EQ(ksn::make_degree(90.0f).degree(), 90.0f);
-  EXPECT_DOUBLE_EQ(ksn::make_degree(-45.0).degree(), -45.0);
-  EXPECT_DOUBLE_EQ(ksn::make_degree(15.0l).degree(), 15.0l);
+  EXPECT_FLOAT_EQ(ksn::angle::from_degree(90.0f).degree(), 90.0f);
+  EXPECT_DOUBLE_EQ(ksn::angle::from_degree(-45.0).degree(), -45.0);
+  EXPECT_DOUBLE_EQ(ksn::angle::from_degree(15.0l).degree(), 15.0l);
 }
 
 TEST(AngleTest, MakeRadian)
 {
-  EXPECT_FLOAT_EQ(ksn::make_radian<float>(0.5_pi).radian(), 0.5_pi);
-  EXPECT_DOUBLE_EQ(ksn::make_radian<double>(-0.25_pi).radian(), -0.25_pi);
-  EXPECT_DOUBLE_EQ(ksn::make_radian<long double>(0.1_pi).radian(), 0.1_pi);
+  EXPECT_FLOAT_EQ(ksn::angle::from_radian<float>(0.5_pi).radian(), 0.5_pi);
+  EXPECT_DOUBLE_EQ(ksn::angle::from_radian<double>(-0.25_pi).radian(), -0.25_pi);
+  EXPECT_DOUBLE_EQ(ksn::angle::from_radian<long double>(0.1_pi).radian(), 0.1_pi);
 }
 
 TEST(AngleTest, DegLiterals)
 {
-  EXPECT_EQ(0_deg, ksn::make_degree(0.0));
-  EXPECT_EQ(90_deg, ksn::make_degree(90.0));
-  EXPECT_EQ(-45_deg, ksn::make_degree(-45.0));
-  EXPECT_EQ(0.0_deg, ksn::make_degree(0.0));
-  EXPECT_EQ(12.5_deg, ksn::make_degree(12.5));
-  EXPECT_EQ(-2.5_deg, ksn::make_degree(-2.5));
+  EXPECT_EQ(0_deg, ksn::angle::from_degree(0.0));
+  EXPECT_EQ(90_deg, ksn::angle::from_degree(90.0));
+  EXPECT_EQ(-45_deg, ksn::angle::from_degree(-45.0));
+  EXPECT_EQ(0.0_deg, ksn::angle::from_degree(0.0));
+  EXPECT_EQ(12.5_deg, ksn::angle::from_degree(12.5));
+  EXPECT_EQ(-2.5_deg, ksn::angle::from_degree(-2.5));
 }
 
 TEST(AngleTest, RadLiterals)
 {
-  EXPECT_EQ(0_pi_rad, ksn::make_radian<double>(0_pi));
-  EXPECT_EQ(1_pi_rad, ksn::make_radian<double>(1_pi));
-  EXPECT_EQ(-2_pi_rad, ksn::make_radian<double>(-2_pi));
-  EXPECT_EQ(0.0_pi_rad, ksn::make_radian<double>(0.0_pi));
-  EXPECT_EQ(0.5_pi_rad, ksn::make_radian<double>(0.5_pi));
-  EXPECT_EQ(-0.25_pi_rad, ksn::make_radian<double>(-0.25_pi));
+  EXPECT_EQ(0_pi_rad, ksn::angle::from_radian<double>(0_pi));
+  EXPECT_EQ(1_pi_rad, ksn::angle::from_radian<double>(1_pi));
+  EXPECT_EQ(-2_pi_rad, ksn::angle::from_radian<double>(-2_pi));
+  EXPECT_EQ(0.0_pi_rad, ksn::angle::from_radian<double>(0.0_pi));
+  EXPECT_EQ(0.5_pi_rad, ksn::angle::from_radian<double>(0.5_pi));
+  EXPECT_EQ(-0.25_pi_rad, ksn::angle::from_radian<double>(-0.25_pi));
 }
 
 TEST(AngleTest, OutputStream)
@@ -72,38 +93,59 @@ TEST(AngleTest, OutputStream)
   EXPECT_STREQ(ss.str().c_str(), "90 -180");
 }
 
+// This one will test whether ksn::Angle could be declared without initial value
 TEST(AngleTest, Empty)
 {
-  ksn::Angle<float> float_angle;
-  ksn::Angle<double> double_angle;
-  ksn::Angle<long double> long_double_angle;
+#define EXPECT_COMPILED(TYPE, ANGLE_TYPE) {ksn::Angle<ANGLE_TYPE, TYPE> angle;}
+#define ITERATE_TYPE(ANGLE_TYPE, ...) FOREACH_TYPE_DO(EXPECT_COMPILED, ANGLE_TYPE)
+
+  FOREACH_ANGLE_TYPE_DO(ITERATE_TYPE)
 }
 
-TEST(AngleTest, AssignmentConstructor)
+// This one will test whether ksn::Angle could be declared with initial value
+TEST(AngleTest, ValueConstructor)
 {
-  #define EXPECT_CONVERSION_CONSTRUCTOR(TYPE, SOURCE) \
+#define EXPECT_CORRECT(TYPE, ANGLE_TYPE) \
   { \
-    ksn::Angle<TYPE> a(SOURCE), b = SOURCE, c; \
+    auto val = std::rand() % 200 - 100; \
+    ksn::Angle<ANGLE_TYPE, TYPE> angle(val); \
+    switch (ANGLE_TYPE) { \
+      case ksn::AngleType::Degree: ASSERT_EQ(angle.degree(), val); break; \
+      case ksn::AngleType::Radian: ASSERT_EQ(angle.radian(), val); break; \
+    } \
+  }
+
+#undef ITERATE_TYPE
+#define ITERATE_TYPE(ANGLE_TYPE, ...) FOREACH_TYPE_DO(EXPECT_CORRECT, ANGLE_TYPE)
+
+  FOREACH_ANGLE_TYPE_DO(ITERATE_TYPE)
+}
+
+// This one will test whether ksn::Angle could be assigned to other ksn::Angle
+// with the same angle type but different value type
+TEST(AngleTest, SameAngleTypeDifferentTypeAssignment)
+{
+#undef EXPECT_CORRECT
+#define EXPECT_CORRECT(TYPE, ANGLE_TYPE, SOURCE) \
+  { \
+    ksn::Angle<ANGLE_TYPE, TYPE> a(SOURCE), b = SOURCE, c; \
     c = SOURCE; \
-    EXPECT_DOUBLE_EQ(a.degree(), SOURCE.degree()); \
-    EXPECT_DOUBLE_EQ(b.degree(), SOURCE.degree()); \
-    EXPECT_DOUBLE_EQ(c.degree(), SOURCE.degree()); \
+    EXPECT_EQ(a, SOURCE); \
+    EXPECT_EQ(b, SOURCE); \
+    ASSERT_EQ(c, SOURCE); \
   }
 
-  auto float_angle = ksn::make_degree(90.0f);
-  auto double_angle = ksn::make_degree(-45.0);
-  auto long_double_angle = ksn::make_degree(15.0l);
-
-  #define LOOP_EXPECT_CONVERSION_CONSTRUCTOR(TYPE) \
+#undef ITERATE_TYPE
+#define ITERATE_TYPE(SOURCE_TYPE, ANGLE_TYPE) \
   { \
-    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, float_angle) \
-    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, double_angle) \
-    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, long_double_angle) \
+    auto val = std::rand() % 200 - 100; \
+    auto source = ksn::Angle<ANGLE_TYPE, SOURCE_TYPE>(val); \
+    FOREACH_TYPE_DO(EXPECT_CORRECT, ANGLE_TYPE, source) \
   }
 
-  LOOP_EXPECT_CONVERSION_CONSTRUCTOR(float)
-  LOOP_EXPECT_CONVERSION_CONSTRUCTOR(double)
-  LOOP_EXPECT_CONVERSION_CONSTRUCTOR(long double)
+#define ITERATE_SOURCE_TYPE(ANGLE_TYPE, ...) FOREACH_TYPE_DO2(ITERATE_TYPE, ANGLE_TYPE)
+
+  FOREACH_ANGLE_TYPE_DO(ITERATE_SOURCE_TYPE)
 }
 
 TEST(AngleTest, ComparisonOperator)

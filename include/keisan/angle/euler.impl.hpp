@@ -53,13 +53,15 @@ Euler<E, T>::operator Euler<E, U>() const
 }
 
 template<AngleType E, typename T>
-bool Euler<E, T>::operator==(const Euler<E, T> & other) const
+template<AngleType F, typename U>
+bool Euler<E, T>::operator==(const Euler<F, U> & other) const
 {
   return roll == other.roll && yaw == other.yaw && pitch == other.pitch;
 }
 
 template<AngleType E, typename T>
-bool Euler<E, T>::operator!=(const Euler<E, T> & other) const
+template<AngleType F, typename U>
+bool Euler<E, T>::operator!=(const Euler<F, U> & other) const
 {
   return roll != other.roll || yaw != other.yaw || pitch != other.pitch;
 }

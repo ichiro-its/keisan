@@ -29,7 +29,7 @@ namespace literals
 
 DegAngle<long long int> operator""_deg(unsigned long long int value)  // NOLINT
 {
-  return DegAngle<long long int>(value);
+  return DegAngle<long long int>(value); // NOLINT
 }
 
 DegAngle<long double> operator""_deg(long double value)

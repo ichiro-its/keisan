@@ -48,20 +48,20 @@ TEST(TrigonometryTest, PiFloatingPointLiterals)
 
 TEST(TrigonometryTest, Sin)
 {
-  EXPECT_FLOAT_EQ(ksn::sin<float>(30_deg), 0.5f) << "sin(30) = 0.5";
-  EXPECT_DOUBLE_EQ(ksn::sin<double>(30_deg), 0.5) << "sin(30) = 0.5";
+  EXPECT_FLOAT_EQ(ksn::sin(30_deg), 0.5f) << "sin(30) = 0.5";
+  EXPECT_DOUBLE_EQ(ksn::sin(30_deg), 0.5) << "sin(30) = 0.5";
 }
 
 TEST(TrigonometryTest, Cos)
 {
-  EXPECT_FLOAT_EQ(ksn::cos<float>(60_deg), 0.5f) << "cos(60) = 0.5";
-  EXPECT_DOUBLE_EQ(ksn::cos<double>(60_deg), 0.5) << "cos(60) = 0.5";
+  EXPECT_FLOAT_EQ(ksn::cos(60_deg), 0.5f) << "cos(60) = 0.5";
+  EXPECT_DOUBLE_EQ(ksn::cos(60_deg), 0.5) << "cos(60) = 0.5";
 }
 
 TEST(TrigonometryTest, Tan)
 {
-  EXPECT_FLOAT_EQ(ksn::tan<float>(45_deg), 1.0f) << "tan(45) = 1";
-  EXPECT_DOUBLE_EQ(ksn::tan<double>(45_deg), 1.0) << "tan(45) = 1";
+  EXPECT_FLOAT_EQ(ksn::tan(45_deg), 1.0f) << "tan(45) = 1";
+  EXPECT_DOUBLE_EQ(ksn::tan(45_deg), 1.0) << "tan(45) = 1";
 }
 
 TEST(TrigonometryTest, ArcSin)

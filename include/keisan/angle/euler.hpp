@@ -42,8 +42,11 @@ struct Euler
   template<typename U>
   operator Euler<E, U>() const;
 
-  bool operator==(const Euler<E, T> & other) const;
-  bool operator!=(const Euler<E, T> & other) const;
+  template<AngleType F, typename U>
+  bool operator==(const Euler<F, U> & other) const;
+
+  template<AngleType F, typename U>
+  bool operator!=(const Euler<F, U> & other) const;
 
   Quaternion<T> to_quaternion() const;
 

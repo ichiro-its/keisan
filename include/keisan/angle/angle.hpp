@@ -21,8 +21,6 @@
 #ifndef KEISAN__ANGLE__ANGLE_HPP_
 #define KEISAN__ANGLE__ANGLE_HPP_
 
-#include <iostream>
-
 #include "keisan/angle/angle_type.hpp"
 
 namespace keisan
@@ -133,9 +131,6 @@ RadAngle<long double> operator""_pi_rad(long double value);
 }  // namespace literals
 
 }  // namespace keisan
-
-template<keisan::AngleType E, typename T>
-std::ostream & operator<<(std::ostream & out, const keisan::Angle<E, T> & angle);
 
 template<keisan::AngleType E, typename T, typename U>
 keisan::Angle<E, T> operator*(const U & value, const keisan::Angle<E, T> & angle);

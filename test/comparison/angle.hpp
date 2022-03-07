@@ -1,4 +1,4 @@
-// Copyright (c) 2021 ICHIRO ITS
+// Copyright (c) 2022 ICHIRO ITS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,8 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef COMPARISON__POINT_3_HPP_
-#define COMPARISON__POINT_3_HPP_
+#ifndef COMPARISON__ANGLE_HPP_
+#define COMPARISON__ANGLE_HPP_
 
 #include <limits>
 #include <string>
@@ -31,39 +31,35 @@
 namespace testing
 {
 
-std::string point3_print_string(const keisan::Point3 & point)
+std::string deg_angle_print_string(const keisan::DegAngle<float> & angle)
 {
   std::stringstream ss;
-  ss << std::setprecision(std::numeric_limits<double>::digits10 + 2) <<
-    "{" << point.x << ", " << point.y << ", " << point.z << "}";
+  ss << std::setprecision(std::numeric_limits<float>::digits10 + 2) <<
+    angle.degree() << "_deg";
 
   return internal::StringStreamToString(&ss);
 }
 
-AssertionResult point3_equal(
+AssertionResult deg_angle_equal(
   const char * lhs_expression, const char * rhs_expression,
-  const keisan::Point3 & lhs_value, const keisan::Point3 & rhs_value)
+  const keisan::DegAngle<float> & lhs_value, const keisan::DegAngle<float> & rhs_value)
 {
-  if (almost_equal(lhs_value.x, rhs_value.x)) {
-    if (almost_equal(lhs_value.y, rhs_value.y)) {
-      if (almost_equal(lhs_value.z, rhs_value.z)) {
-        return AssertionSuccess();
-      }
-    }
+  if (almost_equal(lhs_value.degree(), rhs_value.degree())) {
+    return AssertionSuccess();
   }
 
   return internal::EqFailure(
     lhs_expression, rhs_expression,
-    point3_print_string(lhs_value), point3_print_string(rhs_value),
+    deg_angle_print_string(lhs_value), deg_angle_print_string(rhs_value),
     false);
 }
 
-#define EXPECT_POINT3_EQ(VAL1, VAL2) \
-  EXPECT_PRED_FORMAT2(testing::point3_equal, VAL1, VAL2)
+#define EXPECT_ANGLE_EQ(VAL1, VAL2) \
+  EXPECT_PRED_FORMAT2(testing::deg_angle_equal, VAL1, VAL2)
 
-#define ASSERT_POINT3_EQ(VAL1, VAL2) \
-  ASSERT_PRED_FORMAT2(testing::point3_equal, VAL1, VAL2)
+#define ASSERT_ANGLE_EQ(VAL1, VAL2) \
+  ASSERT_PRED_FORMAT2(testing::deg_angle_equal, VAL1, VAL2)
 
 }  // namespace testing
 
-#endif  // COMPARISON__POINT_3_HPP_
+#endif  // COMPARISON__ANGLE_HPP_

@@ -19,11 +19,8 @@
 // THE SOFTWARE.
 
 #include <cstdlib>
-#include <iomanip>
-#include <sstream>
 
-#include "gtest/gtest.h"
-#include "keisan/angle/angle.hpp"
+#include "../comparison/angle.hpp"
 
 namespace ksn = keisan;
 
@@ -31,18 +28,18 @@ namespace ksn = keisan;
   MACRO(ksn::AngleType::Degree, __VA_ARGS__) \
   MACRO(ksn::AngleType::Radian, __VA_ARGS__)
 
-#define FOREACH_TYPE_DO(MACRO, ...) \
+#define FOREACH_FLOAT_TYPE_DO(MACRO, ...) \
   MACRO(float, __VA_ARGS__) \
   MACRO(double, __VA_ARGS__) \
-  MACRO(long double, __VA_ARGS__) \
-  MACRO(int, __VA_ARGS__) \
-  MACRO(int32_t, __VA_ARGS__) \
-  MACRO(int64_t, __VA_ARGS__)
+  MACRO(long double, __VA_ARGS__)
 
-#define FOREACH_TYPE_DO2(MACRO, ...) \
+#define FOREACH_FLOAT_TYPE_DO2(MACRO, ...) \
   MACRO(float, __VA_ARGS__) \
   MACRO(double, __VA_ARGS__) \
-  MACRO(long double, __VA_ARGS__) \
+  MACRO(long double, __VA_ARGS__)
+
+#define FOREACH_TYPE_DO(MACRO, ...) \
+  FOREACH_FLOAT_TYPE_DO(MACRO, __VA_ARGS__) \
   MACRO(int, __VA_ARGS__) \
   MACRO(int32_t, __VA_ARGS__) \
   MACRO(int64_t, __VA_ARGS__)
@@ -67,57 +64,43 @@ TEST(AngleTest, MakeRadian)
 
 TEST(AngleTest, DegLiterals)
 {
-  EXPECT_EQ(0_deg, ksn::angle::from_degree(0.0));
-  EXPECT_EQ(90_deg, ksn::angle::from_degree(90.0));
-  EXPECT_EQ(-45_deg, ksn::angle::from_degree(-45.0));
-  EXPECT_EQ(0.0_deg, ksn::angle::from_degree(0.0));
-  EXPECT_EQ(12.5_deg, ksn::angle::from_degree(12.5));
-  EXPECT_EQ(-2.5_deg, ksn::angle::from_degree(-2.5));
+  EXPECT_ANGLE_EQ(0_deg, ksn::angle::from_degree(0.0));
+  EXPECT_ANGLE_EQ(90_deg, ksn::angle::from_degree(90.0));
+  EXPECT_ANGLE_EQ(-45_deg, ksn::angle::from_degree(-45.0));
+  EXPECT_ANGLE_EQ(0.0_deg, ksn::angle::from_degree(0.0));
+  EXPECT_ANGLE_EQ(12.5_deg, ksn::angle::from_degree(12.5));
+  EXPECT_ANGLE_EQ(-2.5_deg, ksn::angle::from_degree(-2.5));
 }
 
 TEST(AngleTest, RadLiterals)
 {
-  EXPECT_EQ(0_pi_rad, ksn::angle::from_radian<double>(0_pi));
-  EXPECT_EQ(1_pi_rad, ksn::angle::from_radian<double>(1_pi));
-  EXPECT_EQ(-2_pi_rad, ksn::angle::from_radian<double>(-2_pi));
-  EXPECT_EQ(0.0_pi_rad, ksn::angle::from_radian<double>(0.0_pi));
-  EXPECT_EQ(0.5_pi_rad, ksn::angle::from_radian<double>(0.5_pi));
-  EXPECT_EQ(-0.25_pi_rad, ksn::angle::from_radian<double>(-0.25_pi));
-}
-
-TEST(AngleTest, OutputStream)
-{
-  std::stringstream ss;
-  ss << 90_deg << " " << -1_pi_rad;
-
-  EXPECT_STREQ(ss.str().c_str(), "90 -180");
+  EXPECT_ANGLE_EQ(0_pi_rad, ksn::angle::from_radian<double>(0_pi));
+  EXPECT_ANGLE_EQ(1_pi_rad, ksn::angle::from_radian<double>(1_pi));
+  EXPECT_ANGLE_EQ(-2_pi_rad, ksn::angle::from_radian<double>(-2_pi));
+  EXPECT_ANGLE_EQ(0.0_pi_rad, ksn::angle::from_radian<double>(0.0_pi));
+  EXPECT_ANGLE_EQ(0.5_pi_rad, ksn::angle::from_radian<double>(0.5_pi));
+  EXPECT_ANGLE_EQ(-0.25_pi_rad, ksn::angle::from_radian<double>(-0.25_pi));
 }
 
 // This one will test whether ksn::Angle could be declared without initial value
 TEST(AngleTest, Empty)
 {
-#define EXPECT_COMPILED(TYPE, ANGLE_TYPE) {ksn::Angle<ANGLE_TYPE, TYPE> angle;}
-#define ITERATE_TYPE(ANGLE_TYPE, ...) FOREACH_TYPE_DO(EXPECT_COMPILED, ANGLE_TYPE)
-
+  #define EXPECT_COMPILED(TYPE, ANGLE_TYPE) {ksn::Angle<ANGLE_TYPE, TYPE> angle;}
+  #define ITERATE_TYPE(ANGLE_TYPE, ...) FOREACH_TYPE_DO(EXPECT_COMPILED, ANGLE_TYPE)
   FOREACH_ANGLE_TYPE_DO(ITERATE_TYPE)
 }
 
 // This one will test whether ksn::Angle could be declared with initial value
 TEST(AngleTest, ValueConstructor)
 {
-#define EXPECT_CORRECT(TYPE, ANGLE_TYPE) \
-  { \
-    auto val = std::rand() % 200 - 100; \
-    ksn::Angle<ANGLE_TYPE, TYPE> angle(val); \
-    switch (ANGLE_TYPE) { \
-      case ksn::AngleType::Degree: ASSERT_EQ(angle.degree(), val); break; \
-      case ksn::AngleType::Radian: ASSERT_EQ(angle.radian(), val); break; \
-    } \
-  }
-
-#undef ITERATE_TYPE
-#define ITERATE_TYPE(ANGLE_TYPE, ...) FOREACH_TYPE_DO(EXPECT_CORRECT, ANGLE_TYPE)
-
+  #define EXPECT_CORRECT(TYPE, ANGLE_TYPE) \
+    { \
+      auto val = std::rand() % 200 - 100; \
+      ksn::Angle<ANGLE_TYPE, TYPE> angle(val); \
+      ASSERT_DOUBLE_EQ(angle.value_in<ANGLE_TYPE>(), val); \
+    }
+  #undef ITERATE_TYPE
+  #define ITERATE_TYPE(ANGLE_TYPE, ...) FOREACH_TYPE_DO(EXPECT_CORRECT, ANGLE_TYPE)
   FOREACH_ANGLE_TYPE_DO(ITERATE_TYPE)
 }
 
@@ -125,26 +108,23 @@ TEST(AngleTest, ValueConstructor)
 // with the same angle type but different value type
 TEST(AngleTest, SameAngleTypeDifferentTypeAssignment)
 {
-#undef EXPECT_CORRECT
-#define EXPECT_CORRECT(TYPE, ANGLE_TYPE, SOURCE) \
-  { \
-    ksn::Angle<ANGLE_TYPE, TYPE> a(SOURCE), b = SOURCE, c; \
-    c = SOURCE; \
-    EXPECT_EQ(a, SOURCE); \
-    EXPECT_EQ(b, SOURCE); \
-    ASSERT_EQ(c, SOURCE); \
-  }
-
-#undef ITERATE_TYPE
-#define ITERATE_TYPE(SOURCE_TYPE, ANGLE_TYPE) \
-  { \
-    auto val = std::rand() % 200 - 100; \
-    auto source = ksn::Angle<ANGLE_TYPE, SOURCE_TYPE>(val); \
-    FOREACH_TYPE_DO(EXPECT_CORRECT, ANGLE_TYPE, source) \
-  }
-
-#define ITERATE_SOURCE_TYPE(ANGLE_TYPE, ...) FOREACH_TYPE_DO2(ITERATE_TYPE, ANGLE_TYPE)
-
+  #undef EXPECT_CORRECT
+  #define EXPECT_CORRECT(TYPE, ANGLE_TYPE, SOURCE) \
+    { \
+      ksn::Angle<ANGLE_TYPE, TYPE> a(SOURCE), b = SOURCE, c; \
+      c = SOURCE; \
+      EXPECT_ANGLE_EQ(a, SOURCE); \
+      EXPECT_ANGLE_EQ(b, SOURCE); \
+      ASSERT_ANGLE_EQ(c, SOURCE); \
+    }
+  #undef ITERATE_TYPE
+  #define ITERATE_TYPE(SOURCE_TYPE, ANGLE_TYPE) \
+    { \
+      auto val = std::rand() % 200 - 100; \
+      auto source = ksn::Angle<ANGLE_TYPE, SOURCE_TYPE>(val); \
+      FOREACH_FLOAT_TYPE_DO(EXPECT_CORRECT, ANGLE_TYPE, source) \
+    }
+  #define ITERATE_SOURCE_TYPE(ANGLE_TYPE, ...) FOREACH_FLOAT_TYPE_DO2(ITERATE_TYPE, ANGLE_TYPE)
   FOREACH_ANGLE_TYPE_DO(ITERATE_SOURCE_TYPE)
 }
 
@@ -181,11 +161,11 @@ TEST(AngleTest, SelfMathOperator)
 
 TEST(AngleTest, MathOperator)
 {
-  EXPECT_EQ(1_pi_rad + 90_deg, 270_deg) << "1pi + 90 = 270";
-  EXPECT_EQ(270_deg - 1_pi_rad, 90_deg) << "270 - 1pi = 90";
-  EXPECT_EQ(90_deg * 2, 180_deg) << "90 * 2 = 180";
-  EXPECT_EQ(2 * 90_deg, 180_deg) << "2 * 90 = 180";
-  EXPECT_EQ(180_deg / 3, 60_deg) << "180 / 3 = 60";
+  EXPECT_ANGLE_EQ(1_pi_rad + 90_deg, 270_deg) << "1pi + 90 = 270";
+  EXPECT_ANGLE_EQ(270_deg - 1_pi_rad, 90_deg) << "270 - 1pi = 90";
+  EXPECT_ANGLE_EQ(90_deg * 2, 180_deg) << "90 * 2 = 180";
+  EXPECT_ANGLE_EQ(2 * 90_deg, 180_deg) << "2 * 90 = 180";
+  EXPECT_ANGLE_EQ(180_deg / 3, 60_deg) << "180 / 3 = 60";
 }
 
 TEST(AngleTest, NegationOperator)
@@ -207,6 +187,6 @@ TEST(AngleTest, Conversion)
 
 TEST(AngleTest, Normalize)
 {
-  EXPECT_EQ((270_deg).normalize(), -90_deg) << "270 = 1 * 360 + (-90)";
-  EXPECT_EQ((-0.5_pi_rad).normalize(), -0.5_pi_rad) << "-0.5pi = 0 * 2pi + (-0.5pi)";
+  EXPECT_ANGLE_EQ((270_deg).normalize(), -90_deg) << "270 = 1 * 360 + (-90)";
+  EXPECT_ANGLE_EQ((-0.5_pi_rad).normalize(), -0.5_pi_rad) << "-0.5pi = 0 * 2pi + (-0.5pi)";
 }

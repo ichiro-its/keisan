@@ -26,7 +26,7 @@
 
 #include "keisan/keisan.hpp"
 
-#include "./almost_equal.hpp"
+#include "almost_equal.hpp"
 
 namespace testing
 {
@@ -54,11 +54,11 @@ AssertionResult point2_equal(
     false);
 }
 
-#define EXPECT_POINT2_EQ(val1, val2) \
-  EXPECT_PRED_FORMAT2(testing::point2_equal, val1, val2)
+#define EXPECT_POINT2_EQ(VAL1, VAL2) \
+  EXPECT_PRED_FORMAT2(testing::point2_equal, VAL1, VAL2)
 
-#define ASSERT_POINT2_EQ(val1, val2) \
-  ASSERT_PRED_FORMAT2(testing::point2_equal, val1, val2)
+#define ASSERT_POINT2_EQ(VAL1, VAL2) \
+  ASSERT_PRED_FORMAT2(testing::point2_equal, VAL1, VAL2)
 
 }  // namespace testing
 

@@ -24,15 +24,6 @@
 #include "keisan/number.hpp"
 #include "keisan/angle/trigonometry.hpp"
 
-template<keisan::AngleType E, typename T>
-std::ostream & operator<<(std::ostream & out, const keisan::Angle<E, T> & angle)
-{
-  switch (E) {
-    case keisan::AngleType::Degree: return out << angle.degree() << "_deg";
-    case keisan::AngleType::Radian: return out << angle.radian() << "_pi_rad";
-  }
-}
-
 template<keisan::AngleType E, typename T, typename U>
 keisan::Angle<E, T> operator*(const U & value, const keisan::Angle<E, T> & angle)
 {

@@ -28,7 +28,7 @@
 template<keisan::AngleType E, typename T>
 std::ostream & operator<<(std::ostream & out, const keisan::Euler<E, T> & euler)
 {
-  return out << euler.roll << " " << euler.pitch << " " << euler.yaw;
+  return out << euler.roll.degree() << " " << euler.pitch.degree() << " " << euler.yaw.degree();
 }
 
 namespace keisan

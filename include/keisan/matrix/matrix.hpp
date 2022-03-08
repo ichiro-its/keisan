@@ -27,8 +27,18 @@ namespace keisan
 {
 
 // Forward declaration
+struct Point2;
+
+struct Point3;
+
 template<size_t N>
 class Vector;
+
+template<typename T>
+class Angle;
+
+template<typename T>
+class Euler;
 
 template<size_t M, size_t N>
 class Matrix
@@ -42,7 +52,7 @@ public:
   Matrix(const Matrix<M, N> & matrix);
 
   static Matrix<M, N> zero();
-  static Matrix<N, N> identity();
+  static Matrix<M, N> identity();
 
   Matrix<M, N> & operator=(const Matrix<M, N> & matrix);
 
@@ -81,23 +91,13 @@ private:
   double data[M * N];
 };
 
-struct Point3;
+Matrix<3, 3> translation_matrix(const Point2 & point);
 
 Matrix<4, 4> translation_matrix(const Point3 & point);
 
-struct Point2;
-
-Matrix<3, 3> translation_matrix(const Point2 & point);
-
-template<typename T>
-class Euler;
+Matrix<3, 3> rotation_matrix(const Angle<double> & angle);
 
 Matrix<4, 4> rotation_matrix(const Euler<double> & angle);
-
-template<typename T>
-class Angle;
-
-Matrix<3, 3> rotation_matrix(const Angle<double> & angle);
 
 }  // namespace keisan
 

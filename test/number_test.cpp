@@ -156,3 +156,23 @@ TEST(NumberTest, WrapFloatingPoint)
     "-1.0 = 0.4 * (-3) + 0.2\n"
     "0.2 + (1.1) = 1.3";
 }
+
+#define ASSERT_SMOOTH_NEAR(SOURCE, TARGET, RATIO, ...) \
+  { \
+    double _source = SOURCE; \
+    double _values[] = {__VA_ARGS__}; \
+    size_t index = 0; \
+    while (_source < (TARGET - (TARGET * RATIO))) { \
+      _source = ksn::smooth(_source, TARGET, RATIO); \
+      ASSERT_NEAR(_source, _values[index], 0.00001); \
+      ++index; \
+    } \
+  }
+
+TEST(NumberTest, SmoothValue)
+{
+  ASSERT_SMOOTH_NEAR(
+    0.0, 10.0, 0.1, 1, 1.9, 2.71, 3.439, 4.0951, 4.68559, 5.21703, 5.69533, 6.12579,
+    6.51322, 6.86189, 7.1757, 7.45813, 7.71232, 7.94109, 8.14698, 8.33228, 8.49905,
+    8.64915, 8.78423, 8.90581, 9.01523);
+}

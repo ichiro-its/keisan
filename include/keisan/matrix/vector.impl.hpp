@@ -24,6 +24,7 @@
 #include <algorithm>
 #include <ostream>
 
+#include "gtest/gtest.h"
 #include "keisan/matrix/vector.hpp"
 
 template<size_t N>

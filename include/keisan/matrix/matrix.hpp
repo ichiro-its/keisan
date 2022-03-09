@@ -23,22 +23,14 @@
 
 #include <ostream>
 
+#include "keisan/angle/angle.hpp"
+#include "keisan/angle/euler.hpp"
+#include "keisan/geometry/point_2.hpp"
+#include "keisan/geometry/point_3.hpp"
+#include "keisan/matrix/vector.hpp"
+
 namespace keisan
 {
-
-// Forward declaration
-struct Point2;
-
-struct Point3;
-
-template<size_t N>
-class Vector;
-
-template<typename T>
-class Angle;
-
-template<typename T>
-class Euler;
 
 template<size_t M, size_t N>
 class Matrix

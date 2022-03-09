@@ -94,7 +94,7 @@ T wrap(const T & value, const T & min, const T & max)
   return min + (min_max + min_value % min_max) % min_max;
 }
 
-template<typename T, enable_if_is_floating_point<T> = true>
+template<typename T>
 T smooth(T value, T target, T ratio)
 {
   return ((1.0 - ratio) * value) + (ratio * target);

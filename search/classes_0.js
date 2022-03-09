@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['angle_97',['Angle',['../classkeisan_1_1Angle.html',1,'keisan']]]
+  ['angle_98',['Angle',['../classkeisan_1_1Angle.html',1,'keisan']]]
 ];

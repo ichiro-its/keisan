@@ -167,14 +167,21 @@ $(function() {
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="keywordflow">return</span> min + (min_max + min_value % min_max) % min_max;</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;}</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;}  <span class="comment">// namespace keisan</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// KEISAN__NUMBER_IMPL_HPP_</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="namespacekeisan.html#a1b8afae9f042bf520c4669b38d4d2c96">   98</a></span>&#160;T <a class="code" href="namespacekeisan.html#a1b8afae9f042bf520c4669b38d4d2c96">smooth</a>(T value, T target, T ratio)</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;{</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keywordflow">return</span> ((1.0 - ratio) * value) + (ratio * target);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;}</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;}  <span class="comment">// namespace keisan</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// KEISAN__NUMBER_IMPL_HPP_</span></div>
 <div class="ttc" id="aangle_8hpp_html"><div class="ttname"><a href="angle_8hpp.html">angle.hpp</a></div></div>
 <div class="ttc" id="aclasskeisan_1_1Angle_html"><div class="ttname"><a href="classkeisan_1_1Angle.html">keisan::Angle</a></div><div class="ttdef"><b>Definition:</b> angle.hpp:52</div></div>
 <div class="ttc" id="anamespacekeisan_html"><div class="ttname"><a href="namespacekeisan.html">keisan</a></div><div class="ttdef"><b>Definition:</b> angle.hpp:27</div></div>
 <div class="ttc" id="anamespacekeisan_html_a008a4fa64a0327d9e5d9ac92352f68c9"><div class="ttname"><a href="namespacekeisan.html#a008a4fa64a0327d9e5d9ac92352f68c9">keisan::clamp</a></div><div class="ttdeci">T clamp(const T &amp;value, const T &amp;min, const T &amp;max)</div><div class="ttdef"><b>Definition:</b> number.impl.hpp:60</div></div>
 <div class="ttc" id="anamespacekeisan_html_a0e90306447fed9f87a796953301d1d43"><div class="ttname"><a href="namespacekeisan.html#a0e90306447fed9f87a796953301d1d43">keisan::sign</a></div><div class="ttdeci">T sign(const T &amp;value)</div><div class="ttdef"><b>Definition:</b> number.impl.hpp:34</div></div>
+<div class="ttc" id="anamespacekeisan_html_a1b8afae9f042bf520c4669b38d4d2c96"><div class="ttname"><a href="namespacekeisan.html#a1b8afae9f042bf520c4669b38d4d2c96">keisan::smooth</a></div><div class="ttdeci">T smooth(T value, T target, T ratio)</div><div class="ttdef"><b>Definition:</b> number.impl.hpp:98</div></div>
 <div class="ttc" id="anamespacekeisan_html_a735cc198ac8a4a0496b67b0ce8279540"><div class="ttname"><a href="namespacekeisan.html#a735cc198ac8a4a0496b67b0ce8279540">keisan::scale</a></div><div class="ttdeci">T scale(const T &amp;value, const T &amp;source, const T &amp;target)</div><div class="ttdef"><b>Definition:</b> number.impl.hpp:46</div></div>
 <div class="ttc" id="anamespacekeisan_html_ac35153ec66577a7daa533ea195f57f27"><div class="ttname"><a href="namespacekeisan.html#ac35153ec66577a7daa533ea195f57f27">keisan::map</a></div><div class="ttdeci">T map(const T &amp;value, const T &amp;source_min, const T &amp;source_max, const T &amp;target_min, const T &amp;target_max)</div><div class="ttdef"><b>Definition:</b> number.impl.hpp:52</div></div>
 <div class="ttc" id="anamespacekeisan_html_adf3d244c758f5c547330b2178a973dd8"><div class="ttname"><a href="namespacekeisan.html#adf3d244c758f5c547330b2178a973dd8">keisan::wrap</a></div><div class="ttdeci">T wrap(const T &amp;value, const T &amp;min, const T &amp;max)</div><div class="ttdef"><b>Definition:</b> number.impl.hpp:80</div></div>

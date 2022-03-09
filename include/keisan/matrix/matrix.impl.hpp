@@ -94,7 +94,7 @@ Matrix<M, N> Matrix<M, N>::zero()
 }
 
 template<size_t M, size_t N>
-Matrix<N, N> Matrix<M, N>::identity()
+Matrix<M, N> Matrix<M, N>::identity()
 {
   static_assert(
     M == N,

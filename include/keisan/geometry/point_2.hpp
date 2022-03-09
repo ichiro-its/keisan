@@ -24,7 +24,7 @@
 #include <ostream>
 
 #include "keisan/angle.hpp"
-#include "keisan/matrix.hpp"
+#include "keisan/matrix/vector.hpp"
 
 namespace keisan
 {

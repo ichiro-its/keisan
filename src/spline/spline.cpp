@@ -18,10 +18,46 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__SPLINE_HPP_
-#define KEISAN__SPLINE_HPP_
-
-#include "keisan/spline/polynom.hpp"
 #include "keisan/spline/spline.hpp"
 
-#endif  // KEISAN__SPLINE_HPP_
+namespace keisan
+{
+
+Spline::Spline()
+{
+}
+
+Spline::~Spline()
+{
+}
+
+void Spline::add_spline(Polynom polynom)
+{
+  splines.push_back(polynom);
+}
+
+double Spline::interpolate_value(double value, int derivative_order)
+{
+  int start_index = 0;
+  int end_index =  splines.size() - 1;
+  Polynom center_spline = splines[0];
+  while (start_index != end_index) {
+    int center_index = (start_index + end_index) / 2;
+    center_spline = splines[center_index];
+
+    if (value < center_spline.min_value) {
+      end_index = center_index - 1;
+      continue;
+    }
+    if (value > center_spline.max_value) {
+      start_index = center_index + 1;
+      continue;
+    }
+    start_index = center_index;
+    end_index = center_index;
+  }
+
+  return (center_spline.get_value(value - center_spline.min_value));
+}
+
+}

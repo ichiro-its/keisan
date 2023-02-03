@@ -18,10 +18,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__SPLINE_HPP_
-#define KEISAN__SPLINE_HPP_
+#ifndef KEISAN__SPLINE__SPLINE_HPP_
+#define KEISAN__SPLINE__SPLINE_HPP_
 
 #include "keisan/spline/polynom.hpp"
-#include "keisan/spline/spline.hpp"
 
-#endif  // KEISAN__SPLINE_HPP_
+namespace keisan
+{
+
+class Spline 
+{
+public:
+    Spline();
+    ~Spline();
+
+    void add_spline(Polynom polynom);
+    double interpolate_value(double value, int derivative_order);
+protected:
+    std::vector<Polynom> splines;
+private:
+
+};
+}
+#endif //KEISAN__SPLINE__SPLINE_HPP_
+

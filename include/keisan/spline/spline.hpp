@@ -32,6 +32,7 @@ public:
     Spline();
     ~Spline();
 
+    std::vector<Polynom> get_splines();
     void add_spline(Polynom polynom);
     double interpolate_value(double value, int derivative_order);
 protected:

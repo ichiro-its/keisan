@@ -31,6 +31,11 @@ Spline::~Spline()
 {
 }
 
+std::vector<Polynom> Spline::get_splines()
+{
+  return splines;
+}
+
 void Spline::add_spline(Polynom polynom)
 {
   splines.push_back(polynom);

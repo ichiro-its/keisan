@@ -23,25 +23,18 @@
 namespace keisan
 {
 
-SmoothSpline::SmoothSpline()
-{
-}
+SmoothSpline::SmoothSpline() {}
 
-SmoothSpline::~SmoothSpline()
-{
-}
+SmoothSpline::~SmoothSpline() {}
 
 SmoothSpline::SmoothSpline(std::vector<PointTime> point_times)
 {
-  for(auto point_time : point_times) {
+  for (auto point_time : point_times) {
     add_point(point_time.point, point_time.time);
   }
 }
 
-void SmoothSpline::add_point(Polynom polynom)
-{
-  splines.push_back(polynom);
-}
+void SmoothSpline::add_point(Polynom polynom) { splines.push_back(polynom); }
 
 void SmoothSpline::add_point(double value, double t)
 {
@@ -58,7 +51,8 @@ void SmoothSpline::add_point(double value, double t)
   splines.push_back(new_polynom);
 }
 
-Polynom SmoothSpline::polynomial_fit(double pos1, double pos2, double vel1, double vel2, double acc1, double acc2, double t)
+Polynom SmoothSpline::polynomial_fit(
+  double pos1, double pos2, double vel1, double vel2, double acc1, double acc2, double t)
 {
   double t2 = t * t;
   double t3 = t2 * t;
@@ -70,12 +64,16 @@ Polynom SmoothSpline::polynomial_fit(double pos1, double pos2, double vel1, doub
   coefficients[0] = pos1;
   coefficients[1] = vel1;
   coefficients[2] = acc1 / 2;
-  coefficients[3] = -(-acc2 * t2 + 3 * acc1 * t2 + 8 * vel2 * t + 12 * vel1 * t - 20 * pos2 + 20 * pos1) / (2 * t3);
-  coefficients[4] = (-2 * acc2 * t2 + 3 * acc1 * t2 + 14 * vel2 * t + 16 * vel1 * t - 30 * pos2 + 30 * pos1) / (2 * t4);
-  coefficients[5] = -(-acc2 * t2 + acc1 * t2 + 6 * vel2 * t + 6 * vel1 * t - 12 * pos2 + 12 * pos1) / (2 * t5);
+  coefficients[3] =
+    -(-acc2 * t2 + 3 * acc1 * t2 + 8 * vel2 * t + 12 * vel1 * t - 20 * pos2 + 20 * pos1) / (2 * t3);
+  coefficients[4] =
+    (-2 * acc2 * t2 + 3 * acc1 * t2 + 14 * vel2 * t + 16 * vel1 * t - 30 * pos2 + 30 * pos1) /
+    (2 * t4);
+  coefficients[5] =
+    -(-acc2 * t2 + acc1 * t2 + 6 * vel2 * t + 6 * vel1 * t - 12 * pos2 + 12 * pos1) / (2 * t5);
 
-  Polynom polynom(coefficients); 
+  Polynom polynom(coefficients);
   return polynom;
 }
 
-}
+}  // namespace keisan

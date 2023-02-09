@@ -29,7 +29,7 @@ namespace keisan
 class SmoothSpline : public Spline
 {
 public:
-  struct PointTime 
+  struct PointTime
   {
     float point;
     float time;
@@ -41,12 +41,12 @@ public:
 
   void add_point(Polynom polynom);
   void add_point(double value, double t);
-  Polynom polynomial_fit(double pos1, double pos2, double vel1, double vel2, double acc1, double acc2, double t);
+  Polynom polynomial_fit(
+    double pos1, double pos2, double vel1, double vel2, double acc1, double acc2, double t);
 
 private:
   std::vector<float> points;
-
 };
-}
+}  // namespace keisan
 
-#endif //KEISAN__SPLINE__SMOOTH_SPLINE_HPP_
+#endif  //KEISAN__SPLINE__SMOOTH_SPLINE_HPP_

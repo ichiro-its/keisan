@@ -23,5 +23,6 @@
 
 #include "keisan/spline/polynom.hpp"
 #include "keisan/spline/spline.hpp"
+#include "keisan/spline/smooth_spline.hpp"
 
 #endif  // KEISAN__SPLINE_HPP_

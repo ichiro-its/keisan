@@ -78,5 +78,4 @@ Polynom SmoothSpline::polynomial_fit(double pos1, double pos2, double vel1, doub
   return polynom;
 }
 
-
 }

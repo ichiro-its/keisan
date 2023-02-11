@@ -42,4 +42,3 @@ private:
 };
 }
 #endif //KEISAN__SPLINE__SPLINE_HPP_
-

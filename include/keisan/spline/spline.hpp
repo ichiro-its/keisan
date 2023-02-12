@@ -21,24 +21,27 @@
 #ifndef KEISAN__SPLINE__SPLINE_HPP_
 #define KEISAN__SPLINE__SPLINE_HPP_
 
+#include <vector>
+
 #include "keisan/spline/polynom.hpp"
 
 namespace keisan
 {
 
-class Spline 
+class Spline
 {
 public:
-    Spline();
-    ~Spline();
+  Spline();
+  ~Spline();
 
-    std::vector<Polynom> get_splines();
-    void add_spline(Polynom polynom);
-    double interpolate_value(double value, int derivative_order);
+  std::vector<Polynom> get_splines();
+  void add_spline(Polynom polynom);
+  double interpolate_value(double value, int derivative_order);
+
 protected:
-    std::vector<Polynom> splines;
-private:
+  std::vector<Polynom> splines;
 
+private:
 };
-}
-#endif //KEISAN__SPLINE__SPLINE_HPP_
+}  // namespace keisan
+#endif  //KEISAN__SPLINE__SPLINE_HPP_

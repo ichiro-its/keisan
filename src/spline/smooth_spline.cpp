@@ -20,6 +20,8 @@
 
 #include "keisan/spline/smooth_spline.hpp"
 
+#include <vector>
+
 namespace keisan
 {
 
@@ -55,7 +57,7 @@ void SmoothSpline::add_point(double value, double t)
   }
   new_polynom.min_value = current_t;
   new_polynom.max_value = current_t + t;
-  
+
   splines.push_back(new_polynom);
 }
 

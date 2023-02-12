@@ -21,6 +21,8 @@
 #ifndef KEISAN__SPLINE__SMOOTH_SPLINE_HPP_
 #define KEISAN__SPLINE__SMOOTH_SPLINE_HPP_
 
+#include <vector>
+
 #include "keisan/spline/spline.hpp"
 
 namespace keisan
@@ -36,7 +38,7 @@ public:
   };
 
   SmoothSpline();
-  SmoothSpline(std::vector<PointTime> point_times);
+  explicit SmoothSpline(std::vector<PointTime> point_times);
   ~SmoothSpline();
 
   void add_point(Polynom polynom);

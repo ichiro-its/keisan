@@ -31,12 +31,13 @@ class Polynom
 {
 public:
   Polynom();
-  Polynom(const std::vector<double> & coefficients);
+  explicit Polynom(const std::vector<double> & coefficients);
 
   double get_value(double value);
   double get_value(double value, int derivative_order);
 
-  enum OrderType {
+  enum OrderType
+  {
     POSITION = 0,
     VELOCITY = 1,
     ACCELERATION = 2,
@@ -45,10 +46,11 @@ public:
 
   double min_value;
   double max_value;
+
 private:
   std::vector<double> coefs;
 };
 
-} // namespace keisan
+}  // namespace keisan
 
-#endif // KEISAN__SPLINE__POLYNOM_HPP_
+#endif  // KEISAN__SPLINE__POLYNOM_HPP_

@@ -18,6 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#include <vector>
+
 #include "keisan/spline/polynom.hpp"
 
 namespace keisan
@@ -34,23 +36,22 @@ Polynom::Polynom(const std::vector<double> & coefficients)
 
 double Polynom::get_value(double value)
 {
-    return get_value(value, OrderType::POSITION);
+  return get_value(value, OrderType::POSITION);
 }
 
 double Polynom::get_value(double value, int derivative_order)
 {
-    double xx = 1.0;
-    double val = 0.0;
-    for (int i = derivative_order; i < coefs.size(); i++)
-    {
-        double multiplicand = xx * coefs[i];
-        for (int j = 0; j < derivative_order; j ++) {
-            multiplicand *= (i - j - 1); 
-        }
-        val += multiplicand;
-        xx *= value;
+  double xx = 1.0;
+  double val = 0.0;
+  for (int i = derivative_order; i < coefs.size(); i++) {
+    double multiplicand = xx * coefs[i];
+    for (int j = 0; j < derivative_order; j++) {
+      multiplicand *= (i - j - 1);
     }
-    return val;
+    val += multiplicand;
+    xx *= value;
+  }
+  return val;
 }
 
 }

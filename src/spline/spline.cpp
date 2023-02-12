@@ -18,6 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#include <vector>
+
 #include "keisan/spline/spline.hpp"
 
 namespace keisan
@@ -44,7 +46,7 @@ void Spline::add_spline(Polynom polynom)
 double Spline::interpolate_value(double value, int derivative_order)
 {
   int start_index = 0;
-  int end_index =  splines.size() - 1;
+  int end_index = splines.size() - 1;
   Polynom center_spline = splines[0];
   while (start_index != end_index) {
     int center_index = (start_index + end_index) / 2;
@@ -62,7 +64,7 @@ double Spline::interpolate_value(double value, int derivative_order)
     end_index = center_index;
   }
 
-  return (center_spline.get_value(value - center_spline.min_value, derivative_order));
+  return center_spline.get_value(value - center_spline.min_value, derivative_order);
 }
 
 }

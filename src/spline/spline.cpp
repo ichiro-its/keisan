@@ -62,7 +62,7 @@ double Spline::interpolate_value(double value, int derivative_order)
     end_index = center_index;
   }
 
-  return (center_spline.get_value(value - center_spline.min_value));
+  return (center_spline.get_value(value - center_spline.min_value, derivative_order));
 }
 
 }

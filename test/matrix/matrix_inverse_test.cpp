@@ -51,9 +51,7 @@ protected:
     }
 
     if (((*matrix) == params.inverse) != params.is_valid) {
-      return testing::AssertionFailure() << "the result validation is failed\n" <<
-             "result = " << (*matrix) << "\n" <<
-             "target = " << params.inverse;
+      return testing::AssertionFailure() << "the result validation is failed";
     }
 
     return testing::AssertionSuccess();

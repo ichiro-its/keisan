@@ -52,9 +52,9 @@ TEST(QuaternionTest, AssignmentConstructor)
   { \
     ksn::Quaternion<TYPE> a(SOURCE), b = SOURCE, c; \
     c = SOURCE; \
-    EXPECT_EQ(a, SOURCE); \
-    EXPECT_EQ(b, SOURCE); \
-    EXPECT_EQ(c, SOURCE); \
+    EXPECT_TRUE(a == SOURCE); \
+    EXPECT_TRUE(b == SOURCE); \
+    EXPECT_TRUE(c == SOURCE); \
   }
 
   ksn::Quaternion<float> float_quaternion(1.0f, 1.0f, 1.0f, 1.0f);

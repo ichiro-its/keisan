@@ -54,9 +54,9 @@ TEST(EulerTest, AssignmentConstructor)
   { \
     ksn::Euler<TYPE> a(SOURCE), b = SOURCE, c; \
     c = SOURCE; \
-    EXPECT_EQ(a, SOURCE); \
-    EXPECT_EQ(b, SOURCE); \
-    EXPECT_EQ(c, SOURCE); \
+    EXPECT_TRUE(a == SOURCE); \
+    EXPECT_TRUE(b == SOURCE); \
+    EXPECT_TRUE(c == SOURCE); \
   }
 
   ksn::Euler<float> float_euler(90_deg, 90_deg, 90_deg);
@@ -96,5 +96,5 @@ TEST(EulerTest, QuaternionConversion)
 
   auto quaternion = euler.quaternion();
 
-  ASSERT_EQ(quaternion.euler(), euler);
+  ASSERT_TRUE(quaternion.euler() == euler);
 }

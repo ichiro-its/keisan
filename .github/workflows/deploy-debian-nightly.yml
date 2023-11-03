@@ -15,6 +15,7 @@ jobs:
       - name: Build nightly Debian package
         uses: ichiro-its/ros2-build-debian-action@main
         with:
+          ros2-distro: rolling
           unique-version: true
 
       - name: Deploy nightly Debian package to server

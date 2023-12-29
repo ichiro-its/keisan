@@ -40,25 +40,30 @@ void SmoothSpline::add_point(Polynom polynom) { splines.push_back(polynom); }
 
 void SmoothSpline::add_point(double value, double t)
 {
-  double pos1 = points.back();
-  double pos2 = value;
-
-  double acc1 = 0.0;
-  double vel1 = 0.0;
-  double acc2 = 0.0;
-  double vel2 = 0.0;
-
-  points.push_back(pos2);
-  Polynom new_polynom = polynomial_fit(pos1, pos2, vel1, vel2, acc1, acc2, t);
-
-  double current_t = 0;
-  if (splines.size() > 0) {
-    current_t = splines.back().max_value;
+  if (points.empty()) {
+    points.push_back(value);
   }
-  new_polynom.min_value = current_t;
-  new_polynom.max_value = current_t + t;
+  else {
+    double pos1 = points.back();
+    double pos2 = value;
 
-  splines.push_back(new_polynom);
+    double acc1 = 0.0;
+    double vel1 = 0.0;
+    double acc2 = 0.0;
+    double vel2 = 0.0;
+
+    points.push_back(pos2);
+    Polynom new_polynom = polynomial_fit(pos1, pos2, vel1, vel2, acc1, acc2, t);
+
+    double current_t = 0;
+    if (!splines.empty()) {
+      current_t = splines.back().max_value;
+    }
+    new_polynom.min_value = current_t;
+    new_polynom.max_value = current_t + t;
+
+    splines.push_back(new_polynom);
+  }
 }
 
 Polynom SmoothSpline::polynomial_fit(

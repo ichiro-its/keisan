@@ -43,7 +43,7 @@ double Polynom::get_value(double value, int derivative_order)
 {
   double xx = 1.0;
   double val = 0.0;
-  for (int i = derivative_order; i < coefs.size(); i++) {
+  for (int i = derivative_order; i < coefs.size(); ++i) {
     double multiplicand = xx * coefs[i];
     for (int j = 0; j < derivative_order; j++) {
       multiplicand *= (i - j - 1);

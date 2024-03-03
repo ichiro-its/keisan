@@ -38,10 +38,10 @@ public:
   };
 
   SmoothSpline();
-  explicit SmoothSpline(std::vector<PointTime> point_times);
+  explicit SmoothSpline(const std::vector<PointTime>& point_times);
   ~SmoothSpline();
 
-  void add_point(Polynom polynom);
+  void add_point(const Polynom& polynom);
   void add_point(double value, double t);
   Polynom polynomial_fit(
     double pos1, double pos2, double vel1, double vel2, double acc1, double acc2, double t);

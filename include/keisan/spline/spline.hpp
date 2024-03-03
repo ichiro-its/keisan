@@ -35,13 +35,11 @@ public:
   ~Spline();
 
   std::vector<Polynom> get_splines();
-  void add_spline(Polynom polynom);
+  void add_spline(const Polynom& polynom);
   double interpolate_value(double value, int derivative_order);
 
 protected:
   std::vector<Polynom> splines;
-
-private:
 };
 }  // namespace keisan
 #endif  //KEISAN__SPLINE__SPLINE_HPP_

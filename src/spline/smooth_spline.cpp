@@ -29,14 +29,14 @@ SmoothSpline::SmoothSpline() {}
 
 SmoothSpline::~SmoothSpline() {}
 
-SmoothSpline::SmoothSpline(std::vector<PointTime> point_times)
+SmoothSpline::SmoothSpline(const std::vector<PointTime>& point_times)
 {
   for (auto point_time : point_times) {
     add_point(point_time.point, point_time.time);
   }
 }
 
-void SmoothSpline::add_point(Polynom polynom) { splines.push_back(polynom); }
+void SmoothSpline::add_point(const Polynom& polynom) { splines.push_back(polynom); }
 
 void SmoothSpline::add_point(double value, double t)
 {

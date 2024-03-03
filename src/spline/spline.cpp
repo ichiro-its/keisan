@@ -38,7 +38,7 @@ std::vector<Polynom> Spline::get_splines()
   return splines;
 }
 
-void Spline::add_spline(Polynom polynom)
+void Spline::add_spline(const Polynom& polynom)
 {
   splines.push_back(polynom);
 }

@@ -1,4 +1,4 @@
-// Copyright (c) 2021 ICHIRO ITS
+// Copyright (c) 2023 ICHIRO ITS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,16 +18,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__KEISAN_HPP_
-#define KEISAN__KEISAN_HPP_
+#ifndef KEISAN__SPLINE_HPP_
+#define KEISAN__SPLINE_HPP_
 
-#include "keisan/geometry/point_2.hpp"
-#include "keisan/geometry/point_3.hpp"
+#include "keisan/spline/polynom.hpp"
+#include "keisan/spline/spline.hpp"
+#include "keisan/spline/smooth_spline.hpp"
 
-#include "keisan/angle.hpp"
-#include "keisan/constant.hpp"
-#include "keisan/matrix.hpp"
-#include "keisan/number.hpp"
-#include "keisan/spline.hpp"
-
-#endif  // KEISAN__KEISAN_HPP_
+#endif  // KEISAN__SPLINE_HPP_

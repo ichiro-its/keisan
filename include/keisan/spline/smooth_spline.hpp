@@ -1,4 +1,4 @@
-// Copyright (c) 2021 ICHIRO ITS
+// Copyright (c) 2023 ICHIRO ITS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,16 +18,37 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__KEISAN_HPP_
-#define KEISAN__KEISAN_HPP_
+#ifndef KEISAN__SPLINE__SMOOTH_SPLINE_HPP_
+#define KEISAN__SPLINE__SMOOTH_SPLINE_HPP_
 
-#include "keisan/geometry/point_2.hpp"
-#include "keisan/geometry/point_3.hpp"
+#include <vector>
 
-#include "keisan/angle.hpp"
-#include "keisan/constant.hpp"
-#include "keisan/matrix.hpp"
-#include "keisan/number.hpp"
-#include "keisan/spline.hpp"
+#include "keisan/spline/spline.hpp"
 
-#endif  // KEISAN__KEISAN_HPP_
+namespace keisan
+{
+
+class SmoothSpline : public Spline
+{
+public:
+  struct PointTime
+  {
+    float point;
+    float time;
+  };
+
+  SmoothSpline();
+  explicit SmoothSpline(const std::vector<PointTime>& point_times);
+  ~SmoothSpline();
+
+  void add_point(const Polynom& polynom);
+  void add_point(double value, double t);
+  Polynom polynomial_fit(
+    double pos1, double pos2, double vel1, double vel2, double acc1, double acc2, double t);
+
+private:
+  std::vector<float> points;
+};
+}  // namespace keisan
+
+#endif  //KEISAN__SPLINE__SMOOTH_SPLINE_HPP_

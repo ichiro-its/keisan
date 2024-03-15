@@ -18,16 +18,40 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__KEISAN_HPP_
-#define KEISAN__KEISAN_HPP_
+#include <vector>
 
-#include "keisan/geometry/point_2.hpp"
-#include "keisan/geometry/point_3.hpp"
+#include "keisan/spline/polynom.hpp"
 
-#include "keisan/angle.hpp"
-#include "keisan/constant.hpp"
-#include "keisan/matrix.hpp"
-#include "keisan/number.hpp"
-#include "keisan/spline.hpp"
+namespace keisan
+{
 
-#endif  // KEISAN__KEISAN_HPP_
+Polynom::Polynom()
+{
+}
+
+Polynom::Polynom(const std::vector<double> & coefficients)
+: coefs(coefficients)
+{
+}
+
+double Polynom::get_value(double value)
+{
+  return get_value(value, OrderType::POSITION);
+}
+
+double Polynom::get_value(double value, int derivative_order)
+{
+  double xx = 1.0;
+  double val = 0.0;
+  for (int i = derivative_order; i < coefs.size(); ++i) {
+    double multiplicand = xx * coefs[i];
+    for (int j = 0; j < derivative_order; j++) {
+      multiplicand *= (i - j - 1);
+    }
+    val += multiplicand;
+    xx *= value;
+  }
+  return val;
+}
+
+}

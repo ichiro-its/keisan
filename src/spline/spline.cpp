@@ -33,7 +33,7 @@ Spline::~Spline()
 {
 }
 
-std::vector<Polynom> Spline::get_splines()
+std::vector<Polynom>& Spline::get_splines()
 {
   return splines;
 }
@@ -41,12 +41,12 @@ std::vector<Polynom> Spline::get_splines()
 void Spline::add_spline(const Polynom& polynom)
 {
   splines.push_back(polynom);
-}
+  }
 
 double Spline::interpolate_value(double value, int derivative_order)
 {
-  int start_index = 0;
-  int end_index = splines.size() - 1;
+    int start_index = 0;
+    int end_index = splines.size() - 1;
   Polynom center_spline = splines[0];
   while (start_index != end_index) {
     int center_index = (start_index + end_index) / 2;

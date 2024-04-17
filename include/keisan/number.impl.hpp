@@ -100,6 +100,14 @@ T smooth(T value, T target, T ratio)
   return ((1.0 - ratio) * value) + (ratio * target);
 }
 
+template<typename T>
+T curve(const T & value, const T & min, const T & max, const T & exponential)
+{
+  auto val = std::min(value, std::max(min, max));
+  val = std::max(value, std::min(min, max));
+  return min + ((max - min) * (std::pow(val - min, exponential) / std::pow(max - min, exponential)));
+}
+
 }  // namespace keisan
 
 #endif  // KEISAN__NUMBER_IMPL_HPP_

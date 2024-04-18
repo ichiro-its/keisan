@@ -53,7 +53,7 @@ T map(
   const T & value, const T & source_min, const T & source_max,
   const T & target_min, const T & target_max)
 {
-  return target_min + scale(value - source_min, source_max - source_min, target_max - target_min);
+  return target_min + scale(clamp(value, source_min, source_max) - source_min, source_max - source_min, target_max - target_min);
 }
 
 template<typename T>
@@ -103,8 +103,7 @@ T smooth(T value, T target, T ratio)
 template<typename T>
 T curve(const T & value, const T & min, const T & max, const T & exponential)
 {
-  auto val = std::min(value, std::max(min, max));
-  val = std::max(value, std::min(min, max));
+  auto val = clamp(value, min, max);
   return min + ((max - min) * (std::pow(val - min, exponential) / std::pow(max - min, exponential)));
 }
 

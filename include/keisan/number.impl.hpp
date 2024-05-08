@@ -56,8 +56,9 @@ T map(
   auto source_val = value;
   source_val = std::min(source_val, std::max(source_min, source_max));
   source_val = std::max(source_val, std::min(source_min, source_max));
-  
-  return target_min + scale(source_val - source_min, source_max - source_min, target_max - target_min);
+
+  return target_min +
+         scale(source_val - source_min, source_max - source_min, target_max - target_min);
 }
 
 template<typename T>

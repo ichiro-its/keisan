@@ -64,21 +64,21 @@ TEST(NumberTest, MapIntegral)
 {
   EXPECT_EQ(ksn::map(5, 2, 4, 0, 1), 1) <<
     "min(5, max(2, 4)) = 4\n"
-    "max(4, min(2, 4)) = 2\n"
+    "max(4, min(2, 4)) = 4\n"
     "4 - 2 = 2\n"
     "4 - 2 = 2\n"
     "1 - 0 = 1\n"
     "scale(2, 2, 1) = 1\n"
     "1 + 0 = 1";
 
-  EXPECT_EQ(ksn::map(0, -2, -4, 0, 1), -1) <<
+  EXPECT_EQ(ksn::map(0, -2, -4, 0, 1), 0) <<
     "min(0, max(-2, -4)) = -2\n"
     "max(-2, min(-2, -4)) = -2\n"
     "-2 - (-2) = 0\n"
     "-4 - (-2) = -2\n"
     "1 - 0 = 1\n"
-    "scale(0, -2, 1) = -1\n"
-    "-1 + 0 = -1";
+    "scale(0, -2, 1) = 0\n"
+    "0 + 0 = 0";
 }
 
 TEST(NumberTest, MapFloatingPoint)
@@ -86,20 +86,20 @@ TEST(NumberTest, MapFloatingPoint)
   EXPECT_DOUBLE_EQ(ksn::map(0.5, 0.2, 0.8, 1.0, 3.2), 2.1) <<
     "min(0.5, max(0.2, 0.8)) = 0.5\n"
     "max(0.5, min(0.2, 0.8)) = 0.5\n"
-    "0.2 - 0.2 = 0.0\n"
+    "0.5 - 0.2 = 0.3\n"
     "0.8 - 0.2 = 0.6\n"
     "3.2 - 1.0 = 2.2\n"
     "scale(0.5, 0.6, 2.2) = 1.1\n"
     "1.1 + 1.0 = 2.1";
 
-  EXPECT_DOUBLE_EQ(ksn::map(-0.1, 0.2, 0.8, -3.2, -1.0), -4.3) <<
-    "min(-0.1, max(0.2, 0.8)) = 0.2\n"
+  EXPECT_DOUBLE_EQ(ksn::map(-0.1, 0.2, 0.8, -3.2, -1.0), -3.2) <<
+    "min(-0.1, max(0.2, 0.8)) = -0.1\n"
     "max(-0.1, min(0.2, 0.8)) = 0.2\n"
     "0.2 - 0.2 = 0.0\n"
     "0.8 - 0.2 = 0.6\n"
     "-1.0 - (-3.2) = 2.2\n"
-    "scale(0.0, 0.6, 2.2) = -1.1\n"
-    "-1.1 + (-3.2) = -4.3";
+    "scale(0.0, 0.6, 2.2) = 0.0\n"
+    "0.0 + (-3.2) = -3.2";
 }
 
 TEST(NumberTest, ClampIntegral)

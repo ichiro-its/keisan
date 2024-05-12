@@ -79,6 +79,15 @@ TEST(NumberTest, MapIntegral)
     "1 - 0 = 1\n"
     "scale(0, -2, 1) = 0\n"
     "0 + 0 = 0";
+
+  EXPECT_EQ(ksn::map(10, 3, 11, -2, 2), -2) <<
+    "min(10, max(3, 11)) = 10\n"
+    "max(10, min(3, 11)) = 10\n"
+    "10 - 3 = 7\n"
+    "11 - 3 = 8\n"
+    "2 - (-2) = 4\n"
+    "scale(7, 8, 4) = 0\n"
+    "0 + (-2) = -2";
 }
 
 TEST(NumberTest, MapFloatingPoint)
@@ -100,6 +109,15 @@ TEST(NumberTest, MapFloatingPoint)
     "-1.0 - (-3.2) = 2.2\n"
     "scale(0.0, 0.6, 2.2) = 0.0\n"
     "0.0 + (-3.2) = -3.2";
+
+  EXPECT_DOUBLE_EQ(ksn::map(-1.5, 5.0, -2.5, 7.0, 13.0), 12.2) <<
+    "min(-1.5, max(5.0, -2.5)) = -1.5\n"
+    "max(-1.5, min(5.0, -2.5)) = -1.5\n"
+    "-1.5 - 5.0 = -6.5\n"
+    "-2.5 - 5.0 = -7.5\n"
+    "13.0 - 7.0 = 6.0\n"
+    "scale(-6.5, -7.5, 6.0) = 5.2\n"
+    "5.2 + 7.0 = 12.2";
 }
 
 TEST(NumberTest, ClampIntegral)

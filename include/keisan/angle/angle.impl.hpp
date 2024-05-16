@@ -199,6 +199,12 @@ Angle<T> Angle<T>::operator-() const
 }
 
 template<typename T>
+Angle<T> Angle<T>::operator^(const T & power) const
+{
+    return Angle<T>(std::pow(data, power));
+}
+
+template<typename T>
 T Angle<T>::degree() const
 {
   using keisan::literals::operator""_pi;

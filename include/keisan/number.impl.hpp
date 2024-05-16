@@ -57,6 +57,17 @@ T map(
 }
 
 template<typename T>
+T exponentialmap(
+  const T & value, const T & source_min, const T & source_max,
+  const T & target_min, const T & target_max)
+{
+  auto val = clamp(value, source_min, source_max);
+  auto map_coeff = (target_min <= target_max) ? 1 : -1;
+  auto normalized_val = (val - source_min) / (source_max - source_min);
+  return map_coeff * std::pow(std::abs(target_max - target_min + map_coeff), normalized_val) + target_min - map_coeff;
+}
+
+template<typename T>
 T clamp(const T & value, const T & min, const T & max)
 {
   return std::min(std::max(value, min), max);
@@ -105,6 +116,12 @@ T curve(const T & value, const T & min, const T & max, const T & exponential)
 {
   auto val = clamp(value, min, max);
   return min + ((max - min) * (std::pow(val - min, exponential) / std::pow(max - min, exponential)));
+}
+
+template<typename T>
+Angle<T> fabs(const Angle<T> & value)
+{
+  return make_degree(std::fabs(value.degree()));
 }
 
 }  // namespace keisan

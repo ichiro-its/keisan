@@ -50,6 +50,11 @@ T map(
   const T & target_min, const T & target_max);
 
 template<typename T>
+T exponentialmap(
+  const T & value, const T & source_min, const T & source_max,
+  const T & target_min, const T & target_max);
+
+template<typename T>
 T clamp(const T & value, const T & min, const T & max);
 
 template<typename T>
@@ -66,6 +71,9 @@ T smooth(T value, T target, T ratio);
 
 template<typename T>
 T curve(const T & value, const T & min, const T & max, const T & exponential);
+
+template<typename T>
+Angle<T> fabs(const Angle<T> & value);
 
 }  // namespace keisan
 

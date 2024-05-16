@@ -86,6 +86,7 @@ public:
   Angle<T> operator/(const T & value) const;
 
   Angle<T> operator-() const;
+  Angle<T> operator^(const T & power) const;
 
   T degree() const;
   T radian() const;

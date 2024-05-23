@@ -55,6 +55,11 @@ T exponentialmap(
   const T & target_min, const T & target_max);
 
 template<typename T>
+T sinusoidalmap(
+  const T & value, const T & source_min, const T & source_max,
+  const T & target_min, const T & target_max);
+
+template<typename T>
 T clamp(const T & value, const T & min, const T & max);
 
 template<typename T>

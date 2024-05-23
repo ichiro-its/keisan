@@ -68,6 +68,17 @@ T exponentialmap(
 }
 
 template<typename T>
+T sinusoidalmap(
+  const T & value, const T & source_min, const T & source_max,
+  const T & target_min, const T & target_max)
+{
+  auto val = clamp(value, source_min, source_max);
+  auto coeff = -(target_max - target_min) / 2;
+  auto angle = (M_PI * (source_min - val)) / (source_min - source_max);  
+  return coeff * std::cos(angle) + (target_max + target_min) / 2;
+}
+
+template<typename T>
 T clamp(const T & value, const T & min, const T & max)
 {
   return std::min(std::max(value, min), max);

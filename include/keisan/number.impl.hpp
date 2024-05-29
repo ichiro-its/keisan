@@ -53,7 +53,12 @@ T map(
   const T & value, const T & source_min, const T & source_max,
   const T & target_min, const T & target_max)
 {
-  return target_min + scale(clamp(value, source_min, source_max) - source_min, source_max - source_min, target_max - target_min);
+  auto source_val = value;
+  source_val = std::min(source_val, std::max(source_min, source_max));
+  source_val = std::max(source_val, std::min(source_min, source_max));
+
+  return target_min +
+         scale(source_val - source_min, source_max - source_min, target_max - target_min);
 }
 
 template<typename T>

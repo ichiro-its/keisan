@@ -66,9 +66,11 @@ T exponentialmap(
   const T & value, const T & source_min, const T & source_max,
   const T & target_min, const T & target_max)
 {
-  auto val = clamp(value, source_min, source_max);
+  auto source_val = value;
+  source_val = std::min(source_val, std::max(source_min, source_max));
+  source_val = std::max(source_val, std::min(source_min, source_max));
   auto map_coeff = (target_min <= target_max) ? 1 : -1;
-  auto normalized_val = (val - source_min) / (source_max - source_min);
+  auto normalized_val = (source_val - source_min) / (source_max - source_min);
   return map_coeff * std::pow(std::abs(target_max - target_min + map_coeff), normalized_val) + target_min - map_coeff;
 }
 
@@ -77,9 +79,11 @@ T sinusoidalmap(
   const T & value, const T & source_min, const T & source_max,
   const T & target_min, const T & target_max)
 {
-  auto val = clamp(value, source_min, source_max);
+  auto source_val = value;
+  source_val = std::min(source_val, std::max(source_min, source_max));
+  source_val = std::max(source_val, std::min(source_min, source_max));
   auto coeff = -(target_max - target_min) / 2;
-  auto angle = (M_PI * (source_min - val)) / (source_min - source_max);  
+  auto angle = (M_PI * (source_min - source_val)) / (source_min - source_max);  
   return coeff * std::cos(angle) + (target_max + target_min) / 2;
 }
 

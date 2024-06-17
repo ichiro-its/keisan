@@ -1,4 +1,4 @@
-// Copyright (c) 2021 ICHIRO ITS
+// Copyright (c) 2023 ICHIRO ITS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,16 +18,53 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__KEISAN_HPP_
-#define KEISAN__KEISAN_HPP_
+#include <vector>
 
-#include "keisan/geometry/point_2.hpp"
-#include "keisan/geometry/point_3.hpp"
+#include "keisan/spline/spline.hpp"
 
-#include "keisan/angle.hpp"
-#include "keisan/constant.hpp"
-#include "keisan/matrix.hpp"
-#include "keisan/number.hpp"
-#include "keisan/spline.hpp"
+namespace keisan
+{
 
-#endif  // KEISAN__KEISAN_HPP_
+Spline::Spline()
+{
+}
+
+Spline::~Spline()
+{
+}
+
+std::vector<Polynom>& Spline::get_splines()
+{
+  return splines;
+}
+
+void Spline::add_spline(const Polynom& polynom)
+{
+  splines.push_back(polynom);
+  }
+
+double Spline::interpolate_value(double value, int derivative_order)
+{
+    int start_index = 0;
+    int end_index = splines.size() - 1;
+  Polynom center_spline = splines[0];
+  while (start_index != end_index) {
+    int center_index = (start_index + end_index) / 2;
+    center_spline = splines[center_index];
+
+    if (value < center_spline.min_value) {
+      end_index = center_index - 1;
+      continue;
+    }
+    if (value > center_spline.max_value) {
+      start_index = center_index + 1;
+      continue;
+    }
+    start_index = center_index;
+    end_index = center_index;
+  }
+
+  return center_spline.get_value(value - center_spline.min_value, derivative_order);
+}
+
+}

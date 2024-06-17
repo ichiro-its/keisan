@@ -1,4 +1,4 @@
-// Copyright (c) 2021 ICHIRO ITS
+// Copyright (c) 2023 ICHIRO ITS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,16 +18,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__KEISAN_HPP_
-#define KEISAN__KEISAN_HPP_
+#ifndef KEISAN__SPLINE__SPLINE_HPP_
+#define KEISAN__SPLINE__SPLINE_HPP_
 
-#include "keisan/geometry/point_2.hpp"
-#include "keisan/geometry/point_3.hpp"
+#include <vector>
 
-#include "keisan/angle.hpp"
-#include "keisan/constant.hpp"
-#include "keisan/matrix.hpp"
-#include "keisan/number.hpp"
-#include "keisan/spline.hpp"
+#include "keisan/spline/polynom.hpp"
 
-#endif  // KEISAN__KEISAN_HPP_
+namespace keisan
+{
+
+class Spline
+{
+public:
+  Spline();
+  ~Spline();
+
+  std::vector<Polynom>& get_splines();
+  void add_spline(const Polynom& polynom);
+  double interpolate_value(double value, int derivative_order);
+
+protected:
+  std::vector<Polynom> splines;
+};
+}  // namespace keisan
+#endif  //KEISAN__SPLINE__SPLINE_HPP_

@@ -1,4 +1,4 @@
-// Copyright (c) 2021 ICHIRO ITS
+// Copyright (c) 2023 ICHIRO ITS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,16 +18,39 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__KEISAN_HPP_
-#define KEISAN__KEISAN_HPP_
+#ifndef KEISAN__SPLINE__POLYNOM_HPP_
+#define KEISAN__SPLINE__POLYNOM_HPP_
 
-#include "keisan/geometry/point_2.hpp"
-#include "keisan/geometry/point_3.hpp"
+#include <ostream>
+#include <vector>
 
-#include "keisan/angle.hpp"
-#include "keisan/constant.hpp"
-#include "keisan/matrix.hpp"
-#include "keisan/number.hpp"
-#include "keisan/spline.hpp"
+namespace keisan
+{
 
-#endif  // KEISAN__KEISAN_HPP_
+class Polynom
+{
+public:
+  Polynom();
+  explicit Polynom(const std::vector<double> & coefficients);
+
+  double get_value(double value);
+  double get_value(double value, int derivative_order);
+
+  enum OrderType
+  {
+    POSITION = 0,
+    VELOCITY = 1,
+    ACCELERATION = 2,
+    JERK = 3
+  };
+
+  double min_value;
+  double max_value;
+
+private:
+  std::vector<double> coefs;
+};
+
+}  // namespace keisan
+
+#endif  // KEISAN__SPLINE__POLYNOM_HPP_

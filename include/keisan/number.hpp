@@ -77,9 +77,6 @@ T smooth(T value, T target, T ratio);
 template<typename T>
 T curve(const T & value, const T & min, const T & max, const T & exponential);
 
-template<typename T>
-Angle<T> fabs(const Angle<T> & value);
-
 }  // namespace keisan
 
 #include "keisan/number.impl.hpp"

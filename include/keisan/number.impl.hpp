@@ -134,14 +134,11 @@ T smooth(T value, T target, T ratio)
 template<typename T>
 T curve(const T & value, const T & min, const T & max, const T & exponential)
 {
+  if (min == max) {
+    return min;
+  }
   auto val = clamp(value, min, max);
   return min + ((max - min) * (std::pow(val - min, exponential) / std::pow(max - min, exponential)));
-}
-
-template<typename T>
-Angle<T> fabs(const Angle<T> & value)
-{
-  return make_degree(std::fabs(value.degree()));
 }
 
 }  // namespace keisan

@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['vector_187',['Vector',['../classkeisan_1_1Vector.html#a56bb112a9c9f30e54290798f28555905',1,'keisan::Vector::Vector()'],['../classkeisan_1_1Vector.html#a2cc6371bb5802f36a74b26267f295393',1,'keisan::Vector::Vector(const double &amp;value, Types ... the_rest)'],['../classkeisan_1_1Vector.html#a3cff4b1c3fb7a2210b425be92f1288c2',1,'keisan::Vector::Vector(const Vector&lt; N &gt; &amp;vector)']]]
+  ['tan_192',['tan',['../classkeisan_1_1Angle.html#a128985d351fec50dad79449b22b374c1',1,'keisan::Angle']]],
+  ['translate_193',['translate',['../structkeisan_1_1Point2.html#a9ba5f949a5030fb3ccffc0f8567a34b2',1,'keisan::Point2']]],
+  ['translation_5fmatrix_194',['translation_matrix',['../namespacekeisan.html#a5a4fa13153ff96b5ca148554c3ed560c',1,'keisan::translation_matrix(const Point2 &amp;point)'],['../namespacekeisan.html#ac6abc06b4df3c17930cd5ac403631397',1,'keisan::translation_matrix(const Point3 &amp;point)']]]
 ];

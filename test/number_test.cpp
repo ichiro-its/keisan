@@ -306,7 +306,7 @@ TEST(NumberTest, CurveIntegral)
     "10 + (15 - 10) * ((10 - 10) / (15-10))^2 = 10";
 }
 
-TEST(NumberTest, CurveFloatingPOint)
+TEST(NumberTest, CurveFloatingPoint)
 {
   EXPECT_EQ(ksn::curve(13.0, 10.0, 15.0, 2.0), 11.8) <<
     "clamp(13, 10, 15) = 13\n"
@@ -319,6 +319,24 @@ TEST(NumberTest, CurveFloatingPOint)
   EXPECT_EQ(ksn::curve(4.0, 10.0, 15.0, 2.0), 10.0) <<
     "clamp(4, 10, 15) = 10\n"
     "10 + (15 - 10) * ((10 - 10) / (15-10))^2 = 10";
+}
+
+TEST(NumberTest, LerpIntegral)
+{
+  EXPECT_EQ(ksn::lerp(0, 10, 0), 0) <<
+    "0 + (10 - 0) * 0 = 0";
+
+  EXPECT_EQ(ksn::lerp(5, 15, 1), 15) <<
+    "5 + (15 - 5) * 1 = 15";
+}
+
+TEST(NumberTest, LerpFloatingPoint)
+{
+  EXPECT_DOUBLE_EQ(ksn::lerp(0.0, 10.0, 0.5), 5.0) <<
+    "0 + (10 - 0) * 0.5 = 0";
+
+  EXPECT_DOUBLE_EQ(ksn::lerp(5.0, 15.0, 0.25), 7.5) <<
+    "5 + (15 - 5) * 0.25 = 15";
 }
 
 #define ASSERT_SMOOTH_NEAR(SOURCE, TARGET, RATIO, ...) \

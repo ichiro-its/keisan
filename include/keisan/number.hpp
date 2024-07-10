@@ -77,6 +77,9 @@ T smooth(T value, T target, T ratio);
 template<typename T>
 T curve(const T & value, const T & min, const T & max, const T & exponential);
 
+template<typename T>
+T lerp(const T & start, const T & end, const T & rate);
+
 }  // namespace keisan
 
 #include "keisan/number.impl.hpp"

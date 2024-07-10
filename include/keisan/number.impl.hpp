@@ -141,6 +141,12 @@ T curve(const T & value, const T & min, const T & max, const T & exponential)
   return min + ((max - min) * (std::pow(val - min, exponential) / std::pow(max - min, exponential)));
 }
 
+template<typename T>
+T lerp(const T & start, const T & end, const T & rate)
+{
+  return (start + ((end - start) * rate));
+}
+
 }  // namespace keisan
 
 #endif  // KEISAN__NUMBER_IMPL_HPP_

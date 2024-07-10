@@ -120,6 +120,114 @@ TEST(NumberTest, MapFloatingPoint)
     "5.2 + 7.0 = 12.2";
 }
 
+TEST(NumberTest, ExponentialMapIntegral)
+{
+  EXPECT_EQ(ksn::exponentialmap(5, 2, 4, 0, 1), 1) <<
+    "clamp(5, 2, 4) = 4\n"
+    "map_coeff (0 <= 1) = 1\n"
+    "normalized_val = (4 - 2)/(4 - 2) = 1\n"
+    "1 * pow(|1 - 0 + 1|, 1) + 0 - 1 = 1\n";
+
+  EXPECT_EQ(ksn::exponentialmap(-5, -4, -2, 0, 1), 0) <<
+    "clamp(-5, -4, -2) = -4\n"
+    "map_coeff (0 <= 1) = 1\n"
+    "normalized_val = (-4 - (-4))/( -2 - (-4)) = 0\n"
+    "1 * pow(|1 - 0 + 1|, 0) + 0 - 1 = 0\n";
+}
+
+TEST(NumberTest, ExponentialMapFloatingPoint)
+{
+  EXPECT_DOUBLE_EQ(ksn::exponentialmap(5.2, 1.8, 4.9, 0.4, 2.4), 2.4) <<
+    "clamp(5.2, 1.8, 4.9) = 4.9\n"
+    "map_coeff (0.4 <= 2.4) = 1\n"
+    "normalized_val = (4.9 - 1.8) / (4.9 - 1.8) = 1\n"
+    "1 * pow(|2.4 - 0.4 + 1|, 1) + 0.4 - 1 = 2.4\n";
+
+  EXPECT_DOUBLE_EQ(ksn::exponentialmap(-6.9, -4.2, -2.0, 0.0, 1.3), 0) <<
+    "clamp(-6.9, -4.2, -2.0) = -4.2\n"
+    "map_coeff (0.0 <= 1.3) = 1\n"
+    "normalized_val = (-4.2 - (-4.2)) / (-2.0 - (-4.2)) = 0\n"
+    "1 * pow(|1.3 - 0.0 + 1|, 0) + 0.0 - 1 = 0\n";
+
+  EXPECT_NEAR(ksn::exponentialmap(10.2, 3.1, 14.7, -2.2, 2.2), -0.393, 0.001) <<
+    "clamp(10.2, 3.1, 14.7) = 10.2\n"
+    "map_coeff (-2.2 <= 2.2) = 1\n"
+    "normalized_val = (10.2 - 3.1) / (14.7 - 3.1) = 0.6121\n"
+    "1 * pow(|2.2 - (-2.2) + 1|, 0.6121) + (-2.2) - 1 ~ -0.393\n";
+
+  EXPECT_NEAR(ksn::exponentialmap(10.2, 3.1, 14.7, 2.2, -2.2), 0.393, 0.001) <<
+    "clamp(10.2, 3.1, 14.7) = 10.2\n"
+    "map_coeff (2.2 <= -2.2) = -1\n"
+    "normalized_val = (10.2 - 3.1) / (14.7 - 3.1) = 0.6121\n"
+    "-1 * pow(|-2.2 - 2.2 + (-1)|, 0.6121) + 2.2 - (-1) ~ 0.393\n";
+
+  EXPECT_NEAR(ksn::exponentialmap(10.2, 14.7, 3.1, 2.2, -2.2), 1.276, 0.001) <<
+    "clamp(10.2, 14.7, 3.1) = 10.2\n"
+    "map_coeff (2.2 <= -2.2) = -1\n"
+    "normalized_val = (10.2 - 14.7) / (3.1 - 14.7) = 0.3879\n"
+    "-1 * pow(|-2.2 - 2.2 + (-1)|, 0.3879) + 2.2 - (-1) ~ 1.276\n";
+
+  EXPECT_NEAR(ksn::exponentialmap(10.2, 14.7, 3.1, -2.2, 2.2), -1.276, 0.001) <<
+    "clamp(10.2, 14.7, 3.1) = 10.2\n"
+    "map_coeff (-2.2 <= 2.2) = 1\n"
+    "normalized_val = (10.2 - 14.7) / (3.1 - 14.7) = 0.3879\n"
+    "1 * pow(|2.2 - (-2.2) + 1|, 0.3879) + (-2.2) - 1 ~ -1.276\n";
+}
+
+TEST(NumberTest, SinusoidalMapIntegral)
+{
+  EXPECT_EQ(ksn::sinusoidalmap(10, 2, 4, 0, 2), 2) <<
+    "clamp(10, 2, 4) = 4\n"
+    "coeff = -(2 - 0) / 2 = -1\n"
+    "angle = (M_PI * (2 - 4)) / (2 - 4) = M_PI\n"
+    "-1 * cos(M_PI) + (2 + 0) / 2 = 2\n";
+
+  EXPECT_EQ(ksn::sinusoidalmap(-5, -4, -2, 0, 1), 0) <<
+    "clamp(-5, -4, -2) = -4\n"
+    "coeff = -(1 - 0) / 2 = -0.5\n"
+    "angle = (M_PI * (-4 - (-4))) / (-4 - (-2)) = 0\n"
+    "-0.5 * cos(0) + (1 + 0) / 2 = 0\n";
+}
+
+TEST(NumberTest, SinusoidalMapFloatingPoint)
+{
+  EXPECT_DOUBLE_EQ(ksn::sinusoidalmap(5.2, 1.8, 4.9, 0.4, 2.4), 2.4) <<
+    "clamp(5.2, 1.8, 4.9) = 4.9\n"
+    "coeff = -(2.4 - 0.4) / 2 = -1\n"
+    "angle = (M_PI * (1.8 - 4.9)) / (1.8 - 4.9) = M_PI\n"
+    "-1 * cos(M_PI) + (2.4 + 0.4) / 2 = 2.4\n";
+
+  EXPECT_DOUBLE_EQ(ksn::sinusoidalmap(-6.9, -4.2, -2.0, 0.0, 1.3), 0) <<
+    "clamp(-6.9, -4.2, -2.0) = -4.2\n"
+    "coeff = -(1.3 - 0.0) / 2 = -0.65\n"
+    "angle = (M_PI * (-4.2 - (-4.2))) / (-4.2 - (-2.0)) = 0\n"
+    "-0.65 * cos(0) + (1.3 + 0.0) / 2 = 0.0\n";
+
+  EXPECT_NEAR(ksn::sinusoidalmap(10.2, 3.1, 14.7, -2.2, 2.2), 0.759, 0.001) <<
+    "clamp(10.2, 3.1, 14.7) = 10.2\n"
+    "coeff = -(2.2 - (-2.2)) / 2 = -2.2\n"
+    "angle = (M_PI * (3.1 - 10.2)) / (3.1 - 14.7) ~ 1.923\n"
+    "-2.2 * cos(1.923) + (2.2 + (-2.2)) / 2 ~ 0.759\n";
+
+  EXPECT_NEAR(ksn::sinusoidalmap(10.2, 3.1, 14.7, 2.2, -2.2), -0.759, 0.001) <<
+    "clamp(10.2, 3.1, 14.7) = 10.2\n"
+    "coeff = -(-2.2 - 2.2) / 2 = 2.2\n"
+    "angle = (M_PI * (3.1 - 10.2)) / (3.1 - 14.7) ~ 1.923\n"
+    "2.2 * cos(1.923) + (-2.2 + 2.2) / 2 ~ -0.759\n";
+
+  EXPECT_NEAR(ksn::sinusoidalmap(10.2, 14.7, 3.1, 2.2, -2.2), 0.759, 0.001) <<
+    "clamp(10.2, 14.7, 3.1) = 10.2\n"
+    "coeff = -(-2.2 - 2.2) / 2 = 2.2\n"
+    "angle = (M_PI * (14.7 - 10.2)) / (14.7 - 3.1) = 1.219\n"
+    "2.2 * cos(1.219) + (2.2 + (-2.2)) / 2 ~ 0.759\n";
+
+  EXPECT_NEAR(ksn::sinusoidalmap(10.2, 14.7, 3.1, -2.2, 2.2), -0.759, 0.001) <<
+    "clamp(10.2, 14.7, 3.1) = 10.2\n"
+    "coeff = -(2.2 - (-2.2)) / 2 = -2.2\n"
+    "angle = (M_PI * (14.7 - 10.2)) / (14.7 - 3.1) = 1.219\n"
+    "-2.2 * cos(1.219) + (-2.2 + 2.2) / 2 ~ -0.759\n";
+}
+
 TEST(NumberTest, ClampIntegral)
 {
   EXPECT_EQ(ksn::clamp(5, 0, 10), 5) << "0 <= 5 <= 10";
@@ -181,6 +289,54 @@ TEST(NumberTest, WrapFloatingPoint)
     "1.5 - (1.1) = 0.4\n"
     "-1.0 = 0.4 * (-3) + 0.2\n"
     "0.2 + (1.1) = 1.3";
+}
+
+TEST(NumberTest, CurveIntegral)
+{
+  EXPECT_EQ(ksn::curve(13, 10, 15, 2), 11) <<
+    "clamp(13, 10, 15) = 13\n"
+    "10 + (15 - 10) * ((13 - 10) / (15-10))^2 = 11";
+
+  EXPECT_EQ(ksn::curve(31, 10, 15, 2), 15) <<
+    "clamp(31, 10, 15) = 15\n"
+    "10 + (15 - 10) * ((15 - 10) / (15-10))^2 = 15";
+    
+  EXPECT_EQ(ksn::curve(4, 10, 15, 2), 10) <<
+    "clamp(4, 10, 15) = 10\n"
+    "10 + (15 - 10) * ((10 - 10) / (15-10))^2 = 10";
+}
+
+TEST(NumberTest, CurveFloatingPoint)
+{
+  EXPECT_EQ(ksn::curve(13.0, 10.0, 15.0, 2.0), 11.8) <<
+    "clamp(13, 10, 15) = 13\n"
+    "10 + (15 - 10) * ((13 - 10) / (15-10))^2 = 11.8";
+
+  EXPECT_EQ(ksn::curve(31.0, 10.0, 15.0, 2.0), 15.0) <<
+    "clamp(31, 10, 15) = 15\n"
+    "10 + (15 - 10) * ((15 - 10) / (15-10))^2 = 15";
+
+  EXPECT_EQ(ksn::curve(4.0, 10.0, 15.0, 2.0), 10.0) <<
+    "clamp(4, 10, 15) = 10\n"
+    "10 + (15 - 10) * ((10 - 10) / (15-10))^2 = 10";
+}
+
+TEST(NumberTest, LerpIntegral)
+{
+  EXPECT_EQ(ksn::lerp(0, 10, 0), 0) <<
+    "0 + (10 - 0) * 0 = 0";
+
+  EXPECT_EQ(ksn::lerp(5, 15, 1), 15) <<
+    "5 + (15 - 5) * 1 = 15";
+}
+
+TEST(NumberTest, LerpFloatingPoint)
+{
+  EXPECT_DOUBLE_EQ(ksn::lerp(0.0, 10.0, 0.5), 5.0) <<
+    "0 + (10 - 0) * 0.5 = 0";
+
+  EXPECT_DOUBLE_EQ(ksn::lerp(5.0, 15.0, 0.25), 7.5) <<
+    "5 + (15 - 5) * 0.25 = 15";
 }
 
 #define ASSERT_SMOOTH_NEAR(SOURCE, TARGET, RATIO, ...) \

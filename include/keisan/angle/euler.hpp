@@ -29,16 +29,16 @@ namespace keisan
 {
 
 // Forward declaration
-template<typename T>
+template <typename T>
 struct Quaternion;
 
-template<typename T>
+template <typename T>
 struct Euler
 {
   Euler();
   Euler(const Angle<T> & roll, const Angle<T> & pitch, const Angle<T> & yaw);
 
-  template<typename U>
+  template <typename U>
   operator Euler<U>() const;
 
   bool operator==(const Euler<T> & other) const;
@@ -53,7 +53,7 @@ struct Euler
 
 }  // namespace keisan
 
-template<typename T>
+template <typename T>
 std::ostream & operator<<(std::ostream & out, const keisan::Euler<T> & euler);
 
 #include "keisan/angle/euler.impl.hpp"

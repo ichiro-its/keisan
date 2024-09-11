@@ -26,32 +26,32 @@
 namespace keisan
 {
 
-template<typename T, typename U>
+template <typename T, typename U>
 using IfElseFloat = typename std::conditional<std::is_floating_point<T>::value, T, U>::type;
 
 // Forward declaration
-template<typename T>
+template <typename T>
 class Angle;
 
-template<typename T>
+template <typename T>
 Angle<T> make_degree(const T & value);
-template<typename T>
+template <typename T>
 Angle<T> make_radian(const T & value);
 
-template<typename T>
+template <typename T>
 Angle<IfElseFloat<T, double>> arcsin(const T & value);
-template<typename T>
+template <typename T>
 Angle<IfElseFloat<T, double>> arccos(const T & value);
-template<typename T>
+template <typename T>
 Angle<IfElseFloat<T, double>> arctan(const T & value);
-template<typename T>
+template <typename T>
 Angle<IfElseFloat<T, double>> signed_arctan(const T & y, const T & x);
 
-template<typename T>
+template <typename T>
 class Angle
 {
 public:
-  template<typename U>
+  template <typename U>
   friend class Angle;
 
   friend Angle<T> make_degree<T>(const T & value);
@@ -63,7 +63,7 @@ private:
   explicit Angle(const T & data, const bool & is_degree = false);
 
 public:
-  template<typename U>
+  template <typename U>
   operator Angle<U>() const;
 
   bool operator==(const Angle<T> & angle) const;
@@ -114,7 +114,7 @@ Angle<double> operator""_pi_rad(long double value);
 
 }  // namespace keisan
 
-template<typename T, typename U>
+template <typename T, typename U>
 keisan::Angle<T> operator*(const U & value, const keisan::Angle<T> & angle);
 
 #include "keisan/angle/angle.impl.hpp"

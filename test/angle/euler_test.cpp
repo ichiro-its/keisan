@@ -33,42 +33,35 @@ TEST(EulerTest, Empty)
   ksn::Euler<long double> long_double_euler;
 }
 
-TEST(EulerTest, RpyConstructor)
-{
-  #define EXPECT_RPY_CONSTRUCTOR(TYPE) \
-  { \
+TEST(EulerTest, RpyConstructor){
+#define EXPECT_RPY_CONSTRUCTOR(TYPE)                \
+  {                                                 \
     ksn::Euler<TYPE> euler(0_deg, 90_deg, 180_deg); \
-    EXPECT_DOUBLE_EQ(euler.roll.degree(), 0.0); \
-    EXPECT_DOUBLE_EQ(euler.pitch.degree(), 90.0); \
-    EXPECT_DOUBLE_EQ(euler.yaw.degree(), 180.0); \
+    EXPECT_DOUBLE_EQ(euler.roll.degree(), 0.0);     \
+    EXPECT_DOUBLE_EQ(euler.pitch.degree(), 90.0);   \
+    EXPECT_DOUBLE_EQ(euler.yaw.degree(), 180.0);    \
   }
 
-  EXPECT_RPY_CONSTRUCTOR(float)
-  EXPECT_RPY_CONSTRUCTOR(double)
-  EXPECT_RPY_CONSTRUCTOR(long double)
-}
+  EXPECT_RPY_CONSTRUCTOR(float) EXPECT_RPY_CONSTRUCTOR(double) EXPECT_RPY_CONSTRUCTOR(long double)}
 
 TEST(EulerTest, AssignmentConstructor)
 {
-  #define EXPECT_CONVERSION_CONSTRUCTOR(TYPE, SOURCE) \
-  { \
-    ksn::Euler<TYPE> a(SOURCE), b = SOURCE, c; \
-    c = SOURCE; \
-    EXPECT_TRUE(a == SOURCE); \
-    EXPECT_TRUE(b == SOURCE); \
-    EXPECT_TRUE(c == SOURCE); \
+#define EXPECT_CONVERSION_CONSTRUCTOR(TYPE, SOURCE) \
+  {                                                 \
+    ksn::Euler<TYPE> a(SOURCE), b = SOURCE, c;      \
+    c = SOURCE;                                     \
+    EXPECT_TRUE(a == SOURCE);                       \
+    EXPECT_TRUE(b == SOURCE);                       \
+    EXPECT_TRUE(c == SOURCE);                       \
   }
 
   ksn::Euler<float> float_euler(90_deg, 90_deg, 90_deg);
   ksn::Euler<double> double_euler(-45_deg, -45_deg, -45_deg);
   ksn::Euler<long double> long_double_euler(15_deg, 15_deg, 15_deg);
 
-  #define LOOP_EXPECT_CONVERSION_CONSTRUCTOR(TYPE) \
-  { \
-    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, float_euler) \
-    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, double_euler) \
-    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, long_double_euler) \
-  }
+#define LOOP_EXPECT_CONVERSION_CONSTRUCTOR(TYPE)                                   \
+  {EXPECT_CONVERSION_CONSTRUCTOR(TYPE, float_euler) EXPECT_CONVERSION_CONSTRUCTOR( \
+    TYPE, double_euler) EXPECT_CONVERSION_CONSTRUCTOR(TYPE, long_double_euler)}
 
   LOOP_EXPECT_CONVERSION_CONSTRUCTOR(float)
   LOOP_EXPECT_CONVERSION_CONSTRUCTOR(double)

@@ -23,13 +23,13 @@
 #include "gtest/gtest.h"
 #include "keisan/keisan.hpp"
 
-#define ASSERT_VECTOR_N_EQ(N, VECTOR, ...) \
-  { \
-    ksn::Vector<N> _vector = VECTOR; \
-    double _values[] = {__VA_ARGS__}; \
-    for (size_t i = 0; i < N; ++i) { \
+#define ASSERT_VECTOR_N_EQ(N, VECTOR, ...)      \
+  {                                             \
+    ksn::Vector<N> _vector = VECTOR;            \
+    double _values[] = {__VA_ARGS__};           \
+    for (size_t i = 0; i < N; ++i) {            \
       ASSERT_DOUBLE_EQ(_values[i], _vector[i]); \
-    } \
+    }                                           \
   }
 
 namespace ksn = keisan;
@@ -78,10 +78,7 @@ TEST(VectorTest, ComparisonOperation)
 
 TEST(VectorTest, MatrixMultiplication)
 {
-  auto a = ksn::Matrix<3, 2>(
-    1.0, 1.0,
-    2.0, 2.0,
-    3.0, 3.0);
+  auto a = ksn::Matrix<3, 2>(1.0, 1.0, 2.0, 2.0, 3.0, 3.0);
 
   auto b = ksn::Vector<2>(1.0, 2.0);
 

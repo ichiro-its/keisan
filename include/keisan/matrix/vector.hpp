@@ -26,14 +26,14 @@
 namespace keisan
 {
 
-template<size_t N>
+template <size_t N>
 class Vector
 {
 public:
   Vector();
 
-  template<typename ... Types>
-  explicit Vector(const double & value, Types ... the_rest);
+  template <typename... Types>
+  explicit Vector(const double & value, Types... the_rest);
 
   Vector(const Vector<N> & vector);
 
@@ -71,10 +71,10 @@ private:
 
 }  // namespace keisan
 
-template<size_t N>
+template <size_t N>
 std::ostream & operator<<(std::ostream & out, const keisan::Vector<N> & vector);
 
-template<size_t N>
+template <size_t N>
 keisan::Vector<N> operator*(const double & value, const keisan::Vector<N> & vector);
 
 #include "keisan/matrix/vector.impl.hpp"

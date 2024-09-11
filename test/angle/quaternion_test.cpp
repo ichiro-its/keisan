@@ -30,50 +30,45 @@ TEST(QuaternionTest, Empty)
   ksn::Quaternion<long double> long_double_quaternion;
 }
 
-TEST(QuaternionTest, XyzwConstructor)
-{
-  #define EXPECT_XYZW_CONSTRUCTOR(TYPE) \
-  { \
+TEST(QuaternionTest, XyzwConstructor){
+#define EXPECT_XYZW_CONSTRUCTOR(TYPE)                      \
+  {                                                        \
     ksn::Quaternion<TYPE> quaternion(1.0, 0.5, 0.0, -0.5); \
-    EXPECT_DOUBLE_EQ(quaternion.x, 1.0); \
-    EXPECT_DOUBLE_EQ(quaternion.y, 0.5); \
-    EXPECT_DOUBLE_EQ(quaternion.z, 0.0); \
-    EXPECT_DOUBLE_EQ(quaternion.w, -0.5); \
+    EXPECT_DOUBLE_EQ(quaternion.x, 1.0);                   \
+    EXPECT_DOUBLE_EQ(quaternion.y, 0.5);                   \
+    EXPECT_DOUBLE_EQ(quaternion.z, 0.0);                   \
+    EXPECT_DOUBLE_EQ(quaternion.w, -0.5);                  \
   }
 
-  EXPECT_XYZW_CONSTRUCTOR(float)
-  EXPECT_XYZW_CONSTRUCTOR(double)
-  EXPECT_XYZW_CONSTRUCTOR(long double)
-}
+  EXPECT_XYZW_CONSTRUCTOR(float) EXPECT_XYZW_CONSTRUCTOR(double)
+    EXPECT_XYZW_CONSTRUCTOR(long double)}
 
 TEST(QuaternionTest, AssignmentConstructor)
 {
-  #define EXPECT_CONVERSION_CONSTRUCTOR(TYPE, SOURCE) \
-  { \
+#define EXPECT_CONVERSION_CONSTRUCTOR(TYPE, SOURCE) \
+  {                                                 \
     ksn::Quaternion<TYPE> a(SOURCE), b = SOURCE, c; \
-    c = SOURCE; \
-    EXPECT_TRUE(a == SOURCE); \
-    EXPECT_TRUE(b == SOURCE); \
-    EXPECT_TRUE(c == SOURCE); \
+    c = SOURCE;                                     \
+    EXPECT_TRUE(a == SOURCE);                       \
+    EXPECT_TRUE(b == SOURCE);                       \
+    EXPECT_TRUE(c == SOURCE);                       \
   }
 
   ksn::Quaternion<float> float_quaternion(1.0f, 1.0f, 1.0f, 1.0f);
   ksn::Quaternion<double> double_quaternion(0.5, 0.5, 0.5, 0.5);
   ksn::Quaternion<long double> long_double_quaternion(-0.5l, -0.5l, -0.5l, -0.5l);
 
-  #define LOOP_EXPECT_CONVERSION_CONSTRUCTOR(TYPE) \
-  { \
-    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, float_quaternion) \
-    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, double_quaternion) \
-    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, long_double_quaternion) \
-  }
+#define LOOP_EXPECT_CONVERSION_CONSTRUCTOR(TYPE)                                        \
+  {EXPECT_CONVERSION_CONSTRUCTOR(TYPE, float_quaternion) EXPECT_CONVERSION_CONSTRUCTOR( \
+    TYPE, double_quaternion) EXPECT_CONVERSION_CONSTRUCTOR(TYPE, long_double_quaternion)}
 
   LOOP_EXPECT_CONVERSION_CONSTRUCTOR(float)
   LOOP_EXPECT_CONVERSION_CONSTRUCTOR(double)
   LOOP_EXPECT_CONVERSION_CONSTRUCTOR(long double)
 }
 
-TEST(QuaternionTest, ComparisonOperator) {
+TEST(QuaternionTest, ComparisonOperator)
+{
   ksn::Quaternion<double> a(1.0, 0.5, 0.0, -0.5);
 
   auto b = a;

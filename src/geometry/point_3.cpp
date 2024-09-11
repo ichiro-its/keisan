@@ -18,10 +18,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#include "keisan/geometry/point_3.hpp"
+
 #include <cmath>
 
 #include "keisan/angle.hpp"
-#include "keisan/geometry/point_3.hpp"
 
 std::ostream & operator<<(std::ostream & out, const keisan::Point3 point)
 {
@@ -36,50 +37,24 @@ keisan::Point3 operator*(const double & value, const keisan::Point3 & point)
 namespace keisan
 {
 
-Point3::Point3()
-{
-}
+Point3::Point3() {}
 
-Point3::Point3(double x, double y, double z)
-: x(x),
-  y(y),
-  z(z)
-{
-}
+Point3::Point3(double x, double y, double z) : x(x), y(y), z(z) {}
 
-Point3::Point3(const Vector<3> & vector)
-: x(vector[0]),
-  y(vector[1]),
-  z(vector[2])
-{
-}
+Point3::Point3(const Vector<3> & vector) : x(vector[0]), y(vector[1]), z(vector[2]) {}
 
 Point3::Point3(const Vector<4> & vector)
-: x(vector[0] / vector[3]),
-  y(vector[1] / vector[3]),
-  z(vector[2] / vector[3])
+: x(vector[0] / vector[3]), y(vector[1] / vector[3]), z(vector[2] / vector[3])
 {
 }
 
-Point3::Point3(const Point3 & point)
-{
-  *this = point;
-}
+Point3::Point3(const Point3 & point) { *this = point; }
 
-Point3::operator Vector<3>() const
-{
-  return Vector<3>(x, y, z);
-}
+Point3::operator Vector<3>() const { return Vector<3>(x, y, z); }
 
-Point3::operator Vector<4>() const
-{
-  return Vector<4>(x, y, z, 1.0);
-}
+Point3::operator Vector<4>() const { return Vector<4>(x, y, z, 1.0); }
 
-Point3 Point3::zero()
-{
-  return Point3(0.0, 0.0, 0.0);
-}
+Point3 Point3::zero() { return Point3(0.0, 0.0, 0.0); }
 
 Point3 & Point3::operator=(const Point3 & point)
 {
@@ -184,15 +159,9 @@ Point3 Point3::operator/(const double & value) const
   return Point3(x / value, y / value, z / value);
 }
 
-Point3 Point3::operator-() const
-{
-  return Point3(-x, -y, -z);
-}
+Point3 Point3::operator-() const { return Point3(-x, -y, -z); }
 
-double Point3::magnitude() const
-{
-  return std::hypot(std::hypot(x, y), z);
-}
+double Point3::magnitude() const { return std::hypot(std::hypot(x, y), z); }
 
 Point3 Point3::normalize() const
 {
@@ -201,17 +170,11 @@ Point3 Point3::normalize() const
   return Point3(x / mag, y / mag, z / mag);
 }
 
-double Point3::dot(const Point3 & other) const
-{
-  return x * other.x + y * other.y + z * other.z;
-}
+double Point3::dot(const Point3 & other) const { return x * other.x + y * other.y + z * other.z; }
 
 Point3 Point3::cross(const Point3 & other) const
 {
-  return Point3(
-    y * other.z - z * other.y,
-    z * other.x - x * other.z,
-    x * other.y - y * other.x);
+  return Point3(y * other.z - z * other.y, z * other.x - x * other.z, x * other.y - y * other.x);
 }
 
 }  // namespace keisan

@@ -31,10 +31,7 @@ Angle<double> operator""_deg(unsigned long long int value)  // NOLINT
   return make_degree<double>(value);
 }
 
-Angle<double> operator""_deg(long double value)
-{
-  return make_degree<double>(value);
-}
+Angle<double> operator""_deg(long double value) { return make_degree<double>(value); }
 
 Angle<double> operator""_pi_rad(unsigned long long int value)  // NOLINT
 {

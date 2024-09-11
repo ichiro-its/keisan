@@ -27,7 +27,7 @@
 #include "gtest/gtest.h"
 #include "keisan/matrix/vector.hpp"
 
-template<size_t N>
+template <size_t N>
 std::ostream & operator<<(std::ostream & out, const keisan::Vector<N> & vector)
 {
   out << "[";
@@ -44,7 +44,7 @@ std::ostream & operator<<(std::ostream & out, const keisan::Vector<N> & vector)
   return out;
 }
 
-template<size_t N>
+template <size_t N>
 inline keisan::Vector<N> operator*(const double & value, const keisan::Vector<N> & vector)
 {
   return vector * value;
@@ -53,25 +53,24 @@ inline keisan::Vector<N> operator*(const double & value, const keisan::Vector<N>
 namespace keisan
 {
 
-template<size_t N>
+template <size_t N>
 Vector<N>::Vector()
 {
 }
 
-template<size_t N>
-template<typename ... Types>
-Vector<N>::Vector(const double & value, Types ... the_rest)
-: data{value, the_rest ...}
+template <size_t N>
+template <typename... Types>
+Vector<N>::Vector(const double & value, Types... the_rest) : data{value, the_rest...}
 {
 }
 
-template<size_t N>
+template <size_t N>
 Vector<N>::Vector(const Vector<N> & vector)
 {
   *this = vector;
 }
 
-template<size_t N>
+template <size_t N>
 Vector<N> Vector<N>::zero()
 {
   Vector<N> vector;
@@ -82,14 +81,14 @@ Vector<N> Vector<N>::zero()
   return vector;
 }
 
-template<size_t N>
+template <size_t N>
 Vector<N> & Vector<N>::operator=(const Vector<N> & vector)
 {
   std::copy(vector.data, vector.data + N, data);
   return *this;
 }
 
-template<size_t N>
+template <size_t N>
 bool Vector<N>::operator==(const Vector<N> & vector) const
 {
   using testing::internal::FloatingPoint;
@@ -102,13 +101,13 @@ bool Vector<N>::operator==(const Vector<N> & vector) const
   return true;
 }
 
-template<size_t N>
+template <size_t N>
 bool Vector<N>::operator!=(const Vector<N> & vector) const
 {
   return !(*this == vector);
 }
 
-template<size_t N>
+template <size_t N>
 Vector<N> & Vector<N>::operator+=(const Vector<N> & vector)
 {
   for (size_t i = 0; i < N; ++i) {
@@ -118,7 +117,7 @@ Vector<N> & Vector<N>::operator+=(const Vector<N> & vector)
   return *this;
 }
 
-template<size_t N>
+template <size_t N>
 Vector<N> & Vector<N>::operator-=(const Vector<N> & vector)
 {
   for (size_t i = 0; i < N; ++i) {
@@ -128,7 +127,7 @@ Vector<N> & Vector<N>::operator-=(const Vector<N> & vector)
   return *this;
 }
 
-template<size_t N>
+template <size_t N>
 Vector<N> & Vector<N>::operator+=(const double & value)
 {
   for (size_t i = 0; i < N; ++i) {
@@ -138,7 +137,7 @@ Vector<N> & Vector<N>::operator+=(const double & value)
   return *this;
 }
 
-template<size_t N>
+template <size_t N>
 Vector<N> & Vector<N>::operator-=(const double & value)
 {
   for (size_t i = 0; i < N; ++i) {
@@ -148,7 +147,7 @@ Vector<N> & Vector<N>::operator-=(const double & value)
   return *this;
 }
 
-template<size_t N>
+template <size_t N>
 Vector<N> & Vector<N>::operator*=(const double & value)
 {
   for (size_t i = 0; i < N; ++i) {
@@ -158,7 +157,7 @@ Vector<N> & Vector<N>::operator*=(const double & value)
   return *this;
 }
 
-template<size_t N>
+template <size_t N>
 Vector<N> & Vector<N>::operator/=(const double & value)
 {
   for (size_t i = 0; i < N; ++i) {
@@ -168,7 +167,7 @@ Vector<N> & Vector<N>::operator/=(const double & value)
   return *this;
 }
 
-template<size_t N>
+template <size_t N>
 Vector<N> Vector<N>::operator+(const Vector<N> & vector) const
 {
   auto new_vector = *this;
@@ -177,7 +176,7 @@ Vector<N> Vector<N>::operator+(const Vector<N> & vector) const
   return new_vector;
 }
 
-template<size_t N>
+template <size_t N>
 Vector<N> Vector<N>::operator-(const Vector<N> & vector) const
 {
   auto new_vector = *this;
@@ -186,7 +185,7 @@ Vector<N> Vector<N>::operator-(const Vector<N> & vector) const
   return new_vector;
 }
 
-template<size_t N>
+template <size_t N>
 Vector<N> Vector<N>::operator+(const double & value) const
 {
   auto new_vector = *this;
@@ -195,7 +194,7 @@ Vector<N> Vector<N>::operator+(const double & value) const
   return new_vector;
 }
 
-template<size_t N>
+template <size_t N>
 Vector<N> Vector<N>::operator-(const double & value) const
 {
   auto new_vector = *this;
@@ -204,7 +203,7 @@ Vector<N> Vector<N>::operator-(const double & value) const
   return new_vector;
 }
 
-template<size_t N>
+template <size_t N>
 Vector<N> Vector<N>::operator*(const double & value) const
 {
   auto new_vector = *this;
@@ -213,7 +212,7 @@ Vector<N> Vector<N>::operator*(const double & value) const
   return new_vector;
 }
 
-template<size_t N>
+template <size_t N>
 Vector<N> Vector<N>::operator/(const double & value) const
 {
   auto new_vector = *this;
@@ -221,7 +220,7 @@ Vector<N> Vector<N>::operator/(const double & value) const
   return new_vector;
 }
 
-template<size_t N>
+template <size_t N>
 Vector<N> Vector<N>::operator-() const
 {
   Vector<N> vector;
@@ -232,13 +231,13 @@ Vector<N> Vector<N>::operator-() const
   return vector;
 }
 
-template<size_t N>
+template <size_t N>
 double & Vector<N>::operator[](size_t pos)
 {
   return data[pos];
 }
 
-template<size_t N>
+template <size_t N>
 const double & Vector<N>::operator[](size_t pos) const
 {
   return data[pos];

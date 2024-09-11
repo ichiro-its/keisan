@@ -24,7 +24,7 @@
 #include "keisan/angle/quaternion.hpp"
 #include "keisan/constant.hpp"
 
-template<typename T>
+template <typename T>
 std::ostream & operator<<(std::ostream & out, const keisan::Euler<T> & euler)
 {
   return out << euler.roll.degree() << " " << euler.pitch.degree() << " " << euler.yaw.degree();
@@ -33,37 +33,37 @@ std::ostream & operator<<(std::ostream & out, const keisan::Euler<T> & euler)
 namespace keisan
 {
 
-template<typename T>
+template <typename T>
 Euler<T>::Euler()
 {
 }
 
-template<typename T>
+template <typename T>
 Euler<T>::Euler(const Angle<T> & roll, const Angle<T> & pitch, const Angle<T> & yaw)
 : roll(roll), pitch(pitch), yaw(yaw)
 {
 }
 
-template<typename T>
-template<typename U>
+template <typename T>
+template <typename U>
 Euler<T>::operator Euler<U>() const
 {
   return Euler<U>(roll, pitch, yaw);
 }
 
-template<typename T>
+template <typename T>
 bool Euler<T>::operator==(const Euler<T> & other) const
 {
   return roll == other.roll && yaw == other.yaw && pitch == other.pitch;
 }
 
-template<typename T>
+template <typename T>
 bool Euler<T>::operator!=(const Euler<T> & other) const
 {
   return roll != other.roll || yaw != other.yaw || pitch != other.pitch;
 }
 
-template<typename T>
+template <typename T>
 Quaternion<T> Euler<T>::quaternion() const
 {
   Quaternion<T> quaternion;

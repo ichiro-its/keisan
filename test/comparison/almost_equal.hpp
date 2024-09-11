@@ -26,7 +26,7 @@
 namespace testing
 {
 
-template<typename T>
+template <typename T>
 bool almost_equal(const T & a, const T & b)
 {
   return internal::FloatingPoint<T>(a).AlmostEquals(internal::FloatingPoint<T>(b));

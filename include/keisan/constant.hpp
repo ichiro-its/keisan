@@ -26,7 +26,7 @@
 namespace keisan
 {
 
-template<typename T>
+template <typename T>
 const T pi = std::atan((T)1) * 4;
 
 namespace literals

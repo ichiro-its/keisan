@@ -26,58 +26,58 @@
 namespace keisan
 {
 
-template<typename T>
+template <typename T>
 class Angle;
 
-template<typename T>
+template <typename T>
 using enable_if_is_integral = std::enable_if_t<std::is_integral<T>::value, bool>;
 
-template<typename T>
+template <typename T>
 using enable_if_is_floating_point = std::enable_if_t<std::is_floating_point<T>::value, bool>;
 
-template<typename T>
+template <typename T>
 T sign(const T & value);
 
-template<typename T>
+template <typename T>
 T sign(const Angle<T> & value);
 
-template<typename T>
+template <typename T>
 T scale(const T & value, const T & source, const T & target);
 
-template<typename T>
+template <typename T>
 T map(
-  const T & value, const T & source_min, const T & source_max,
-  const T & target_min, const T & target_max);
+  const T & value, const T & source_min, const T & source_max, const T & target_min,
+  const T & target_max);
 
-template<typename T>
+template <typename T>
 T exponentialmap(
-  const T & value, const T & source_min, const T & source_max,
-  const T & target_min, const T & target_max);
+  const T & value, const T & source_min, const T & source_max, const T & target_min,
+  const T & target_max);
 
-template<typename T>
+template <typename T>
 T sinusoidalmap(
-  const T & value, const T & source_min, const T & source_max,
-  const T & target_min, const T & target_max);
+  const T & value, const T & source_min, const T & source_max, const T & target_min,
+  const T & target_max);
 
-template<typename T>
+template <typename T>
 T clamp(const T & value, const T & min, const T & max);
 
-template<typename T>
+template <typename T>
 Angle<T> clamp(const Angle<T> & value, const Angle<T> & min, const Angle<T> & max);
 
-template<typename T, enable_if_is_floating_point<T> = true>
+template <typename T, enable_if_is_floating_point<T> = true>
 T wrap(const T & value, const T & min, const T & max);
 
-template<typename T, enable_if_is_integral<T> = true>
+template <typename T, enable_if_is_integral<T> = true>
 T wrap(const T & value, const T & min, const T & max);
 
-template<typename T>
+template <typename T>
 T smooth(T value, T target, T ratio);
 
-template<typename T>
+template <typename T>
 T curve(const T & value, const T & min, const T & max, const T & exponential);
 
-template<typename T>
+template <typename T>
 T lerp(const T & start, const T & end, const T & rate);
 
 }  // namespace keisan

@@ -98,25 +98,22 @@ TEST(AngleTest, Empty)
 
 TEST(AngleTest, AssignmentConstructor)
 {
-  #define EXPECT_CONVERSION_CONSTRUCTOR(TYPE, SOURCE) \
-  { \
-    ksn::Angle<TYPE> a(SOURCE), b = SOURCE, c; \
-    c = SOURCE; \
-    EXPECT_DOUBLE_EQ(a.degree(), SOURCE.degree()); \
-    EXPECT_DOUBLE_EQ(b.degree(), SOURCE.degree()); \
-    EXPECT_DOUBLE_EQ(c.degree(), SOURCE.degree()); \
+#define EXPECT_CONVERSION_CONSTRUCTOR(TYPE, SOURCE) \
+  {                                                 \
+    ksn::Angle<TYPE> a(SOURCE), b = SOURCE, c;      \
+    c = SOURCE;                                     \
+    EXPECT_DOUBLE_EQ(a.degree(), SOURCE.degree());  \
+    EXPECT_DOUBLE_EQ(b.degree(), SOURCE.degree());  \
+    EXPECT_DOUBLE_EQ(c.degree(), SOURCE.degree());  \
   }
 
   auto float_angle = ksn::make_degree(90.0f);
   auto double_angle = ksn::make_degree(-45.0);
   auto long_double_angle = ksn::make_degree(15.0l);
 
-  #define LOOP_EXPECT_CONVERSION_CONSTRUCTOR(TYPE) \
-  { \
-    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, float_angle) \
-    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, double_angle) \
-    EXPECT_CONVERSION_CONSTRUCTOR(TYPE, long_double_angle) \
-  }
+#define LOOP_EXPECT_CONVERSION_CONSTRUCTOR(TYPE)                                   \
+  {EXPECT_CONVERSION_CONSTRUCTOR(TYPE, float_angle) EXPECT_CONVERSION_CONSTRUCTOR( \
+    TYPE, double_angle) EXPECT_CONVERSION_CONSTRUCTOR(TYPE, long_double_angle)}
 
   LOOP_EXPECT_CONVERSION_CONSTRUCTOR(float)
   LOOP_EXPECT_CONVERSION_CONSTRUCTOR(double)
@@ -129,9 +126,8 @@ TEST(AngleTest, ComparisonOperator)
   auto b = -180_deg;
   auto c = -1_pi_rad;
 
-  EXPECT_TRUE(b == c && a != c) <<
-    "-180 == -1pi\n"
-    "90 != -1pi";
+  EXPECT_TRUE(b == c && a != c) << "-180 == -1pi\n"
+                                   "90 != -1pi";
 
   EXPECT_TRUE(a > b && a >= b && a >= a) << "90 > -180";
   EXPECT_TRUE(b < a && b <= a && b <= b) << "-180 < 90";

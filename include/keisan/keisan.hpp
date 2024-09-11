@@ -21,11 +21,10 @@
 #ifndef KEISAN__KEISAN_HPP_
 #define KEISAN__KEISAN_HPP_
 
-#include "keisan/geometry/point_2.hpp"
-#include "keisan/geometry/point_3.hpp"
-
 #include "keisan/angle.hpp"
 #include "keisan/constant.hpp"
+#include "keisan/geometry/point_2.hpp"
+#include "keisan/geometry/point_3.hpp"
 #include "keisan/matrix.hpp"
 #include "keisan/number.hpp"
 

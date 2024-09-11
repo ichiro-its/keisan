@@ -26,7 +26,7 @@
 
 using keisan::literals::operator""_pi;
 
-template<typename T>
+template <typename T>
 std::ostream & operator<<(std::ostream & out, const keisan::Quaternion<T> & quaternion)
 {
   return out << quaternion.x << " " << quaternion.y << " " << quaternion.z << " " << quaternion.w;
@@ -35,37 +35,37 @@ std::ostream & operator<<(std::ostream & out, const keisan::Quaternion<T> & quat
 namespace keisan
 {
 
-template<typename T>
+template <typename T>
 Quaternion<T>::Quaternion()
 {
 }
 
-template<typename T>
+template <typename T>
 Quaternion<T>::Quaternion(const T & x, const T & y, const T & z, const T & w)
 : x(x), y(y), z(z), w(w)
 {
 }
 
-template<typename T>
-template<typename U>
+template <typename T>
+template <typename U>
 Quaternion<T>::operator Quaternion<U>() const
 {
   return Quaternion<U>(x, y, z, w);
 }
 
-template<typename T>
+template <typename T>
 bool Quaternion<T>::operator==(const Quaternion<T> & other) const
 {
   return x == other.x && y == other.y && z == other.z && w == other.w;
 }
 
-template<typename T>
+template <typename T>
 bool Quaternion<T>::operator!=(const Quaternion<T> & other) const
 {
   return x != other.x || y != other.y || z != other.z || w != other.w;
 }
 
-template<typename T>
+template <typename T>
 Euler<T> Quaternion<T>::euler() const
 {
   Euler<T> euler;

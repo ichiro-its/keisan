@@ -24,9 +24,8 @@
 #include <limits>
 #include <string>
 
-#include "keisan/keisan.hpp"
-
 #include "./almost_equal.hpp"
+#include "keisan/keisan.hpp"
 
 namespace testing
 {
@@ -34,15 +33,15 @@ namespace testing
 std::string point3_print_string(const keisan::Point3 & point)
 {
   std::stringstream ss;
-  ss << std::setprecision(std::numeric_limits<double>::digits10 + 2) <<
-    "{" << point.x << ", " << point.y << ", " << point.z << "}";
+  ss << std::setprecision(std::numeric_limits<double>::digits10 + 2) << "{" << point.x << ", "
+     << point.y << ", " << point.z << "}";
 
   return internal::StringStreamToString(&ss);
 }
 
 AssertionResult point3_equal(
-  const char * lhs_expression, const char * rhs_expression,
-  const keisan::Point3 & lhs_value, const keisan::Point3 & rhs_value)
+  const char * lhs_expression, const char * rhs_expression, const keisan::Point3 & lhs_value,
+  const keisan::Point3 & rhs_value)
 {
   if (almost_equal(lhs_value.x, rhs_value.x)) {
     if (almost_equal(lhs_value.y, rhs_value.y)) {
@@ -53,16 +52,13 @@ AssertionResult point3_equal(
   }
 
   return internal::EqFailure(
-    lhs_expression, rhs_expression,
-    point3_print_string(lhs_value), point3_print_string(rhs_value),
+    lhs_expression, rhs_expression, point3_print_string(lhs_value), point3_print_string(rhs_value),
     false);
 }
 
-#define EXPECT_POINT3_EQ(val1, val2) \
-  EXPECT_PRED_FORMAT2(testing::point3_equal, val1, val2)
+#define EXPECT_POINT3_EQ(val1, val2) EXPECT_PRED_FORMAT2(testing::point3_equal, val1, val2)
 
-#define ASSERT_POINT3_EQ(val1, val2) \
-  ASSERT_PRED_FORMAT2(testing::point3_equal, val1, val2)
+#define ASSERT_POINT3_EQ(val1, val2) ASSERT_PRED_FORMAT2(testing::point3_equal, val1, val2)
 
 }  // namespace testing
 

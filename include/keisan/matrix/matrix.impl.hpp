@@ -445,6 +445,31 @@ bool Matrix<M, N>::inverse()
   return true;
 }
 
+template<size_t M, size_t N>  
+Matrix<N, M> Matrix<M, N>::transpose() const
+{
+  Matrix<N, M> matrix;
+  for (size_t i = 0; i < M; ++i) {
+    for (size_t j = 0; j < N; ++j) {
+      matrix[j][i] = (*this)[i][j];
+    }
+  }
+
+  return matrix;
+}
+
+template<size_t M, size_t N>
+Matrix<M, N> Matrix<M, N>::round(const double & tolerance = 1e-9) const {
+  Matrix<M, N> matrix;
+  for (size_t i = 0; i < M; ++i) {
+    for (size_t j = 0; j < N; ++j) {
+      matrix[i][j] = std::abs((*this)[i][j]) < tolerance ? 0.0 : (*this)[i][j];
+    }
+  }
+
+  return matrix;
+}
+
 }  // namespace keisan
 
 #endif  // KEISAN__MATRIX__MATRIX_IMPL_HPP_

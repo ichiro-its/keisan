@@ -29,7 +29,7 @@ namespace keisan
 class Kalman
 {
 public:
-  Kalman(float dt, float std_dev_aceleration, Matrix<2, 1> std_measurement, Matrix<2, 1> acceleration); 
+  Kalman(double dt, double std_dev_aceleration, Matrix<2, 1> std_measurement, Matrix<2, 1> acceleration); 
   Matrix<4, 1> predict();
   Matrix<4, 1> update(Matrix<2, 1> measurement);
 

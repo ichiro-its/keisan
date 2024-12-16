@@ -459,7 +459,7 @@ Matrix<N, M> Matrix<M, N>::transpose() const
 }
 
 template<size_t M, size_t N>
-Matrix<M, N> Matrix<M, N>::round(const double & tolerance = 1e-9) const {
+Matrix<M, N> Matrix<M, N>::round(double & tolerance = 1e-9) const {
   Matrix<M, N> matrix;
   for (size_t i = 0; i < M; ++i) {
     for (size_t j = 0; j < N; ++j) {

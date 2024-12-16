@@ -78,9 +78,10 @@ public:
   const double * operator[](size_t pos) const;
 
   bool inverse();
+  bool inverse2();
 
   Matrix<N, M> transpose() const;
-  Matrix<M, N> round(double & tolerance = 1e-9) const;
+  Matrix<M, N> round(const double & tolerance) const;
 
 private:
   double data[M * N];

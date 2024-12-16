@@ -52,8 +52,8 @@ Matrix<4, 1> Kalman::predict() {
 }
  
 Matrix<4, 1> Kalman::update(Matrix<2, 1> measurement) {
-  Matrix<4, 2> K = (P*(H.transpose()))*(H*P*H.transpose() + R).inverse();
-  Xk = (Xk + K*(measurement - H*Xk)).round();
+  Matrix<4, 2> K = (P*(H.transpose()))*(H*P*H.transpose() + R).inverse2();
+  Xk = (Xk + K*(measurement - H*Xk)).round(1e-9);
   Matrix<4, 4> I = Matrix<4, 4>::identity();
   P = (I - K*H)*P;
 

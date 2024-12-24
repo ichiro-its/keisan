@@ -55,42 +55,53 @@ Spline quadratic_spline(const std::vector<double> & x, const std::vector<double>
 
 Spline cubic_spline(const std::vector<double> & x, const std::vector<double> & y)
 {
-  std::vector<Polynom> polynoms;
+  size_t n = x.size() - 1;
 
-  std::vector<double> h;
-  std::vector<double> a;
-  std::vector<double> b;
-  std::vector<double> c;
-  std::vector<double> d;
-
-  for (size_t i = 0; i < x.size() - 1; ++i) {
-    h.push_back(x[i + 1] - x[i]);
-    a.push_back(y[i]);
+  std::vector<double> h(n);
+  for (size_t i = 0; i < n; ++i) {
+    h[i] = (x[i + 1] - x[i]);
   }
 
-  std::vector<double> alpha;
-  for (size_t i = 1; i < x.size() - 1; ++i) {
-    alpha.push_back(3.0 / h[i] * (a[i + 1] - a[i]) - 3.0 / h[i - 1] * (a[i] - a[i - 1]));
+  std::vector<double> alpha(n);
+  for (size_t i = 1; i < n; ++i) {
+    alpha[i] = (3.0 / h[i] * (y[i + 1] - y[i]) - 3.0 / h[i - 1] * (y[i] - y[i - 1]));
   }
 
-  std::vector<double> l(x.size(), 1.0);
-  std::vector<double> mu(x.size(), 0.0);
-  std::vector<double> z(x.size(), 0.0);
+  std::vector<double> l(n + 1);
+  std::vector<double> mu(n);
+  std::vector<double> z(n + 1);
 
-  for (size_t i = 1; i < x.size() - 1; ++i) {
+  l[0] = 1.0;
+  mu[0] = 0.0;
+  z[0] = 0.0;
+
+  for (size_t i = 1; i < n; ++i) {
     l[i] = 2.0 * (x[i + 1] - x[i - 1]) - h[i - 1] * mu[i - 1];
     mu[i] = h[i] / l[i];
     z[i] = (alpha[i] - h[i - 1] * z[i - 1]) / l[i];
   }
 
-  for (size_t i = x.size() - 2; i > 0; --i) {
-    c.push_back(z[i] - mu[i] * c.back());
-    b.push_back((a[i + 1] - a[i]) / h[i] - h[i] * (c.back() + 2.0 * c.back()) / 3.0);
-    d.push_back((c.back() - c.back()) / (3.0 * h[i]));
+  l[n] = 1.0;
+  z[n] = 0.0;
+
+  std::vector<double> c(n + 1);
+  c[n] = 0.0;
+
+  for (int j = n - 1; j >= 0; --j) {
+    c[j] = z[j] - mu[j] * c[j + 1];
   }
 
-  for (size_t i = 0; i < x.size() - 1; ++i) {
-    polynoms.push_back(Polynom({a[i], b[i], c[i], d[i]}, x[i], x[i + 1]));
+  std::vector<double> b(n);
+  std::vector<double> d(n);
+
+  for (size_t i = 0; i < n; ++i) {
+    b[i] = (y[i + 1] - y[i]) / h[i] - h[i] * (c[i + 1] + 2.0 * c[i]) / 3.0;
+    d[i] = (c[i + 1] - c[i]) / (3.0 * h[i]);
+  }
+
+  std::vector<Polynom> polynoms;
+  for (size_t i = 0; i < n; ++i) {
+    polynoms.push_back(Polynom({y[i], b[i], c[i], d[i]}, x[i], x[i + 1]));
   }
 
   return Spline(polynoms);

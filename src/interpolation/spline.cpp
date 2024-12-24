@@ -63,6 +63,8 @@ Spline cubic_spline(const std::vector<double> & x, const std::vector<double> & y
   }
 
   std::vector<double> alpha(n);
+  alpha[0] = 0.0;
+
   for (size_t i = 1; i < n; ++i) {
     alpha[i] = (3.0 / h[i] * (y[i + 1] - y[i]) - 3.0 / h[i - 1] * (y[i] - y[i - 1]));
   }
@@ -84,19 +86,15 @@ Spline cubic_spline(const std::vector<double> & x, const std::vector<double> & y
   l[n] = 1.0;
   z[n] = 0.0;
 
+  std::vector<double> b(n);
+  std::vector<double> d(n);
   std::vector<double> c(n + 1);
   c[n] = 0.0;
 
   for (int j = n - 1; j >= 0; --j) {
     c[j] = z[j] - mu[j] * c[j + 1];
-  }
-
-  std::vector<double> b(n);
-  std::vector<double> d(n);
-
-  for (size_t i = 0; i < n; ++i) {
-    b[i] = (y[i + 1] - y[i]) / h[i] - h[i] * (c[i + 1] + 2.0 * c[i]) / 3.0;
-    d[i] = (c[i + 1] - c[i]) / (3.0 * h[i]);
+    b[j] = (y[j + 1] - y[j]) / h[j] - h[j] * (c[j + 1] + 2.0 * c[j]) / 3.0;
+    d[j] = (c[j + 1] - c[j]) / (3.0 * h[j]);
   }
 
   std::vector<Polynom> polynoms;

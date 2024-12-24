@@ -29,17 +29,32 @@ namespace keisan
 class Polynom
 {
 public:
-  std::vector<double> coefficients;
+  Polynom(
+    const std::vector<double> & coefficients = {0.0}, const double & domain_min = 0.0,
+    const double & domain_max = 0.0);
 
-  Polynom(const std::vector<double> & coefficients);
+  bool is_in_domain(const double & x) const;
 
   double operator()(const double & x) const;
+
+  bool operator==(const Polynom & other) const;
+  bool operator!=(const Polynom & other) const;
+
+  Polynom operator+(const Polynom & other) const;
+  Polynom operator-(const Polynom & other) const;
 
   Polynom derivative() const;
 
   Polynom integral() const;
+
+private:
+  std::vector<double> coefficients;
+  double domain_min;
+  double domain_max;
 };
 
-} // namespace keisan
+}  // namespace keisan
 
-#endif // KEISAN__INTERPOLATION__POLYNOM_HPP_
+#include "keisan/interpolation/polynom.impl.hpp"
+
+#endif  // KEISAN__INTERPOLATION__POLYNOM_HPP_

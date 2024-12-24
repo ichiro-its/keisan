@@ -18,6 +18,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#ifndef KEISAN__INTERPOLATION__POLYNOM_IMPL_HPP_
+#define KEISAN__INTERPOLATION__POLYNOM_IMPL_HPP_
+
 #include <cmath>
 
 #include "keisan/interpolation/polynom.hpp"
@@ -25,9 +28,13 @@
 namespace keisan
 {
 
-Polynom::Polynom(const std::vector<double> & coefficients)
-: coefficients(coefficients)
-{}
+Polynom::Polynom(
+  const std::vector<double> & coefficients, const double & domain_min, const double & domain_max)
+: coefficients(coefficients), domain_min(domain_min), domain_max(domain_max)
+{
+}
+
+bool Polynom::is_in_domain(const double & x) const { return x >= domain_min && x <= domain_max; }
 
 double Polynom::operator()(const double & x) const
 {
@@ -40,6 +47,42 @@ double Polynom::operator()(const double & x) const
   return result;
 }
 
+bool Polynom::operator==(const Polynom & other) const
+{
+  return coefficients == other.coefficients && domain_min == other.domain_min &&
+         domain_max == other.domain_max;
+}
+
+bool Polynom::operator!=(const Polynom & other) const { return !(*this == other); }
+
+Polynom Polynom::operator+(const Polynom & other) const
+{
+  std::vector<double> new_coefficients;
+
+  for (size_t i = 0; i < std::max(coefficients.size(), other.coefficients.size()); ++i) {
+    double a = (i < coefficients.size()) ? coefficients[i] : 0.0;
+    double b = (i < other.coefficients.size()) ? other.coefficients[i] : 0.0;
+
+    new_coefficients.push_back(a + b);
+  }
+
+  return Polynom(new_coefficients, domain_min, domain_max);
+}
+
+Polynom Polynom::operator-(const Polynom & other) const
+{
+  std::vector<double> new_coefficients;
+
+  for (size_t i = 0; i < std::max(coefficients.size(), other.coefficients.size()); ++i) {
+    double a = (i < coefficients.size()) ? coefficients[i] : 0.0;
+    double b = (i < other.coefficients.size()) ? other.coefficients[i] : 0.0;
+
+    new_coefficients.push_back(a - b);
+  }
+
+  return Polynom(new_coefficients, domain_min, domain_max);
+}
+
 Polynom Polynom::derivative() const
 {
   std::vector<double> new_coefficients;
@@ -48,7 +91,7 @@ Polynom Polynom::derivative() const
     new_coefficients.push_back(i * coefficients[i]);
   }
 
-  return Polynom(new_coefficients);
+  return Polynom(new_coefficients, domain_min, domain_max);
 }
 
 Polynom Polynom::integral() const
@@ -61,7 +104,9 @@ Polynom Polynom::integral() const
     new_coefficients.push_back(coefficients[i] / (i + 1));
   }
 
-  return Polynom(new_coefficients);
+  return Polynom(new_coefficients, domain_min, domain_max);
 }
 
-} // namespace keisan
+}  // namespace keisan
+
+#endif  // KEISAN__INTERPOLATION__POLYNOM_IMPL_HPP_

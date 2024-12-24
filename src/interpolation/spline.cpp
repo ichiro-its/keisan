@@ -25,9 +25,17 @@ namespace keisan
 
 Spline linear_spline(const std::vector<double> & x, const std::vector<double> & y)
 {
+  if (x.size() != y.size()) {
+    throw std::invalid_argument("x and y must have the same size");
+  }
+
   std::vector<Polynom> polynoms;
 
   for (size_t i = 0; i < x.size() - 1; ++i) {
+    if (x[i + 1] <= x[i]) {
+      throw std::invalid_argument("x must be in increasing order");
+    }
+
     double a = (y[i + 1] - y[i]) / (x[i + 1] - x[i]);
     double b = y[i] - a * x[i];
 
@@ -39,9 +47,17 @@ Spline linear_spline(const std::vector<double> & x, const std::vector<double> & 
 
 Spline quadratic_spline(const std::vector<double> & x, const std::vector<double> & y)
 {
+  if (x.size() != y.size()) {
+    throw std::invalid_argument("x and y must have the same size");
+  }
+
   std::vector<Polynom> polynoms;
 
   for (size_t i = 0; i < x.size() - 1; ++i) {
+    if (x[i + 1] <= x[i]) {
+      throw std::invalid_argument("x must be in increasing order");
+    }
+
     double a = ((y[i + 1] - y[i]) / (x[i + 1] - x[i]) - (y[i] - y[i - 1]) / (x[i] - x[i - 1])) /
                (x[i + 1] - x[i - 1]);
     double b = (y[i] - y[i - 1]) / (x[i] - x[i - 1]) - a * x[i];
@@ -60,17 +76,19 @@ Spline cubic_spline(const std::vector<double> & x, const std::vector<double> & y
   std::vector<double> h(n);
   for (size_t i = 0; i < n; ++i) {
     h[i] = (x[i + 1] - x[i]);
+
+    if (h[i] <= 0.0) {
+      throw std::invalid_argument("x must be in increasing order");
+    }
   }
 
   std::vector<double> alpha(n);
-  alpha[0] = 0.0;
-
   for (size_t i = 1; i < n; ++i) {
     alpha[i] = (3.0 / h[i] * (y[i + 1] - y[i]) - 3.0 / h[i - 1] * (y[i] - y[i - 1]));
   }
 
   std::vector<double> l(n + 1);
-  std::vector<double> mu(n);
+  std::vector<double> mu(n + 1);
   std::vector<double> z(n + 1);
 
   l[0] = 1.0;
@@ -85,10 +103,11 @@ Spline cubic_spline(const std::vector<double> & x, const std::vector<double> & y
 
   l[n] = 1.0;
   z[n] = 0.0;
+  mu[n] = 0.0;
 
   std::vector<double> b(n);
-  std::vector<double> d(n);
   std::vector<double> c(n + 1);
+  std::vector<double> d(n);
   c[n] = 0.0;
 
   for (int j = n - 1; j >= 0; --j) {

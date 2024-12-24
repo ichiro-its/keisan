@@ -59,6 +59,8 @@ Spline Spline::derivative() const
   return Spline(new_polynoms);
 }
 
+std::vector<Polynom> Spline::get_polynoms() const { return polynoms; }
+
 }  // namespace keisan
 
 #endif  // KEISAN__INTERPOLATION__SPLINE_IMPL_HPP_

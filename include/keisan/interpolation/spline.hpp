@@ -33,6 +33,8 @@ public:
 
   double operator()(const double & x) const;
 
+  std::vector<Polynom> get_polynoms() const;
+
   Spline derivative() const;
 
 private:

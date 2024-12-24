@@ -41,7 +41,7 @@ double Polynom::operator()(const double & x) const
   double result = 0.0;
 
   for (size_t i = 0; i < coefficients.size(); ++i) {
-    result += coefficients[i] * std::pow(x, i);
+    result += coefficients[i] * std::pow(x - domain_min, i);
   }
 
   return result;

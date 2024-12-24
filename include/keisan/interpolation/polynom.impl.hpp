@@ -109,9 +109,14 @@ Polynom Polynom::integral() const
 
 std::ostream & operator<<(std::ostream & os, const Polynom & polynom)
 {
-  for (size_t i = 0; i < polynom.coefficients.size(); ++i) {
-    os << polynom.coefficients[i] << "x^" << i;
-    if (i != polynom.coefficients.size() - 1) {
+  for (size_t i = polynom.coefficients.size(); i-- > 0;) {
+    os << polynom.coefficients[i];
+
+    if (i > 0) {
+      os << "x^" << i;
+    }
+
+    if (i != 0) {
       os << " + ";
     }
   }

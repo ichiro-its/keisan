@@ -24,7 +24,8 @@ add_library(${PROJECT_NAME} SHARED
   "src/geometry/point_2.cpp"
   "src/geometry/point_3.cpp"
   "src/matrix/matrix.cpp"
-  "src/constant.cpp")
+  "src/constant.cpp"
+  "src/interpolation/polynom.cpp")
 
 ament_target_dependencies(${PROJECT_NAME} gtest_vendor)
 

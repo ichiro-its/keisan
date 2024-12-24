@@ -21,6 +21,7 @@
 #ifndef KEISAN__INTERPOLATION__POLYNOM_HPP_
 #define KEISAN__INTERPOLATION__POLYNOM_HPP_
 
+#include <iostream>
 #include <vector>
 
 namespace keisan
@@ -47,12 +48,13 @@ public:
 
   Polynom integral() const;
 
+  friend std::ostream & operator<<(std::ostream & os, const Polynom & polynom);
+
 private:
   std::vector<double> coefficients;
   double domain_min;
   double domain_max;
 };
-
 }  // namespace keisan
 
 #include "keisan/interpolation/polynom.impl.hpp"

@@ -107,6 +107,18 @@ Polynom Polynom::integral() const
   return Polynom(new_coefficients, domain_min, domain_max);
 }
 
+std::ostream & operator<<(std::ostream & os, const Polynom & polynom)
+{
+  for (size_t i = 0; i < polynom.coefficients.size(); ++i) {
+    os << polynom.coefficients[i] << "x^" << i;
+    if (i != polynom.coefficients.size() - 1) {
+      os << " + ";
+    }
+  }
+  os << ", Domain: [" << polynom.domain_min << ", " << polynom.domain_max << "]";
+  return os;
+};
+
 }  // namespace keisan
 
 #endif  // KEISAN__INTERPOLATION__POLYNOM_IMPL_HPP_

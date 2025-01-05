@@ -91,6 +91,8 @@ Matrix<3, 3> rotation_matrix(const Angle<double> & angle);
 
 Matrix<4, 4> rotation_matrix(const Euler<double> & angle);
 
+Matrix<4, 4> rotation_matrix(const Quaternion<double> & quaternion);
+
 }  // namespace keisan
 
 template<size_t M, size_t N>

@@ -56,13 +56,13 @@ bool Polynom::operator!=(const Polynom & other) const { return !(*this == other)
 
 Polynom Polynom::operator+(const Polynom & other) const
 {
-  std::vector<double> new_coefficients;
+  std::vector<double> new_coefficients(std::max(coefficients.size(), other.coefficients.size()));
 
   for (size_t i = 0; i < std::max(coefficients.size(), other.coefficients.size()); ++i) {
     double a = (i < coefficients.size()) ? coefficients[i] : 0.0;
     double b = (i < other.coefficients.size()) ? other.coefficients[i] : 0.0;
 
-    new_coefficients.push_back(a + b);
+    new_coefficients[i] = a + b;
   }
 
   return Polynom(new_coefficients, domain_min, domain_max);
@@ -70,13 +70,13 @@ Polynom Polynom::operator+(const Polynom & other) const
 
 Polynom Polynom::operator-(const Polynom & other) const
 {
-  std::vector<double> new_coefficients;
+  std::vector<double> new_coefficients(std::max(coefficients.size(), other.coefficients.size()));
 
   for (size_t i = 0; i < std::max(coefficients.size(), other.coefficients.size()); ++i) {
     double a = (i < coefficients.size()) ? coefficients[i] : 0.0;
     double b = (i < other.coefficients.size()) ? other.coefficients[i] : 0.0;
 
-    new_coefficients.push_back(a - b);
+    new_coefficients[i] = a - b;
   }
 
   return Polynom(new_coefficients, domain_min, domain_max);
@@ -84,10 +84,10 @@ Polynom Polynom::operator-(const Polynom & other) const
 
 Polynom Polynom::derivative() const
 {
-  std::vector<double> new_coefficients;
+  std::vector<double> new_coefficients(coefficients.size() > 1 ? coefficients.size() - 1 : 0);
 
   for (size_t i = 1; i < coefficients.size(); ++i) {
-    new_coefficients.push_back(i * coefficients[i]);
+    new_coefficients[i - 1] = i * coefficients[i];
   }
 
   return Polynom(new_coefficients, domain_min, domain_max);
@@ -95,12 +95,12 @@ Polynom Polynom::derivative() const
 
 Polynom Polynom::integral() const
 {
-  std::vector<double> new_coefficients;
+  std::vector<double> new_coefficients(coefficients.size() + 1);
 
-  new_coefficients.push_back(0.0);
+  new_coefficients[0] = 0.0;
 
   for (size_t i = 0; i < coefficients.size(); ++i) {
-    new_coefficients.push_back(coefficients[i] / (i + 1));
+    new_coefficients[i + 1] = coefficients[i] / (i + 1);
   }
 
   return Polynom(new_coefficients, domain_min, domain_max);

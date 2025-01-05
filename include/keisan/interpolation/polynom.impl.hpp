@@ -28,15 +28,14 @@
 namespace keisan
 {
 
-Polynom::Polynom(
-  const std::vector<double> & coefficients, const double & domain_min, const double & domain_max)
+Polynom::Polynom(const std::vector<double> & coefficients, double domain_min, double domain_max)
 : coefficients(coefficients), domain_min(domain_min), domain_max(domain_max)
 {
 }
 
-bool Polynom::is_in_domain(const double & x) const { return x >= domain_min && x <= domain_max; }
+bool Polynom::is_in_domain(double x) const { return x >= domain_min && x <= domain_max; }
 
-double Polynom::operator()(const double & x) const
+double Polynom::operator()(double x) const
 {
   double result = 0.0;
 

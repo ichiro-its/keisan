@@ -31,7 +31,7 @@ class Spline
 public:
   Spline(const std::vector<Polynom> & polynoms);
 
-  double operator()(const double & x) const;
+  double operator()(double x) const;
 
   std::vector<Polynom> get_polynoms() const;
 

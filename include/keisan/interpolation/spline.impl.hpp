@@ -37,7 +37,7 @@ Spline::Spline(const std::vector<Polynom> & polynoms)
   this->polynoms = polynoms;
 }
 
-double Spline::operator()(const double & x) const
+double Spline::operator()(double x) const
 {
   for (const auto & polynom : polynoms) {
     if (polynom.is_in_domain(x)) {

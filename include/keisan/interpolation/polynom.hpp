@@ -31,12 +31,12 @@ class Polynom
 {
 public:
   Polynom(
-    const std::vector<double> & coefficients = {0.0}, const double & domain_min = 0.0,
-    const double & domain_max = 0.0);
+    const std::vector<double> & coefficients = {0.0}, double domain_min = 0.0,
+    double domain_max = 0.0);
 
-  bool is_in_domain(const double & x) const;
+  bool is_in_domain(double x) const;
 
-  double operator()(const double & x) const;
+  double operator()(double x) const;
 
   bool operator==(const Polynom & other) const;
   bool operator!=(const Polynom & other) const;

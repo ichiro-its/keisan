@@ -81,7 +81,7 @@ public:
   bool inverse2();
 
   Matrix<N, M> transpose() const;
-  Matrix<M, N> round(const double & tolerance) const;
+  Matrix<M, N> round(double tolerance) const;
 
 private:
   double data[M * N];

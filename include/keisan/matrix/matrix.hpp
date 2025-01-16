@@ -84,6 +84,10 @@ public:
   bool inverse();
 
 private:
+  bool inverse4();
+  bool inverse2();
+  bool inverse3();
+
   double data[M * N];
 };
 

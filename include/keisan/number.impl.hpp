@@ -107,7 +107,7 @@ Angle<T> clamp(const Angle<T> & value, const Angle<T> & min, const Angle<T> & ma
   return value;
 }
 
-template<typename T, enable_if_is_floating_point<T> = true>
+template<typename T, enable_if_is_floating_point<T>>
 T wrap(const T & value, const T & min, const T & max)
 {
   auto min_value = value - min;
@@ -116,7 +116,7 @@ T wrap(const T & value, const T & min, const T & max)
   return min + std::fmod(min_max + std::fmod(min_value, min_max), min_max);
 }
 
-template<typename T, enable_if_is_integral<T> = true>
+template<typename T, enable_if_is_integral<T>>
 T wrap(const T & value, const T & min, const T & max)
 {
   auto min_value = value - min;

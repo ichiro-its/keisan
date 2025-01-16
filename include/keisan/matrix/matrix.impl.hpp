@@ -112,6 +112,72 @@ Matrix<M, N> Matrix<M, N>::identity()
 }
 
 template<size_t M, size_t N>
+Matrix<M, N> Matrix<M, N>::exp()
+{
+  static_assert(
+    M == N,
+    "The dimensions of matrix are not matched. "
+    "There is no exponential matrix for non-square matrix!");
+
+  double norm = infinity_norm();
+  int scale = std::max(0, static_cast<int>(std::ceil(std::log2(norm))));
+
+  Matrix<N, N> scaled_matrix = (*this) / (std::pow(2, scale));
+
+  Matrix<N, N> exp_matrix = identity();
+  Matrix<N, N> matrix_power = identity();
+
+  double tolerance = 1e-9;
+  size_t k = 1;
+
+  while (true) {
+    matrix_power = matrix_power * scaled_matrix / k;
+    exp_matrix = exp_matrix + matrix_power;
+
+    if (matrix_power.norm() < tolerance) {
+        break;
+    }
+
+    ++k;
+  }
+
+  for (int i = 0; i < scale; ++i) {
+    exp_matrix = exp_matrix * exp_matrix;
+  }
+
+  return exp_matrix;
+}
+
+template<size_t M, size_t N>
+double Matrix<M, N>::norm()
+{
+  double norm = 0.0;
+  for (size_t i = 0; i < M; ++i) {
+    for (size_t j = 0; j < N; ++j) {
+      norm += std::pow((*this)[i][j], 2);
+    }
+  }
+
+  return std::sqrt(norm);
+}
+
+template<size_t M, size_t N>
+double Matrix<M, N>::infinity_norm()
+{
+  double norm = 0.0;
+  for (size_t i = 0; i < M; ++i) {
+    double row_sum = 0.0;
+    for (size_t j = 0; j < N; ++j) {
+      row_sum += std::abs((*this)[i][j]);
+    }
+
+    norm = std::max(norm, row_sum);
+  }
+
+  return norm;
+}
+
+template<size_t M, size_t N>
 Matrix<M, N> & Matrix<M, N>::operator=(const Matrix<M, N> & matrix)
 {
   std::copy(matrix.data, matrix.data + M * N, data);

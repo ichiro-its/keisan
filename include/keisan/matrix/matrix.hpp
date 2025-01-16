@@ -45,6 +45,10 @@ public:
 
   static Matrix<M, N> zero();
   static Matrix<M, N> identity();
+  
+  Matrix<M, N> exp();
+  double norm();
+  double infinity_norm();
 
   Matrix<M, N> & operator=(const Matrix<M, N> & matrix);
 

@@ -46,6 +46,14 @@ public:
   static Matrix<M, N> zero();
   static Matrix<M, N> identity();
 
+  void set_row(size_t pos, const Vector<M> & vector);
+  Vector<M> get_row(size_t pos) const;
+
+  void set_column(size_t pos, const Vector<N> & vector);
+  Vector<N> get_column(size_t pos) const;
+  
+  Matrix<M, N> exp(double tau = 1.0, size_t terms = 10);
+
   Matrix<M, N> & operator=(const Matrix<M, N> & matrix);
 
   bool operator==(const Matrix<M, N> & matrix) const;
@@ -78,8 +86,13 @@ public:
   const double * operator[](size_t pos) const;
 
   bool inverse();
+  bool pseudo_inverse();
 
 private:
+  bool inverse4();
+  bool inverse2();
+  bool inverse3();
+
   double data[M * N];
 };
 

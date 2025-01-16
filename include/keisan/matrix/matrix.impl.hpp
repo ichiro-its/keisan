@@ -23,6 +23,7 @@
 
 #include <algorithm>
 #include <ostream>
+#include <cmath>
 
 #include "gtest/gtest.h"
 #include "keisan/matrix/matrix.hpp"
@@ -109,6 +110,63 @@ Matrix<M, N> Matrix<M, N>::identity()
   }
 
   return matrix;
+}
+
+template<size_t M, size_t N>
+void Matrix<M, N>::set_row(size_t pos, const Vector<M> & vector)
+{
+  std::copy(vector.begin(), vector.end(), (*this)[pos]);
+}
+
+template<size_t M, size_t N>
+Vector<M> Matrix<M, N>::get_row(size_t pos) const
+{
+  Vector<M> vector;
+  std::copy((*this)[pos], (*this)[pos] + M, vector.begin());
+  return vector;
+}
+
+template<size_t M, size_t N>
+void Matrix<M, N>::set_column(size_t pos, const Vector<N> & vector)
+{
+  for (size_t i = 0; i < N; ++i) {
+    (*this)[i][pos] = vector[i];
+  }
+}
+
+template<size_t M, size_t N>
+Vector<N> Matrix<M, N>::get_column(size_t pos) const
+{
+  Vector<N> vector;
+  for (size_t i = 0; i < N; ++i) {
+    vector[i] = (*this)[i][pos];
+  }
+
+  return vector;
+}
+
+template<size_t M, size_t N>
+Matrix<M, N> Matrix<M, N>::exp(double tau, size_t terms)
+{
+  static_assert(
+    M == N,
+    "The dimensions of matrix are not matched. "
+    "There is no exponential matrix for non-square matrix!");
+
+  auto exponential = identity();
+  auto term = identity();
+
+  for (size_t k = 1; k <= terms; ++k) {
+    term = term * (*this);
+
+    for (size_t i = 0; i < M; ++i) {
+      for (size_t j = 0; j < N; ++j) {
+        exponential[i][j] += term[i][j] * std::pow(tau, k) / tgamma(k + 1);
+      }
+    }
+  }
+
+  return exponential;
 }
 
 template<size_t M, size_t N>
@@ -314,10 +372,81 @@ bool Matrix<M, N>::inverse()
     "The dimensions of matrix are not matched. "
     "There is no inverse matrix for non-square matrix!");
 
-  static_assert(
-    M == 4,
-    "Inverse matrix operation only available for 4 by 4 matrix.");
+  switch (N) {
+    case 2:
+      return inverse2();
+    case 3:
+      return inverse3();
+    case 4:
+      return inverse4();
+    default:
+      Matrix<N, N> inverse = identity();
+      double tolerance = 1e-9;
 
+      for (size_t i = 0; i < N; ++i) {
+        for (size_t j = 0; j < N; ++j) {
+          (*this)[i][j + N] = inverse[i][j];
+        }
+      }
+
+      // Forward elimination
+      for (size_t k = 0; k < N; ++k) {
+        size_t max_row = k;
+        for (size_t i = k + 1; i < N; ++i) {
+          if (std::abs((*this)[i][k]) > std::abs((*this)[max_row][k])) {
+            max_row = i;
+          }
+        }
+
+        if (max_row != k) {
+          for (size_t j = 0; j < 2 * N; ++j) {
+            std::swap((*this)[k][j], (*this)[max_row][j]);
+          }
+        }
+
+        if (std::abs((*this)[k][k]) < tolerance) {
+          return false;
+        }
+
+        double pivot = (*this)[k][k];
+        for (size_t j = 0; j < 2 * N; ++j) {
+          (*this)[k][j] /= pivot;
+        }
+
+        for (size_t i = k + 1; i < N; ++i) {
+          double factor = (*this)[i][k];
+          for (size_t j = 0; j < 2 * N; ++j) {
+            (*this)[i][j] -= factor * (*this)[k][j];
+          }
+        }
+      }
+
+      // Backward elimination
+      for (size_t k = N - 1; k > 0; --k) {
+        for (size_t i = 0; i < k; ++i) {
+          double factor = (*this)[i][k];
+          for (size_t j = 0; j < 2 * N; ++j) {
+            (*this)[i][j] -= factor * (*this)[k][j];
+          }
+        }
+      }
+
+      for (size_t i = 0; i < N; ++i) {
+        for (size_t j = 0; j < N; ++j) {
+          inverse[i][j] = (*this)[i][j + N];
+        }
+      }
+
+      *this = inverse;
+
+      return true;
+  }
+
+}
+
+template<size_t M, size_t N>
+bool Matrix<M, N>::inverse4()
+{
   auto inverse = Matrix<M, N>::zero();
   auto source = *this;
 
@@ -441,6 +570,55 @@ bool Matrix<M, N>::inverse()
   }
 
   (*this) = inverse * (1.0 / determinant);
+
+  return true;
+}
+
+template<size_t M, size_t N>
+bool Matrix<M, N>::inverse3()
+{
+  auto inverse = Matrix<M, N>::zero();
+  auto source = *this;
+
+  inverse[0][0] = source[1][1] * source[2][2] - source[1][2] * source[2][1];
+  inverse[1][0] = source[1][2] * source[2][0] - source[1][0] * source[2][2];
+  inverse[2][0] = source[1][0] * source[2][1] - source[1][1] * source[2][0];
+
+  inverse[0][1] = source[0][2] * source[2][1] - source[0][1] * source[2][2];
+  inverse[1][1] = source[0][0] * source[2][2] - source[0][2] * source[2][0];
+  inverse[2][1] = source[0][1] * source[2][0] - source[0][0] * source[2][1];
+
+  inverse[0][2] = source[0][1] * source[1][2] - source[0][2] * source[1][1];
+  inverse[1][2] = source[0][2] * source[1][0] - source[0][0] * source[1][2];
+  inverse[2][2] = source[0][0] * source[1][1] - source[0][1] * source[1][0];
+
+  double determinant = source[0][0] * inverse[0][0] + source[0][1] * inverse[1][0] +
+    source[0][2] * inverse[2][0];
+
+  if (determinant == 0) {
+    return false;
+  }
+
+  (*this) = inverse * (1.0 / determinant);
+
+  return true;
+}
+
+template<size_t M, size_t N>
+bool Matrix<M, N>::inverse2()
+{
+  auto source = *this;
+
+  double determinant = source[0][0] * source[1][1] - source[0][1] * source[1][0];
+
+  if (determinant == 0) {
+    return false;
+  }
+
+  (*this)[0][0] = source[1][1] / determinant;
+  (*this)[1][0] = -source[1][0] / determinant;
+  (*this)[0][1] = -source[0][1] / determinant;
+  (*this)[1][1] = source[0][0] / determinant;
 
   return true;
 }

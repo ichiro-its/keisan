@@ -47,6 +47,12 @@ public:
   static Matrix<M, N> identity();
   static Matrix<M, N> infinite();
 
+  void set_row(size_t pos, const Vector<M> & vector);
+  Vector<M> get_row(size_t pos) const;
+
+  void set_column(size_t pos, const Vector<N> & vector);
+  Vector<N> get_column(size_t pos) const;
+
   Matrix<M, N> exp();
   double norm();
   double infinity_norm();
@@ -83,10 +89,10 @@ public:
   const double * operator[](size_t pos) const;
 
   bool inverse();
-  bool inverse2();
 
   Matrix<N, M> transpose() const;
   Matrix<M, N> round(double tolerance) const;
+  bool pseudo_inverse();
 
 private:
   bool inverse4();

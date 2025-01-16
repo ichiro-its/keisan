@@ -32,20 +32,24 @@
 namespace keisan
 {
 
-template<size_t M, size_t N>
+template <size_t M, size_t N>
 class Matrix
 {
 public:
   Matrix();
 
-  template<typename ... Types>
-  explicit Matrix(const double & value, Types ... the_rest);
+  template <typename... Types>
+  explicit Matrix(const double & value, Types... the_rest);
 
   Matrix(const Matrix<M, N> & matrix);
 
   static Matrix<M, N> zero();
   static Matrix<M, N> identity();
   static Matrix<M, N> infinite();
+
+  Matrix<M, N> exp();
+  double norm();
+  double infinity_norm();
 
   Matrix<M, N> & operator=(const Matrix<M, N> & matrix);
 
@@ -60,7 +64,7 @@ public:
   Matrix<M, N> & operator*=(const double & value);
   Matrix<M, N> & operator/=(const double & value);
 
-  template<size_t O>
+  template <size_t O>
   Matrix<M, O> operator*(const Matrix<N, O> & matrix);
 
   Vector<M> operator*(const Vector<N> & vector);
@@ -100,10 +104,10 @@ Matrix<4, 4> rotation_matrix(const Quaternion<double> & quaternion);
 
 }  // namespace keisan
 
-template<size_t M, size_t N>
+template <size_t M, size_t N>
 std::ostream & operator<<(std::ostream & out, const keisan::Matrix<M, N> & matrix);
 
-template<size_t M, size_t N>
+template <size_t M, size_t N>
 keisan::Matrix<M, N> operator*(const double & value, const keisan::Matrix<M, N> & matrix);
 
 #include "keisan/matrix/matrix.impl.hpp"

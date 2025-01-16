@@ -22,6 +22,7 @@
 #define KEISAN__MATRIX__MATRIX_IMPL_HPP_
 
 #include <algorithm>
+#include <cmath>
 #include <ostream>
 
 #include "gtest/gtest.h"
@@ -33,22 +34,20 @@ std::ostream & operator<<(std::ostream & out, const keisan::Matrix<M, N> & matri
   out << "[";
   for (size_t i = 0; i < M; ++i) {
     if (i > 0) {
-      out << ",";
+      out << "\n";
+    }
+
+    if (i > 0) {
+      out << " ";
     }
 
     out << "[";
     for (size_t j = 0; j < N; ++j) {
       if (j > 0) {
-        out << ",";
+        out << ", ";
       }
 
-      if (matrix[i][j] == std::numeric_limits<double>::max()) {
-        out << "inf";
-      } else if (matrix[i][j] == -std::numeric_limits<double>::max()) {
-        out << "-inf";
-      } else {
-        out << matrix[i][j];
-      }
+      out << matrix[i][j];
     }
 
     out << "]";
@@ -117,19 +116,6 @@ Matrix<M, N> Matrix<M, N>::identity()
 }
 
 template <size_t M, size_t N>
-Matrix<M, N> Matrix<M, N>::infinite()
-{
-  Matrix<M, N> matrix;
-  for (size_t i = 0; i < M; ++i) {
-    for (size_t j = 0; j < N; ++j) {
-      matrix[i][j] = std::numeric_limits<double>::max();
-    }
-  }
-
-  return matrix;
-}
-
-template <size_t M, size_t N>
 void Matrix<M, N>::set_row(size_t pos, const Vector<M> & vector)
 {
   std::copy(vector.begin(), vector.end(), (*this)[pos]);
@@ -163,69 +149,27 @@ Vector<N> Matrix<M, N>::get_column(size_t pos) const
 }
 
 template <size_t M, size_t N>
-Matrix<M, N> Matrix<M, N>::exp()
+Matrix<M, N> Matrix<M, N>::exp(double tau, size_t terms)
 {
   static_assert(
     M == N,
     "The dimensions of matrix are not matched. "
     "There is no exponential matrix for non-square matrix!");
 
-  double norm = infinity_norm();
-  int scale = std::max(0, static_cast<int>(std::ceil(std::log2(norm))));
+  auto exponential = identity();
+  auto term = identity();
 
-  Matrix<N, N> scaled_matrix = (*this) / (std::pow(2, scale));
+  for (size_t k = 1; k <= terms; ++k) {
+    term = term * (*this);
 
-  Matrix<N, N> exp_matrix = identity();
-  Matrix<N, N> matrix_power = identity();
-
-  double tolerance = 1e-9;
-  size_t k = 1;
-
-  while (true) {
-    matrix_power = matrix_power * scaled_matrix / k;
-    exp_matrix = exp_matrix + matrix_power;
-
-    if (matrix_power.norm() < tolerance) {
-      break;
-    }
-
-    ++k;
-  }
-
-  for (int i = 0; i < scale; ++i) {
-    exp_matrix = exp_matrix * exp_matrix;
-  }
-
-  return exp_matrix;
-}
-
-template <size_t M, size_t N>
-double Matrix<M, N>::norm()
-{
-  double norm = 0.0;
-  for (size_t i = 0; i < M; ++i) {
-    for (size_t j = 0; j < N; ++j) {
-      norm += std::pow((*this)[i][j], 2);
+    for (size_t i = 0; i < M; ++i) {
+      for (size_t j = 0; j < N; ++j) {
+        exponential[i][j] += term[i][j] * std::pow(tau, k) / tgamma(k + 1);
+      }
     }
   }
 
-  return std::sqrt(norm);
-}
-
-template <size_t M, size_t N>
-double Matrix<M, N>::infinity_norm()
-{
-  double norm = 0.0;
-  for (size_t i = 0; i < M; ++i) {
-    double row_sum = 0.0;
-    for (size_t j = 0; j < N; ++j) {
-      row_sum += std::abs((*this)[i][j]);
-    }
-
-    norm = std::max(norm, row_sum);
-  }
-
-  return norm;
+  return exponential;
 }
 
 template <size_t M, size_t N>
@@ -423,28 +367,6 @@ const double * Matrix<M, N>::operator[](size_t pos) const
 }
 
 template <size_t M, size_t N>
-bool Matrix<M, N>::inverse2()
-{
-  static_assert(M == 2 && N == 2, "Inverse matrix operation only available for 2 by 2 matrix.");
-
-  auto inverse = Matrix<M, N>::zero();
-  auto source = *this;
-
-  inverse[0][0] = source[1][1];
-  inverse[0][1] = -source[0][1];
-  inverse[1][0] = -source[1][0];
-  inverse[1][1] = source[0][0];
-
-  double determinant = source[0][0] * inverse[0][0] + source[0][1] * inverse[1][0];
-  if (determinant == 0) {
-    return false;
-  }
-
-  (*this) = inverse * (1.0 / determinant);
-  return true;
-}
-
-template <size_t M, size_t N>
 bool Matrix<M, N>::inverse()
 {
   static_assert(
@@ -620,32 +542,6 @@ bool Matrix<M, N>::inverse4()
   (*this) = inverse * (1.0 / determinant);
 
   return true;
-}
-
-template <size_t M, size_t N>
-Matrix<N, M> Matrix<M, N>::transpose() const
-{
-  Matrix<N, M> matrix;
-  for (size_t i = 0; i < M; ++i) {
-    for (size_t j = 0; j < N; ++j) {
-      matrix[j][i] = (*this)[i][j];
-    }
-  }
-
-  return matrix;
-}
-
-template <size_t M, size_t N>
-Matrix<M, N> Matrix<M, N>::round(double tolerance) const
-{
-  Matrix<M, N> matrix;
-  for (size_t i = 0; i < M; ++i) {
-    for (size_t j = 0; j < N; ++j) {
-      matrix[i][j] = std::abs((*this)[i][j]) < tolerance ? 0.0 : (*this)[i][j];
-    }
-  }
-
-  return matrix;
 }
 
 template <size_t M, size_t N>

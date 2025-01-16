@@ -112,6 +112,39 @@ Matrix<M, N> Matrix<M, N>::identity()
 }
 
 template<size_t M, size_t N>
+void Matrix<M, N>::set_row(size_t pos, const Vector<M> & vector)
+{
+  std::copy(vector.begin(), vector.end(), (*this)[pos]);
+}
+
+template<size_t M, size_t N>
+Vector<M> Matrix<M, N>::get_row(size_t pos) const
+{
+  Vector<M> vector;
+  std::copy((*this)[pos], (*this)[pos] + M, vector.begin());
+  return vector;
+}
+
+template<size_t M, size_t N>
+void Matrix<M, N>::set_column(size_t pos, const Vector<N> & vector)
+{
+  for (size_t i = 0; i < N; ++i) {
+    (*this)[i][pos] = vector[i];
+  }
+}
+
+template<size_t M, size_t N>
+Vector<N> Matrix<M, N>::get_column(size_t pos) const
+{
+  Vector<N> vector;
+  for (size_t i = 0; i < N; ++i) {
+    vector[i] = (*this)[i][pos];
+  }
+
+  return vector;
+}
+
+template<size_t M, size_t N>
 Matrix<M, N> Matrix<M, N>::exp()
 {
   static_assert(

@@ -52,9 +52,7 @@ public:
   void set_column(size_t pos, const Vector<N> & vector);
   Vector<N> get_column(size_t pos) const;
   
-  Matrix<M, N> exp();
-  double norm();
-  double infinity_norm();
+  Matrix<M, N> exp(double tau = 1.0, size_t terms = 10);
 
   Matrix<M, N> & operator=(const Matrix<M, N> & matrix);
 

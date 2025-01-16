@@ -34,17 +34,13 @@ std::ostream & operator<<(std::ostream & out, const keisan::Matrix<M, N> & matri
   out << "[";
   for (size_t i = 0; i < M; ++i) {
     if (i > 0) {
-      out << "\n";
-    }
-
-    if (i > 0) {
-      out << " ";
+      out << ",";
     }
 
     out << "[";
     for (size_t j = 0; j < N; ++j) {
       if (j > 0) {
-        out << ", ";
+        out << ",";
       }
 
       out << matrix[i][j];
@@ -384,7 +380,6 @@ bool Matrix<M, N>::inverse()
     case 4:
       return inverse4();
     default:
-      Matrix<N, N> source = *this;
       Matrix<N, N> inverse = identity();
       double tolerance = 1e-9;
 

@@ -4,5 +4,6 @@ var searchData=
   ['constant_2ehpp_7',['constant.hpp',['../constant_8hpp.html',1,'']]],
   ['cos_8',['cos',['../classkeisan_1_1Angle.html#ae8d24f3626bc3fe5e8be8a4b4aea9de8',1,'keisan::Angle']]],
   ['cross_9',['cross',['../structkeisan_1_1Point2.html#a20d60d67d2e014b5f6e9cc8813bd7e70',1,'keisan::Point2::cross()'],['../structkeisan_1_1Point3.html#afe5d83b0ac2789acfae61aa8b1412172',1,'keisan::Point3::cross()']]],
-  ['curve_10',['curve',['../namespacekeisan.html#a4d4563a14e3c100adb0a879dea12e729',1,'keisan']]]
+  ['cubic_5fspline_10',['cubic_spline',['../namespacekeisan.html#ac19098d6e9a479ac51b0a2334cfea325',1,'keisan']]],
+  ['curve_11',['curve',['../namespacekeisan.html#a4d4563a14e3c100adb0a879dea12e729',1,'keisan']]]
 ];

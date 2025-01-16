@@ -87,6 +87,10 @@ $(function() {
 <li>degree()
 : <a class="el" href="classkeisan_1_1Angle.html#a4d886308ab1d5626040029a73e5c661f">keisan::Angle&lt; T &gt;</a>
 </li>
+<li>derivative()
+: <a class="el" href="classkeisan_1_1Polynom.html#a1da5bc0047df807e7ef92b35ba4ecb2b">keisan::Polynom</a>
+, <a class="el" href="classkeisan_1_1Spline.html#af36b06ff81a06e324f9dd52785e4d1df">keisan::Spline</a>
+</li>
 <li>direction()
 : <a class="el" href="structkeisan_1_1Point2.html#a3a903d604ffb60a8985c980df52eb215">keisan::Point2</a>
 </li>
@@ -107,12 +111,25 @@ $(function() {
 </ul>
 
 
+<h3><a id="index_g"></a>- g -</h3><ul>
+<li>get_polynoms()
+: <a class="el" href="classkeisan_1_1Spline.html#a74995cd9ba20ca516e678c3fbffcda10">keisan::Spline</a>
+</li>
+</ul>
+
+
 <h3><a id="index_i"></a>- i -</h3><ul>
 <li>identity()
 : <a class="el" href="classkeisan_1_1Matrix.html#aa2c7b3779e10a5cbe9f932d32f662383">keisan::Matrix&lt; M, N &gt;</a>
 </li>
+<li>integral()
+: <a class="el" href="classkeisan_1_1Polynom.html#a6c62962ab1655ea14d79ce1c5e70d94a">keisan::Polynom</a>
+</li>
 <li>inverse()
 : <a class="el" href="classkeisan_1_1Matrix.html#a7352beadb54752b9d0f216e9e041d5fc">keisan::Matrix&lt; M, N &gt;</a>
+</li>
+<li>is_in_domain()
+: <a class="el" href="classkeisan_1_1Polynom.html#a151cc517a266525b57fafe4c8794adce">keisan::Polynom</a>
 </li>
 </ul>
 
@@ -169,8 +186,13 @@ $(function() {
 , <a class="el" href="classkeisan_1_1Matrix.html#a2ef260cf8b9a3dfa6e318b4c13344a91">keisan::Matrix&lt; M, N &gt;</a>
 , <a class="el" href="structkeisan_1_1Point2.html#a91a895f8dcfef7a5a95d40aab8d8c282">keisan::Point2</a>
 , <a class="el" href="structkeisan_1_1Point3.html#aec6380fa8d8e5bdcd464f98bf67dbb84">keisan::Point3</a>
+, <a class="el" href="classkeisan_1_1Polynom.html#acf1321af9c075ff16cefa9babd881058">keisan::Polynom</a>
 , <a class="el" href="structkeisan_1_1Quaternion.html#a357ccf0bafcb657b1e6d65a95d783d07">keisan::Quaternion&lt; T &gt;</a>
 , <a class="el" href="classkeisan_1_1Vector.html#aab53968703cc33418ac0b8d28d914b32">keisan::Vector&lt; N &gt;</a>
+</li>
+<li>operator()()
+: <a class="el" href="classkeisan_1_1Polynom.html#a04f91f79f7020e61a3483a67e8f1af3b">keisan::Polynom</a>
+, <a class="el" href="classkeisan_1_1Spline.html#a49cbc484e912be0f2b6e4a2305581bf4">keisan::Spline</a>
 </li>
 <li>operator*()
 : <a class="el" href="classkeisan_1_1Angle.html#acbc9ec7d83785363ddf64cccd8b8ea54">keisan::Angle&lt; T &gt;</a>
@@ -191,20 +213,22 @@ $(function() {
 , <a class="el" href="classkeisan_1_1Matrix.html#a1faf1ef10afc8c567b5ee2d0c27d4379">keisan::Matrix&lt; M, N &gt;</a>
 , <a class="el" href="structkeisan_1_1Point2.html#a110109ff9496f52156a815ccbeafe4eb">keisan::Point2</a>
 , <a class="el" href="structkeisan_1_1Point3.html#ab10f9a8ebe377f652f88bb30475c8eff">keisan::Point3</a>
+, <a class="el" href="classkeisan_1_1Polynom.html#a11cd750410bfc9d9c8704385835cd65d">keisan::Polynom</a>
 , <a class="el" href="classkeisan_1_1Vector.html#a5bf084424566b32e5df0bf0256066e93">keisan::Vector&lt; N &gt;</a>
 </li>
 <li>operator+=()
 : <a class="el" href="classkeisan_1_1Angle.html#ae1621caf1997494789273466c66c6ab6">keisan::Angle&lt; T &gt;</a>
 , <a class="el" href="classkeisan_1_1Matrix.html#a1da829e83f8413ad0266503c13eccf86">keisan::Matrix&lt; M, N &gt;</a>
 , <a class="el" href="structkeisan_1_1Point2.html#a522253335e8eae6d47dc794867a1d116">keisan::Point2</a>
-, <a class="el" href="structkeisan_1_1Point3.html#ad4675c2db3058a06b376920dae59fee8">keisan::Point3</a>
+, <a class="el" href="structkeisan_1_1Point3.html#aab9dfeed64d154705b13baefd0b27c70">keisan::Point3</a>
 , <a class="el" href="classkeisan_1_1Vector.html#a5ae4c51efddffa84601d1ab7d0dc4cb9">keisan::Vector&lt; N &gt;</a>
 </li>
 <li>operator-()
 : <a class="el" href="classkeisan_1_1Angle.html#a26ab406c08ceb316932e1b19a1109c8d">keisan::Angle&lt; T &gt;</a>
-, <a class="el" href="classkeisan_1_1Matrix.html#afb664783b526e6b40385eb9ad06fb406">keisan::Matrix&lt; M, N &gt;</a>
-, <a class="el" href="structkeisan_1_1Point2.html#a030bfec3c119ea957336aefc6a2c04cb">keisan::Point2</a>
+, <a class="el" href="classkeisan_1_1Matrix.html#a69621f5e24b99371d7b0c674672dd186">keisan::Matrix&lt; M, N &gt;</a>
+, <a class="el" href="structkeisan_1_1Point2.html#a2b7156b5a5ac0c3a8bf6ef3ee407dc68">keisan::Point2</a>
 , <a class="el" href="structkeisan_1_1Point3.html#a7220d6c4b50938bdc5b9f71f68b8f15f">keisan::Point3</a>
+, <a class="el" href="classkeisan_1_1Polynom.html#a3c4622f4468593182ef7782870677c37">keisan::Polynom</a>
 , <a class="el" href="classkeisan_1_1Vector.html#aa9d2e5784244f9753a41a53ad4fcbb21">keisan::Vector&lt; N &gt;</a>
 </li>
 <li>operator-=()
@@ -231,6 +255,9 @@ $(function() {
 <li>operator&lt;()
 : <a class="el" href="classkeisan_1_1Angle.html#ad52e9b470a9c647cc983569f0b162dcf">keisan::Angle&lt; T &gt;</a>
 </li>
+<li>operator&lt;&lt;
+: <a class="el" href="classkeisan_1_1Polynom.html#a0a922be5944891ee632bdfd24e4ad9dd">keisan::Polynom</a>
+</li>
 <li>operator&lt;=()
 : <a class="el" href="classkeisan_1_1Angle.html#a3d53246523e02a7f1a0614ead983cee3">keisan::Angle&lt; T &gt;</a>
 </li>
@@ -246,6 +273,7 @@ $(function() {
 , <a class="el" href="classkeisan_1_1Matrix.html#aead0f1c25cd21ce7961a67bf77305f44">keisan::Matrix&lt; M, N &gt;</a>
 , <a class="el" href="structkeisan_1_1Point2.html#a897f2256e16375025401dafb06e64234">keisan::Point2</a>
 , <a class="el" href="structkeisan_1_1Point3.html#a492c35f96143af53667af98a2ceb7bbb">keisan::Point3</a>
+, <a class="el" href="classkeisan_1_1Polynom.html#ae97917a03d9e5c4bde8ed11fd3117159">keisan::Polynom</a>
 , <a class="el" href="structkeisan_1_1Quaternion.html#a22e2641e74992055ff0acd84762bb895">keisan::Quaternion&lt; T &gt;</a>
 , <a class="el" href="classkeisan_1_1Vector.html#a8593ea943b4307735a7cf1924232d323">keisan::Vector&lt; N &gt;</a>
 </li>
@@ -271,6 +299,9 @@ $(function() {
 </li>
 <li>Point3()
 : <a class="el" href="structkeisan_1_1Point3.html#a512c0b2530ed3522be6ef6ea6344c022">keisan::Point3</a>
+</li>
+<li>Polynom()
+: <a class="el" href="classkeisan_1_1Polynom.html#ac16c28db1371734ea7c355b67dd4f5b9">keisan::Polynom</a>
 </li>
 </ul>
 
@@ -310,6 +341,9 @@ $(function() {
 </li>
 <li>sin()
 : <a class="el" href="classkeisan_1_1Angle.html#a52c563e08e7aad4d9eea4cd14a19d1df">keisan::Angle&lt; T &gt;</a>
+</li>
+<li>Spline()
+: <a class="el" href="classkeisan_1_1Spline.html#a739d29c9a3a31091310561ba5f5186f3">keisan::Spline</a>
 </li>
 </ul>
 

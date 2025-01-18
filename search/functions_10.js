@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wrap_227',['wrap',['../namespacekeisan.html#adf3d244c758f5c547330b2178a973dd8',1,'keisan']]]
+  ['update_252',['update',['../classkeisan_1_1Kalman.html#a2a6c1322df98e1c5eb61341c73234b5f',1,'keisan::Kalman']]]
 ];

@@ -130,6 +130,15 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad55ca5f6ec83cea4322fda367db1e4e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7352beadb54752b9d0f216e9e041d5fc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkeisan_1_1Matrix.html#a7352beadb54752b9d0f216e9e041d5fc">inverse</a> ()</td></tr>
 <tr class="separator:a7352beadb54752b9d0f216e9e041d5fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f81da0f45420edaf4c9aa62a26cd38d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkeisan_1_1Matrix.html#a8f81da0f45420edaf4c9aa62a26cd38d">inverse2</a> ()</td></tr>
+<tr class="separator:a8f81da0f45420edaf4c9aa62a26cd38d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29b6a3e47d4cffef3199fbb7853ba3d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classkeisan_1_1Matrix.html">Matrix</a>&lt; N, M &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkeisan_1_1Matrix.html#a29b6a3e47d4cffef3199fbb7853ba3d1">transpose</a> () const</td></tr>
+<tr class="separator:a29b6a3e47d4cffef3199fbb7853ba3d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15fa8cea5f23982e5068c0ec7710e8f1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classkeisan_1_1Matrix.html">Matrix</a>&lt; M, N &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkeisan_1_1Matrix.html#a15fa8cea5f23982e5068c0ec7710e8f1">round</a> (double tolerance) const</td></tr>
+<tr class="separator:a15fa8cea5f23982e5068c0ec7710e8f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab410ccab7178430dba752d806e753345"><td class="memTemplParams" colspan="2">template&lt;typename... Types&gt; </td></tr>
+<tr class="memitem:ab410ccab7178430dba752d806e753345"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classkeisan_1_1Matrix.html#ab410ccab7178430dba752d806e753345">Matrix</a> (const double &amp;value, Types... the_rest)</td></tr>
+<tr class="separator:ab410ccab7178430dba752d806e753345"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -140,7 +149,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="adbcb8f460140f7a1c98a28d5c90cc423"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adbcb8f460140f7a1c98a28d5c90cc423">&#9670;&nbsp;</a></span>Matrix() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#adbcb8f460140f7a1c98a28d5c90cc423">&#9670;&nbsp;</a></span>Matrix() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -156,7 +165,7 @@ template&lt;size_t M, size_t N&gt; </div>
 </div>
 </div>
 <a id="aff6ed9017250091fd96aad3c02b55e56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff6ed9017250091fd96aad3c02b55e56">&#9670;&nbsp;</a></span>Matrix() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aff6ed9017250091fd96aad3c02b55e56">&#9670;&nbsp;</a></span>Matrix() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -196,7 +205,7 @@ template&lt;typename ... Types&gt; </div>
 </div>
 </div>
 <a id="a439d4757ef709fbff82516085f467c78"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a439d4757ef709fbff82516085f467c78">&#9670;&nbsp;</a></span>Matrix() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a439d4757ef709fbff82516085f467c78">&#9670;&nbsp;</a></span>Matrix() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -209,6 +218,38 @@ template&lt;size_t M, size_t N&gt; </div>
           <td class="paramtype">const <a class="el" href="classkeisan_1_1Matrix.html">Matrix</a>&lt; M, N &gt; &amp;&#160;</td>
           <td class="paramname"><em>matrix</em></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab410ccab7178430dba752d806e753345"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab410ccab7178430dba752d806e753345">&#9670;&nbsp;</a></span>Matrix() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t M, size_t N&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Types&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classkeisan_1_1Matrix.html">keisan::Matrix</a>&lt; M, N &gt;::<a class="el" href="classkeisan_1_1Matrix.html">Matrix</a> </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Types...&#160;</td>
+          <td class="paramname"><em>the_rest</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -672,6 +713,58 @@ template&lt;size_t M, size_t N&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">bool <a class="el" href="classkeisan_1_1Matrix.html">keisan::Matrix</a>&lt; M, N &gt;::inverse</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8f81da0f45420edaf4c9aa62a26cd38d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f81da0f45420edaf4c9aa62a26cd38d">&#9670;&nbsp;</a></span>inverse2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t M, size_t N&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classkeisan_1_1Matrix.html">keisan::Matrix</a>&lt; M, N &gt;::inverse2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a29b6a3e47d4cffef3199fbb7853ba3d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29b6a3e47d4cffef3199fbb7853ba3d1">&#9670;&nbsp;</a></span>transpose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t M, size_t N&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classkeisan_1_1Matrix.html">Matrix</a>&lt; N, M &gt; <a class="el" href="classkeisan_1_1Matrix.html">keisan::Matrix</a>&lt; M, N &gt;::transpose</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a15fa8cea5f23982e5068c0ec7710e8f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15fa8cea5f23982e5068c0ec7710e8f1">&#9670;&nbsp;</a></span>round()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t M, size_t N&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classkeisan_1_1Matrix.html">Matrix</a>&lt; M, N &gt; <a class="el" href="classkeisan_1_1Matrix.html">keisan::Matrix</a>&lt; M, N &gt;::round </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>tolerance</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">

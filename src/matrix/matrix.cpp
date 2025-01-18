@@ -70,6 +70,37 @@ Matrix<4, 4> rotation_matrix(const Euler<double> & angle)
   return (yaw * pitch) * roll;
 }
 
+Matrix<4, 4> rotation_matrix(const Quaternion<double> & quat)
+{
+  auto matrix = Matrix<4, 4>::identity();
+
+  double xx = quat.x * quat.x;
+  double yy = quat.y * quat.y;
+  double zz = quat.z * quat.z;
+
+  double xy = quat.x * quat.y;
+  double xz = quat.x * quat.z;
+  double yz = quat.y * quat.z;
+
+  double wx = quat.w * quat.x;
+  double wy = quat.w * quat.y;
+  double wz = quat.w * quat.z;
+
+  matrix[0][0] = 1 - 2 * (yy + zz);
+  matrix[0][1] = 2 * (xy - wz);
+  matrix[0][2] = 2 * (xz + wy);
+
+  matrix[1][0] = 2 * (xy + wz);
+  matrix[1][1] = 1 - 2 * (xx + zz);
+  matrix[1][2] = 2 * (yz - wx);
+
+  matrix[2][0] = 2 * (xz - wy);
+  matrix[2][1] = 2 * (yz + wx);
+  matrix[2][2] = 1 - 2 * (xx + yy);
+
+  return matrix;
+}
+
 Matrix<3, 3> rotation_matrix(const Angle<double> & angle)
 {
   auto matrix = Matrix<3, 3>::identity();

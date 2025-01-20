@@ -90,7 +90,6 @@ public:
 
   Matrix<N, M> transpose() const;
   Matrix<M, N> round(double tolerance) const;
-  bool pseudo_inverse();
 
 private:
   bool inverse4();

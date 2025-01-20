@@ -46,6 +46,8 @@ public:
   static Matrix<M, N> zero();
   static Matrix<M, N> identity();
 
+  double norm() const;
+
   void set_row(size_t pos, const Vector<M> & vector);
   Vector<M> get_row(size_t pos) const;
 

@@ -111,6 +111,19 @@ Matrix<M, N> Matrix<M, N>::identity()
   return matrix;
 }
 
+template <size_t M, size_t N>
+double Matrix<M, N>::norm() const
+{
+  double norm = 0.0;
+  for (size_t i = 0; i < M; ++i) {
+    for (size_t j = 0; j < N; ++j) {
+      norm += std::pow((*this)[i][j], 2);
+    }
+  }
+
+  return std::sqrt(norm);
+}
+
 template<size_t M, size_t N>
 void Matrix<M, N>::set_row(size_t pos, const Vector<M> & vector)
 {
@@ -363,28 +376,6 @@ const double * Matrix<M, N>::operator[](size_t pos) const
 }
 
 template <size_t M, size_t N>
-bool Matrix<M, N>::inverse2()
-{
-  static_assert(M == 2 && N == 2, "Inverse matrix operation only available for 2 by 2 matrix.");
-
-  auto inverse = Matrix<M, N>::zero();
-  auto source = *this;
-
-  inverse[0][0] = source[1][1];
-  inverse[0][1] = -source[0][1];
-  inverse[1][0] = -source[1][0];
-  inverse[1][1] = source[0][0];
-
-  double determinant = source[0][0] * inverse[0][0] + source[0][1] * inverse[1][0];
-  if (determinant == 0) {
-    return false;
-  }
-
-  (*this) = inverse * (1.0 / determinant);
-  return true;
-}
-
-template <size_t M, size_t N>
 bool Matrix<M, N>::inverse()
 {
   static_assert(
@@ -467,8 +458,6 @@ bool Matrix<M, N>::inverse()
 template<size_t M, size_t N>
 bool Matrix<M, N>::inverse4()
 {
-  static_assert(M == 4, "Inverse matrix operation only available for 4 by 4 matrix.");
-
   auto inverse = Matrix<M, N>::zero();
   auto source = *this;
 
@@ -594,22 +583,24 @@ bool Matrix<M, N>::inverse3()
   return true;
 }
 
-template<size_t M, size_t N>
+template <size_t M, size_t N>
 bool Matrix<M, N>::inverse2()
 {
+  auto inverse = Matrix<M, N>::zero();
   auto source = *this;
 
-  double determinant = source[0][0] * source[1][1] - source[0][1] * source[1][0];
+  inverse[0][0] = source[1][1];
+  inverse[0][1] = -source[0][1];
+  inverse[1][0] = -source[1][0];
+  inverse[1][1] = source[0][0];
 
+  double determinant = source[0][0] * inverse[0][0] + source[0][1] * inverse[1][0];
   if (determinant == 0) {
     return false;
   }
 
-  (*this)[0][0] = source[1][1] / determinant;
-  (*this)[1][0] = -source[1][0] / determinant;
-  (*this)[0][1] = -source[0][1] / determinant;
-  (*this)[1][1] = source[0][0] / determinant;
-
+  (*this) = inverse * (1.0 / determinant);
+  
   return true;
 }
 

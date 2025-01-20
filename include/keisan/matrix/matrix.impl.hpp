@@ -630,6 +630,31 @@ Matrix<M, N> Matrix<M, N>::round(double tolerance) const
   return matrix;
 }
 
+template <size_t M, size_t N>
+Matrix<M, N> Matrix<M, N>::power(double exponent) const
+{
+  if (exponent == 0) {
+    return identity();
+  }
+
+  if (exponent == 1) {
+    return *this;
+  }
+
+  auto matrix = *this;
+
+  if (exponent < 0) {
+    matrix.inverse();
+    exponent = -exponent;
+  }
+
+  for (size_t i = 1; i < exponent; ++i) {
+    matrix = matrix * (*this);
+  }
+
+  return matrix;
+}
+
 }  // namespace keisan
 
 #endif  // KEISAN__MATRIX__MATRIX_IMPL_HPP_

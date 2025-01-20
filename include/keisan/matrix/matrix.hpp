@@ -91,6 +91,7 @@ public:
 
   Matrix<N, M> transpose() const;
   Matrix<M, N> round(double tolerance) const;
+  Matrix<M, N> power(double exponent) const;
 
 private:
   bool inverse4();

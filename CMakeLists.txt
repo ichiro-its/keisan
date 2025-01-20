@@ -26,6 +26,7 @@ add_library(${PROJECT_NAME} SHARED
   "src/matrix/matrix.cpp"
   "src/constant.cpp"
   "src/interpolation/spline.cpp")
+  "src/kalman.cpp")
 
 ament_target_dependencies(${PROJECT_NAME} gtest_vendor)
 

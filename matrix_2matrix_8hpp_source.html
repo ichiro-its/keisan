@@ -168,17 +168,19 @@ $(function() {
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
 <div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="namespacekeisan.html#ae9858b1f3b80093ad91bf78b3b6edd90">   96</a></span>&#160;<a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;4, 4&gt;</a> <a class="code" href="namespacekeisan.html#a332cc3fab9f47b1b292bec82c5775bd2">rotation_matrix</a>(<span class="keyword">const</span> <a class="code" href="structkeisan_1_1Euler.html">Euler&lt;double&gt;</a> &amp; angle);</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;}  <span class="comment">// namespace keisan</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="namespacekeisan.html#aa0d55f01093ebdb207f80820586d77a7">   98</a></span>&#160;<a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;4, 4&gt;</a> <a class="code" href="namespacekeisan.html#a332cc3fab9f47b1b292bec82c5775bd2">rotation_matrix</a>(<span class="keyword">const</span> <a class="code" href="structkeisan_1_1Quaternion.html">Quaternion&lt;double&gt;</a> &amp; quaternion);</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keyword">template</span>&lt;<span class="keywordtype">size_t</span> M, <span class="keywordtype">size_t</span> N&gt;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;std::ostream &amp; <a class="code" href="matrix_2matrix_8hpp.html#a742cccea72194735725e770f8e3dcb18">operator&lt;&lt;</a>(std::ostream &amp; out, <span class="keyword">const</span> <a class="code" href="classkeisan_1_1Matrix.html">keisan::Matrix&lt;M, N&gt;</a> &amp; matrix);</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keyword">template</span>&lt;<span class="keywordtype">size_t</span> M, <span class="keywordtype">size_t</span> N&gt;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<a class="code" href="classkeisan_1_1Matrix.html">keisan::Matrix&lt;M, N&gt;</a> <a class="code" href="matrix_2matrix_8hpp.html#ac0ddf3db1002a3e30c91cbe9d024d718">operator*</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp; value, <span class="keyword">const</span> <a class="code" href="classkeisan_1_1Matrix.html">keisan::Matrix&lt;M, N&gt;</a> &amp; matrix);</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="matrix_8impl_8hpp.html">keisan/matrix/matrix.impl.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}  <span class="comment">// namespace keisan</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keyword">template</span>&lt;<span class="keywordtype">size_t</span> M, <span class="keywordtype">size_t</span> N&gt;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;std::ostream &amp; <a class="code" href="matrix_2matrix_8hpp.html#a742cccea72194735725e770f8e3dcb18">operator&lt;&lt;</a>(std::ostream &amp; out, <span class="keyword">const</span> <a class="code" href="classkeisan_1_1Matrix.html">keisan::Matrix&lt;M, N&gt;</a> &amp; matrix);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keyword">template</span>&lt;<span class="keywordtype">size_t</span> M, <span class="keywordtype">size_t</span> N&gt;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<a class="code" href="classkeisan_1_1Matrix.html">keisan::Matrix&lt;M, N&gt;</a> <a class="code" href="matrix_2matrix_8hpp.html#ac0ddf3db1002a3e30c91cbe9d024d718">operator*</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp; value, <span class="keyword">const</span> <a class="code" href="classkeisan_1_1Matrix.html">keisan::Matrix&lt;M, N&gt;</a> &amp; matrix);</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// KEISAN__MATRIX__MATRIX_HPP_</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="matrix_8impl_8hpp.html">keisan/matrix/matrix.impl.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// KEISAN__MATRIX__MATRIX_HPP_</span></div>
 <div class="ttc" id="aangle_2angle_8hpp_html"><div class="ttname"><a href="angle_2angle_8hpp.html">angle.hpp</a></div></div>
 <div class="ttc" id="aclasskeisan_1_1Angle_html"><div class="ttname"><a href="classkeisan_1_1Angle.html">keisan::Angle</a></div><div class="ttdef"><b>Definition:</b> angle.hpp:52</div></div>
 <div class="ttc" id="aclasskeisan_1_1Matrix_html"><div class="ttname"><a href="classkeisan_1_1Matrix.html">keisan::Matrix</a></div><div class="ttdef"><b>Definition:</b> matrix.hpp:37</div></div>
@@ -215,6 +217,7 @@ $(function() {
 <div class="ttc" id="astructkeisan_1_1Euler_html"><div class="ttname"><a href="structkeisan_1_1Euler.html">keisan::Euler</a></div><div class="ttdef"><b>Definition:</b> euler.hpp:37</div></div>
 <div class="ttc" id="astructkeisan_1_1Point2_html"><div class="ttname"><a href="structkeisan_1_1Point2.html">keisan::Point2</a></div><div class="ttdef"><b>Definition:</b> point_2.hpp:33</div></div>
 <div class="ttc" id="astructkeisan_1_1Point3_html"><div class="ttname"><a href="structkeisan_1_1Point3.html">keisan::Point3</a></div><div class="ttdef"><b>Definition:</b> point_3.hpp:33</div></div>
+<div class="ttc" id="astructkeisan_1_1Quaternion_html"><div class="ttname"><a href="structkeisan_1_1Quaternion.html">keisan::Quaternion</a></div><div class="ttdef"><b>Definition:</b> quaternion.hpp:35</div></div>
 <div class="ttc" id="avector_8hpp_html"><div class="ttname"><a href="vector_8hpp.html">vector.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

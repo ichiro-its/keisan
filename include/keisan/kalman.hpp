@@ -18,8 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__KEISAN_HPP_
-#define KEISAN__KEISAN_HPP_
+#ifndef KEISAN__KALMAN_HPP_
+#define KEISAN__KALMAN_HPP_
 
 #include "keisan/matrix.hpp"
 
@@ -29,6 +29,8 @@ namespace keisan
 class Kalman
 {
 public:
+  Kalman() = default;
+  ~Kalman() = default;
   Kalman(double dt, double std_dev_aceleration, Matrix<2, 1> std_measurement, Matrix<2, 1> acceleration); 
   Matrix<4, 1> predict();
   Matrix<4, 1> update(Matrix<2, 1> measurement);
@@ -46,4 +48,4 @@ private:
 
 } // namespace keisa
 
-#endif // KEISAN__KEISAN_HPP_
+#endif // KEISAN__KALMAN_HPP_

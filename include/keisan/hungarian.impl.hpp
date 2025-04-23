@@ -18,6 +18,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#ifndef KEISAN__HUNGARIAN_IMPL_HPP_
+#define KEISAN__HUNGARIAN_IMPL_HPP_
+
 #include "keisan/hungarian.hpp"
 
 namespace keisan
@@ -26,7 +29,7 @@ namespace keisan
 template<size_t N>
 Hungarian<N>::Hungarian()
 : matrix(Matrix<N, N>::zero()), mask(Matrix<N, N>::zero()),
-  path(Matrix<N + 1, 2>::zero()), row_cover(N, 0), col_cover(N, 0),
+  path(Matrix<N + 1, 2>::zero()), row_cover{}, col_cover{},
   size(0), step(0), actual_size(0), path_row_0(0), path_col_0(0)
 {
 }
@@ -360,3 +363,5 @@ Matrix<N, N> Hungarian<N>::solve(const Matrix<N, N> & matrix, int actual_size)
 }
 
 } // namespace keisan
+
+#endif // KEISAN__HUNGARIAN_IMPL_HPP_

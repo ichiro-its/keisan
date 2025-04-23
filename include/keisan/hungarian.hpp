@@ -67,4 +67,6 @@ private:
 
 } // namespace keisan
 
+#include "keisan/hungarian.impl.hpp"
+
 #endif // KEISAN__HUNGARIAN_HPP_

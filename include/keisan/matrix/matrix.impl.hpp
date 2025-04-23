@@ -111,6 +111,19 @@ Matrix<M, N> Matrix<M, N>::identity()
 }
 
 template <size_t M, size_t N>
+Matrix<M, N> Matrix<M, N>::infinite()
+{
+  Matrix<M, N> matrix;
+  for (size_t i = 0; i < M; ++i) {
+    for (size_t j = 0; j < N; ++j) {
+      matrix[i][j] = std::numeric_limits<double>::max();
+    }
+  }
+
+  return matrix;
+}
+
+template <size_t M, size_t N>
 Matrix<M, N> & Matrix<M, N>::operator=(const Matrix<M, N> & matrix)
 {
   std::copy(matrix.data, matrix.data + M * N, data);

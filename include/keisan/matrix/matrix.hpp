@@ -45,6 +45,7 @@ public:
 
   static Matrix<M, N> zero();
   static Matrix<M, N> identity();
+  static Matrix<M, N> infinite();
 
   Matrix<M, N> & operator=(const Matrix<M, N> & matrix);
 

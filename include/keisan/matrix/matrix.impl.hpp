@@ -42,7 +42,13 @@ std::ostream & operator<<(std::ostream & out, const keisan::Matrix<M, N> & matri
         out << ",";
       }
 
-      out << matrix[i][j];
+      if (matrix[i][j] == std::numeric_limits<double>::max()) {
+        out << "inf";
+      } else if (matrix[i][j] == -std::numeric_limits<double>::max()) {
+        out << "-inf";
+      } else {
+        out << matrix[i][j];
+      }
     }
 
     out << "]";

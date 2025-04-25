@@ -28,9 +28,8 @@ namespace keisan
 
 template<size_t N>
 Hungarian<N>::Hungarian()
-: matrix(Matrix<N, N>::zero()), mask(Matrix<N, N>::zero()),
-  path(Matrix<N + 1, 2>::zero()), row_cover{}, col_cover{},
-  size(0), step(0), actual_size(0), path_row_0(0), path_col_0(0)
+: matrix(Matrix<N, N>::zero()), result(Matrix<N, N>::zero()), mask{}, path{},
+  step(0), actual_size(0), row_cover{}, col_cover{}, path_row_0(0), path_col_0(0)
 {
 }
 
@@ -70,38 +69,38 @@ bool Hungarian<N>::star_in_row(int row)
 }
 
 template<size_t N>
-void Hungarian<N>::find_star_in_row(int row, int & col)
+int Hungarian<N>::find_star_in_row(int row)
 {
-  for (col = 0; col < actual_size; ++col) {
+  for (int col = 0; col < actual_size; ++col) {
     if (mask[row][col] == 1) {
-      return;
+      return col;
     }
   }
 
-  col = -1;
+  return -1;
 }
 
 template<size_t N>
-void Hungarian<N>::find_star_in_col(int col, int & row)
+int Hungarian<N>::find_star_in_col(int col)
 {
-  for (row = 0; row < actual_size; ++row) {
+  for (int row = 0; row < actual_size; ++row) {
     if (mask[row][col] == 1) {
-      return;
+      return row;
     }
   }
 
-  row = -1;
+  return -1;
 }
 
 template<size_t N>
-void Hungarian<N>::find_prime_in_row(int row, int & col)
+int Hungarian<N>::find_prime_in_row(int row)
 {
-  for (int j = 0; j < actual_size; ++j) {
-    if (mask[row][j] == 2) {
-      col = j;
-      return;
+  for (int col = 0; col < actual_size; ++col) {
+    if (mask[row][col] == 2) {
+      return col;
     }
   }
+  return -1;
 }
 
 template<size_t N>
@@ -131,9 +130,9 @@ void Hungarian<N>::erase_primes()
 }
 
 template<size_t N>
-void Hungarian<N>::find_smallest(double & minval)
+double Hungarian<N>::find_smallest()
 {
-  minval = std::numeric_limits<double>::max();
+  double minval = std::numeric_limits<double>::max();
   for (int row = 0; row < actual_size; ++row) {
     for (int col = 0; col < actual_size; ++col) {
       if (row_cover[row] == 0 && col_cover[col] == 0) {
@@ -143,6 +142,8 @@ void Hungarian<N>::find_smallest(double & minval)
       }
     }
   }
+
+  return minval;
 }
 
 /* Step 1: Subtract row and column minima
@@ -211,18 +212,13 @@ void Hungarian<N>::step_2()
 template<size_t N>
 void Hungarian<N>::step_3()
 {
+  int col_count = 0;
   for (int row = 0; row < actual_size; ++row) {
     for (int col = 0; col < actual_size; ++col) {
-      if (mask[row][col] == 1) {
+      if (mask[row][col] == 1 && col_cover[col] != 1) {
         col_cover[col] = 1;
+        col_count++;
       }
-    }
-  }
-
-  int col_count = 0;
-  for (int col = 0; col < actual_size; ++col) {
-    if (col_cover[col] == 1) {
-      col_count++;
     }
   }
 
@@ -243,13 +239,13 @@ void Hungarian<N>::step_4()
   int row, col;
   while (true) {
     find_a_zero(row, col);
-    if (row == -1) {
+    if (row == -1 || col == -1) {
       step = 6;
       return;
     } else {
       mask[row][col] = 2;
       if (star_in_row(row)) {
-        find_star_in_row(row, col);
+        col = find_star_in_row(row);
         row_cover[row] = 1;
         col_cover[col] = 0;
       } else {
@@ -266,9 +262,9 @@ void Hungarian<N>::step_4()
  * Construct a series of alternating primed and starred zeros. Unstar the starred
  * zeros and star the primed ones. Clear all primes and uncover all rows and
  * columns. Return to step 3. */
-template<size_t N>
-void Hungarian<N>::step_5()
-{
+ template<size_t N>
+ void Hungarian<N>::step_5()
+ {
   int row = -1;
   int col = -1;
   int path_count = 1;
@@ -276,23 +272,19 @@ void Hungarian<N>::step_5()
   path[path_count - 1][0] = path_row_0;
   path[path_count - 1][1] = path_col_0;
 
-  bool done = false;
-  while (!done) {
-    find_star_in_col(path[path_count - 1][1], row);
-    if (row > -1) {
-      path_count++;
-      path[path_count - 1][0] = row;
-      path[path_count - 1][1] = path[path_count - 2][1];
-    } else {
-      done = true;
+  while (true) {
+    row = find_star_in_col(path[path_count - 1][1]);
+    if (row == -1) {
+      break;
     }
+    path_count++;
+    path[path_count - 1][0] = row;
+    path[path_count - 1][1] = path[path_count - 2][1];
 
-    if (!done) {
-      find_prime_in_row(path[path_count - 1][0], col);
-      path_count++;
-      path[path_count - 1][0] = path[path_count - 2][0];
-      path[path_count - 1][1] = col;
-    }
+    col = find_prime_in_row(path[path_count - 1][0]);
+    path_count++;
+    path[path_count - 1][0] = path[path_count - 2][0];
+    path[path_count - 1][1] = col;
   }
 
   augment_path(path_count);
@@ -310,8 +302,7 @@ void Hungarian<N>::step_5()
 template<size_t N>
 void Hungarian<N>::step_6()
 {
-  double minval;
-  find_smallest(minval);
+  double minval = find_smallest();
 
   for (int row = 0; row < actual_size; ++row) {
     for (int col = 0; col < actual_size; ++col) {
@@ -332,7 +323,14 @@ Matrix<N, N> Hungarian<N>::solve(const Matrix<N, N> & matrix, int actual_size)
 {
   this->matrix = matrix;
   this->actual_size = actual_size;
+  result = Matrix<N, N>::zero();
   step = 1;
+  row_cover = {};
+  col_cover = {};
+  mask = {};
+  path = {};
+  path_row_0 = 0;
+  path_col_0 = 0;
 
   while (true) {
     switch (step) {
@@ -355,7 +353,14 @@ Matrix<N, N> Hungarian<N>::solve(const Matrix<N, N> & matrix, int actual_size)
         step_6();
         break;
       case 7:
-        return mask;
+        for (int row = 0; row < actual_size; ++row) {
+          for (int col = 0; col < actual_size; ++col) {
+            if (mask[row][col] == 1) {
+              result[row][col] = 1;
+            }
+          }
+        }
+        return result;
       default:
         throw std::runtime_error("Invalid step in Hungarian algorithm");
     }

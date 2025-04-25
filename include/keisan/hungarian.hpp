@@ -37,11 +37,11 @@ public:
 
 private:
   Matrix<N, N> matrix;
-  Matrix<N, N> mask;
-  Matrix<N + 1, 2> path;
+  Matrix<N, N> result;
+  std::array<std::array<int, N>, N> mask;
+  std::array<std::array<int, 2>, N * 2> path;
   std::array<int, N> row_cover;
   std::array<int, N> col_cover;
-  size_t size;
   int step;
   int actual_size;
   int path_row_0;
@@ -50,12 +50,12 @@ private:
   void clear_covers(std::array<int, N> & cover);
   void find_a_zero(int & row, int & col);
   bool star_in_row(int row);
-  void find_star_in_row(int row, int & col);
-  void find_star_in_col(int col, int & row);
-  void find_prime_in_row(int row, int & col);
+  int find_star_in_row(int row);
+  int find_star_in_col(int col);
+  int find_prime_in_row(int row);
   void augment_path(int path_count);
   void erase_primes();
-  void find_smallest(double & minval);
+  double find_smallest();
 
   void step_1();
   void step_2();

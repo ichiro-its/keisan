@@ -16,6 +16,7 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 find_package(gtest_vendor REQUIRED)
+find_package(Eigen3 3 REQUIRED NO_MODULE)
 
 install(DIRECTORY "include" DESTINATION ".")
 

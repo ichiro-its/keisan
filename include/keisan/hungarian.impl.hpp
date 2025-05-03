@@ -242,19 +242,19 @@ void Hungarian<N>::step_4()
     if (row == -1 || col == -1) {
       step = 6;
       return;
-    } else {
-      mask[row][col] = PRIME;
-      if (star_in_row(row)) {
-        col = find_star_in_row(row);
-        row_cover[row] = COVERED;
-        col_cover[col] = UNCOVERED;
-      } else {
-        path_row_0 = row;
-        path_col_0 = col;
-        step = 5;
-        return;
-      }
     }
+
+    mask[row][col] = PRIME;
+    if (!star_in_row(row)) {
+      path_row_0 = row;
+      path_col_0 = col;
+      step = 5;
+      return;
+    }
+
+    col = find_star_in_row(row);
+    row_cover[row] = COVERED;
+    col_cover[col] = UNCOVERED;
   }
 }
 

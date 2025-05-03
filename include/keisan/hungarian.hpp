@@ -35,6 +35,19 @@ public:
   Hungarian();
   Matrix<N, N> solve(const Matrix<N, N> & matrix, int actual_size);
 
+  enum Mask
+  {
+    NONE,
+    STAR,
+    PRIME
+  };
+
+  enum CoverState
+  {
+    UNCOVERED,
+    COVERED
+  };
+
 private:
   Matrix<N, N> matrix;
   Matrix<N, N> result;

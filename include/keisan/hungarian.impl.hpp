@@ -37,7 +37,7 @@ template<size_t N>
 void Hungarian<N>::clear_covers(std::array<int, N> & cover)
 {
   for (int i = 0; i < actual_size; ++i) {
-    cover[i] = 0;
+    cover[i] = UNCOVERED;
   }
 }
 
@@ -46,7 +46,7 @@ void Hungarian<N>::find_a_zero(int & row, int & col)
 {
   for (row = 0; row < actual_size; ++row) {
     for (col = 0; col < actual_size; ++col) {
-      if (matrix[row][col] == 0 && row_cover[row] == 0 && col_cover[col] == 0) {
+      if (matrix[row][col] == 0 && row_cover[row] == UNCOVERED && col_cover[col] == UNCOVERED) {
         return;
       }
     }
@@ -60,7 +60,7 @@ template<size_t N>
 bool Hungarian<N>::star_in_row(int row)
 {
   for (int col = 0; col < actual_size; ++col) {
-    if (mask[row][col] == 1) {
+    if (mask[row][col] == STAR) {
       return true;
     }
   }
@@ -72,7 +72,7 @@ template<size_t N>
 int Hungarian<N>::find_star_in_row(int row)
 {
   for (int col = 0; col < actual_size; ++col) {
-    if (mask[row][col] == 1) {
+    if (mask[row][col] == STAR) {
       return col;
     }
   }
@@ -84,7 +84,7 @@ template<size_t N>
 int Hungarian<N>::find_star_in_col(int col)
 {
   for (int row = 0; row < actual_size; ++row) {
-    if (mask[row][col] == 1) {
+    if (mask[row][col] == STAR) {
       return row;
     }
   }
@@ -96,7 +96,7 @@ template<size_t N>
 int Hungarian<N>::find_prime_in_row(int row)
 {
   for (int col = 0; col < actual_size; ++col) {
-    if (mask[row][col] == 2) {
+    if (mask[row][col] == PRIME) {
       return col;
     }
   }
@@ -109,10 +109,10 @@ void Hungarian<N>::augment_path(int path_count)
   for (int i = 0; i < path_count; ++i) {
     int row = path[i][0];
     int col = path[i][1];
-    if (mask[row][col] == 1) {
-      mask[row][col] = 0;
+    if (mask[row][col] == STAR) {
+      mask[row][col] = NONE;
     } else {
-      mask[row][col] = 1;
+      mask[row][col] = STAR;
     }
   }
 }
@@ -122,8 +122,8 @@ void Hungarian<N>::erase_primes()
 {
   for (int row = 0; row < actual_size; ++row) {
     for (int col = 0; col < actual_size; ++col) {
-      if (mask[row][col] == 2) {
-        mask[row][col] = 0;
+      if (mask[row][col] == PRIME) {
+        mask[row][col] = NONE;
       }
     }
   }
@@ -135,7 +135,7 @@ double Hungarian<N>::find_smallest()
   double minval = std::numeric_limits<double>::max();
   for (int row = 0; row < actual_size; ++row) {
     for (int col = 0; col < actual_size; ++col) {
-      if (row_cover[row] == 0 && col_cover[col] == 0) {
+      if (row_cover[row] == UNCOVERED && col_cover[col] == UNCOVERED) {
         if (matrix[row][col] < minval) {
           minval = matrix[row][col];
         }
@@ -192,10 +192,10 @@ void Hungarian<N>::step_2()
 {
   for (int row = 0; row < actual_size; ++row) {
     for (int col = 0; col < actual_size; ++col) {
-      if (matrix[row][col] == 0 && row_cover[row] == 0 && col_cover[col] == 0) {
-        mask[row][col] = 1;
-        row_cover[row] = 1;
-        col_cover[col] = 1;
+      if (matrix[row][col] == 0 && row_cover[row] == UNCOVERED && col_cover[col] == UNCOVERED) {
+        mask[row][col] = STAR;
+        row_cover[row] = COVERED;
+        col_cover[col] = COVERED;
       }
     }
   }
@@ -215,8 +215,8 @@ void Hungarian<N>::step_3()
   int col_count = 0;
   for (int row = 0; row < actual_size; ++row) {
     for (int col = 0; col < actual_size; ++col) {
-      if (mask[row][col] == 1 && col_cover[col] != 1) {
-        col_cover[col] = 1;
+      if (mask[row][col] == STAR && col_cover[col] == UNCOVERED) {
+        col_cover[col] = COVERED;
         col_count++;
       }
     }
@@ -243,11 +243,11 @@ void Hungarian<N>::step_4()
       step = 6;
       return;
     } else {
-      mask[row][col] = 2;
+      mask[row][col] = PRIME;
       if (star_in_row(row)) {
         col = find_star_in_row(row);
-        row_cover[row] = 1;
-        col_cover[col] = 0;
+        row_cover[row] = COVERED;
+        col_cover[col] = UNCOVERED;
       } else {
         path_row_0 = row;
         path_col_0 = col;
@@ -306,10 +306,10 @@ void Hungarian<N>::step_6()
 
   for (int row = 0; row < actual_size; ++row) {
     for (int col = 0; col < actual_size; ++col) {
-      if (row_cover[row] == 1) {
+      if (row_cover[row] == COVERED) {
         matrix[row][col] += minval;
       }
-      if (col_cover[col] == 0) {
+      if (col_cover[col] == UNCOVERED) {
         matrix[row][col] -= minval;
       }
     }
@@ -355,7 +355,7 @@ Matrix<N, N> Hungarian<N>::solve(const Matrix<N, N> & matrix, int actual_size)
       case 7:
         for (int row = 0; row < actual_size; ++row) {
           for (int col = 0; col < actual_size; ++col) {
-            if (mask[row][col] == 1) {
+            if (mask[row][col] == STAR) {
               result[row][col] = 1;
             }
           }

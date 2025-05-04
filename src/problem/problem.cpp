@@ -19,6 +19,7 @@
 // THE SOFTWARE.
 
 #include "keisan/problem/problem.hpp"
+#include <Eigen/src/Core/Matrix.h>
 
 #include "keisan/problem/constraint.hpp"
 #include "keisan/problem/expression.hpp"
@@ -29,6 +30,7 @@
 #include "eiquadprog/eiquadprog.hpp"
 
 #include <cmath>
+#include <limits>
 #include <map>
 #include <stdexcept>
 
@@ -303,6 +305,54 @@ void Problem::solve()
   qp_x.setZero();
   double result = eiquadprog::solvers::solve_quadprog(
     P, q, A.transpose(), b, G.transpose(), h, qp_x, active_set, active_set_size);
+
+  if (determined_variables) {
+    Eigen::VectorXd u(n_variables, 1);
+    u.setZero();
+    u.topRows(determined_variables) = y;
+    u.bottomRows(free_variables) = qp_x.topRows(free_variables);
+    QR.matrixQ().applyThisOnTheLeft(u);
+
+    x = u;
+  } else {
+    x = qp_x;
+  }
+
+  if (result == std::numeric_limits<double>::infinity()) {
+    throw std::runtime_error("Infeasible QP (check your hard inequality constraints)");
+  }
+
+  if (A.rows() > 0) {
+    Eigen::VectorXd equality_constraints = A * x.topRows(A.cols()) + b;
+    for (int k = 0; k < A.rows(); ++k) {
+      throw std::runtime_error("Infeasible QP (equality constraints were not enforced)");
+    }
+  }
+
+  if (x.hasNaN()) {
+    throw std::runtime_error("NaN in the QP solution");
+  }
+
+  for (int k = 0; k < active_set_size; ++k) {
+    int active_constraint = active_set[k];
+
+    if (active_constraint >= 0 && hard_inequalities.count(active_constraint)) {
+      hard_inequalities[active_constraint]->is_active = true;
+    }
+  }
+
+  slacks = qp_x.block(free_variables, 0, slack_variables, 1);
+  for (int k = 0; k < slacks.rows(); ++k) {
+    if (slacks[k] <= 1e-6 && soft_inequalities.count(k)) {
+      soft_inequalities[k]->is_active = true;
+    }
+  }
+
+  for (auto variable : variables) {
+    variable->version++;
+    variable->value = Eigen::VectorXd(variable->size());
+    variable->value = x.block(variable->offset_start, 0, variable->size(), 1);
+  }
 }
 
 }  // namespace keisan

@@ -35,27 +35,27 @@ class Constraint
 public:
   enum Priority
   {
-    SOFT,
-    HARD
+    Soft,  // Constraint tidak harus diselesaikan, seberapa dekat tergantung dengan weight.
+    Hard   // Constraint harus diselesaikan, jika tidak, akan keluar error.
   };
 
   enum Type
   {
-    EQUALITY,
-    INEQUALITY
+    Equality,
+    Inequality
   };
 
   Expression expression;
 
-  Type type = EQUALITY;
-  Priority priority = HARD;
+  Type type = Equality;
+  Priority priority = Hard;
 
   double weight = 1.0;
 
   bool is_active = false;
 
-  void configure(Priority priority_, double weight = 1.0);
-  void configure(std::string type, double weight = 1.0);
+  void configure(Priority priority_, double weight_ = 1.0);
+  void configure(std::string type_, double weight_ = 1.0);
 
   bool operator==(const Constraint & other) const;
 };

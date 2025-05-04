@@ -1,4 +1,4 @@
-// Copyright (c) 2025 ICHIRO ITS
+// Copyright (c) 2025 Rhoban
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,8 +25,6 @@
 #include "keisan/problem/expression.hpp"
 #include "keisan/problem/variable.hpp"
 
-#include <memory>
-
 namespace keisan
 {
 
@@ -34,6 +32,7 @@ class Problem
 {
 public:
   Problem();
+  virtual ~Problem();
 
   Variable & add_variable(int size = -1);
   Constraint & add_limit(Expression expression, Eigen::VectorXd target);
@@ -59,8 +58,12 @@ public:
   Eigen::VectorXd x;
   Eigen::VectorXd slacks;
 
+  bool use_sparsity_optimization = true;
+
+  // Jika true, maka QP hanya akan memakai free variable.
+  bool rewrite_equalities = true;
+
 protected:
-  /**
   Eigen::ColPivHouseholderQR<Eigen::Matrix<double, -1, -1, 1, -1, -1>> QR;
 
   /**
@@ -70,11 +73,11 @@ protected:
    */
   Eigen::MatrixXd y;
 
-  std::vector<std::shared_ptr<Variable>> variables;
-  std::vector<std::shared_ptr<Constraint>> constraints;
+  std::vector<Variable *> variables;
+  std::vector<Constraint *> constraints;
 
   void get_constraint_expressions(
-    std::shared_ptr<Constraint> constraint, Eigen::MatrixXd & A, Eigen::MatrixXd & b);
+    Constraint * constraint, Eigen::MatrixXd & A, Eigen::MatrixXd & b);
 };
 
 }  // namespace keisan

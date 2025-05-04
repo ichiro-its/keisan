@@ -14,9 +14,11 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+find_package(Eigen3 REQUIRED)
+find_package(eiquadprog REQUIRED)
+
 find_package(ament_cmake REQUIRED)
 find_package(gtest_vendor REQUIRED)
-find_package(Eigen3 3 REQUIRED NO_MODULE)
 
 install(DIRECTORY "include" DESTINATION ".")
 
@@ -25,6 +27,13 @@ add_library(${PROJECT_NAME} SHARED
   "src/geometry/point_2.cpp"
   "src/geometry/point_3.cpp"
   "src/matrix/matrix.cpp"
+  "src/problem/constraint.cpp"
+  "src/problem/expression.cpp"
+  "src/problem/integrator.cpp"
+  "src/problem/polygon_constraint.cpp"
+  "src/problem/problem.cpp"
+  "src/problem/sparsity.cpp"
+  "src/problem/variable.cpp"
   "src/constant.cpp"
   "src/interpolation/spline.cpp"
   "src/kalman.cpp")
@@ -34,6 +43,11 @@ ament_target_dependencies(${PROJECT_NAME} gtest_vendor)
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
+
+target_link_libraries(${PROJECT_NAME} PUBLIC
+  Eigen3::Eigen
+  eiquadprog::eiquadprog
+)
 
 install(TARGETS ${PROJECT_NAME}
   EXPORT export_${PROJECT_NAME}

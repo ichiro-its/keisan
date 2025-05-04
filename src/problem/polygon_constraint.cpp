@@ -18,24 +18,52 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__PROBLEM__POLYGON_CONSTRAINT_HPP_
-#define KEISAN__PROBLEM__POLYGON_CONSTRAINT_HPP_
+#include "keisan/problem/polygon_constraint.hpp"
+#include <Eigen/src/Core/Matrix.h>
 
 #include "keisan/problem/constraint.hpp"
+#include "keisan/problem/expression.hpp"
 
 #include <Eigen/Dense>
+
+#include <cmath>
+#include <stdexcept>
 
 namespace keisan
 {
 
-class PolygonConstraint
+Constraint PolygonConstraint::in_polygon(
+  const Expression & expression_xy, std::vector<Eigen::Vector2d> polygon, double margin)
 {
-public:
-  static Constraint in_polygon(
-    const Expression & expression_xy, std::vector<Eigen::Vector2d> polygon, double margin = 0.);
-};
+  if (expression_xy.rows() != 2) {
+    throw std::runtime_error("Polygon constraint should be called with 2 rows expressions");
+  }
+
+  Expression values;
+  values.A.resize(polygon.size(), expression_xy.cols());
+  values.b.resize(polygon.size());
+
+  for (size_t i = 0; i < polygon.size(); ++i) {
+    int j = (i + 1) % polygon.size();
+
+    const Eigen::Vector2d & A = polygon[i];
+    const Eigen::Vector2d & B = polygon[j];
+
+    // Menghitung vektor yang dinormalisasikan yang mengarah ke dalam polygon
+    Eigen::Vector2d n;
+    n << (B - A).y(), (A - B).x();
+    n.normalize();
+
+    /*
+    * Jarak ke batas polygon berupa rumus:
+    * n.T * (P - A) >= margin
+    */
+    Expression result = (n.transpose() * (expression_xy - A)) - margin;
+    values.A.block(i, 0, 1, expression_xy.cols()) = result.A;
+    values.b(i) = result.b(0);
+  }
+
+  return values >= 0;
+}
 
 }  // namespace keisan
-
-#endif  // KEISAN__PROBLEM__POLYGON_CONSTRAINT_HPP_
-

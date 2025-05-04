@@ -18,24 +18,40 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__PROBLEM__POLYGON_CONSTRAINT_HPP_
-#define KEISAN__PROBLEM__POLYGON_CONSTRAINT_HPP_
-
-#include "keisan/problem/constraint.hpp"
+#ifndef KEISAN__PROBLEM__SPARSITY_HPP_
+#define KEISAN__PROBLEM__SPARSITY_HPP_
 
 #include <Eigen/Dense>
+
+#include <vector>
 
 namespace keisan
 {
 
-class PolygonConstraint
+class Sparsity
 {
 public:
-  static Constraint in_polygon(
-    const Expression & expression_xy, std::vector<Eigen::Vector2d> polygon, double margin = 0.);
+  struct Interval
+  {
+    Interval();
+    Interval(int start, int end);
+
+    int start = 0;
+    int end = 0;
+
+    // True jika interval memiliki kolom i
+    bool contains(int i);
+  };
+
+  void add_interval(int start, int end);
+
+  std::vector<Interval> intervals;
+
+  Sparsity operator+(const Sparsity & other) const;
+
+  static Sparsity detect_columns_sparsity(const Eigen::MatrixXd M);
 };
 
 }  // namespace keisan
 
-#endif  // KEISAN__PROBLEM__POLYGON_CONSTRAINT_HPP_
-
+#endif  // KEISAN__PROBLEM__SPARSITY_HPP_

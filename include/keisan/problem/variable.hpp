@@ -1,4 +1,4 @@
-// Copyright (c) 2025 ICHIRO ITS
+// Copyright (c) 2025 Rhoban
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -44,7 +44,7 @@ public:
 
   int version = 0;
 
-  std::shared_ptr<Problem> problem;
+  Problem * problem;
 };
 
 }  // namespace keisan

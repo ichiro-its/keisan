@@ -18,24 +18,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__PROBLEM__POLYGON_CONSTRAINT_HPP_
-#define KEISAN__PROBLEM__POLYGON_CONSTRAINT_HPP_
-
 #include "keisan/problem/constraint.hpp"
-
-#include <Eigen/Dense>
 
 namespace keisan
 {
 
-class PolygonConstraint
+void Constraint::configure(std::string type, double weight_)
 {
-public:
-  static Constraint in_polygon(
-    const Expression & expression_xy, std::vector<Eigen::Vector2d> polygon, double margin = 0.);
-};
+  priority = (type == "hard" ? Hard : Soft);
+  weight = weight_;
+}
+
+void Constraint::configure(Constraint::Priority priority_, double weight_)
+{
+  priority = priority_;
+  weight = weight_;
+}
+
+bool Constraint::operator==(const Constraint & other) const
+{
+  return (expression.A == other.expression.A) && (expression.b == other.expression.b) &&
+         (priority == other.priority) && (weight == other.weight) && (type == other.type);
+}
 
 }  // namespace keisan
-
-#endif  // KEISAN__PROBLEM__POLYGON_CONSTRAINT_HPP_
-

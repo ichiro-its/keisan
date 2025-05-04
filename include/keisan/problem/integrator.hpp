@@ -1,4 +1,4 @@
-// Copyright (c) 2025 ICHIRO ITS
+// Copyright (c) 2025 Rhoban
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,10 +21,10 @@
 #ifndef KEISAN__PROBLEM__INTEGRATOR_HPP_
 #define KEISAN__PROBLEM__INTEGRATOR_HPP_
 
-#include <Eigen/Dense>
-
 #include "keisan/problem/expression.hpp"
 #include "keisan/problem/variable.hpp"
+
+#include <Eigen/Dense>
 
 #include <map>
 
@@ -52,8 +52,8 @@ public:
   };
 
   Integrator();
-  Integrator(Variable & variable, Expression x0, int order, double dt);
-  Integrator(Variable & variable, Expression X0, Eigen::MatrixXd system_matrix, double dt);
+  Integrator(Variable & variable, Expression x0_, int order, double dt);
+  Integrator(Variable & variable, Expression x0_, Eigen::MatrixXd system_matrix, double dt);
 
   static Eigen::MatrixXd upper_shift_matrix(int order);
 
@@ -67,7 +67,9 @@ public:
   double value(double t, int diff);
 
   // Decision variable
-  std::shared_ptr<Variable> variable;
+  Variable * variable;
+   
+  int N;
 
   // Continuous system matrix
   Eigen::MatrixXd M;
@@ -89,10 +91,10 @@ public:
   double dt;
   double t_start = 0.;
 
-protected:
   // Cek jika diff yang diberikan valid
-  void check_diff(int diff, bool allow_all = false);
+  static void check_diff(int order, int diff, bool allow_all = false);
 
+protected:
   int version = 0;
 
   Trajectory trajectory;

@@ -18,24 +18,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__PROBLEM__POLYGON_CONSTRAINT_HPP_
-#define KEISAN__PROBLEM__POLYGON_CONSTRAINT_HPP_
+#include "keisan/problem/variable.hpp"
 
-#include "keisan/problem/constraint.hpp"
+#include "keisan/problem/expression.hpp"
 
 #include <Eigen/Dense>
 
 namespace keisan
 {
 
-class PolygonConstraint
+Expression Variable::expr(int start, int rows)
 {
-public:
-  static Constraint in_polygon(
-    const Expression & expression_xy, std::vector<Eigen::Vector2d> polygon, double margin = 0.);
-};
+  start = (start == -1) ? 0 : start;
+  rows = (rows == -1) ? 0 : rows;
+
+  Expression e;
+  e.A = Eigen::MatrixXd(rows, offset_start);
+  e.A.setZero();
+  e.b = Eigen::VectorXd(rows);
+  e.b.setZero();
+
+  for (int k = 0; k < rows; ++k) {
+    e.A(k, offset_start + start + k) = 1;
+  }
+
+  return e;
+}
+
+int Variable::size() { return offset_end - offset_start; }
 
 }  // namespace keisan
-
-#endif  // KEISAN__PROBLEM__POLYGON_CONSTRAINT_HPP_
-

@@ -1,4 +1,4 @@
-// Copyright (c) 2021 ICHIRO ITS
+// Copyright (c) 2025 Rhoban
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,16 +18,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__KEISAN_HPP_
-#define KEISAN__KEISAN_HPP_
+#ifndef KEISAN__PROBLEM_HPP_
+#define KEISAN__PROBLEM_HPP_
 
-#include "keisan/geometry/point_2.hpp"
-#include "keisan/geometry/point_3.hpp"
+#include "keisan/problem/constraint.hpp"
+#include "keisan/problem/expression.hpp"
+#include "keisan/problem/integrator.hpp"
+#include "keisan/problem/polygon_constraint.hpp"
+#include "keisan/problem/problem.hpp"
+#include "keisan/problem/sparsity.hpp"
+#include "keisan/problem/variable.hpp"
 
-#include "keisan/angle.hpp"
-#include "keisan/constant.hpp"
-#include "keisan/matrix.hpp"
-#include "keisan/number.hpp"
-#include "keisan/problem.hpp"
-
-#endif  // KEISAN__KEISAN_HPP_
+#endif  // KEISAN__PROBLEM_HPP_

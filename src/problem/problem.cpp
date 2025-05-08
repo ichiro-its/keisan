@@ -19,7 +19,6 @@
 // THE SOFTWARE.
 
 #include "keisan/problem/problem.hpp"
-#include <Eigen/src/Core/Matrix.h>
 
 #include "keisan/problem/constraint.hpp"
 #include "keisan/problem/expression.hpp"
@@ -333,7 +332,7 @@ void Problem::solve()
     throw std::runtime_error("NaN in the QP solution");
   }
 
-  for (int k = 0; k < active_set_size; ++k) {
+  for (int k = 0; k < static_cast<int>(active_set_size); ++k) {
     int active_constraint = active_set[k];
 
     if (active_constraint >= 0 && hard_inequalities.count(active_constraint)) {

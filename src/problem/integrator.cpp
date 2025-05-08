@@ -72,7 +72,7 @@ Integrator::Integrator(
 {
   order = system_matrix.rows() - 1;
 
-  N = variable_.size();
+  N = variable->size();
 
   auto AB = get_AB_matrices(M, order, dt);
   A = AB.first;
@@ -86,7 +86,7 @@ Integrator::Integrator(
   a_powers[0] = Ak;
 
   for (int step = 0; step < N; ++step) {
-    final_transition_matrix.block(0, N - step - 1, order, 1) = Ak;
+    final_transition_matrix.block(0, N - step - 1, order, 1) = Ak * B;
     Ak = A * Ak;
     a_powers[step + 1] = Ak;
   }
@@ -116,8 +116,7 @@ Eigen::MatrixXd Integrator::upper_shift_matrix(int order)
   Eigen::MatrixXd M(order + 1, order + 1);
   M.setZero();
 
-  for (int k = 0; k < order; k++)
-  {
+  for (int k = 0; k < order; ++k) {
     M(k, k + 1) = 1.0;
   }
 

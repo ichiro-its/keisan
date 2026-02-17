@@ -1,4 +1,4 @@
-// Copyright (c) 2024 ICHIRO ITS
+// Copyright (c) 2025 ICHIRO ITS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,46 +18,37 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__INTERPOLATION__POLYNOM_HPP_
-#define KEISAN__INTERPOLATION__POLYNOM_HPP_
+#ifndef EKF_landmark_HPP
+#define EKF_landmark_HPP
 
-#include <iostream>
-#include <vector>
+#include "keisan/matrix.hpp"
 
 namespace keisan
 {
 
-class Polynom
+class ekf_landmark
 {
 public:
-  Polynom(
-    const std::vector<double> & coefficients = {0.0}, double domain_min = 0.0,
-    double domain_max = 0.0);
+  ekf_landmark();
 
-  bool is_in_domain(double x) const;
+  void predict();
+  void update(
+    const Matrix<2, 1> & z, 
+    double xr, 
+    double yr, 
+    double theta);
 
-  double operator()(double x) const;
-
-  bool operator==(const Polynom & other) const;
-  bool operator!=(const Polynom & other) const;
-
-  Polynom operator+(const Polynom & other) const;
-  Polynom operator-(const Polynom & other) const;
-
-  Polynom derivative() const;
-
-  Polynom integral() const;
-
-  friend std::ostream & operator<<(std::ostream & os, const Polynom & polynom);
+  Matrix<2, 1> getstate() const;
+  Matrix<2, 2> getcov() const;
 
 
 private:
-  std::vector<double> coefficients;
-  double domain_min;
-  double domain_max;
+  Matrix<2, 1> X;
+  Matrix<2, 2> P;
+  Matrix<2, 2> Q;
+  Matrix<2, 2> R;
 };
+
 }  // namespace keisan
 
-#include "keisan/interpolation/polynom.impl.hpp"
-
-#endif  // KEISAN__INTERPOLATION__POLYNOM_HPP_
+#endif  // KEISAN__KEISAN_HPP_

@@ -1,0 +1,42 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../gyakuenki"
+		}
+	],
+	"settings": {
+		"python.autoComplete.extraPaths": [
+			"/home/salsa-hanaa/ichiro-ws/install/tachimawari_interfaces/lib/python3.12/site-packages",
+			"/home/salsa-hanaa/ichiro-ws/install/suiryoku_interfaces/lib/python3.12/site-packages",
+			"/home/salsa-hanaa/ichiro-ws/install/soccer_interfaces/lib/python3.12/site-packages",
+			"/home/salsa-hanaa/ichiro-ws/install/shisen_interfaces/lib/python3.12/site-packages",
+			"/home/salsa-hanaa/ichiro-ws/install/ninshiki_interfaces/lib/python3.12/site-packages",
+			"/home/salsa-hanaa/ichiro-ws/install/kansei_interfaces/lib/python3.12/site-packages",
+			"/home/salsa-hanaa/ichiro-ws/install/image_geometry/lib/python3.12/site-packages",
+			"/home/salsa-hanaa/ichiro-ws/install/gyakuenki/lib/python3.12/site-packages",
+			"/home/salsa-hanaa/ichiro-ws/install/biped_interfaces/lib/python3.12/site-packages",
+			"/home/salsa-hanaa/ichiro-ws/install/atama_interfaces/lib/python3.12/site-packages",
+			"/home/salsa-hanaa/ichiro-ws/install/aruku_interfaces/lib/python3.12/site-packages",
+			"/home/salsa-hanaa/ichiro-ws/install/akushon_interfaces/lib/python3.12/site-packages",
+			"/opt/ros/jazzy/lib/python3.12/site-packages"
+		],
+		"python.analysis.extraPaths": [
+			"/home/salsa-hanaa/ichiro-ws/install/tachimawari_interfaces/lib/python3.12/site-packages",
+			"/home/salsa-hanaa/ichiro-ws/install/suiryoku_interfaces/lib/python3.12/site-packages",
+			"/home/salsa-hanaa/ichiro-ws/install/soccer_interfaces/lib/python3.12/site-packages",
+			"/home/salsa-hanaa/ichiro-ws/install/shisen_interfaces/lib/python3.12/site-packages",
+			"/home/salsa-hanaa/ichiro-ws/install/ninshiki_interfaces/lib/python3.12/site-packages",
+			"/home/salsa-hanaa/ichiro-ws/install/kansei_interfaces/lib/python3.12/site-packages",
+			"/home/salsa-hanaa/ichiro-ws/install/image_geometry/lib/python3.12/site-packages",
+			"/home/salsa-hanaa/ichiro-ws/install/gyakuenki/lib/python3.12/site-packages",
+			"/home/salsa-hanaa/ichiro-ws/install/biped_interfaces/lib/python3.12/site-packages",
+			"/home/salsa-hanaa/ichiro-ws/install/atama_interfaces/lib/python3.12/site-packages",
+			"/home/salsa-hanaa/ichiro-ws/install/aruku_interfaces/lib/python3.12/site-packages",
+			"/home/salsa-hanaa/ichiro-ws/install/akushon_interfaces/lib/python3.12/site-packages",
+			"/opt/ros/jazzy/lib/python3.12/site-packages"
+		]
+	}
+}

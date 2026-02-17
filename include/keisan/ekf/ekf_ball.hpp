@@ -1,4 +1,4 @@
-// Copyright (c) 2025 ICHIRO ITS
+// Copyright (c) 2026 ICHIRO ITS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@
 #ifndef EKF_BALL_HPP
 #define EKF_BALL_HPP
 
-#include "keisan/matrix.hpp"
+#include "keisan/matrix/matrix.hpp"
 
 namespace keisan
 {
@@ -29,23 +29,34 @@ namespace keisan
 class ekf_ball
 {
 public:
-    ekf_ball();
+  ekf_ball();
 
-    void init(double x, double y);
-    void predict(double dt);
-    void update(const Matrix<2, 1> & z);
+  void init(double x, double y, double v, double theta);
+  void predict(double dt);
+  void update(const Matrix<2, 1> & z);
 
-    Matrix<2, 1> getPosition() const;
-    Matrix<2, 1> getVelocity() const;
+  void set_q_noise(double q)
+  {
+    for (int i = 0; i < 4; i++) Q_[i][i] = q;
+  }
+  void set_r_noise(double r)
+  {
+    for (int i = 0; i < 2; i++) R_[i][i] = r;
+  }
 
-    Matrix<4, 1> getState() const;
-    Matrix<4, 4> getCovariance() const;
+  Matrix<2, 1> getPosition() const;
+  Matrix<2, 1> getVelocity() const;
+
+  Matrix<4, 1> getstate() const;
+  Matrix<4, 4> getcov() const;
 
 private:
-    Matrix<4, 1> X_;
-    Matrix<4, 4> P_;
-    Matrix<4, 4> Q_;
-    Matrix<2, 2> R_;
+  Matrix<4, 1> X_;  //state
+  Matrix<4, 4> P_;  //covarience
+  Matrix<4, 4> Q_;  //covarience noise
+  Matrix<2, 2> R_;  //measurement noise
+
+  double normalizeAngle(double a) const;  // a = angle in radians
 };
 
 }  // namespace keisan

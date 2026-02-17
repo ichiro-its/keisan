@@ -1,4 +1,4 @@
-// Copyright (c) 2024 ICHIRO ITS
+// Copyright (c) 2025 ICHIRO ITS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,46 +18,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__INTERPOLATION__POLYNOM_HPP_
-#define KEISAN__INTERPOLATION__POLYNOM_HPP_
+#ifndef KF_BALL_HPP
+#define KF_BALL_HPP
 
-#include <iostream>
-#include <vector>
+#include "keisan/matrix.hpp"
 
 namespace keisan
 {
 
-class Polynom
+class kf_ball
 {
 public:
-  Polynom(
-    const std::vector<double> & coefficients = {0.0}, double domain_min = 0.0,
-    double domain_max = 0.0);
+    kf_ball();
 
-  bool is_in_domain(double x) const;
+    void init(double x, double y);
+    void predict(double dt);
+    void update(const Matrix<2, 1> & z);
 
-  double operator()(double x) const;
+    Matrix<2, 1> getPosition() const;
+    Matrix<2, 1> getVelocity() const;
 
-  bool operator==(const Polynom & other) const;
-  bool operator!=(const Polynom & other) const;
-
-  Polynom operator+(const Polynom & other) const;
-  Polynom operator-(const Polynom & other) const;
-
-  Polynom derivative() const;
-
-  Polynom integral() const;
-
-  friend std::ostream & operator<<(std::ostream & os, const Polynom & polynom);
-
+    Matrix<4, 1> getState() const;
+    Matrix<4, 4> getCovariance() const;
 
 private:
-  std::vector<double> coefficients;
-  double domain_min;
-  double domain_max;
+    Matrix<4, 1> X_;
+    Matrix<4, 4> P_;
+    Matrix<4, 4> Q_;
+    Matrix<2, 2> R_;
 };
+
 }  // namespace keisan
 
-#include "keisan/interpolation/polynom.impl.hpp"
-
-#endif  // KEISAN__INTERPOLATION__POLYNOM_HPP_
+#endif  // EKF_BALL_HPP

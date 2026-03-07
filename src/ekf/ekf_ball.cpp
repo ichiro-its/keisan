@@ -15,6 +15,59 @@ ekf_ball::ekf_ball()
   R_ *= 0.01;  // Need tuning: measurement noise (Tuning R dulu baru Q), start : 0.01
 }
 
+void ekf_ball::setQ(double q_pos, double q_vel, double q_theta)
+{
+  Q_ = Matrix<4, 4>::zero();
+  Q_[0][0] = q_pos;    // Uncertainty posisi X
+  Q_[1][1] = q_pos;    // Uncertainty posisi Y
+  Q_[2][2] = q_vel;    // Uncertainty kecepatan (v)
+  Q_[3][3] = q_theta;  // Uncertainty heading (theta)
+}
+
+void ekf_ball::setR(double r_pos)
+{
+  R_ = Matrix<2, 2>::zero();
+  R_[0][0] = r_pos;  // Noise kamera sumbu X
+  R_[1][1] = r_pos;  // Noise kamera sumbu Y
+}
+
+// Fungsi Prediksi Masa Depan (3 detik) dengan looping EKF
+Matrix<4, 1> ekf_ball::predictFuture(double dt_future) const
+{
+  Matrix<4, 1> X_temp = X_;
+  Matrix<4, 4> P_temp = P_;
+  double step = 0.1;
+  double remaining = dt_future;
+
+  while (remaining > 0) {
+    double dt = (remaining > step) ? step : remaining;
+    double x = X_temp[0][0], y = X_temp[1][0], v = X_temp[2][0], th = X_temp[3][0];
+
+    // Predict State
+    X_temp[0][0] = x + v * std::cos(th) * dt;
+    X_temp[1][0] = y + v * std::sin(th) * dt;
+    X_temp[2][0] = v;
+    X_temp[3][0] = normalizeAngle(th);
+
+    // Predict Covariance (Jacobian F)
+    Matrix<4, 4> F = Matrix<4, 4>::identity();
+    F[0][2] = std::cos(th) * dt;
+    F[0][3] = -v * std::sin(th) * dt;
+    F[1][2] = std::sin(th) * dt;
+    F[1][3] = v * std::cos(th) * dt;
+
+    Matrix<4, 4> Q_step = Q_;
+    Q_step[0][0] *= dt * dt;
+    Q_step[1][1] *= dt * dt;
+    Q_step[2][2] *= dt;
+    Q_step[3][3] *= dt;
+
+    P_temp = F * P_temp * F.transpose() + Q_step;
+    remaining -= dt;
+  }
+  return X_temp;
+}
+
 void ekf_ball::init(double x, double y, double v, double theta)
 {
   X_[0][0] = x;

@@ -18,8 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef EKF_BALL_HPP
-#define EKF_BALL_HPP
+#ifndef KEISAN__EKF__EKF_BALL_HPP_
+#define KEISAN__EKF__EKF_BALL_HPP_
 
 #include "keisan/matrix/matrix.hpp"
 
@@ -31,34 +31,33 @@ class ekf_ball
 public:
   ekf_ball();
 
+  // Fungsi Inisialisasi dan Core EKF
   void init(double x, double y, double v, double theta);
   void predict(double dt);
   void update(const Matrix<2, 1> & z);
 
-  void set_q_noise(double q)
-  {
-    for (int i = 0; i < 4; i++) Q_[i][i] = q;
-  }
-  void set_r_noise(double r)
-  {
-    for (int i = 0; i < 2; i++) R_[i][i] = r;
-  }
+  // Fungsi Tuning (Disesuaikan dengan ekf_test_node)
+  void setQ(double q_pos, double q_vel, double q_theta);
+  void setR(double r_pos);
 
+  // Fungsi Output Data
   Matrix<2, 1> getPosition() const;
   Matrix<2, 1> getVelocity() const;
-
   Matrix<4, 1> getstate() const;
   Matrix<4, 4> getcov() const;
 
-private:
-  Matrix<4, 1> X_;  //state
-  Matrix<4, 4> P_;  //covarience
-  Matrix<4, 4> Q_;  //covarience noise
-  Matrix<2, 2> R_;  //measurement noise
+  // Fungsi Prediksi Masa Depan (Iteratif EKF)
+  Matrix<4, 1> predictFuture(double dt_future) const;
 
+private:
   double normalizeAngle(double a) const;  // a = angle in radians
+
+  Matrix<4, 1> X_;  // state: [x, y, v, theta]
+  Matrix<4, 4> P_;  // covariance
+  Matrix<4, 4> Q_;  // process noise covariance
+  Matrix<2, 2> R_;  // measurement noise covariance
 };
 
 }  // namespace keisan
 
-#endif  // EKF_BALL_HPP
+#endif  // KEISAN__EKF__EKF_BALL_HPP_

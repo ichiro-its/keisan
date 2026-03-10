@@ -1,5 +1,4 @@
 #include "keisan/ekf/ekf_ball.hpp"
-
 #include <cmath>
 
 namespace keisan
@@ -13,6 +12,7 @@ ekf_ball::ekf_ball()
   Q_ *= 1e-3;  // Need tuning: process noise, start : 1e-3
   R_ = Matrix<2, 2>::identity();
   R_ *= 0.01;  // Need tuning: measurement noise (Tuning R dulu baru Q), start : 0.01
+  friction_ = 0.0; // 0 by default
 }
 
 void ekf_ball::setQ(double q_pos, double q_vel, double q_theta)
@@ -31,41 +31,40 @@ void ekf_ball::setR(double r_pos)
   R_[1][1] = r_pos;  // Noise kamera sumbu Y
 }
 
-// Fungsi Prediksi Masa Depan (3 detik) dengan looping EKF
 Matrix<4, 1> ekf_ball::predictFuture(double dt_future) const
 {
-  Matrix<4, 1> X_temp = X_;
-  Matrix<4, 4> P_temp = P_;
-  double step = 0.1;
+  Matrix<4, 1> X_pred = X_;
+  
+  double step = 0.033; // 30 fps
   double remaining = dt_future;
 
   while (remaining > 0) {
     double dt = (remaining > step) ? step : remaining;
-    double x = X_temp[0][0], y = X_temp[1][0], v = X_temp[2][0], th = X_temp[3][0];
+    
+    double x = X_pred[0][0];
+    double y = X_pred[1][0];
+    double v = X_pred[2][0];
+    double th = X_pred[3][0];
 
-    // Predict State
-    X_temp[0][0] = x + v * std::cos(th) * dt;
-    X_temp[1][0] = y + v * std::sin(th) * dt;
-    X_temp[2][0] = v;
-    X_temp[3][0] = normalizeAngle(th);
+    if (v <= 0.001) {
+      break;
+    }
 
-    // Predict Covariance (Jacobian F)
-    Matrix<4, 4> F = Matrix<4, 4>::identity();
-    F[0][2] = std::cos(th) * dt;
-    F[0][3] = -v * std::sin(th) * dt;
-    F[1][2] = std::sin(th) * dt;
-    F[1][3] = v * std::cos(th) * dt;
-
-    Matrix<4, 4> Q_step = Q_;
-    Q_step[0][0] *= dt * dt;
-    Q_step[1][1] *= dt * dt;
-    Q_step[2][2] *= dt;
-    Q_step[3][3] *= dt;
-
-    P_temp = F * P_temp * F.transpose() + Q_step;
+    X_pred[0][0] = x + v * std::cos(th) * dt;
+    X_pred[1][0] = y + v * std::sin(th) * dt;
+    
+    double v_new = v - (friction_ * 9.81 * dt);
+    X_pred[2][0] = (v_new > 0.0) ? v_new : 0.0;
+    
     remaining -= dt;
   }
-  return X_temp;
+  
+  return X_pred;
+}
+
+void ekf_ball::setFriction(double friction)
+{
+  friction_ = friction;
 }
 
 void ekf_ball::init(double x, double y, double v, double theta)
@@ -86,7 +85,10 @@ void ekf_ball::predict(double dt)
 
   X_[0][0] = x + v * std::cos(th) * dt;
   X_[1][0] = y + v * std::sin(th) * dt;
-  X_[2][0] = v;
+  
+  double v_new = v - (friction_ * 9.81 * dt);
+  X_[2][0] = (v_new > 0.0) ? v_new : 0.0;
+  
   X_[3][0] = normalizeAngle(th);
 
   Matrix<4, 4> F = Matrix<4, 4>::identity();

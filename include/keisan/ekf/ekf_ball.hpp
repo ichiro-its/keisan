@@ -31,22 +31,22 @@ class ekf_ball
 public:
   ekf_ball();
 
-  // Fungsi Inisialisasi dan Core EKF
+  // init and core functions
   void init(double x, double y, double v, double theta);
   void predict(double dt);
   void update(const Matrix<2, 1> & z);
 
-  // Fungsi Tuning (Disesuaikan dengan ekf_test_node)
+  // tuning parameter setter
   void setQ(double q_pos, double q_vel, double q_theta);
   void setR(double r_pos);
+  void setFriction(double friction);
 
-  // Fungsi Output Data
+  // output
   Matrix<2, 1> getPosition() const;
   Matrix<2, 1> getVelocity() const;
   Matrix<4, 1> getstate() const;
   Matrix<4, 4> getcov() const;
 
-  // Fungsi Prediksi Masa Depan (Iteratif EKF)
   Matrix<4, 1> predictFuture(double dt_future) const;
 
 private:
@@ -56,6 +56,8 @@ private:
   Matrix<4, 4> P_;  // covariance
   Matrix<4, 4> Q_;  // process noise covariance
   Matrix<2, 2> R_;  // measurement noise covariance
+  
+  double friction_; // grass friction
 };
 
 }  // namespace keisan

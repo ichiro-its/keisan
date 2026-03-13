@@ -2,6 +2,7 @@
 #include "keisan/ekf/ekf_ball.hpp"
 
 #include <cmath>
+#include <vector>
 
 namespace keisan
 {
@@ -34,23 +35,28 @@ void ekf_ball::setR(double r_pos)
   R_[1][1] = r_pos;
 }
 
-std::pair<Matrix<4, 1>, Matrix<4, 4>> ekf_ball::predictFuture(double dt_future) const
+std::vector<Matrix<4, 1>> ekf_ball::predictFuture(double dt_future) const
 {
   Matrix<4, 1> X_pred = X_;
   Matrix<4, 4> P_pred = P_;
 
-  double step = 0.033;
+  std::vector<Matrix<4, 1>> result;
+
+  double current_dt = 0.0;
+  double step = 0.2;
   double remaining = dt_future;
 
-  while (remaining > 0) {
-    double dt = (remaining > step) ? step : remaining;
+  while (current_dt < dt_future) {
+    // double dt = (remaining > step) ? step : remaining;
+    current_dt += step;
+    double dt = current_dt;
 
     double x = X_pred[0][0];
     double y = X_pred[1][0];
     double v = X_pred[2][0];
     double th = X_pred[3][0];
 
-    if (v <= 0.001) {
+    if (v <= 0.00001) {
       break;
     }
 
@@ -76,10 +82,10 @@ std::pair<Matrix<4, 1>, Matrix<4, 4>> ekf_ball::predictFuture(double dt_future) 
 
     P_pred = F * P_pred * F.transpose() + Q;
 
-    remaining -= dt;
+    result.push_back(X_pred);
   }
 
-  return std::make_pair(X_pred, P_pred);
+  return result;
 }
 
 void ekf_ball::setFriction(double friction) { friction_ = friction; }
@@ -156,6 +162,12 @@ void ekf_ball::update(const Matrix<2, 1> & z)
 
   Matrix<4, 4> I = Matrix<4, 4>::identity();
   P_ = (I - K * H) * P_ * (I - K * H).transpose() + K * R_ * K.transpose();
+
+  if (X_[2][0] < 0.0) {
+    X_[2][0] = std::abs(X_[2][0]);
+    X_[3][0] += M_PI;
+    X_[3][0] = normalizeAngle(X_[3][0]);
+  }
 }
 
 Matrix<2, 1> ekf_ball::getPosition() const

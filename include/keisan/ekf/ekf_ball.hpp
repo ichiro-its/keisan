@@ -18,18 +18,18 @@ public:
   void predict(double dt);
   void update(const Matrix<2, 1> & z);
 
-  // tuning parameter setter
-  void setQ(double q_pos, double q_vel, double q_theta);
+  // setter
+  void setQ(double q_pos, double q_vel);
   void setR(double r_pos);
   void setFriction(double friction);
 
-  // output
+  // getter
   Matrix<2, 1> getPosition() const;
   Matrix<2, 1> getVelocity() const;
   Matrix<4, 1> getstate() const;
   Matrix<4, 4> getcov() const;
 
-  std::pair<Matrix<4, 1>, Matrix<4, 4>> predictFuture(double dt_future) const;
+  std::vector<Matrix<4, 1>> predictFuture(double dt_future) const;
 
 private:
   double normalizeAngle(double a) const;

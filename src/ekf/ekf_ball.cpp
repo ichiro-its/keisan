@@ -19,13 +19,13 @@ ekf_ball::ekf_ball()
   friction_ = 0.0;
 }
 
-void ekf_ball::setQ(double q_pos, double q_vel, double q_theta)
+void ekf_ball::setQ(double q_pos, double q_vel)
 {
   Q_ = Matrix<4, 4>::zero();
   Q_[0][0] = q_pos;
   Q_[1][1] = q_pos;
   Q_[2][2] = q_vel;
-  Q_[3][3] = q_theta;
+  Q_[3][3] = q_vel;
 }
 
 void ekf_ball::setR(double r_pos)
@@ -41,38 +41,48 @@ std::vector<Matrix<4, 1>> ekf_ball::predictFuture(double dt_future) const
   Matrix<4, 4> P_pred = P_;
 
   std::vector<Matrix<4, 1>> result;
+  result.push_back(X_pred);
 
   double current_dt = 0.0;
   double step = 0.2;
-  double remaining = dt_future;
 
   while (current_dt < dt_future) {
-    // double dt = (remaining > step) ? step : remaining;
     current_dt += step;
-    double dt = current_dt;
+    double dt = step;
 
     double x = X_pred[0][0];
     double y = X_pred[1][0];
-    double v = X_pred[2][0];
-    double th = X_pred[3][0];
+    double vx = X_pred[2][0];
+    double vy = X_pred[3][0];
 
-    if (v <= 0.00001) {
-      break;
-    }
+    double v_mag = sqrt(vx * vx + vy * vy);
+
+    if (v_mag < 0.00001) break;
 
     // State Prediction
-    X_pred[0][0] = x + v * std::cos(th) * dt;
-    X_pred[1][0] = y + v * std::sin(th) * dt;
+    X_pred[0][0] = x + vx * dt;
+    X_pred[1][0] = y + vy * dt;
 
-    double v_new = v - (friction_ * 9.81 * dt);
-    X_pred[2][0] = (v_new > 0.0) ? v_new : 0.0;
-    X_pred[3][0] = normalizeAngle(th);
+    double delta_v = friction_ * 9.81 * dt;
+
+    if (v_mag > 0.00001) {
+      if (delta_v > v_mag) {
+        X_pred[2][0] = 0.0;
+        X_pred[3][0] = 0.0;
+      } else {
+        double vx_new = vx - (delta_v * (vx / v_mag));
+        double vy_new = vy - (delta_v * (vy / v_mag));
+        X_pred[2][0] = vx_new;
+        X_pred[3][0] = vy_new;
+      }
+    } else {
+      X_pred[2][0] = 0.0;
+      X_pred[3][0] = 0.0;
+    }
 
     Matrix<4, 4> F = Matrix<4, 4>::identity();
-    F[0][2] = std::cos(th) * dt;
-    F[0][3] = -v * std::sin(th) * dt;
-    F[1][2] = std::sin(th) * dt;
-    F[1][3] = v * std::cos(th) * dt;
+    F[0][2] = dt;
+    F[1][3] = dt;
 
     Matrix<4, 4> Q = Q_;
     Q[0][0] *= dt * dt;
@@ -90,12 +100,12 @@ std::vector<Matrix<4, 1>> ekf_ball::predictFuture(double dt_future) const
 
 void ekf_ball::setFriction(double friction) { friction_ = friction; }
 
-void ekf_ball::init(double x, double y, double v, double theta)
+void ekf_ball::init(double x, double y, double vx, double vy)
 {
   X_[0][0] = x;
   X_[1][0] = y;
-  X_[2][0] = v;
-  X_[3][0] = theta;
+  X_[2][0] = vx;
+  X_[3][0] = vy;
   P_ = Matrix<4, 4>::identity();
   P_ *= 10.0;
 }
@@ -104,23 +114,33 @@ void ekf_ball::predict(double dt)
 {
   double x = X_[0][0];
   double y = X_[1][0];
-  double v = X_[2][0];
-  double th = X_[3][0];
+  double vx = X_[2][0];
+  double vy = X_[3][0];
 
-  X_[0][0] = x + v * std::cos(th) * dt;
-  X_[1][0] = y + v * std::sin(th) * dt;
+  X_[0][0] = x + vx * dt;
+  X_[1][0] = y + vy * dt;
 
-  double v_new = v - (friction_ * 9.81 * dt);
-  X_[2][0] = (v_new > 0.0) ? v_new : 0.0;
-
-  X_[3][0] = normalizeAngle(th);
+  double v_mag = sqrt(vx * vx + vy * vy);
+  double delta_v = friction_ * 9.81 * dt;
+  
+  if (v_mag > 0.00001) {
+    if (delta_v > v_mag) {
+      X_[2][0] = 0.0;
+      X_[3][0] = 0.0;
+    } else {
+      double vx_new = vx - (delta_v * (vx / v_mag));
+      double vy_new = vy - (delta_v * (vy / v_mag));
+      X_[2][0] = vx_new;
+      X_[3][0] = vy_new;
+    }
+  } else {
+    X_[2][0] = 0.0;
+    X_[3][0] = 0.0;
+  }
 
   Matrix<4, 4> F = Matrix<4, 4>::identity();
-
-  F[0][2] = std::cos(th) * dt;
-  F[0][3] = -v * std::sin(th) * dt;
-  F[1][2] = std::sin(th) * dt;
-  F[1][3] = v * std::cos(th) * dt;
+  F[0][2] = dt;
+  F[1][3] = dt;
 
   Matrix<4, 4> Q = Q_;
   Q[0][0] *= dt * dt;
@@ -162,12 +182,6 @@ void ekf_ball::update(const Matrix<2, 1> & z)
 
   Matrix<4, 4> I = Matrix<4, 4>::identity();
   P_ = (I - K * H) * P_ * (I - K * H).transpose() + K * R_ * K.transpose();
-
-  if (X_[2][0] < 0.0) {
-    X_[2][0] = std::abs(X_[2][0]);
-    X_[3][0] += M_PI;
-    X_[3][0] = normalizeAngle(X_[3][0]);
-  }
 }
 
 Matrix<2, 1> ekf_ball::getPosition() const
@@ -180,11 +194,9 @@ Matrix<2, 1> ekf_ball::getPosition() const
 
 Matrix<2, 1> ekf_ball::getVelocity() const
 {
-  double v = X_[2][0];
-  double th = X_[3][0];
   Matrix<2, 1> vel;
-  vel[0][0] = v * std::cos(th);
-  vel[1][0] = v * std::sin(th);
+  vel[0][0] = X_[2][0];
+  vel[1][0] = X_[3][0];
   return vel;
 }
 

@@ -1,6 +1,18 @@
 var searchData=
 [
-  ['normalize_52',['normalize',['../classkeisan_1_1Angle.html#a81425701bf42df67b4500f2d1fc85cdb',1,'keisan::Angle::normalize()'],['../structkeisan_1_1Point2.html#a99204468ad69a65568d5fef37623b82b',1,'keisan::Point2::normalize()'],['../structkeisan_1_1Point3.html#a40d6ff27bdaf0bd34ea07fa8509739e5',1,'keisan::Point3::normalize()']]],
-  ['number_2ehpp_53',['number.hpp',['../number_8hpp.html',1,'']]],
-  ['number_2eimpl_2ehpp_54',['number.impl.hpp',['../number_8impl_8hpp.html',1,'']]]
+  ['magnitude_46',['magnitude',['../structkeisan_1_1Point3.html#a32083b66f6541fb117c15413529fe22e',1,'keisan::Point3::magnitude()'],['../structkeisan_1_1Point2.html#aaf32430e5f9d02077f47c0a92c5daf20',1,'keisan::Point2::magnitude()']]],
+  ['make_5fdegree_47',['make_degree',['../namespacekeisan.html#a750bc74f1ad05f878862df434ed1ad73',1,'keisan::make_degree()'],['../classkeisan_1_1Angle.html#a9f2a7adc4c5722fef3ea3d08373711f3',1,'keisan::Angle::make_degree()']]],
+  ['make_5fradian_48',['make_radian',['../namespacekeisan.html#a4f5866fce72dac599ce6d680e81b575e',1,'keisan::make_radian()'],['../classkeisan_1_1Angle.html#af43efe9ec1d74842c32d510a0b07502c',1,'keisan::Angle::make_radian()']]],
+  ['map_49',['map',['../namespacekeisan.html#ac35153ec66577a7daa533ea195f57f27',1,'keisan']]],
+  ['mask_50',['Mask',['../classkeisan_1_1Hungarian.html#a8d191284bd51437037394334e1db30ee',1,'keisan::Hungarian']]],
+  ['matrix_51',['Matrix',['../classkeisan_1_1Matrix.html',1,'keisan::Matrix&lt; M, N &gt;'],['../classkeisan_1_1Matrix.html#adbcb8f460140f7a1c98a28d5c90cc423',1,'keisan::Matrix::Matrix()'],['../classkeisan_1_1Matrix.html#aff6ed9017250091fd96aad3c02b55e56',1,'keisan::Matrix::Matrix(const double &amp;value, Types ... the_rest)'],['../classkeisan_1_1Matrix.html#a439d4757ef709fbff82516085f467c78',1,'keisan::Matrix::Matrix(const Matrix&lt; M, N &gt; &amp;matrix)'],['../classkeisan_1_1Matrix.html#ab410ccab7178430dba752d806e753345',1,'keisan::Matrix::Matrix(const double &amp;value, Types... the_rest)']]],
+  ['matrix_2ehpp_52',['matrix.hpp',['../matrix_2matrix_8hpp.html',1,'(Global Namespace)'],['../matrix_8hpp.html',1,'(Global Namespace)']]],
+  ['matrix_2eimpl_2ehpp_53',['matrix.impl.hpp',['../matrix_8impl_8hpp.html',1,'']]],
+  ['matrix_3c_202_2c_201_20_3e_54',['Matrix&lt; 2, 1 &gt;',['../classkeisan_1_1Matrix.html',1,'keisan']]],
+  ['matrix_3c_202_2c_202_20_3e_55',['Matrix&lt; 2, 2 &gt;',['../classkeisan_1_1Matrix.html',1,'keisan']]],
+  ['matrix_3c_202_2c_204_20_3e_56',['Matrix&lt; 2, 4 &gt;',['../classkeisan_1_1Matrix.html',1,'keisan']]],
+  ['matrix_3c_204_2c_201_20_3e_57',['Matrix&lt; 4, 1 &gt;',['../classkeisan_1_1Matrix.html',1,'keisan']]],
+  ['matrix_3c_204_2c_202_20_3e_58',['Matrix&lt; 4, 2 &gt;',['../classkeisan_1_1Matrix.html',1,'keisan']]],
+  ['matrix_3c_204_2c_204_20_3e_59',['Matrix&lt; 4, 4 &gt;',['../classkeisan_1_1Matrix.html',1,'keisan']]],
+  ['matrix_3c_20n_2c_20n_20_3e_60',['Matrix&lt; N, N &gt;',['../classkeisan_1_1Matrix.html',1,'keisan']]]
 ];

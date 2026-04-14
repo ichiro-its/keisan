@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kalman_131',['Kalman',['../classkeisan_1_1Kalman.html',1,'keisan']]]
+  ['hungarian_147',['Hungarian',['../classkeisan_1_1Hungarian.html',1,'keisan']]]
 ];

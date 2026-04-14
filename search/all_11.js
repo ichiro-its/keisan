@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['vector_119',['Vector',['../classkeisan_1_1Vector.html',1,'keisan::Vector&lt; N &gt;'],['../classkeisan_1_1Vector.html#a56bb112a9c9f30e54290798f28555905',1,'keisan::Vector::Vector()'],['../classkeisan_1_1Vector.html#a2cc6371bb5802f36a74b26267f295393',1,'keisan::Vector::Vector(const double &amp;value, Types ... the_rest)'],['../classkeisan_1_1Vector.html#a3cff4b1c3fb7a2210b425be92f1288c2',1,'keisan::Vector::Vector(const Vector&lt; N &gt; &amp;vector)']]],
-  ['vector_2ehpp_120',['vector.hpp',['../vector_8hpp.html',1,'']]],
-  ['vector_2eimpl_2ehpp_121',['vector.impl.hpp',['../vector_8impl_8hpp.html',1,'']]]
+  ['uncovered_132',['UNCOVERED',['../classkeisan_1_1Hungarian.html#a22747a1740cfc9d16db966a99dfac368a8930326b5f3ff057e9cd05159c2d924a',1,'keisan::Hungarian']]],
+  ['update_133',['update',['../classkeisan_1_1Kalman.html#a2a6c1322df98e1c5eb61341c73234b5f',1,'keisan::Kalman']]]
 ];

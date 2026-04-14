@@ -1,4 +1,4 @@
-// Copyright (c) 2024 ICHIRO ITS
+// Copyright (c) 2025 ICHIRO ITS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,34 +18,68 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__KALMAN_HPP_
-#define KEISAN__KALMAN_HPP_
+#ifndef KEISAN__HUNGARIAN_HPP_
+#define KEISAN__HUNGARIAN_HPP_
+
+#include <array>
 
 #include "keisan/matrix.hpp"
 
 namespace keisan
 {
 
-class Kalman
+template<size_t N>
+class Hungarian
 {
 public:
-  Kalman() = default;
-  ~Kalman() = default;
-  Kalman(double dt, double std_dev_aceleration, Matrix<2, 1> std_measurement, Matrix<2, 1> acceleration); 
-  Matrix<4, 1> predict();
-  Matrix<4, 1> update(Matrix<2, 1> measurement);
+  Hungarian();
+  Matrix<N, N> solve(const Matrix<N, N> & matrix, int actual_size);
+
+  enum Mask
+  {
+    NONE,
+    STAR,
+    PRIME
+  };
+
+  enum CoverState
+  {
+    UNCOVERED,
+    COVERED
+  };
 
 private:
-    Matrix<4, 1> Xk;
-    Matrix<4, 4> Q;
-    Matrix<2, 2> R;
-    Matrix<4, 4> A;
-    Matrix<4, 2> B;
-    Matrix<4, 4> P;
-    Matrix<2, 4> H;
-    Matrix<2, 1> U; 
+  Matrix<N, N> matrix;
+  Matrix<N, N> result;
+  std::array<std::array<int, N>, N> mask;
+  std::array<std::array<int, 2>, N * 2> path;
+  std::array<int, N> row_cover;
+  std::array<int, N> col_cover;
+  int step;
+  int actual_size;
+  int path_row_0;
+  int path_col_0;
+
+  void clear_covers(std::array<int, N> & cover);
+  void find_a_zero(int & row, int & col);
+  bool star_in_row(int row);
+  int find_star_in_row(int row);
+  int find_star_in_col(int col);
+  int find_prime_in_row(int row);
+  void augment_path(int path_count);
+  void erase_primes();
+  double find_smallest();
+
+  void step_1();
+  void step_2();
+  void step_3();
+  void step_4();
+  void step_5();
+  void step_6();
 };
 
-} // namespace keisa
+} // namespace keisan
 
-#endif // KEISAN__KALMAN_HPP_
+#include "keisan/hungarian.impl.hpp"
+
+#endif // KEISAN__HUNGARIAN_HPP_

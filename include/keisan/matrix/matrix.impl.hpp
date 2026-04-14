@@ -42,7 +42,13 @@ std::ostream & operator<<(std::ostream & out, const keisan::Matrix<M, N> & matri
         out << ",";
       }
 
-      out << matrix[i][j];
+      if (matrix[i][j] == std::numeric_limits<double>::max()) {
+        out << "inf";
+      } else if (matrix[i][j] == -std::numeric_limits<double>::max()) {
+        out << "-inf";
+      } else {
+        out << matrix[i][j];
+      }
     }
 
     out << "]";
@@ -104,6 +110,19 @@ Matrix<M, N> Matrix<M, N>::identity()
   for (size_t i = 0; i < N; ++i) {
     for (size_t j = 0; j < N; ++j) {
       matrix[i][j] = (i == j) ? 1.0 : 0.0;
+    }
+  }
+
+  return matrix;
+}
+
+template <size_t M, size_t N>
+Matrix<M, N> Matrix<M, N>::infinite()
+{
+  Matrix<M, N> matrix;
+  for (size_t i = 0; i < M; ++i) {
+    for (size_t j = 0; j < N; ++j) {
+      matrix[i][j] = std::numeric_limits<double>::max();
     }
   }
 

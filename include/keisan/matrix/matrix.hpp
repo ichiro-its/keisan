@@ -32,20 +32,30 @@
 namespace keisan
 {
 
-template<size_t M, size_t N>
+template <size_t M, size_t N>
 class Matrix
 {
 public:
   Matrix();
 
-  template<typename ... Types>
-  explicit Matrix(const double & value, Types ... the_rest);
+  template <typename... Types>
+  explicit Matrix(const double & value, Types... the_rest);
 
   Matrix(const Matrix<M, N> & matrix);
 
   static Matrix<M, N> zero();
   static Matrix<M, N> identity();
   static Matrix<M, N> infinite();
+
+  double norm() const;
+
+  void set_row(size_t pos, const Vector<M> & vector);
+  Vector<M> get_row(size_t pos) const;
+
+  void set_column(size_t pos, const Vector<N> & vector);
+  Vector<N> get_column(size_t pos) const;
+
+  Matrix<M, N> exp(double tau = 1.0, size_t terms = 10);
 
   Matrix<M, N> & operator=(const Matrix<M, N> & matrix);
 
@@ -60,7 +70,7 @@ public:
   Matrix<M, N> & operator*=(const double & value);
   Matrix<M, N> & operator/=(const double & value);
 
-  template<size_t O>
+  template <size_t O>
   Matrix<M, O> operator*(const Matrix<N, O> & matrix);
 
   Vector<M> operator*(const Vector<N> & vector);
@@ -79,12 +89,16 @@ public:
   const double * operator[](size_t pos) const;
 
   bool inverse();
-  bool inverse2();
 
   Matrix<N, M> transpose() const;
   Matrix<M, N> round(double tolerance) const;
+  Matrix<M, N> power(double exponent) const;
 
 private:
+  bool inverse4();
+  bool inverse2();
+  bool inverse3();
+
   double data[M * N];
 };
 
@@ -100,10 +114,10 @@ Matrix<4, 4> rotation_matrix(const Quaternion<double> & quaternion);
 
 }  // namespace keisan
 
-template<size_t M, size_t N>
+template <size_t M, size_t N>
 std::ostream & operator<<(std::ostream & out, const keisan::Matrix<M, N> & matrix);
 
-template<size_t M, size_t N>
+template <size_t M, size_t N>
 keisan::Matrix<M, N> operator*(const double & value, const keisan::Matrix<M, N> & matrix);
 
 #include "keisan/matrix/matrix.impl.hpp"

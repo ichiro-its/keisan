@@ -31,21 +31,23 @@ class Kalman
 public:
   Kalman() = default;
   ~Kalman() = default;
-  Kalman(double dt, double std_dev_aceleration, Matrix<2, 1> std_measurement, Matrix<2, 1> acceleration); 
+
+  Kalman(
+    double dt, double std_dev_aceleration, Matrix<2, 1> std_measurement, Matrix<2, 1> acceleration);
   Matrix<4, 1> predict();
   Matrix<4, 1> update(Matrix<2, 1> measurement);
 
 private:
-    Matrix<4, 1> Xk;
-    Matrix<4, 4> Q;
-    Matrix<2, 2> R;
-    Matrix<4, 4> A;
-    Matrix<4, 2> B;
-    Matrix<4, 4> P;
-    Matrix<2, 4> H;
-    Matrix<2, 1> U; 
+  Matrix<4, 1> Xk;
+  Matrix<4, 4> Q;
+  Matrix<2, 2> R;
+  Matrix<4, 4> A;
+  Matrix<4, 2> B;
+  Matrix<4, 4> P;
+  Matrix<2, 4> H;
+  Matrix<2, 1> U;
 };
 
-} // namespace keisa
+}  // namespace keisan
 
-#endif // KEISAN__KALMAN_HPP_
+#endif  // KEISAN__KALMAN_HPP_

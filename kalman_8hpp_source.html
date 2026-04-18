@@ -104,24 +104,26 @@ $(function() {
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classkeisan_1_1Kalman.html#a2af27be854c8267cf187ec3d59187d08">   32</a></span>&#160;  <a class="code" href="classkeisan_1_1Kalman.html#a2af27be854c8267cf187ec3d59187d08">Kalman</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classkeisan_1_1Kalman.html#a89737b093dddd1994f88a9ee710ddca8">   33</a></span>&#160;  <a class="code" href="classkeisan_1_1Kalman.html#a89737b093dddd1994f88a9ee710ddca8">~Kalman</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classkeisan_1_1Kalman.html#aca84bd60eb86c5998308679225f44870">   34</a></span>&#160;  <a class="code" href="classkeisan_1_1Kalman.html#aca84bd60eb86c5998308679225f44870">Kalman</a>(<span class="keywordtype">double</span> dt, <span class="keywordtype">double</span> std_dev_aceleration, <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;2, 1&gt;</a> std_measurement, <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;2, 1&gt;</a> acceleration); </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classkeisan_1_1Kalman.html#a350014ff97217fa9941c34a2ac21651d">   35</a></span>&#160;  <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;4, 1&gt;</a> <a class="code" href="classkeisan_1_1Kalman.html#a350014ff97217fa9941c34a2ac21651d">predict</a>();</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classkeisan_1_1Kalman.html#a2a6c1322df98e1c5eb61341c73234b5f">   36</a></span>&#160;  <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;4, 1&gt;</a> <a class="code" href="classkeisan_1_1Kalman.html#a2a6c1322df98e1c5eb61341c73234b5f">update</a>(<a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;2, 1&gt;</a> measurement);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;4, 1&gt;</a> Xk;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;4, 4&gt;</a> Q;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;2, 2&gt;</a> R;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;4, 4&gt;</a> A;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;4, 2&gt;</a> B;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;4, 4&gt;</a> P;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;2, 4&gt;</a> H;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;2, 1&gt;</a> U; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;};</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;} <span class="comment">// namespace keisa</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classkeisan_1_1Kalman.html#aca84bd60eb86c5998308679225f44870">   35</a></span>&#160;  <a class="code" href="classkeisan_1_1Kalman.html#aca84bd60eb86c5998308679225f44870">Kalman</a>(</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">double</span> dt, <span class="keywordtype">double</span> std_dev_aceleration, <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;2, 1&gt;</a> std_measurement, <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;2, 1&gt;</a> acceleration);</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classkeisan_1_1Kalman.html#a350014ff97217fa9941c34a2ac21651d">   37</a></span>&#160;  <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;4, 1&gt;</a> <a class="code" href="classkeisan_1_1Kalman.html#a350014ff97217fa9941c34a2ac21651d">predict</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classkeisan_1_1Kalman.html#a2a6c1322df98e1c5eb61341c73234b5f">   38</a></span>&#160;  <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;4, 1&gt;</a> <a class="code" href="classkeisan_1_1Kalman.html#a2a6c1322df98e1c5eb61341c73234b5f">update</a>(<a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;2, 1&gt;</a> measurement);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;4, 1&gt;</a> Xk;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;4, 4&gt;</a> Q;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;2, 2&gt;</a> R;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;4, 4&gt;</a> A;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;4, 2&gt;</a> B;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;4, 4&gt;</a> P;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;2, 4&gt;</a> H;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <a class="code" href="classkeisan_1_1Matrix.html">Matrix&lt;2, 1&gt;</a> U;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;};</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// KEISAN__KALMAN_HPP_</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}  <span class="comment">// namespace keisan</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// KEISAN__KALMAN_HPP_</span></div>
 <div class="ttc" id="aclasskeisan_1_1Kalman_html"><div class="ttname"><a href="classkeisan_1_1Kalman.html">keisan::Kalman</a></div><div class="ttdef"><b>Definition:</b> kalman.hpp:30</div></div>
 <div class="ttc" id="aclasskeisan_1_1Kalman_html_a2a6c1322df98e1c5eb61341c73234b5f"><div class="ttname"><a href="classkeisan_1_1Kalman.html#a2a6c1322df98e1c5eb61341c73234b5f">keisan::Kalman::update</a></div><div class="ttdeci">Matrix&lt; 4, 1 &gt; update(Matrix&lt; 2, 1 &gt; measurement)</div></div>
 <div class="ttc" id="aclasskeisan_1_1Kalman_html_a2af27be854c8267cf187ec3d59187d08"><div class="ttname"><a href="classkeisan_1_1Kalman.html#a2af27be854c8267cf187ec3d59187d08">keisan::Kalman::Kalman</a></div><div class="ttdeci">Kalman()=default</div></div>

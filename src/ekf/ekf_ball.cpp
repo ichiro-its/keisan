@@ -1,4 +1,23 @@
-// File: src/ekf/ekf_ball.cpp
+// Copyright (c) 2025-2026 ICHIRO ITS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
 #include "keisan/ekf/ekf_ball.hpp"
 
 #include <cmath>
@@ -7,38 +26,40 @@
 namespace keisan
 {
 
+const double epsilon = 1e-5;
+
 ekf_ball::ekf_ball()
 {
-  X_ = Matrix<4, 1>::zero();
-  P_ = Matrix<4, 4>::identity();
-  P_ *= 10.0;
-  Q_ = Matrix<4, 4>::identity();
-  Q_ *= 1e-3;
-  R_ = Matrix<2, 2>::identity();
-  R_ *= 0.01;
-  friction_ = 0.0;
+  X = Matrix<4, 1>::zero();
+  P = Matrix<4, 4>::identity();
+  P *= 10.0;
+  Q = Matrix<4, 4>::identity();
+  Q *= 1e-3;
+  R = Matrix<2, 2>::identity();
+  R *= 0.01;
+  friction = 0.0;
 }
 
-void ekf_ball::setQ(double q_pos, double q_vel)
+void ekf_ball::set_Q(double q_pos, double q_vel)
 {
-  Q_ = Matrix<4, 4>::zero();
-  Q_[0][0] = q_pos;
-  Q_[1][1] = q_pos;
-  Q_[2][2] = q_vel;
-  Q_[3][3] = q_vel;
+  Q = Matrix<4, 4>::zero();
+  Q[0][0] = q_pos;
+  Q[1][1] = q_pos;
+  Q[2][2] = q_vel;
+  Q[3][3] = q_vel;
 }
 
-void ekf_ball::setR(double r_pos)
+void ekf_ball::set_R(double r_pos)
 {
-  R_ = Matrix<2, 2>::zero();
-  R_[0][0] = r_pos;
-  R_[1][1] = r_pos;
+  R = Matrix<2, 2>::zero();
+  R[0][0] = r_pos;
+  R[1][1] = r_pos;
 }
 
-std::vector<Matrix<4, 1>> ekf_ball::predictFuture(double dt_future) const
+std::vector<Matrix<4, 1>> ekf_ball::predict_future(double dt_future) const
 {
-  Matrix<4, 1> X_pred = X_;
-  Matrix<4, 4> P_pred = P_;
+  Matrix<4, 1> X_pred = X;
+  Matrix<4, 4> P_pred = P;
 
   std::vector<Matrix<4, 1>> result;
   result.push_back(X_pred);
@@ -57,40 +78,36 @@ std::vector<Matrix<4, 1>> ekf_ball::predictFuture(double dt_future) const
 
     double v_mag = sqrt(vx * vx + vy * vy);
 
-    if (v_mag < 0.00001) break;
+    if (v_mag < epsilon) {
+      break;
+    }
 
     // State Prediction
     X_pred[0][0] = x + vx * dt;
     X_pred[1][0] = y + vy * dt;
 
-    double delta_v = friction_ * 9.81 * dt;
+    double delta_v = friction * 981.0 * dt;
 
-    if (v_mag > 0.00001) {
-      if (delta_v > v_mag) {
-        X_pred[2][0] = 0.0;
-        X_pred[3][0] = 0.0;
-      } else {
-        double vx_new = vx - (delta_v * (vx / v_mag));
-        double vy_new = vy - (delta_v * (vy / v_mag));
-        X_pred[2][0] = vx_new;
-        X_pred[3][0] = vy_new;
-      }
-    } else {
       X_pred[2][0] = 0.0;
       X_pred[3][0] = 0.0;
+
+    if (v_mag > epsilon && delta_v <= v_mag) {
+      double scale = 1.0 - delta_v / v_mag;
+      X_pred[2][0] = vx * scale;
+      X_pred[3][0] = vy * scale;
     }
 
     Matrix<4, 4> F = Matrix<4, 4>::identity();
     F[0][2] = dt;
     F[1][3] = dt;
 
-    Matrix<4, 4> Q = Q_;
-    Q[0][0] *= dt * dt;
-    Q[1][1] *= dt * dt;
-    Q[2][2] *= dt;
-    Q[3][3] *= dt;
+    Matrix<4, 4> Q_step = Q;
+    Q_step[0][0] *= dt * dt;
+    Q_step[1][1] *= dt * dt;
+    Q_step[2][2] *= dt;
+    Q_step[3][3] *= dt;
 
-    P_pred = F * P_pred * F.transpose() + Q;
+    P_pred = F * P_pred * F.transpose() + Q_step;
 
     result.push_back(X_pred);
   }
@@ -98,57 +115,51 @@ std::vector<Matrix<4, 1>> ekf_ball::predictFuture(double dt_future) const
   return result;
 }
 
-void ekf_ball::setFriction(double friction) { friction_ = friction; }
+void ekf_ball::set_friction(double friction) { this->friction = friction; }
 
 void ekf_ball::init(double x, double y, double vx, double vy)
 {
-  X_[0][0] = x;
-  X_[1][0] = y;
-  X_[2][0] = vx;
-  X_[3][0] = vy;
-  P_ = Matrix<4, 4>::identity();
-  P_ *= 10.0;
+  X[0][0] = x;
+  X[1][0] = y;
+  X[2][0] = vx;
+  X[3][0] = vy;
+  P = Matrix<4, 4>::identity();
+  P *= 10.0;
 }
 
 void ekf_ball::predict(double dt)
 {
-  double x = X_[0][0];
-  double y = X_[1][0];
-  double vx = X_[2][0];
-  double vy = X_[3][0];
+  double x = X[0][0];
+  double y = X[1][0];
+  double vx = X[2][0];
+  double vy = X[3][0];
 
-  X_[0][0] = x + vx * dt;
-  X_[1][0] = y + vy * dt;
+  X[0][0] = x + vx * dt;
+  X[1][0] = y + vy * dt;
 
   double v_mag = sqrt(vx * vx + vy * vy);
-  double delta_v = friction_ * 9.81 * dt;
-  
-  if (v_mag > 0.00001) {
-    if (delta_v > v_mag) {
-      X_[2][0] = 0.0;
-      X_[3][0] = 0.0;
-    } else {
-      double vx_new = vx - (delta_v * (vx / v_mag));
-      double vy_new = vy - (delta_v * (vy / v_mag));
-      X_[2][0] = vx_new;
-      X_[3][0] = vy_new;
-    }
-  } else {
-    X_[2][0] = 0.0;
-    X_[3][0] = 0.0;
+  double delta_v = friction * 981.0 * dt;
+
+  X[2][0] = 0.0;
+  X[3][0] = 0.0;
+
+  if (v_mag > epsilon && delta_v <= v_mag) {
+    double scale = 1.0 - delta_v / v_mag;
+    X[2][0] = vx * scale;
+    X[3][0] = vy * scale;
   }
 
   Matrix<4, 4> F = Matrix<4, 4>::identity();
   F[0][2] = dt;
   F[1][3] = dt;
 
-  Matrix<4, 4> Q = Q_;
-  Q[0][0] *= dt * dt;
-  Q[1][1] *= dt * dt;
-  Q[2][2] *= dt;
-  Q[3][3] *= dt;
+  Matrix<4, 4> Q_step = Q;
+  Q_step[0][0] *= dt * dt;
+  Q_step[1][1] *= dt * dt;
+  Q_step[2][2] *= dt;
+  Q_step[3][3] *= dt;
 
-  P_ = F * P_ * F.transpose() + Q;
+  P = F * P * F.transpose() + Q_step;
 }
 
 void ekf_ball::update(const Matrix<2, 1> & z)
@@ -158,57 +169,50 @@ void ekf_ball::update(const Matrix<2, 1> & z)
   H[1][1] = 1.0;
 
   Matrix<2, 1> z_pred;
-  z_pred[0][0] = X_[0][0];
-  z_pred[1][0] = X_[1][0];
+  z_pred[0][0] = X[0][0];
+  z_pred[1][0] = X[1][0];
 
   Matrix<2, 1> y;
   y[0][0] = z[0][0] - z_pred[0][0];
   y[1][0] = z[1][0] - z_pred[1][0];
 
-  Matrix<2, 2> S = H * P_ * H.transpose() + R_;
+  Matrix<2, 2> S = H * P * H.transpose() + R;
 
   Matrix<2, 2> S_inv = S;
   if (!S_inv.inverse2()) {
     return;
   }
 
-  Matrix<4, 2> K = P_ * H.transpose() * S_inv;
+  Matrix<4, 2> K = P * H.transpose() * S_inv;
 
   Matrix<4, 1> K_y = K * y;
-  X_[0][0] += K_y[0][0];
-  X_[1][0] += K_y[1][0];
-  X_[2][0] += K_y[2][0];
-  X_[3][0] += K_y[3][0];
+  X[0][0] += K_y[0][0];
+  X[1][0] += K_y[1][0];
+  X[2][0] += K_y[2][0];
+  X[3][0] += K_y[3][0];
 
   Matrix<4, 4> I = Matrix<4, 4>::identity();
-  P_ = (I - K * H) * P_ * (I - K * H).transpose() + K * R_ * K.transpose();
+  P = (I - K * H) * P * (I - K * H).transpose() + K * R * K.transpose();
 }
 
-Matrix<2, 1> ekf_ball::getPosition() const
+Matrix<2, 1> ekf_ball::get_position() const
 {
   Matrix<2, 1> pos;
-  pos[0][0] = X_[0][0];
-  pos[1][0] = X_[1][0];
+  pos[0][0] = X[0][0];
+  pos[1][0] = X[1][0];
   return pos;
 }
 
-Matrix<2, 1> ekf_ball::getVelocity() const
+Matrix<2, 1> ekf_ball::get_velocity() const
 {
   Matrix<2, 1> vel;
-  vel[0][0] = X_[2][0];
-  vel[1][0] = X_[3][0];
+  vel[0][0] = X[2][0];
+  vel[1][0] = X[3][0];
   return vel;
 }
 
-Matrix<4, 1> ekf_ball::getstate() const { return X_; }
+Matrix<4, 1> ekf_ball::get_state() const { return X; }
 
-Matrix<4, 4> ekf_ball::getcov() const { return P_; }
-
-double ekf_ball::normalizeAngle(double a) const
-{
-  while (a > M_PI) a -= 2.0 * M_PI;
-  while (a < -M_PI) a += 2.0 * M_PI;
-  return a;
-}
+Matrix<4, 4> ekf_ball::get_cov() const { return P; }
 
 }  // namespace keisan

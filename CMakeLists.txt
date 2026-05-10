@@ -27,7 +27,6 @@ add_library(${PROJECT_NAME} SHARED
   "src/constant.cpp"
   "src/interpolation/spline.cpp"
   "src/kalman.cpp"
-  "src/ekf/ekf_landmark.cpp"
   "src/ekf/ekf_ball.cpp")
 
 ament_target_dependencies(${PROJECT_NAME} gtest_vendor)

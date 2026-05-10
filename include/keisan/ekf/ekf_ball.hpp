@@ -33,17 +33,14 @@ class ekf_ball
 public:
   ekf_ball();
 
-  // init and core functions
-  void init(double x, double y, double v, double theta);
+  void init(double x, double y, double vx, double vy);
   void predict(double dt);
   void update(const Matrix<2, 1> & z);
 
-  // setter
   void set_Q(double q_pos, double q_vel);
   void set_R(double r_pos);
   void set_friction(double friction);
 
-  // getter
   Matrix<2, 1> get_position() const;
   Matrix<2, 1> get_velocity() const;
   Matrix<4, 1> get_state() const;
@@ -52,7 +49,7 @@ public:
   std::vector<Matrix<4, 1>> predict_future(double dt_future) const;
 
 private:
-  Matrix<4, 1> X;  // state: [x, y, v, theta]
+  Matrix<4, 1> X;  // state: [x, y, vx, vy]
   Matrix<4, 4> P;  // covariance
   Matrix<4, 4> Q;  // process noise covariance
   Matrix<2, 2> R;  // measurement noise covariance

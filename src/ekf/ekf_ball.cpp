@@ -192,7 +192,8 @@ void ekf_ball::update(const Matrix<2, 1> & z)
   X[3][0] += K_y[3][0];
 
   Matrix<4, 4> I = Matrix<4, 4>::identity();
-  P = (I - K * H) * P * (I - K * H).transpose() + K * R * K.transpose();
+  Matrix<4, 4> IKH = I - K * H;
+  P = IKH * P * IKH.transpose() + K * R * K.transpose();
 }
 
 Matrix<2, 1> ekf_ball::get_position() const

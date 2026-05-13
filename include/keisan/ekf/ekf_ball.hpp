@@ -18,8 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__EKF_KF_BALL_HPP
-#define KEISAN__EKF_KF_BALL_HPP
+#ifndef KEISAN__EKF__EKF_BALL_HPP_
+#define KEISAN__EKF__EKF_BALL_HPP_
 
 #include <utility>
 
@@ -28,10 +28,10 @@
 namespace keisan
 {
 
-class ekf_ball
+class EKFBall
 {
 public:
-  ekf_ball();
+  EKFBall();
 
   void init(double x, double y, double vx, double vy);
   void predict(double dt);

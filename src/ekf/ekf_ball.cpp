@@ -28,7 +28,7 @@ namespace keisan
 
 const double epsilon = 1e-5;
 
-ekf_ball::ekf_ball()
+EKFBall::EKFBall()
 {
   X = Matrix<4, 1>::zero();
   P = Matrix<4, 4>::identity();
@@ -40,7 +40,7 @@ ekf_ball::ekf_ball()
   friction = 0.0;
 }
 
-void ekf_ball::set_Q(double q_pos, double q_vel)
+void EKFBall::set_Q(double q_pos, double q_vel)
 {
   Q = Matrix<4, 4>::zero();
   Q[0][0] = q_pos;
@@ -49,14 +49,14 @@ void ekf_ball::set_Q(double q_pos, double q_vel)
   Q[3][3] = q_vel;
 }
 
-void ekf_ball::set_R(double r_pos)
+void EKFBall::set_R(double r_pos)
 {
   R = Matrix<2, 2>::zero();
   R[0][0] = r_pos;
   R[1][1] = r_pos;
 }
 
-std::vector<Matrix<4, 1>> ekf_ball::predict_future(double dt_future) const
+std::vector<Matrix<4, 1>> EKFBall::predict_future(double dt_future) const
 {
   Matrix<4, 1> X_pred = X;
   Matrix<4, 4> P_pred = P;
@@ -115,9 +115,9 @@ std::vector<Matrix<4, 1>> ekf_ball::predict_future(double dt_future) const
   return result;
 }
 
-void ekf_ball::set_friction(double friction) { this->friction = friction; }
+void EKFBall::set_friction(double friction) { this->friction = friction; }
 
-void ekf_ball::init(double x, double y, double vx, double vy)
+void EKFBall::init(double x, double y, double vx, double vy)
 {
   X[0][0] = x;
   X[1][0] = y;
@@ -127,7 +127,7 @@ void ekf_ball::init(double x, double y, double vx, double vy)
   P *= 10.0;
 }
 
-void ekf_ball::predict(double dt)
+void EKFBall::predict(double dt)
 {
   double x = X[0][0];
   double y = X[1][0];
@@ -162,7 +162,7 @@ void ekf_ball::predict(double dt)
   P = F * P * F.transpose() + Q_step;
 }
 
-void ekf_ball::update(const Matrix<2, 1> & z)
+void EKFBall::update(const Matrix<2, 1> & z)
 {
   Matrix<2, 4> H = Matrix<2, 4>::zero();
   H[0][0] = 1.0;
@@ -196,7 +196,7 @@ void ekf_ball::update(const Matrix<2, 1> & z)
   P = IKH * P * IKH.transpose() + K * R * K.transpose();
 }
 
-Matrix<2, 1> ekf_ball::get_position() const
+Matrix<2, 1> EKFBall::get_position() const
 {
   Matrix<2, 1> pos;
   pos[0][0] = X[0][0];
@@ -204,7 +204,7 @@ Matrix<2, 1> ekf_ball::get_position() const
   return pos;
 }
 
-Matrix<2, 1> ekf_ball::get_velocity() const
+Matrix<2, 1> EKFBall::get_velocity() const
 {
   Matrix<2, 1> vel;
   vel[0][0] = X[2][0];
@@ -212,8 +212,8 @@ Matrix<2, 1> ekf_ball::get_velocity() const
   return vel;
 }
 
-Matrix<4, 1> ekf_ball::get_state() const { return X; }
+Matrix<4, 1> EKFBall::get_state() const { return X; }
 
-Matrix<4, 4> ekf_ball::get_cov() const { return P; }
+Matrix<4, 4> EKFBall::get_cov() const { return P; }
 
 }  // namespace keisan

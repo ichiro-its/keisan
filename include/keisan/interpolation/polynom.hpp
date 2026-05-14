@@ -50,7 +50,6 @@ public:
 
   friend std::ostream & operator<<(std::ostream & os, const Polynom & polynom);
 
-
 private:
   std::vector<double> coefficients;
   double domain_min;

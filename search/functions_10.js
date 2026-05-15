@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['tan_281',['tan',['../classkeisan_1_1Angle.html#a128985d351fec50dad79449b22b374c1',1,'keisan::Angle']]],
-  ['translate_282',['translate',['../structkeisan_1_1Point2.html#a9ba5f949a5030fb3ccffc0f8567a34b2',1,'keisan::Point2']]],
-  ['translation_5fmatrix_283',['translation_matrix',['../namespacekeisan.html#a5a4fa13153ff96b5ca148554c3ed560c',1,'keisan::translation_matrix(const Point2 &amp;point)'],['../namespacekeisan.html#ac6abc06b4df3c17930cd5ac403631397',1,'keisan::translation_matrix(const Point3 &amp;point)']]],
-  ['transpose_284',['transpose',['../classkeisan_1_1Matrix.html#a29b6a3e47d4cffef3199fbb7853ba3d1',1,'keisan::Matrix']]]
+  ['tan_305',['tan',['../classkeisan_1_1Angle.html#a128985d351fec50dad79449b22b374c1',1,'keisan::Angle']]],
+  ['translate_306',['translate',['../structkeisan_1_1Point2.html#a9ba5f949a5030fb3ccffc0f8567a34b2',1,'keisan::Point2']]],
+  ['translation_5fmatrix_307',['translation_matrix',['../namespacekeisan.html#a5a4fa13153ff96b5ca148554c3ed560c',1,'keisan::translation_matrix(const Point2 &amp;point)'],['../namespacekeisan.html#ac6abc06b4df3c17930cd5ac403631397',1,'keisan::translation_matrix(const Point3 &amp;point)']]],
+  ['transpose_308',['transpose',['../classkeisan_1_1Matrix.html#a29b6a3e47d4cffef3199fbb7853ba3d1',1,'keisan::Matrix']]]
 ];

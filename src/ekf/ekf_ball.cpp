@@ -179,7 +179,7 @@ void EKFBall::update(const Matrix<2, 1> & z)
   Matrix<2, 2> S = H * P * H.transpose() + R;
 
   Matrix<2, 2> S_inv = S;
-  if (!S_inv.inverse2()) {
+  if (!S_inv.inverse()) {
     return;
   }
 

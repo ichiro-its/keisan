@@ -21,6 +21,7 @@ install(DIRECTORY "include" DESTINATION ".")
 
 add_library(${PROJECT_NAME} SHARED
   "src/angle/angle.cpp"
+  "src/geometry/line.cpp"
   "src/geometry/point_2.cpp"
   "src/geometry/point_3.cpp"
   "src/matrix/matrix.cpp"

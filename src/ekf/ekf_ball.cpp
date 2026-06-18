@@ -86,7 +86,7 @@ std::vector<Matrix<4, 1>> EKFBall::predict_future(double dt_future) const
     X_pred[0][0] = x + vx * dt;
     X_pred[1][0] = y + vy * dt;
 
-    double delta_v = friction * 981.0 * dt;
+    double delta_v = friction * dt;
 
       X_pred[2][0] = 0.0;
       X_pred[3][0] = 0.0;
@@ -138,7 +138,7 @@ void EKFBall::predict(double dt)
   X[1][0] = y + vy * dt;
 
   double v_mag = sqrt(vx * vx + vy * vy);
-  double delta_v = friction * 981.0 * dt;
+  double delta_v = friction * dt;
 
   X[2][0] = 0.0;
   X[3][0] = 0.0;

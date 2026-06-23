@@ -35,10 +35,11 @@ public:
 
   void init(double x, double y, double vx, double vy);
   void predict(double dt);
-  void update(const Matrix<2, 1> & z);
+  void update(const Matrix<2, 1> & z, double imu_roll = 0.0, double imu_pitch = 0.0);
 
   void set_Q(double q_pos, double q_vel);
   void set_R(double r_pos);
+  void set_imu_alpha(double alpha);
   void set_friction(double friction);
 
   Matrix<2, 1> get_position() const;
@@ -54,7 +55,8 @@ private:
   Matrix<4, 4> Q;  // process noise covariance
   Matrix<2, 2> R;  // measurement noise covariance
 
-  double friction;  // grass friction
+  double friction;      // grass friction
+  double imu_r_alpha;
 };
 
 }  // namespace keisan

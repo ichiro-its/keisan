@@ -38,6 +38,7 @@ EKFBall::EKFBall()
   R = Matrix<2, 2>::identity();
   R *= 0.01;
   friction = 0.0;
+  imu_r_alpha = 0.0;
 }
 
 void EKFBall::set_Q(double q_pos, double q_vel)
@@ -82,30 +83,51 @@ std::vector<Matrix<4, 1>> EKFBall::predict_future(double dt_future) const
       break;
     }
 
-    // State Prediction
     X_pred[0][0] = x + vx * dt;
     X_pred[1][0] = y + vy * dt;
 
     double delta_v = friction * dt;
 
-      X_pred[2][0] = 0.0;
-      X_pred[3][0] = 0.0;
-
-    if (v_mag > epsilon && delta_v <= v_mag) {
-      double scale = 1.0 - delta_v / v_mag;
-      X_pred[2][0] = vx * scale;
-      X_pred[3][0] = vy * scale;
-    }
+    X_pred[2][0] = 0.0;
+    X_pred[3][0] = 0.0;
 
     Matrix<4, 4> F = Matrix<4, 4>::identity();
     F[0][2] = dt;
     F[1][3] = dt;
 
-    Matrix<4, 4> Q_step = Q;
-    Q_step[0][0] *= dt * dt;
-    Q_step[1][1] *= dt * dt;
-    Q_step[2][2] *= dt;
-    Q_step[3][3] *= dt;
+    if (v_mag > epsilon && delta_v <= v_mag) {
+      double scale = 1.0 - delta_v / v_mag;
+      X_pred[2][0] = vx * scale;
+      X_pred[3][0] = vy * scale;
+
+      // partial derivatives for Jacobian F
+      double k = friction * dt;
+      double v_mag3 = v_mag * v_mag * v_mag;
+      F[2][2] = 1.0 - k * (vy * vy) / v_mag3;
+      F[2][3] = k * (vx * vy) / v_mag3;
+      F[3][2] = k * (vx * vy) / v_mag3;
+      F[3][3] = 1.0 - k * (vx * vx) / v_mag3;
+    } else {
+      F[2][2] = 0.0;
+      F[3][3] = 0.0;
+    }
+
+    double dt2 = dt * dt;
+    double dt3 = dt2 * dt;
+    double dt4 = dt3 * dt;
+    double q_pos = Q[0][0];
+    double q_vel = Q[2][2];
+
+    Matrix<4, 4> Q_step = Matrix<4, 4>::zero();
+    Q_step[0][0] = q_pos + q_vel * dt4 / 4.0;
+    Q_step[0][2] = q_vel * dt3 / 2.0;
+    Q_step[2][0] = q_vel * dt3 / 2.0;
+    Q_step[2][2] = q_vel * dt2;
+
+    Q_step[1][1] = q_pos + q_vel * dt4 / 4.0;
+    Q_step[1][3] = q_vel * dt3 / 2.0;
+    Q_step[3][1] = q_vel * dt3 / 2.0;
+    Q_step[3][3] = q_vel * dt2;
 
     P_pred = F * P_pred * F.transpose() + Q_step;
 
@@ -116,6 +138,8 @@ std::vector<Matrix<4, 1>> EKFBall::predict_future(double dt_future) const
 }
 
 void EKFBall::set_friction(double friction) { this->friction = friction; }
+
+void EKFBall::set_imu_alpha(double alpha) { imu_r_alpha = alpha; }
 
 void EKFBall::init(double x, double y, double vx, double vy)
 {
@@ -143,27 +167,60 @@ void EKFBall::predict(double dt)
   X[2][0] = 0.0;
   X[3][0] = 0.0;
 
-  if (v_mag > epsilon && delta_v <= v_mag) {
-    double scale = 1.0 - delta_v / v_mag;
-    X[2][0] = vx * scale;
-    X[3][0] = vy * scale;
-  }
-
   Matrix<4, 4> F = Matrix<4, 4>::identity();
   F[0][2] = dt;
   F[1][3] = dt;
 
-  Matrix<4, 4> Q_step = Q;
-  Q_step[0][0] *= dt * dt;
-  Q_step[1][1] *= dt * dt;
-  Q_step[2][2] *= dt;
-  Q_step[3][3] *= dt;
+  if (v_mag > epsilon && delta_v <= v_mag) {
+    double scale = 1.0 - delta_v / v_mag;
+    X[2][0] = vx * scale;
+    X[3][0] = vy * scale;
+
+    // partial derivatives for Jacobian F
+    double k = friction * dt;
+    double v_mag3 = v_mag * v_mag * v_mag;
+    F[2][2] = 1.0 - k * (vy * vy) / v_mag3;
+    F[2][3] = k * (vx * vy) / v_mag3;
+    F[3][2] = k * (vx * vy) / v_mag3;
+    F[3][3] = 1.0 - k * (vx * vx) / v_mag3;
+  } else {
+    F[2][2] = 0.0;
+    F[3][3] = 0.0;
+  }
+
+  // Q_step is derived by integrating random acceleration (CWNA) over dt
+  // Position variance grows as dt⁴/4 from accumulated acceleration, with a dt³/2 cross-term
+  // to position-velocity covariance. q_pos adds extra position noise for localization error
+  // and unmodeled jumps that CWNA alone cannot capture.
+  double dt2 = dt * dt;
+  double dt3 = dt2 * dt;
+  double dt4 = dt3 * dt;
+  double q_pos = Q[0][0];
+  double q_vel = Q[2][2];
+
+  Matrix<4, 4> Q_step = Matrix<4, 4>::zero();
+  Q_step[0][0] = q_pos + q_vel * dt4 / 4.0;
+  Q_step[0][2] = q_vel * dt3 / 2.0;
+  Q_step[2][0] = q_vel * dt3 / 2.0;
+  Q_step[2][2] = q_vel * dt2;
+
+  Q_step[1][1] = q_pos + q_vel * dt4 / 4.0;
+  Q_step[1][3] = q_vel * dt3 / 2.0;
+  Q_step[3][1] = q_vel * dt3 / 2.0;
+  Q_step[3][3] = q_vel * dt2;
 
   P = F * P * F.transpose() + Q_step;
 }
 
-void EKFBall::update(const Matrix<2, 1> & z)
+void EKFBall::update(const Matrix<2, 1> & z, double imu_roll, double imu_pitch)
 {
+  double shake = std::hypot(imu_roll, imu_pitch);
+  double r_dyn = R[0][0] + imu_r_alpha * shake;
+
+  Matrix<2, 2> R_dyn = Matrix<2, 2>::zero();
+  R_dyn[0][0] = r_dyn;
+  R_dyn[1][1] = r_dyn;
+
   Matrix<2, 4> H = Matrix<2, 4>::zero();
   H[0][0] = 1.0;
   H[1][1] = 1.0;
@@ -176,7 +233,7 @@ void EKFBall::update(const Matrix<2, 1> & z)
   y[0][0] = z[0][0] - z_pred[0][0];
   y[1][0] = z[1][0] - z_pred[1][0];
 
-  Matrix<2, 2> S = H * P * H.transpose() + R;
+  Matrix<2, 2> S = H * P * H.transpose() + R_dyn;
 
   Matrix<2, 2> S_inv = S;
   if (!S_inv.inverse()) {
@@ -193,7 +250,7 @@ void EKFBall::update(const Matrix<2, 1> & z)
 
   Matrix<4, 4> I = Matrix<4, 4>::identity();
   Matrix<4, 4> IKH = I - K * H;
-  P = IKH * P * IKH.transpose() + K * R * K.transpose();
+  P = IKH * P * IKH.transpose() + K * R_dyn * K.transpose();
 }
 
 Matrix<2, 1> EKFBall::get_position() const
